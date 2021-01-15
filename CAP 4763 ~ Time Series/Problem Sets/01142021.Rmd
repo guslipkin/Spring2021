@@ -1,0 +1,43 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(dplyr)
+library(plyr)
+```
+
+```{r}
+set.seed(14599)
+obs <- runif(2000)
+```
+
+```{r}
+stata.runiform <- function(r, c) {
+  return(matrix(runif(obs), nrow = r, ncol = c))
+}
+
+stata.round <- function(r, u) {
+  for(i in 1:length(r)) {
+    r[i] <- u*round(r[i]/u)
+  }
+  return(r)
+}
+```
+
+```{r}
+w <- stata.runiform(20, 90)
+q <- rnorm(obs, 0, 10)
+z <- rnorm(obs, 0, 20)
+```
+
+```{r}
+x <- stata.round(10+.8*w+.6*q, 10)
+y <- 10+4*w-0.03*w^2+.7*z
+```
+
+```{r}
+ymean = aggregate(y, x, mean)
+```
+
