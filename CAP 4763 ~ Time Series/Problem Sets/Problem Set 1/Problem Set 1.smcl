@@ -1,0 +1,28 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}/Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Problem Set 1/Problem Set 1.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}31 Jan 2021, 15:52:09
+
+{com}. 
+. import delimited "/Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Problem Set 1/Assignment_1.csv", encoding(UTF-8) 
+{res}{text}(5 vars, 984 obs)
+
+{com}. format date %tm
+{err}string %fmt required for string variables
+{txt}{search r(120), local:r(120);}
+
+{com}. format date %fmt
+{err}invalid %format
+{txt}{search r(120), local:r(120);}
+
+{com}. date = date(date, "YMD")
+{err}command {bf}date{sf} is unrecognized
+{txt}{search r(199), local:r(199);}
+
+{com}. date
+{err}command {bf}date{sf} is unrecognized
+{txt}{search r(199), local:r(199);}
+
+{com}. exit, clear

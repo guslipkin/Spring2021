@@ -1,0 +1,41 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+## \#1
+```{r}
+library(tidyverse)
+library(lubridate)
+library(stats)
+
+emratio <- read.csv("../Problem Set 1/EMRATIO.csv")
+FLBPP <- read.csv("../Problem Set 1/FLBPPRIVSA.csv")
+FLLF <- read.csv("../Problem Set 1/FLLF.csv")
+FLNA <- read.csv("../Problem Set 1/FLNA.csv")
+
+df <- inner_join(emratio, FLBPP, by = "DATE")
+df <- inner_join(df, FLLF, by = "DATE")
+df <- inner_join(df, FLNA, by = "DATE")
+write.csv(df, "../Problem Set 1/r_is_better.csv")
+colnames(df) <- c("date", "us_epr", "fl_bp", "fl_lf", "fl_nonfarm")
+df
+```
+## \#2
+```{r}
+df$monthTime <- month(df$date)
+df$ln_us_epr <- log(df$us_epr)
+df$ln_fl_bp <- log(df$fl_bp)
+df$ln_fl_lf <- log(df$fl_lf)
+df$ln_fl_nonfarm <- log(df$fl_nonfarm)
+df
+
+df_ts <- as.ts(df)
+```
+## \#3
+
+### \#3a
+```{r}
+pairs(df[,6:10])
+```
+
