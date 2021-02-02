@@ -10,7 +10,7 @@
 
 2. Illustration Capsule 5.1 discusses Amazon’s low-cost position in the electronic commerce industry. Based on information provided in the capsule, explain how Amazon has built its low-cost advantage in the industry and why a low-cost pro- vider strategy is well suited to the industry.
 
-   - 
+   - Through economies of scale and high-entry cost/low maintenance cost technologies, Amazon has been able to maintain a low-cost advantage in the industry. By working in economies of scale, Amazon reduces it's costs
 
 3. USAA is a Fortune 500 insurance and financial services company with 2014 annual sales exceeding $24 billion. The company was founded in 1922 by 25 Army officers who decided to insure each other’s vehicles and continues to limit its membership to active-duty and retired military members, officer candidates, and adult children and spouses of military-affiliated USAA members. The com- pany has received countless awards, including being listed among *Fortune*’s World’s Most Admired Companies in 2014 and 2015 and 100 Best Companies to Work For in 2010 through 2015. USAA was also ranked as the number-one Bank, Credit Card, and Insurance Company by Forrester Research from 2013 to 2015. You can read more about the company’s history and strategy at **www.usaa.com**.
 
@@ -20,4 +20,5 @@
 
 4. Explore lululemon athletica’s website at [**info.lululemon.com**](info.lululemon.com) and see if you can identify at least three ways in which the company seeks to differentiate itself from
     rival athletic apparel firms. Is there reason to believe that lululemon’s differentiation strategy has been successful in producing a competitive advantage? Why or why not?
+   
    - 
