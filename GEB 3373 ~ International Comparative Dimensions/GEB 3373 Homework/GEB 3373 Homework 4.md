@@ -59,15 +59,30 @@
 
    - <img src="GEB 3373 Homework 4.assets/Screen Shot 2021-02-02 at 8.05.40 PM.png" alt="Screen Shot 2021-02-02 at 8.05.40 PM" style="zoom:50%;" />
 
-     
+     Managing ethical behaviors across international borders is incredibly tricky because of how interrelated culture and ethics are. Depending on the roles of the employees, the guidelines for ethics across borders may change. The chart above from the book illustrates the balance needed to make sure that employees are acting appropriately in every context.
 
 5. What is social responsibility?
 
+   - **Social responsibility**: The set of ethical obligations one follows "to protect and enhance the society in which it functions."
+
 6. What is the difference between ethics and social responsibility?
+
+   - Ethics is the baseline for social responsibility. One can think of ethics as the rulebook for how to live their life while social responsibility is the application and action of following those rules.
 
 7. Identify the major areas of social responsibility for international business.
 
+   1. "Fulfilling their economic mission, delivering profits for their shareholders, and creating value for their stakeholders"
+   2. "Protecting the natural environment"
+   3. "Enhancing the general welfare of society"
+
+   - These three can be condensed into the phrase "people, planet, and profits."
+
 8. What are the four general approaches a firm can take regarding social responsibility?
+
+   1. **Obstructionist stance**: These companies do the bare minimum to fulfil their social responsibility. They tend to deny crossing any ethical lines and will deflect accusations or try and draw attention away from themselves. Some examples are Nestle and Danone.
+   2. **Defensive stance**: These companies will do only what they are obligated to do by law and nothing else. 
+   3. **Accommodative stance:** These companies will also only do the bare minimum, but may go above and beyond in rare cases such as matching charitable donations made by employees or donate to youth sports.
+   4. **Proactive stance**: Proactive companies will go above and beyond in many areas because they see themselves as a member of society and that this means they have a level of social responsibility to meet.
 
 9. What is a whistle-blower?
 
@@ -75,3 +90,6 @@
    - Ed Snowden became famous for blowing the whistle on all the sorts of data that the government collects about people.
 
 10. Identify and briefly summarize representative laws and regulations that attempt to address international ethics and social responsibility.
+
+    - A more extreme example of international laws and regulations about ethics are the Geneva conventions which cover humanitarian treatment in wars. 
+    - While the Paris Climate Agreement is not a set of laws, it is a set of international guidelines on how countries can become more environmentally friendly to combat global warming.
