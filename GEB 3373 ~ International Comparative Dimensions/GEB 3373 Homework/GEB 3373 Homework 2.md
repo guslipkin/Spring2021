@@ -16,7 +16,7 @@
 
 4. What is a *keiretsu*?
    
-   - *Keiretsu* is a Japanese term for a large family of interrelated companies. These families are typically centered around a major Japanese bank. The members work closely together and make it difficult for outsiders to penetrate the markets
+   - **Keiretsu** is a Japanese term for a large family of interrelated companies. These families are typically centered around a major Japanese bank. The members work closely together and make it difficult for outsiders to penetrate the markets
 
 5. Who are the Four Tigers? Why are they important to international businesses? 
    
@@ -31,7 +31,7 @@
 
 6. What is a *chaebol*?
    
-   - A *chaebol* is a Korean word for "any of the large business conglomerates that dominate the South Korean economy."
+   - A **chaebol** is a Korean word for "any of the large business conglomerates that dominate the South Korean economy." A few years ago I was playing a word/knowledge game with my family and I came up with a pretty good question. *From what company can you buy a microwave, television, and cellphone?* The answer, of course, is Samsung. What's especially crazy is that those aren't even the most divergent items you can buy from them.
 
 7. Discuss the role of natural resources and agriculture in Africa’s economy.
    

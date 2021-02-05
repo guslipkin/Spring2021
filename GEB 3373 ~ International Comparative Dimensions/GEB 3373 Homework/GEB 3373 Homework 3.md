@@ -8,7 +8,7 @@
    - **Religious Law** is law based on the laws of a specific religion. Countries with this property are a *theocracy*.
    - **Bereaucratic Law** "whatever the country’s bureaucrats say it is, regardless of the formal law of the land."
 2. What is extraterritoriality?
-   - *Extraterritoriality* is when you (or something) is exempt from local laws such as foreign diplomats or embassies.
+   - **Extraterritoriality** is when you (or something) is exempt from local laws such as foreign diplomats or embassies. In places where embassies are common, diplomatic license plates are generally seen as a bad sign because the people driving them aren't subject to the laws of the host country and can, in some cases, flaunt their immunity by driving aggressively, parking illegally, or various other methods of terrorizing the road.
 3. How can an MNC affect its host country?
    - Any corporation affects the local economy. A multi-national corporation can be a boon for the country in which it is based by creating jobs, paying taxes, and investing in the community. However, a MNC doesn't *have* to do these things in the host country. For example, Walmart pays very little in taxes, manufactures many goods overseas, and underpays employees.
 4. How do expropriation and confiscation differ?
