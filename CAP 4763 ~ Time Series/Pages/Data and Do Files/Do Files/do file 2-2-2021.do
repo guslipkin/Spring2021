@@ -5,7 +5,7 @@ clear
 set more off
 
 *set the working directory to wherever you have the data"
-cd "C:\Users\jdewey\Documents\A S21 Time Series\data and do files"
+cd "/Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Pages/Data and Do Files/Data"
 
 *import the data
 **we will be using data on the US Federal Budget
@@ -69,7 +69,7 @@ twoway (tsline lnreratio) (tsline lnrgdppc, yaxis(2))
 *regression of the reratio on real gdp per capita, in logs
 reg lnreratio lnrgdppc
 
-STOP
+*STOP
 
 *2-2-2021 Spurrious Correlation 1, Trends, Seasonal Effects
 
@@ -150,6 +150,7 @@ reg lnreratio lnrgdppc l.lnrgdppc date i.quarter
 *How many lags?
 
 reg lnreratio lnrgdppc l.lnrgdppc l2.lnrgdppc l3.lnrgdppc l4.lnrgdppc date i.quarter
+STOP
 *Why at least 4 lags?
 
 *Easier way to specify the lags

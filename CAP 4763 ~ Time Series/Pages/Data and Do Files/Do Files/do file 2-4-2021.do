@@ -5,7 +5,7 @@ clear
 set more off
 
 *set the working directory to wherever you have the data"
-cd "C:\Users\jdewey\Documents\A S21 Time Series\data and do files"
+cd "/Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Pages/Data and Do Files/Data"
 
 *import the data
 **we will be using data on the US Federal Budget
