@@ -3,26 +3,96 @@
       name:  {res}<unnamed>
        {txt}log:  {res}/Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Problem Set 1/Problem Set 1.smcl
   {txt}log type:  {res}smcl
- {txt}opened on:  {res}31 Jan 2021, 15:52:09
+ {txt}opened on:  {res} 7 Feb 2021, 18:41:15
+{txt}
+{com}. 
+. *2d Generate a monthly date variable (make its display format monthly time, %tm)
+. gen datec=date(datestring, "YMD")
+{txt}
+{com}. gen date=mofd(datec)
+{txt}
+{com}. format date %tm
+{txt}
+{com}. 
+. *2e tsset your data
+. tsset date
+{res}{txt}{col 9}time variable:  {res}{col 25}date, 1939m1 to 2020m12
+{txt}{col 17}delta:  {res}1 month
+{txt}
+{com}. 
+. *2f
+. gen ln_us_epr=log(us_epr)
+{txt}(108 missing values generated)
+
+{com}. gen ln_fl_nonfarm=log(fl_nonfarm)
+{txt}
+{com}. gen ln_fl_lf=log(fl_lf)
+{txt}(444 missing values generated)
+
+{com}. gen ln_fl_bp=log(fl_bp)
+{txt}(588 missing values generated)
 
 {com}. 
-. import delimited "/Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Problem Set 1/Assignment_1.csv", encoding(UTF-8) 
-{res}{text}(5 vars, 984 obs)
+. *3b Estimate the static model relating monthly nonfarm employment in Florida to the other three variables (all in logs) without controlling for seasonal impacts or a time trend.
+. regress ln_fl_nonfarm ln_fl_lf ln_us_epr ln_fl_bp
 
-{com}. format date %tm
-{err}string %fmt required for string variables
-{txt}{search r(120), local:r(120);}
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       396
+{txt}{hline 13}{c +}{hline 34}   F(3, 392)       = {res}  5972.65
+{txt}       Model {c |} {res} 10.5356085         3  3.51186951   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} .230492978       392  .000587992   {txt}R-squared       ={res}    0.9786
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.9784
+{txt}       Total {c |} {res} 10.7661015       395  .027255953   {txt}Root MSE        =   {res} .02425
 
-{com}. format date %fmt
-{err}invalid %format
-{txt}{search r(120), local:r(120);}
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}ln_fl_nonf~m{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 4}ln_fl_lf {c |}{col 14}{res}{space 2} 1.110504{col 26}{space 2} .0092305{col 37}{space 1}  120.31{col 46}{space 3}0.000{col 54}{space 4} 1.092356{col 67}{space 3} 1.128651
+{txt}{space 3}ln_us_epr {c |}{col 14}{res}{space 2} .6006702{col 26}{space 2}  .047797{col 37}{space 1}   12.57{col 46}{space 3}0.000{col 54}{space 4} .5066997{col 67}{space 3} .6946407
+{txt}{space 4}ln_fl_bp {c |}{col 14}{res}{space 2} .0516831{col 26}{space 2} .0028713{col 37}{space 1}   18.00{col 46}{space 3}0.000{col 54}{space 4} .0460379{col 67}{space 3} .0573282
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-11.78364{col 26}{space 2} .2925244{col 37}{space 1}  -40.28{col 46}{space 3}0.000{col 54}{space 4}-12.35875{col 67}{space 3}-11.20852
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. *3c Estimate the static model with month indicators and a time trend.
+. gen month=month(datec)
+{txt}
+{com}. reg ln_fl_nonfarm ln_fl_lf ln_us_epr ln_fl_bp i.month date
 
-{com}. date = date(date, "YMD")
-{err}command {bf}date{sf} is unrecognized
-{txt}{search r(199), local:r(199);}
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       396
+{txt}{hline 13}{c +}{hline 34}   F(15, 380)      = {res}  2935.69
+{txt}       Model {c |} {res} 10.6739911        15  .711599408   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} .092110398       380  .000242396   {txt}R-squared       ={res}    0.9914
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.9911
+{txt}       Total {c |} {res} 10.7661015       395  .027255953   {txt}Root MSE        =   {res} .01557
 
-{com}. date
-{err}command {bf}date{sf} is unrecognized
-{txt}{search r(199), local:r(199);}
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}ln_fl_nonf~m{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 4}ln_fl_lf {c |}{col 14}{res}{space 2} .9282631{col 26}{space 2} .0413265{col 37}{space 1}   22.46{col 46}{space 3}0.000{col 54}{space 4} .8470059{col 67}{space 3}  1.00952
+{txt}{space 3}ln_us_epr {c |}{col 14}{res}{space 2} .9105558{col 26}{space 2} .0514333{col 37}{space 1}   17.70{col 46}{space 3}0.000{col 54}{space 4} .8094263{col 67}{space 3} 1.011685
+{txt}{space 4}ln_fl_bp {c |}{col 14}{res}{space 2} .0466812{col 26}{space 2} .0021579{col 37}{space 1}   21.63{col 46}{space 3}0.000{col 54}{space 4} .0424382{col 67}{space 3} .0509242
+{txt}{space 12} {c |}
+{space 7}month {c |}
+{space 10}2  {c |}{col 14}{res}{space 2} .0045623{col 26}{space 2} .0038378{col 37}{space 1}    1.19{col 46}{space 3}0.235{col 54}{space 4}-.0029837{col 67}{space 3} .0121084
+{txt}{space 10}3  {c |}{col 14}{res}{space 2} -.001379{col 26}{space 2}  .003839{col 37}{space 1}   -0.36{col 46}{space 3}0.720{col 54}{space 4}-.0089274{col 67}{space 3} .0061694
+{txt}{space 10}4  {c |}{col 14}{res}{space 2}-.0029373{col 26}{space 2} .0038393{col 37}{space 1}   -0.77{col 46}{space 3}0.445{col 54}{space 4}-.0104863{col 67}{space 3} .0046116
+{txt}{space 10}5  {c |}{col 14}{res}{space 2}-.0142748{col 26}{space 2} .0038468{col 37}{space 1}   -3.71{col 46}{space 3}0.000{col 54}{space 4}-.0218384{col 67}{space 3}-.0067112
+{txt}{space 10}6  {c |}{col 14}{res}{space 2}-.0356123{col 26}{space 2} .0038709{col 37}{space 1}   -9.20{col 46}{space 3}0.000{col 54}{space 4}-.0432234{col 67}{space 3}-.0280012
+{txt}{space 10}7  {c |}{col 14}{res}{space 2}-.0519102{col 26}{space 2} .0038917{col 37}{space 1}  -13.34{col 46}{space 3}0.000{col 54}{space 4}-.0595622{col 67}{space 3}-.0442582
+{txt}{space 10}8  {c |}{col 14}{res}{space 2}-.0380965{col 26}{space 2} .0038668{col 37}{space 1}   -9.85{col 46}{space 3}0.000{col 54}{space 4}-.0456995{col 67}{space 3}-.0304936
+{txt}{space 10}9  {c |}{col 14}{res}{space 2} -.026004{col 26}{space 2} .0038581{col 37}{space 1}   -6.74{col 46}{space 3}0.000{col 54}{space 4}-.0335899{col 67}{space 3}-.0184181
+{txt}{space 9}10  {c |}{col 14}{res}{space 2}-.0215894{col 26}{space 2} .0038763{col 37}{space 1}   -5.57{col 46}{space 3}0.000{col 54}{space 4} -.029211{col 67}{space 3}-.0139678
+{txt}{space 9}11  {c |}{col 14}{res}{space 2}-.0014672{col 26}{space 2} .0039082{col 37}{space 1}   -0.38{col 46}{space 3}0.708{col 54}{space 4}-.0091517{col 67}{space 3} .0062173
+{txt}{space 9}12  {c |}{col 14}{res}{space 2} .0054514{col 26}{space 2} .0038735{col 37}{space 1}    1.41{col 46}{space 3}0.160{col 54}{space 4}-.0021648{col 67}{space 3} .0130675
+{txt}{space 12} {c |}
+{space 8}date {c |}{col 14}{res}{space 2} .0003124{col 26}{space 2} .0000637{col 37}{space 1}    4.90{col 46}{space 3}0.000{col 54}{space 4}  .000187{col 67}{space 3} .0004377
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-10.26323{col 26}{space 2}  .498888{col 37}{space 1}  -20.57{col 46}{space 3}0.000{col 54}{space 4}-11.24416{col 67}{space 3}-9.282304
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. save "/Users/guslipkin/Documents/Fall2020/QMB 3200 ~ Advanced Quantitative Methods/Final Project/Untitled.dta", replace
+{txt}file /Users/guslipkin/Documents/Fall2020/QMB 3200 ~ Advanced Quantitative Methods/Final Project/Untitled.dta saved
 
 {com}. exit, clear
