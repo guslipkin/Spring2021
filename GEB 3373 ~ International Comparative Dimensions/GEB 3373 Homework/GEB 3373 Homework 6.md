@@ -59,34 +59,46 @@
 
 > 2. What is the infant industry argument?
 
-
+- **Infant industry argument**: "Argument in favor of governmental intervention in trade: a nation should protect fledgling industries for which the nation will ultimately possess a comparative advantage."
 
 > 3. What are the different types of tariffs?
 
-
+- "An **ad valorem tariff** is assessed as a percentage of the market value of the imported good."
+- "A **specific tariff** is assessed as a specific dollar amount per unit of weight or other standard measure."
+- "A **compound tariff** has both an ad valorem component and a specific component"
 
 > 4. Why is it useful for an importer to seek out an advance tariff classification from the U.S. Customs Service?
 
-
+- If a business does not properly account for customs costs, they can lose a lot of money. By getting this number in advance, they can price their good or service accordingly.
 
 > 5. Why might a country adopt a VER?
 
-
+- A company might adopt a *voluntary export restraint* because they are getting bad press in the target country's markets such as when Japan placed a VER on US bound automobiles after Toyota received bad press for taking jobs away from Americans.
 
 > 6. What are the major forms of NTBs?
 
-
+- "A **quota** is a numerical limit on the quantity of a good that may be imported into a country during some time period, such as a year."
+- "A **voluntary export restraint (VER)** is a promise by a country to limit its exports of a good to another country to a prespecified amount or percentage of the affected market."
+- Product and testing standards
+- Restricted access to distribution networks
+- Public-sector procurement policies
+- Local-purchase requirements
+- Regulatory controls
+- Currency controls
+- Investment controls
 
 > 7. What is an FTZ?
 
-
+- "A **foreign trade zone (FTZ)** is a geographic area in which imported or exported goods receive preferential tariff treatment. An FTZ may be as small as a warehouse or a factory site (such as Caterpillar’s diesel engine facility in Mossville, Illinois) or as large as the entire city of Shenzhen, China (which neighbors Hong Kong)."
 
 > 8. What is the role of the Eximbank?
 
-
+- "The **Export-Import Bank of the United States (EXIM Bank)** provides financing for U.S. exports through direct loans and loan guarantees"
 
 > 9. What is the purpose of a CVD?
 
-
+- "A **countervailing duty (CVD)** is an ad valorem tariff on an imported good that is imposed by the importing country to counter the impact of foreign subsidies."
 
 > 10. What are the two definitions of *dumping*?
+
+- "There are two types of dumping. **Dumping** can occur when a firm sells its goods in a foreign market at a price below what it charges in its home market. This type of dumping is a form of international price discrimination. The second type of dumping involves the firm’s selling its goods below cost in the foreign market, in which case the dumping is a form of predatory pricing."
