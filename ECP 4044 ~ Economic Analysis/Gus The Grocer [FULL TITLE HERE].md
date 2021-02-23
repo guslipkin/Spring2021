@@ -8,7 +8,7 @@
 
 |                           Section                            |
 | :----------------------------------------------------------: |
-| [**Introduction and Background**](#Introduction-and-Backgroundl) |
+| [**Introduction and Background**](#Introduction-and-Background) |
 
 <div style="page-break-after: always; break-after: page;"></div>
 
@@ -101,9 +101,15 @@ $$
 \end{aligned}
 $$
 
-The important part here is not the final profit equation because, as expected, the profit would be higher if MiGrocery did not have to pay employees, but rather that one hour of my time has a value of $794887$ while the value of someone else's time is only $73717$. My time is $10.87$ times more valuable than someone else's for the same task. 
+The important part here is not the final profit equation because, as expected, the profit would be higher if MiGrocery did not have to pay employees, but rather that one hour of my time has a value of $794887$ while the value of someone else's time is only $73717$. My time is $10.87$ times more valuable than someone else's for the same task if the constants given above retain their value.
 
 ​	Of course, proper profit maximization requires taking the first derivative of the profit function. With all of the guesses about the values of constants I made and the ratios that allowed me to put one variable in terms of another, this quickly fell by the wayside. With proper numbers, the equation could be put into solver to give the amount of hours per project that myself and someone else should work on to maximize profit.
 
 ## Expected Marginal Benefit
+
+​	As we established in [*Profit Maximization*](#Profit-Maximization), 
+
+
+
+
 
