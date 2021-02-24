@@ -1,4 +1,4 @@
-<H1><p style="text-align: center;">Gus The Grocer [FULL TITLE HERE]</p></H1>
+<H1><p style="text-align: center;">Grocery Gus or: How I Learned to Stop Worrying and Love the Log Card</p></H1>
 
 <p style="text-align: center;">Author: Gus Lipkin</p>
 
@@ -9,6 +9,14 @@
 |                           Section                            |
 | :----------------------------------------------------------: |
 | [**Introduction and Background**](#Introduction-and-Background) |
+| [Author's Note](#Author's-Note) |
+| [My Origin Story](#My-Origin-Story) |
+| [The Spinoff Series](#The-Spinoff-Series) |
+| [The Dilemma](#The-Dilemma) |
+| [**Analysis**](#Analysis) |
+| [Profit Maximization](#Profit-Maximization) |
+| [Expected Marginal Utility](#Expected-Marginal-Utility) |
+| [**Conclusion**](#Conclusion) |
 
 <div style="page-break-after: always; break-after: page;"></div>
 
@@ -50,7 +58,7 @@ $$
 \end{aligned}
 $$
 
-Because the weight adds to one, the equation can be quickly rewritten as
+​	Because the weight adds to one, the equation can be quickly rewritten as
 
 $$
 \begin{aligned}
@@ -58,7 +66,7 @@ $$
 \end{aligned}
 $$
 
-The portion completed of each project, $D$, can be re-written as a function of the total time taken to complete the project for each person and the total time it will take to complete the project. We can call this total time for each project $T_L$ and $T_S$. I have already optimized the log card project so $D_L$ becomes $\frac{M_L+O_L}{T_L}$. For any special projects, we can say that it will take me one-tenth the time it will take someone else. $D_S$ can become $\frac{M_S}{.1T_S}+\frac{O_S}{T_S}$ which is simplified to $\frac{O_S+10M_S}{T_S}$.  The initial equation is then rewritten as
+​	The portion completed of each project, $D$, can be re-written as a function of the total time taken to complete the project for each person and the total time it will take to complete the project. We can call this total time for each project $T_L$ and $T_S$. I have already optimized the log card project so $D_L$ becomes $\frac{M_L+O_L}{T_L}$. For any special projects, we can say that it will take me one-tenth the time it will take someone else. $D_S$ can become $\frac{M_S}{.1T_S}+\frac{O_S}{T_S}$ which is simplified to $\frac{O_S+10M_S}{T_S}$.  The initial equation is then rewritten as
 
 $$
 \begin{aligned}
@@ -66,7 +74,7 @@ $$
 \end{aligned}
 $$
 
-Finally, in order to make this giant mess usable, $T_L$ and $T_S$ must be able to be said in terms of each other. Each special project takes about twenty-five hours to complete. Based on current progress, we can estimate that the log card project would take about ten twenty-five hour weeks to complete. Thus, $T_L = 10T_S$. In order to make sure we are comparing the same amout of time, we must multiply any special project values by ten as well. This means that my and anyone else's time is limited to 250 hours as well. $O_S$ and $10M_S$ become $250-O_L$ and $10(250-M_L)$, respectively. The profit equation becomes
+​	Finally, in order to make this giant mess usable, $T_L$ and $T_S$ must be able to be said in terms of each other. Each special project takes about twenty-five hours to complete. Based on current progress, we can estimate that the log card project would take about ten twenty-five hour weeks to complete. Thus, $T_L = 10T_S$. In order to make sure we are comparing the same amout of time, we must multiply any special project values by ten as well. This means that my and anyone else's time is limited to 250 hours as well. $O_S$ and $10M_S$ become $250-O_L$ and $10(250-M_L)$, respectively. The profit equation becomes
 
 $$
 \begin{aligned}
@@ -74,7 +82,7 @@ $$
 \end{aligned}
 $$
 
-This cannot be simplified much more unless some of the variables are assigned numeric values. While I do not know the true values of $W_L$, $V_L$, or $V_S$, I can most certainly make something up. Let us say that the log cards are four times as important as any given special project and so $W_L = .8$. However, special projects are considerably more profitable and so $V_S = 5V_L$ and $V_S = \$10,000,000$.
+​	This cannot be simplified much more unless some of the variables are assigned numeric values. While I do not know the true values of $W_L$, $V_L$, or $V_S$, I can most certainly make something up. Let us say that the log cards are four times as important as any given special project and so $W_L = .8$. However, special projects are considerably more profitable and so $V_S = 5V_L$ and $V_S = \$10,000,000$.
 
 $$
 \begin{aligned}
@@ -82,7 +90,7 @@ $$
 \end{aligned}
 $$
 
-Simplifying,
+​	Simplifying,
 $$
 \begin{aligned}
 \pi=1,600,000\frac{M_L+O_L}{250} + 20,000,000\frac{(250-O_L)+10(250-M_L)}{250} - 13(M_L+O_L+10(10(250-M_L))+10(250-O_L))
@@ -101,15 +109,25 @@ $$
 \end{aligned}
 $$
 
-The important part here is not the final profit equation because, as expected, the profit would be higher if MiGrocery did not have to pay employees, but rather that one hour of my time has a value of $794887$ while the value of someone else's time is only $73717$. My time is $10.87$ times more valuable than someone else's for the same task if the constants given above retain their value.
+​	The important part here is not the final profit equation because, as expected, the profit would be higher if MiGrocery did not have to pay employees, but rather that one hour of my time has a value of $794887$ while the value of someone else's time is only $73717$. My time is $10.87$ times more valuable than someone else's for the same task if the constants given above retain their value.
 
-​	Of course, proper profit maximization requires taking the first derivative of the profit function. With all of the guesses about the values of constants I made and the ratios that allowed me to put one variable in terms of another, this quickly fell by the wayside. With proper numbers, the equation could be put into solver to give the amount of hours per project that myself and someone else should work on to maximize profit.
+​	Proper profit maximization requires taking the first derivative of the profit function. With all of the guesses about the values of constants I made and the ratios that allowed me to put one variable in terms of another, this quickly fell by the wayside. With proper numbers, the equation could be put into solver to give the amount of hours per project that myself and someone else should work on to maximize profit.
 
-## Expected Marginal Benefit
+## Expected Marginal Utility
 
-​	As we established in [*Profit Maximization*](#Profit-Maximization), 
+​	As we established in [*Profit Maximization*](#Profit-Maximization), I provide no added value to the log card project over any other person performing the same task. I will concede, of course, that I already know which buttons to press to update my spreadsheets and no one else does, but those tasks are easy to teach in under fifteen minutes and can therefore be ignored. Because I provide no added value to the project, when my supervisor asks me to work on log cards, they have a marginal utility of zero while I am doing that work. 
 
+​	What is the company's expected marginal utility for each unit of time I am on a special project? This is relatively easy to answer because of the nature of the special projects I am assigned to. Each special project has progress that can be measured by tasks completed or percent completion when done by hand such as transcribing part numbers into a spreadsheet or trying to find duplicate part numbers. However, when writing a program that does these tasks it is exceptionally rare that a computer running the program would take as long as a human would to do the same task.
 
+<p style="text-align: center;"><code>Assumption 1: A computer program will always take less time to complete a given task than a human will</code></p>
 
+​	Of course, that program does take time to write. It takes me about a week to write a fully-fledged solution to any special project. If I am able to re-purpose existing code for a new project, that time is cut down to just one or two days.
 
+<p style="text-align: center;"><code>Assumption 2: I will take a week to finish writing a program to complete any given task</code></p>
+
+​		It should now be clear that if any special project is expected to take more than a week to complete, I should be tasked with writing a program to do the task. If the task is expected to be repeated, I should be asked to write a program if the total time spent on the task is more than a week. It may take me more time in the beginning, but at some point the programming time and task time will reach a breakeven point at which point the program will be more efficient.
+
+# Conclusion
+
+​	I may be tooting my own horn, so to speak, but I do not think that MiGrocery could have hired a better and more productive intern. I have shown time and time again that I am able to use skills in my toolset to expertly optimize current workloads and to automate tasks that could take weeks to complete by hand. Through profit maximization techniques with estimated numbers, I have shown that I can be more than ten times as productive as an employee doing the same task by hand. In discussing expected marginal utility, we learned that it makes sense for me to take on any special project that is expected to take more than a week to complete or that is an ongoing project. Because I am so much more productive on special projects, it makes sense for me to be switched to those full time rather than kept on log cards and loaned out to special projects on occasion.
 
