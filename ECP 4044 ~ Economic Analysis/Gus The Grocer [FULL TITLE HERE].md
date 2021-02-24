@@ -107,7 +107,7 @@ The important part here is not the final profit equation because, as expected, t
 
 ## Expected Marginal Benefit
 
-​	As we established in [*Profit Maximization*](#Profit-Maximization), 
+​	As we established in [*Profit Maximization*](#Profit-Maximization), I provide no added value to the log card project over any other employee. 
 
 
 
