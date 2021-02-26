@@ -3,7 +3,7 @@
       name:  {res}<unnamed>
        {txt}log:  {res}/Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Problem Set 1/Problem Set 1.smcl
   {txt}log type:  {res}smcl
- {txt}opened on:  {res}11 Feb 2021, 19:36:36
+ {txt}opened on:  {res}26 Feb 2021, 07:25:39
 {txt}
 {com}. 
 . *2d Generate a monthly date variable (make its display format monthly time, %tm)
@@ -33,310 +33,52 @@
 {txt}(588 missing values generated)
 
 {com}. 
-. *3b Estimate the static model relating monthly nonfarm employment in Florida to the other three variables (all in logs) without controlling for seasonal impacts or a time trend.
-. regress ln_fl_nonfarm ln_fl_lf ln_us_epr ln_fl_bp
+{txt}end of do-file
 
-{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       396
-{txt}{hline 13}{c +}{hline 34}   F(3, 392)       = {res}  5972.65
-{txt}       Model {c |} {res} 10.5356085         3  3.51186951   {txt}Prob > F        ={res}    0.0000
-{txt}    Residual {c |} {res} .230492978       392  .000587992   {txt}R-squared       ={res}    0.9786
-{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.9784
-{txt}       Total {c |} {res} 10.7661015       395  .027255953   {txt}Root MSE        =   {res} .02425
-
-{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 1}ln_fl_nonf~m{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
-{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{space 4}ln_fl_lf {c |}{col 14}{res}{space 2} 1.110504{col 26}{space 2} .0092305{col 37}{space 1}  120.31{col 46}{space 3}0.000{col 54}{space 4} 1.092356{col 67}{space 3} 1.128651
-{txt}{space 3}ln_us_epr {c |}{col 14}{res}{space 2} .6006702{col 26}{space 2}  .047797{col 37}{space 1}   12.57{col 46}{space 3}0.000{col 54}{space 4} .5066997{col 67}{space 3} .6946407
-{txt}{space 4}ln_fl_bp {c |}{col 14}{res}{space 2} .0516831{col 26}{space 2} .0028713{col 37}{space 1}   18.00{col 46}{space 3}0.000{col 54}{space 4} .0460379{col 67}{space 3} .0573282
-{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-11.78364{col 26}{space 2} .2925244{col 37}{space 1}  -40.28{col 46}{space 3}0.000{col 54}{space 4}-12.35875{col 67}{space 3}-11.20852
-{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{res}{txt}
-{com}. 
-. *3c Estimate the static model with month indicators and a time trend.
-. gen month=month(datec)
+{com}. do "/Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Problem Set 2/Problem Set 2.do"
 {txt}
-{com}. reg ln_fl_nonfarm ln_fl_lf ln_us_epr ln_fl_bp i.month date
-
-{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       396
-{txt}{hline 13}{c +}{hline 34}   F(15, 380)      = {res}  2935.69
-{txt}       Model {c |} {res} 10.6739911        15  .711599408   {txt}Prob > F        ={res}    0.0000
-{txt}    Residual {c |} {res} .092110398       380  .000242396   {txt}R-squared       ={res}    0.9914
-{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.9911
-{txt}       Total {c |} {res} 10.7661015       395  .027255953   {txt}Root MSE        =   {res} .01557
-
-{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 1}ln_fl_nonf~m{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
-{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{space 4}ln_fl_lf {c |}{col 14}{res}{space 2} .9282631{col 26}{space 2} .0413265{col 37}{space 1}   22.46{col 46}{space 3}0.000{col 54}{space 4} .8470059{col 67}{space 3}  1.00952
-{txt}{space 3}ln_us_epr {c |}{col 14}{res}{space 2} .9105558{col 26}{space 2} .0514333{col 37}{space 1}   17.70{col 46}{space 3}0.000{col 54}{space 4} .8094263{col 67}{space 3} 1.011685
-{txt}{space 4}ln_fl_bp {c |}{col 14}{res}{space 2} .0466812{col 26}{space 2} .0021579{col 37}{space 1}   21.63{col 46}{space 3}0.000{col 54}{space 4} .0424382{col 67}{space 3} .0509242
-{txt}{space 12} {c |}
-{space 7}month {c |}
-{space 10}2  {c |}{col 14}{res}{space 2} .0045623{col 26}{space 2} .0038378{col 37}{space 1}    1.19{col 46}{space 3}0.235{col 54}{space 4}-.0029837{col 67}{space 3} .0121084
-{txt}{space 10}3  {c |}{col 14}{res}{space 2} -.001379{col 26}{space 2}  .003839{col 37}{space 1}   -0.36{col 46}{space 3}0.720{col 54}{space 4}-.0089274{col 67}{space 3} .0061694
-{txt}{space 10}4  {c |}{col 14}{res}{space 2}-.0029373{col 26}{space 2} .0038393{col 37}{space 1}   -0.77{col 46}{space 3}0.445{col 54}{space 4}-.0104863{col 67}{space 3} .0046116
-{txt}{space 10}5  {c |}{col 14}{res}{space 2}-.0142748{col 26}{space 2} .0038468{col 37}{space 1}   -3.71{col 46}{space 3}0.000{col 54}{space 4}-.0218384{col 67}{space 3}-.0067112
-{txt}{space 10}6  {c |}{col 14}{res}{space 2}-.0356123{col 26}{space 2} .0038709{col 37}{space 1}   -9.20{col 46}{space 3}0.000{col 54}{space 4}-.0432234{col 67}{space 3}-.0280012
-{txt}{space 10}7  {c |}{col 14}{res}{space 2}-.0519102{col 26}{space 2} .0038917{col 37}{space 1}  -13.34{col 46}{space 3}0.000{col 54}{space 4}-.0595622{col 67}{space 3}-.0442582
-{txt}{space 10}8  {c |}{col 14}{res}{space 2}-.0380965{col 26}{space 2} .0038668{col 37}{space 1}   -9.85{col 46}{space 3}0.000{col 54}{space 4}-.0456995{col 67}{space 3}-.0304936
-{txt}{space 10}9  {c |}{col 14}{res}{space 2} -.026004{col 26}{space 2} .0038581{col 37}{space 1}   -6.74{col 46}{space 3}0.000{col 54}{space 4}-.0335899{col 67}{space 3}-.0184181
-{txt}{space 9}10  {c |}{col 14}{res}{space 2}-.0215894{col 26}{space 2} .0038763{col 37}{space 1}   -5.57{col 46}{space 3}0.000{col 54}{space 4} -.029211{col 67}{space 3}-.0139678
-{txt}{space 9}11  {c |}{col 14}{res}{space 2}-.0014672{col 26}{space 2} .0039082{col 37}{space 1}   -0.38{col 46}{space 3}0.708{col 54}{space 4}-.0091517{col 67}{space 3} .0062173
-{txt}{space 9}12  {c |}{col 14}{res}{space 2} .0054514{col 26}{space 2} .0038735{col 37}{space 1}    1.41{col 46}{space 3}0.160{col 54}{space 4}-.0021648{col 67}{space 3} .0130675
-{txt}{space 12} {c |}
-{space 8}date {c |}{col 14}{res}{space 2} .0003124{col 26}{space 2} .0000637{col 37}{space 1}    4.90{col 46}{space 3}0.000{col 54}{space 4}  .000187{col 67}{space 3} .0004377
-{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-10.26323{col 26}{space 2}  .498888{col 37}{space 1}  -20.57{col 46}{space 3}0.000{col 54}{space 4}-11.24416{col 67}{space 3}-9.282304
-{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{res}{txt}
-{com}. 
-. *4a Estimate the distributed lag model relating monthly nonfarm employment to lags 0 to 12 of the three predictor variables without month indicators and a time trend.
-. regress ln_fl_nonfarm l(0/12).ln_fl_lf l(0/12).ln_us_epr l(0/12).ln_fl_bp
-
-{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       384
-{txt}{hline 13}{c +}{hline 34}   F(39, 344)      = {res}  1506.36
-{txt}       Model {c |} {res} 9.45063897        39  .242324076   {txt}Prob > F        ={res}    0.0000
-{txt}    Residual {c |} {res} .055338456       344  .000160868   {txt}R-squared       ={res}    0.9942
-{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.9935
-{txt}       Total {c |} {res} 9.50597742       383  .024819784   {txt}Root MSE        =   {res} .01268
-
-{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 1}ln_fl_nonf~m{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
-{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{space 4}ln_fl_lf {c |}
-{space 9}--. {c |}{col 14}{res}{space 2}-.3180953{col 26}{space 2} .2192272{col 37}{space 1}   -1.45{col 46}{space 3}0.148{col 54}{space 4}-.7492898{col 67}{space 3} .1130992
-{txt}{space 9}L1. {c |}{col 14}{res}{space 2}-.4936055{col 26}{space 2} .2780395{col 37}{space 1}   -1.78{col 46}{space 3}0.077{col 54}{space 4}-1.040477{col 67}{space 3} .0532661
-{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .3085466{col 26}{space 2}   .27846{col 37}{space 1}    1.11{col 46}{space 3}0.269{col 54}{space 4} -.239152{col 67}{space 3} .8562452
-{txt}{space 9}L3. {c |}{col 14}{res}{space 2} 1.173922{col 26}{space 2} .2948363{col 37}{space 1}    3.98{col 46}{space 3}0.000{col 54}{space 4} .5940134{col 67}{space 3} 1.753831
-{txt}{space 9}L4. {c |}{col 14}{res}{space 2}-.2346487{col 26}{space 2} .2905929{col 37}{space 1}   -0.81{col 46}{space 3}0.420{col 54}{space 4}-.8062113{col 67}{space 3} .3369138
-{txt}{space 9}L5. {c |}{col 14}{res}{space 2} .2808166{col 26}{space 2} .2958343{col 37}{space 1}    0.95{col 46}{space 3}0.343{col 54}{space 4}-.3010552{col 67}{space 3} .8626884
-{txt}{space 9}L6. {c |}{col 14}{res}{space 2}-.2076341{col 26}{space 2} .3372426{col 37}{space 1}   -0.62{col 46}{space 3}0.539{col 54}{space 4}-.8709511{col 67}{space 3} .4556829
-{txt}{space 9}L7. {c |}{col 14}{res}{space 2}  .428488{col 26}{space 2} .3391507{col 37}{space 1}    1.26{col 46}{space 3}0.207{col 54}{space 4}-.2385821{col 67}{space 3} 1.095558
-{txt}{space 9}L8. {c |}{col 14}{res}{space 2} .4803611{col 26}{space 2} .3332665{col 37}{space 1}    1.44{col 46}{space 3}0.150{col 54}{space 4}-.1751354{col 67}{space 3} 1.135858
-{txt}{space 9}L9. {c |}{col 14}{res}{space 2} .2977526{col 26}{space 2} .3112925{col 37}{space 1}    0.96{col 46}{space 3}0.339{col 54}{space 4}-.3145235{col 67}{space 3} .9100288
-{txt}{space 8}L10. {c |}{col 14}{res}{space 2}  -.00028{col 26}{space 2} .3217814{col 37}{space 1}   -0.00{col 46}{space 3}0.999{col 54}{space 4}-.6331867{col 67}{space 3} .6326267
-{txt}{space 8}L11. {c |}{col 14}{res}{space 2}-.5860114{col 26}{space 2} .3256137{col 37}{space 1}   -1.80{col 46}{space 3}0.073{col 54}{space 4}-1.226456{col 67}{space 3} .0544331
-{txt}{space 8}L12. {c |}{col 14}{res}{space 2} .0176351{col 26}{space 2} .2499574{col 37}{space 1}    0.07{col 46}{space 3}0.944{col 54}{space 4}-.4740021{col 67}{space 3} .5092724
-{txt}{space 12} {c |}
-{space 3}ln_us_epr {c |}
-{space 9}--. {c |}{col 14}{res}{space 2} 1.180441{col 26}{space 2} .1573579{col 37}{space 1}    7.50{col 46}{space 3}0.000{col 54}{space 4} .8709364{col 67}{space 3} 1.489946
-{txt}{space 9}L1. {c |}{col 14}{res}{space 2} .2435207{col 26}{space 2}  .202013{col 37}{space 1}    1.21{col 46}{space 3}0.229{col 54}{space 4}-.1538155{col 67}{space 3} .6408569
-{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.1519264{col 26}{space 2} .2015081{col 37}{space 1}   -0.75{col 46}{space 3}0.451{col 54}{space 4}-.5482695{col 67}{space 3} .2444166
-{txt}{space 9}L3. {c |}{col 14}{res}{space 2} -.719111{col 26}{space 2} .2119425{col 37}{space 1}   -3.39{col 46}{space 3}0.001{col 54}{space 4}-1.135977{col 67}{space 3}-.3022447
-{txt}{space 9}L4. {c |}{col 14}{res}{space 2} .1877102{col 26}{space 2} .2014654{col 37}{space 1}    0.93{col 46}{space 3}0.352{col 54}{space 4}-.2085489{col 67}{space 3} .5839692
-{txt}{space 9}L5. {c |}{col 14}{res}{space 2}-.1596306{col 26}{space 2}  .206881{col 37}{space 1}   -0.77{col 46}{space 3}0.441{col 54}{space 4}-.5665414{col 67}{space 3} .2472803
-{txt}{space 9}L6. {c |}{col 14}{res}{space 2} .4937537{col 26}{space 2} .2396216{col 37}{space 1}    2.06{col 46}{space 3}0.040{col 54}{space 4} .0224458{col 67}{space 3} .9650615
-{txt}{space 9}L7. {c |}{col 14}{res}{space 2}-.3031484{col 26}{space 2}  .236988{col 37}{space 1}   -1.28{col 46}{space 3}0.202{col 54}{space 4}-.7692764{col 67}{space 3} .1629796
-{txt}{space 9}L8. {c |}{col 14}{res}{space 2}-.2995254{col 26}{space 2} .2312056{col 37}{space 1}   -1.30{col 46}{space 3}0.196{col 54}{space 4}-.7542801{col 67}{space 3} .1552293
-{txt}{space 9}L9. {c |}{col 14}{res}{space 2} .5953076{col 26}{space 2} .2915942{col 37}{space 1}    2.04{col 46}{space 3}0.042{col 54}{space 4} .0217756{col 67}{space 3}  1.16884
-{txt}{space 8}L10. {c |}{col 14}{res}{space 2}-.1656984{col 26}{space 2}  .352639{col 37}{space 1}   -0.47{col 46}{space 3}0.639{col 54}{space 4}-.8592984{col 67}{space 3} .5279015
-{txt}{space 8}L11. {c |}{col 14}{res}{space 2} .5326939{col 26}{space 2} .3523697{col 37}{space 1}    1.51{col 46}{space 3}0.132{col 54}{space 4}-.1603764{col 67}{space 3} 1.225764
-{txt}{space 8}L12. {c |}{col 14}{res}{space 2}-.4280274{col 26}{space 2} .2543508{col 37}{space 1}   -1.68{col 46}{space 3}0.093{col 54}{space 4} -.928306{col 67}{space 3} .0722511
-{txt}{space 12} {c |}
-{space 4}ln_fl_bp {c |}
-{space 9}--. {c |}{col 14}{res}{space 2} .0177815{col 26}{space 2} .0051888{col 37}{space 1}    3.43{col 46}{space 3}0.001{col 54}{space 4} .0075758{col 67}{space 3} .0279872
-{txt}{space 9}L1. {c |}{col 14}{res}{space 2} .0056999{col 26}{space 2} .0054688{col 37}{space 1}    1.04{col 46}{space 3}0.298{col 54}{space 4}-.0050566{col 67}{space 3} .0164565
-{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .0123023{col 26}{space 2} .0056879{col 37}{space 1}    2.16{col 46}{space 3}0.031{col 54}{space 4} .0011149{col 67}{space 3} .0234898
-{txt}{space 9}L3. {c |}{col 14}{res}{space 2}-.0005041{col 26}{space 2} .0058381{col 37}{space 1}   -0.09{col 46}{space 3}0.931{col 54}{space 4}-.0119871{col 67}{space 3} .0109788
-{txt}{space 9}L4. {c |}{col 14}{res}{space 2}-.0040248{col 26}{space 2} .0058282{col 37}{space 1}   -0.69{col 46}{space 3}0.490{col 54}{space 4}-.0154881{col 67}{space 3} .0074385
-{txt}{space 9}L5. {c |}{col 14}{res}{space 2} .0053648{col 26}{space 2} .0058106{col 37}{space 1}    0.92{col 46}{space 3}0.357{col 54}{space 4} -.006064{col 67}{space 3} .0167937
-{txt}{space 9}L6. {c |}{col 14}{res}{space 2} .0122019{col 26}{space 2} .0057914{col 37}{space 1}    2.11{col 46}{space 3}0.036{col 54}{space 4} .0008108{col 67}{space 3} .0235929
-{txt}{space 9}L7. {c |}{col 14}{res}{space 2} .0146252{col 26}{space 2} .0057698{col 37}{space 1}    2.53{col 46}{space 3}0.012{col 54}{space 4} .0032766{col 67}{space 3} .0259737
-{txt}{space 9}L8. {c |}{col 14}{res}{space 2} .0114715{col 26}{space 2} .0057663{col 37}{space 1}    1.99{col 46}{space 3}0.047{col 54}{space 4} .0001299{col 67}{space 3} .0228131
-{txt}{space 9}L9. {c |}{col 14}{res}{space 2} .0100892{col 26}{space 2} .0057895{col 37}{space 1}    1.74{col 46}{space 3}0.082{col 54}{space 4}-.0012981{col 67}{space 3} .0214765
-{txt}{space 8}L10. {c |}{col 14}{res}{space 2}-.0077443{col 26}{space 2} .0056515{col 37}{space 1}   -1.37{col 46}{space 3}0.171{col 54}{space 4}-.0188601{col 67}{space 3} .0033715
-{txt}{space 8}L11. {c |}{col 14}{res}{space 2}-.0129284{col 26}{space 2} .0055227{col 37}{space 1}   -2.34{col 46}{space 3}0.020{col 54}{space 4}-.0237908{col 67}{space 3} -.002066
-{txt}{space 8}L12. {c |}{col 14}{res}{space 2}-.0156324{col 26}{space 2} .0052843{col 37}{space 1}   -2.96{col 46}{space 3}0.003{col 54}{space 4}-.0260261{col 67}{space 3}-.0052388
-{txt}{space 12} {c |}
-{space 7}_cons {c |}{col 14}{res}{space 2}-14.00483{col 26}{space 2}  .220126{col 37}{space 1}  -63.62{col 46}{space 3}0.000{col 54}{space 4}-14.43779{col 67}{space 3}-13.57187
-{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{res}{txt}
-{com}. 
-. *4b Estimate the model in (a) but add month indicators and a time trend.
-. regress ln_fl_nonfarm l(0/12).ln_fl_lf l(0/12).ln_us_epr l(0/12).ln_fl_bp i.month date
-
-{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       384
-{txt}{hline 13}{c +}{hline 34}   F(51, 332)      = {res}  1880.48
-{txt}       Model {c |} {res} 9.47318331        51  .185748692   {txt}Prob > F        ={res}    0.0000
-{txt}    Residual {c |} {res}  .03279411       332  .000098777   {txt}R-squared       ={res}    0.9966
-{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.9960
-{txt}       Total {c |} {res} 9.50597742       383  .024819784   {txt}Root MSE        =   {res} .00994
-
-{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 1}ln_fl_nonf~m{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
-{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{space 4}ln_fl_lf {c |}
-{space 9}--. {c |}{col 14}{res}{space 2} .1395258{col 26}{space 2} .2167149{col 37}{space 1}    0.64{col 46}{space 3}0.520{col 54}{space 4}-.2867817{col 67}{space 3} .5658333
-{txt}{space 9}L1. {c |}{col 14}{res}{space 2}-.0728475{col 26}{space 2} .2909974{col 37}{space 1}   -0.25{col 46}{space 3}0.802{col 54}{space 4}-.6452787{col 67}{space 3} .4995837
-{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.0401378{col 26}{space 2} .2914261{col 37}{space 1}   -0.14{col 46}{space 3}0.891{col 54}{space 4}-.6134123{col 67}{space 3} .5331367
-{txt}{space 9}L3. {c |}{col 14}{res}{space 2} .4941867{col 26}{space 2} .3004728{col 37}{space 1}    1.64{col 46}{space 3}0.101{col 54}{space 4} -.096884{col 67}{space 3} 1.085257
-{txt}{space 9}L4. {c |}{col 14}{res}{space 2} .0243743{col 26}{space 2} .3032608{col 37}{space 1}    0.08{col 46}{space 3}0.936{col 54}{space 4}-.5721806{col 67}{space 3} .6209291
-{txt}{space 9}L5. {c |}{col 14}{res}{space 2}-.0515457{col 26}{space 2} .3007867{col 37}{space 1}   -0.17{col 46}{space 3}0.864{col 54}{space 4}-.6432337{col 67}{space 3} .5401424
-{txt}{space 9}L6. {c |}{col 14}{res}{space 2} .2645611{col 26}{space 2} .3042172{col 37}{space 1}    0.87{col 46}{space 3}0.385{col 54}{space 4}-.3338753{col 67}{space 3} .8629975
-{txt}{space 9}L7. {c |}{col 14}{res}{space 2} .3032209{col 26}{space 2} .3064496{col 37}{space 1}    0.99{col 46}{space 3}0.323{col 54}{space 4}-.2996069{col 67}{space 3} .9060486
-{txt}{space 9}L8. {c |}{col 14}{res}{space 2} .0945934{col 26}{space 2} .3058001{col 37}{space 1}    0.31{col 46}{space 3}0.757{col 54}{space 4}-.5069567{col 67}{space 3} .6961435
-{txt}{space 9}L9. {c |}{col 14}{res}{space 2}-.1097755{col 26}{space 2} .3559336{col 37}{space 1}   -0.31{col 46}{space 3}0.758{col 54}{space 4}-.8099451{col 67}{space 3}  .590394
-{txt}{space 8}L10. {c |}{col 14}{res}{space 2} .1539543{col 26}{space 2}  .375505{col 37}{space 1}    0.41{col 46}{space 3}0.682{col 54}{space 4}-.5847148{col 67}{space 3} .8926234
-{txt}{space 8}L11. {c |}{col 14}{res}{space 2}-.2776778{col 26}{space 2} .3787638{col 37}{space 1}   -0.73{col 46}{space 3}0.464{col 54}{space 4}-1.022757{col 67}{space 3} .4674017
-{txt}{space 8}L12. {c |}{col 14}{res}{space 2}-.0112724{col 26}{space 2}  .279864{col 37}{space 1}   -0.04{col 46}{space 3}0.968{col 54}{space 4}-.5618026{col 67}{space 3} .5392579
-{txt}{space 12} {c |}
-{space 3}ln_us_epr {c |}
-{space 9}--. {c |}{col 14}{res}{space 2} .8902343{col 26}{space 2} .1499136{col 37}{space 1}    5.94{col 46}{space 3}0.000{col 54}{space 4}  .595334{col 67}{space 3} 1.185135
-{txt}{space 9}L1. {c |}{col 14}{res}{space 2} .0725186{col 26}{space 2} .1976025{col 37}{space 1}    0.37{col 46}{space 3}0.714{col 54}{space 4}-.3161923{col 67}{space 3} .4612294
-{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .0146862{col 26}{space 2} .1973291{col 37}{space 1}    0.07{col 46}{space 3}0.941{col 54}{space 4}-.3734868{col 67}{space 3} .4028593
-{txt}{space 9}L3. {c |}{col 14}{res}{space 2}-.3099001{col 26}{space 2} .2109421{col 37}{space 1}   -1.47{col 46}{space 3}0.143{col 54}{space 4}-.7248517{col 67}{space 3} .1050514
-{txt}{space 9}L4. {c |}{col 14}{res}{space 2}  .137028{col 26}{space 2}  .215249{col 37}{space 1}    0.64{col 46}{space 3}0.525{col 54}{space 4}-.2863958{col 67}{space 3} .5604519
-{txt}{space 9}L5. {c |}{col 14}{res}{space 2}-.0073661{col 26}{space 2} .2142714{col 37}{space 1}   -0.03{col 46}{space 3}0.973{col 54}{space 4}-.4288668{col 67}{space 3} .4141346
-{txt}{space 9}L6. {c |}{col 14}{res}{space 2} .0293898{col 26}{space 2} .2200462{col 37}{space 1}    0.13{col 46}{space 3}0.894{col 54}{space 4}-.4034709{col 67}{space 3} .4622504
-{txt}{space 9}L7. {c |}{col 14}{res}{space 2}-.1397223{col 26}{space 2} .2227059{col 37}{space 1}   -0.63{col 46}{space 3}0.531{col 54}{space 4}-.5778149{col 67}{space 3} .2983702
-{txt}{space 9}L8. {c |}{col 14}{res}{space 2}-.0598893{col 26}{space 2} .2228997{col 37}{space 1}   -0.27{col 46}{space 3}0.788{col 54}{space 4}-.4983631{col 67}{space 3} .3785844
-{txt}{space 9}L9. {c |}{col 14}{res}{space 2} .4823653{col 26}{space 2} .4060878{col 37}{space 1}    1.19{col 46}{space 3}0.236{col 54}{space 4}-.3164642{col 67}{space 3} 1.281195
-{txt}{space 8}L10. {c |}{col 14}{res}{space 2} .0335197{col 26}{space 2} .4684115{col 37}{space 1}    0.07{col 46}{space 3}0.943{col 54}{space 4} -.887909{col 67}{space 3} .9549485
-{txt}{space 8}L11. {c |}{col 14}{res}{space 2} .4443457{col 26}{space 2} .4733678{col 37}{space 1}    0.94{col 46}{space 3}0.349{col 54}{space 4}-.4868327{col 67}{space 3} 1.375524
-{txt}{space 8}L12. {c |}{col 14}{res}{space 2}-.3652099{col 26}{space 2} .3457533{col 37}{space 1}   -1.06{col 46}{space 3}0.292{col 54}{space 4}-1.045353{col 67}{space 3} .3149335
-{txt}{space 12} {c |}
-{space 4}ln_fl_bp {c |}
-{space 9}--. {c |}{col 14}{res}{space 2} .0174185{col 26}{space 2} .0043812{col 37}{space 1}    3.98{col 46}{space 3}0.000{col 54}{space 4}    .0088{col 67}{space 3} .0260369
-{txt}{space 9}L1. {c |}{col 14}{res}{space 2} .0097915{col 26}{space 2} .0047176{col 37}{space 1}    2.08{col 46}{space 3}0.039{col 54}{space 4} .0005113{col 67}{space 3} .0190717
-{txt}{space 9}L2. {c |}{col 14}{res}{space 2}  .005989{col 26}{space 2} .0048174{col 37}{space 1}    1.24{col 46}{space 3}0.215{col 54}{space 4}-.0034873{col 67}{space 3} .0154654
-{txt}{space 9}L3. {c |}{col 14}{res}{space 2} .0067099{col 26}{space 2} .0049382{col 37}{space 1}    1.36{col 46}{space 3}0.175{col 54}{space 4}-.0030042{col 67}{space 3}  .016424
-{txt}{space 9}L4. {c |}{col 14}{res}{space 2} .0015463{col 26}{space 2} .0049663{col 37}{space 1}    0.31{col 46}{space 3}0.756{col 54}{space 4}-.0082232{col 67}{space 3} .0113157
-{txt}{space 9}L5. {c |}{col 14}{res}{space 2} .0025978{col 26}{space 2} .0049914{col 37}{space 1}    0.52{col 46}{space 3}0.603{col 54}{space 4} -.007221{col 67}{space 3} .0124166
-{txt}{space 9}L6. {c |}{col 14}{res}{space 2}  .006001{col 26}{space 2} .0049798{col 37}{space 1}    1.21{col 46}{space 3}0.229{col 54}{space 4}-.0037949{col 67}{space 3} .0157968
-{txt}{space 9}L7. {c |}{col 14}{res}{space 2} .0066017{col 26}{space 2} .0049157{col 37}{space 1}    1.34{col 46}{space 3}0.180{col 54}{space 4} -.003068{col 67}{space 3} .0162715
-{txt}{space 9}L8. {c |}{col 14}{res}{space 2}-.0015491{col 26}{space 2} .0049371{col 37}{space 1}   -0.31{col 46}{space 3}0.754{col 54}{space 4} -.011261{col 67}{space 3} .0081628
-{txt}{space 9}L9. {c |}{col 14}{res}{space 2} .0010036{col 26}{space 2} .0048898{col 37}{space 1}    0.21{col 46}{space 3}0.838{col 54}{space 4}-.0086153{col 67}{space 3} .0106225
-{txt}{space 8}L10. {c |}{col 14}{res}{space 2}-.0004773{col 26}{space 2} .0047767{col 37}{space 1}   -0.10{col 46}{space 3}0.920{col 54}{space 4}-.0098737{col 67}{space 3}  .008919
-{txt}{space 8}L11. {c |}{col 14}{res}{space 2}-.0083937{col 26}{space 2} .0046846{col 37}{space 1}   -1.79{col 46}{space 3}0.074{col 54}{space 4} -.017609{col 67}{space 3} .0008216
-{txt}{space 8}L12. {c |}{col 14}{res}{space 2}-.0041455{col 26}{space 2} .0044702{col 37}{space 1}   -0.93{col 46}{space 3}0.354{col 54}{space 4}-.0129391{col 67}{space 3}  .004648
-{txt}{space 12} {c |}
-{space 7}month {c |}
-{space 10}2  {c |}{col 14}{res}{space 2} .0077995{col 26}{space 2} .0048077{col 37}{space 1}    1.62{col 46}{space 3}0.106{col 54}{space 4} -.001658{col 67}{space 3}  .017257
-{txt}{space 10}3  {c |}{col 14}{res}{space 2} .0052085{col 26}{space 2} .0041637{col 37}{space 1}    1.25{col 46}{space 3}0.212{col 54}{space 4}-.0029821{col 67}{space 3} .0133991
-{txt}{space 10}4  {c |}{col 14}{res}{space 2}-.0010198{col 26}{space 2} .0053356{col 37}{space 1}   -0.19{col 46}{space 3}0.849{col 54}{space 4}-.0115156{col 67}{space 3}  .009476
-{txt}{space 10}5  {c |}{col 14}{res}{space 2}-.0012298{col 26}{space 2} .0047478{col 37}{space 1}   -0.26{col 46}{space 3}0.796{col 54}{space 4}-.0105694{col 67}{space 3} .0081098
-{txt}{space 10}6  {c |}{col 14}{res}{space 2}-.0122415{col 26}{space 2} .0055844{col 37}{space 1}   -2.19{col 46}{space 3}0.029{col 54}{space 4}-.0232267{col 67}{space 3}-.0012563
-{txt}{space 10}7  {c |}{col 14}{res}{space 2}-.0240128{col 26}{space 2} .0047031{col 37}{space 1}   -5.11{col 46}{space 3}0.000{col 54}{space 4}-.0332644{col 67}{space 3}-.0147612
-{txt}{space 10}8  {c |}{col 14}{res}{space 2}-.0152756{col 26}{space 2} .0052483{col 37}{space 1}   -2.91{col 46}{space 3}0.004{col 54}{space 4}-.0255997{col 67}{space 3}-.0049514
-{txt}{space 10}9  {c |}{col 14}{res}{space 2}-.0111308{col 26}{space 2} .0045365{col 37}{space 1}   -2.45{col 46}{space 3}0.015{col 54}{space 4}-.0200548{col 67}{space 3}-.0022068
-{txt}{space 9}10  {c |}{col 14}{res}{space 2}-.0046899{col 26}{space 2}  .006722{col 37}{space 1}   -0.70{col 46}{space 3}0.486{col 54}{space 4}-.0179129{col 67}{space 3} .0085332
-{txt}{space 9}11  {c |}{col 14}{res}{space 2} .0076979{col 26}{space 2} .0057763{col 37}{space 1}    1.33{col 46}{space 3}0.184{col 54}{space 4}-.0036649{col 67}{space 3} .0190607
-{txt}{space 9}12  {c |}{col 14}{res}{space 2} .0151789{col 26}{space 2} .0059337{col 37}{space 1}    2.56{col 46}{space 3}0.011{col 54}{space 4} .0035065{col 67}{space 3} .0268514
-{txt}{space 12} {c |}
-{space 8}date {c |}{col 14}{res}{space 2} .0003695{col 26}{space 2}  .000047{col 37}{space 1}    7.86{col 46}{space 3}0.000{col 54}{space 4}  .000277{col 67}{space 3} .0004619
-{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-11.28083{col 26}{space 2}  .391293{col 37}{space 1}  -28.83{col 46}{space 3}0.000{col 54}{space 4}-12.05055{col 67}{space 3} -10.5111
-{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{res}{txt}
-{com}. 
-. *4e Estimate two alternative models that contain month indicators and a time trend but that impose a more parsimonious lag structure for the predictor variables. Explain your choices.
-. regress ln_fl_nonfarm l(0,4,8,12).ln_fl_lf l(0,4,8,12).ln_us_epr l(0,4,8,12).ln_fl_bp i.month date
-
-{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       384
-{txt}{hline 13}{c +}{hline 34}   F(24, 359)      = {res}  3636.67
-{txt}       Model {c |} {res} 9.46703767        24  .394459903   {txt}Prob > F        ={res}    0.0000
-{txt}    Residual {c |} {res} .038939751       359  .000108467   {txt}R-squared       ={res}    0.9959
-{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.9956
-{txt}       Total {c |} {res} 9.50597742       383  .024819784   {txt}Root MSE        =   {res} .01041
-
-{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 1}ln_fl_nonf~m{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
-{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{space 4}ln_fl_lf {c |}
-{space 9}--. {c |}{col 14}{res}{space 2} .2198644{col 26}{space 2}  .118892{col 37}{space 1}    1.85{col 46}{space 3}0.065{col 54}{space 4}-.0139479{col 67}{space 3} .4536767
-{txt}{space 9}L4. {c |}{col 14}{res}{space 2} .3640379{col 26}{space 2} .1628088{col 37}{space 1}    2.24{col 46}{space 3}0.026{col 54}{space 4} .0438591{col 67}{space 3} .6842168
-{txt}{space 9}L8. {c |}{col 14}{res}{space 2} .6241057{col 26}{space 2} .1697337{col 37}{space 1}    3.68{col 46}{space 3}0.000{col 54}{space 4} .2903084{col 67}{space 3}  .957903
-{txt}{space 8}L12. {c |}{col 14}{res}{space 2}-.3365352{col 26}{space 2} .1300465{col 37}{space 1}   -2.59{col 46}{space 3}0.010{col 54}{space 4} -.592284{col 67}{space 3}-.0807864
-{txt}{space 12} {c |}
-{space 3}ln_us_epr {c |}
-{space 9}--. {c |}{col 14}{res}{space 2} .8706823{col 26}{space 2} .0862833{col 37}{space 1}   10.09{col 46}{space 3}0.000{col 54}{space 4} .7009981{col 67}{space 3} 1.040367
-{txt}{space 9}L4. {c |}{col 14}{res}{space 2} .0186581{col 26}{space 2} .1180743{col 37}{space 1}    0.16{col 46}{space 3}0.875{col 54}{space 4} -.213546{col 67}{space 3} .2508623
-{txt}{space 9}L8. {c |}{col 14}{res}{space 2}-.1364675{col 26}{space 2} .1363531{col 37}{space 1}   -1.00{col 46}{space 3}0.318{col 54}{space 4}-.4046187{col 67}{space 3} .1316838
-{txt}{space 8}L12. {c |}{col 14}{res}{space 2} .4492816{col 26}{space 2} .1055542{col 37}{space 1}    4.26{col 46}{space 3}0.000{col 54}{space 4} .2416993{col 67}{space 3} .6568639
-{txt}{space 12} {c |}
-{space 4}ln_fl_bp {c |}
-{space 9}--. {c |}{col 14}{res}{space 2} .0288326{col 26}{space 2} .0033225{col 37}{space 1}    8.68{col 46}{space 3}0.000{col 54}{space 4} .0222986{col 67}{space 3} .0353666
-{txt}{space 9}L4. {c |}{col 14}{res}{space 2}  .014784{col 26}{space 2} .0040692{col 37}{space 1}    3.63{col 46}{space 3}0.000{col 54}{space 4} .0067816{col 67}{space 3} .0227864
-{txt}{space 9}L8. {c |}{col 14}{res}{space 2} .0053046{col 26}{space 2} .0040599{col 37}{space 1}    1.31{col 46}{space 3}0.192{col 54}{space 4}-.0026795{col 67}{space 3} .0132888
-{txt}{space 8}L12. {c |}{col 14}{res}{space 2}-.0040886{col 26}{space 2} .0034865{col 37}{space 1}   -1.17{col 46}{space 3}0.242{col 54}{space 4}-.0109452{col 67}{space 3}  .002768
-{txt}{space 12} {c |}
-{space 7}month {c |}
-{space 10}2  {c |}{col 14}{res}{space 2}  .003724{col 26}{space 2} .0027268{col 37}{space 1}    1.37{col 46}{space 3}0.173{col 54}{space 4}-.0016384{col 67}{space 3} .0090864
-{txt}{space 10}3  {c |}{col 14}{res}{space 2}  .003428{col 26}{space 2} .0030747{col 37}{space 1}    1.11{col 46}{space 3}0.266{col 54}{space 4}-.0026188{col 67}{space 3} .0094747
-{txt}{space 10}4  {c |}{col 14}{res}{space 2}-.0013812{col 26}{space 2} .0030302{col 37}{space 1}   -0.46{col 46}{space 3}0.649{col 54}{space 4}-.0073404{col 67}{space 3} .0045779
-{txt}{space 10}5  {c |}{col 14}{res}{space 2}-.0050709{col 26}{space 2}  .003101{col 37}{space 1}   -1.64{col 46}{space 3}0.103{col 54}{space 4}-.0111693{col 67}{space 3} .0010275
-{txt}{space 10}6  {c |}{col 14}{res}{space 2}-.0215379{col 26}{space 2} .0030889{col 37}{space 1}   -6.97{col 46}{space 3}0.000{col 54}{space 4}-.0276125{col 67}{space 3}-.0154633
-{txt}{space 10}7  {c |}{col 14}{res}{space 2}-.0356678{col 26}{space 2} .0033321{col 37}{space 1}  -10.70{col 46}{space 3}0.000{col 54}{space 4}-.0422208{col 67}{space 3}-.0291149
-{txt}{space 10}8  {c |}{col 14}{res}{space 2}-.0202856{col 26}{space 2} .0032905{col 37}{space 1}   -6.16{col 46}{space 3}0.000{col 54}{space 4}-.0267567{col 67}{space 3}-.0138145
-{txt}{space 10}9  {c |}{col 14}{res}{space 2}-.0118143{col 26}{space 2} .0031977{col 37}{space 1}   -3.69{col 46}{space 3}0.000{col 54}{space 4}-.0181028{col 67}{space 3}-.0055257
-{txt}{space 9}10  {c |}{col 14}{res}{space 2}-.0142884{col 26}{space 2} .0031129{col 37}{space 1}   -4.59{col 46}{space 3}0.000{col 54}{space 4}-.0204102{col 67}{space 3}-.0081666
-{txt}{space 9}11  {c |}{col 14}{res}{space 2}-.0033333{col 26}{space 2} .0030634{col 37}{space 1}   -1.09{col 46}{space 3}0.277{col 54}{space 4}-.0093578{col 67}{space 3} .0026912
-{txt}{space 9}12  {c |}{col 14}{res}{space 2} .0070509{col 26}{space 2} .0028963{col 37}{space 1}    2.43{col 46}{space 3}0.015{col 54}{space 4}  .001355{col 67}{space 3} .0127468
-{txt}{space 12} {c |}
-{space 8}date {c |}{col 14}{res}{space 2} .0004262{col 26}{space 2} .0000476{col 37}{space 1}    8.96{col 46}{space 3}0.000{col 54}{space 4} .0003326{col 67}{space 3} .0005197
-{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-10.60852{col 26}{space 2} .3857432{col 37}{space 1}  -27.50{col 46}{space 3}0.000{col 54}{space 4}-11.36712{col 67}{space 3}-9.849916
-{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{res}{txt}
-{com}. gen dateQ = qofd(datec)
+{com}. clear
 {txt}
-{com}. format dateQ %tq
+{com}. set more off
 {txt}
-{com}. regress ln_fl_nonfarm l(0/4).ln_fl_lf l(0/4).ln_us_epr l(0/4).ln_fl_bp i.month dateQ
-
-{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       392
-{txt}{hline 13}{c +}{hline 34}   F(27, 364)      = {res}  2505.01
-{txt}       Model {c |} {res} 10.2740552        27  .380520563   {txt}Prob > F        ={res}    0.0000
-{txt}    Residual {c |} {res} .055292923       364  .000151904   {txt}R-squared       ={res}    0.9946
-{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.9942
-{txt}       Total {c |} {res} 10.3293481       391   .02641777   {txt}Root MSE        =   {res} .01232
-
-{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 1}ln_fl_nonf~m{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
-{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{space 4}ln_fl_lf {c |}
-{space 9}--. {c |}{col 14}{res}{space 2} .2790757{col 26}{space 2} .2536131{col 37}{space 1}    1.10{col 46}{space 3}0.272{col 54}{space 4}-.2196552{col 67}{space 3} .7778065
-{txt}{space 9}L1. {c |}{col 14}{res}{space 2} .2956093{col 26}{space 2} .3348151{col 37}{space 1}    0.88{col 46}{space 3}0.378{col 54}{space 4}-.3628055{col 67}{space 3} .9540241
-{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.2641756{col 26}{space 2} .3153608{col 37}{space 1}   -0.84{col 46}{space 3}0.403{col 54}{space 4}-.8843334{col 67}{space 3} .3559822
-{txt}{space 9}L3. {c |}{col 14}{res}{space 2} .2832334{col 26}{space 2} .3167687{col 37}{space 1}    0.89{col 46}{space 3}0.372{col 54}{space 4} -.339693{col 67}{space 3} .9061598
-{txt}{space 9}L4. {c |}{col 14}{res}{space 2} .3220421{col 26}{space 2} .2469667{col 37}{space 1}    1.30{col 46}{space 3}0.193{col 54}{space 4}-.1636186{col 67}{space 3} .8077029
-{txt}{space 12} {c |}
-{space 3}ln_us_epr {c |}
-{space 9}--. {c |}{col 14}{res}{space 2}  .869919{col 26}{space 2} .1763402{col 37}{space 1}    4.93{col 46}{space 3}0.000{col 54}{space 4} .5231456{col 67}{space 3} 1.216693
-{txt}{space 9}L1. {c |}{col 14}{res}{space 2}-.1508318{col 26}{space 2} .2303364{col 37}{space 1}   -0.65{col 46}{space 3}0.513{col 54}{space 4}-.6037889{col 67}{space 3} .3021253
-{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .1899043{col 26}{space 2} .2170821{col 37}{space 1}    0.87{col 46}{space 3}0.382{col 54}{space 4}-.2369882{col 67}{space 3} .6167968
-{txt}{space 9}L3. {c |}{col 14}{res}{space 2}-.2262386{col 26}{space 2} .2208671{col 37}{space 1}   -1.02{col 46}{space 3}0.306{col 54}{space 4}-.6605744{col 67}{space 3} .2080971
-{txt}{space 9}L4. {c |}{col 14}{res}{space 2} .3389032{col 26}{space 2} .1751932{col 37}{space 1}    1.93{col 46}{space 3}0.054{col 54}{space 4}-.0056147{col 67}{space 3} .6834212
-{txt}{space 12} {c |}
-{space 4}ln_fl_bp {c |}
-{space 9}--. {c |}{col 14}{res}{space 2} .0204443{col 26}{space 2} .0051347{col 37}{space 1}    3.98{col 46}{space 3}0.000{col 54}{space 4}  .010347{col 67}{space 3} .0305417
-{txt}{space 9}L1. {c |}{col 14}{res}{space 2} .0107528{col 26}{space 2} .0054657{col 37}{space 1}    1.97{col 46}{space 3}0.050{col 54}{space 4} 4.39e-06{col 67}{space 3} .0215012
-{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .0026867{col 26}{space 2} .0054899{col 37}{space 1}    0.49{col 46}{space 3}0.625{col 54}{space 4}-.0081091{col 67}{space 3} .0134826
-{txt}{space 9}L3. {c |}{col 14}{res}{space 2} .0070439{col 26}{space 2} .0054993{col 37}{space 1}    1.28{col 46}{space 3}0.201{col 54}{space 4}-.0037706{col 67}{space 3} .0178583
-{txt}{space 9}L4. {c |}{col 14}{res}{space 2} .0071123{col 26}{space 2} .0051692{col 37}{space 1}    1.38{col 46}{space 3}0.170{col 54}{space 4} -.003053{col 67}{space 3} .0172777
-{txt}{space 12} {c |}
-{space 7}month {c |}
-{space 10}2  {c |}{col 14}{res}{space 2} .0052225{col 26}{space 2} .0038186{col 37}{space 1}    1.37{col 46}{space 3}0.172{col 54}{space 4}-.0022868{col 67}{space 3} .0127318
-{txt}{space 10}3  {c |}{col 14}{res}{space 2} .0086375{col 26}{space 2} .0041006{col 37}{space 1}    2.11{col 46}{space 3}0.036{col 54}{space 4} .0005735{col 67}{space 3} .0167014
-{txt}{space 10}4  {c |}{col 14}{res}{space 2} .0012736{col 26}{space 2} .0046541{col 37}{space 1}    0.27{col 46}{space 3}0.785{col 54}{space 4}-.0078787{col 67}{space 3} .0104258
-{txt}{space 10}5  {c |}{col 14}{res}{space 2} .0022027{col 26}{space 2} .0038771{col 37}{space 1}    0.57{col 46}{space 3}0.570{col 54}{space 4}-.0054216{col 67}{space 3} .0098269
-{txt}{space 10}6  {c |}{col 14}{res}{space 2}-.0193223{col 26}{space 2} .0040672{col 37}{space 1}   -4.75{col 46}{space 3}0.000{col 54}{space 4}-.0273206{col 67}{space 3}-.0113241
-{txt}{space 10}7  {c |}{col 14}{res}{space 2}-.0362039{col 26}{space 2} .0038883{col 37}{space 1}   -9.31{col 46}{space 3}0.000{col 54}{space 4}-.0438502{col 67}{space 3}-.0285575
-{txt}{space 10}8  {c |}{col 14}{res}{space 2}-.0245188{col 26}{space 2} .0043528{col 37}{space 1}   -5.63{col 46}{space 3}0.000{col 54}{space 4}-.0330787{col 67}{space 3} -.015959
-{txt}{space 10}9  {c |}{col 14}{res}{space 2}-.0171602{col 26}{space 2} .0037189{col 37}{space 1}   -4.61{col 46}{space 3}0.000{col 54}{space 4}-.0244733{col 67}{space 3}-.0098471
-{txt}{space 9}10  {c |}{col 14}{res}{space 2}-.0193132{col 26}{space 2} .0044175{col 37}{space 1}   -4.37{col 46}{space 3}0.000{col 54}{space 4}-.0280001{col 67}{space 3}-.0106262
-{txt}{space 9}11  {c |}{col 14}{res}{space 2} -.004866{col 26}{space 2} .0041178{col 37}{space 1}   -1.18{col 46}{space 3}0.238{col 54}{space 4}-.0129637{col 67}{space 3} .0032317
-{txt}{space 9}12  {c |}{col 14}{res}{space 2} .0058531{col 26}{space 2} .0039007{col 37}{space 1}    1.50{col 46}{space 3}0.134{col 54}{space 4}-.0018177{col 67}{space 3} .0135238
-{txt}{space 12} {c |}
-{space 7}dateQ {c |}{col 14}{res}{space 2} .0010375{col 26}{space 2} .0001584{col 37}{space 1}    6.55{col 46}{space 3}0.000{col 54}{space 4} .0007259{col 67}{space 3}  .001349
-{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-10.55687{col 26}{space 2} .4171884{col 37}{space 1}  -25.30{col 46}{space 3}0.000{col 54}{space 4}-11.37727{col 67}{space 3}-9.736468
-{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{res}{txt}
 {com}. 
+. cd "/Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Problem Set 1"
+{res}/Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Problem Set 1
+{txt}
+{com}. 
+. *2a
+. *Done
 . 
-. log close
+. *2b Load the data
+. import delimited "Assignment_1_Monthly.txt"
+{res}{text}(5 vars, 984 obs)
+
+{com}. 
+. rename lnu02300000 us_epr
+{res}{txt}
+{com}. rename flnan fl_nonfarm
+{res}{txt}
+{com}. rename fllfn fl_lf
+{res}{txt}
+{com}. rename flbppriv fl_bp
+{res}{txt}
+{com}. rename date datestring
+{res}{txt}
+{com}. 
+. *2c Turn on a log file
+. log using "Problem Set 1", replace
+{err}log file already open
+{txt}{search r(604), local:r(604);}
+
+end of do-file
+
+{search r(604), local:r(604);}
+
+{com}. log close
       {txt}name:  {res}<unnamed>
        {txt}log:  {res}/Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Problem Set 1/Problem Set 1.smcl
   {txt}log type:  {res}smcl
- {txt}closed on:  {res}11 Feb 2021, 19:36:37
+ {txt}closed on:  {res}26 Feb 2021, 07:25:54
 {txt}{.-}
 {smcl}
 {txt}{sf}{ul off}

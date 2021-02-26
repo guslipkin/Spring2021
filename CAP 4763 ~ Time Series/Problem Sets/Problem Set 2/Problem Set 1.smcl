@@ -1,0 +1,102 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}/Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Problem Set 2/Problem Set 1.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}26 Feb 2021, 07:58:02
+{txt}
+{com}. 
+. *2d Generate a monthly date variable (make its display format monthly time, %tm)
+. gen datec=date(datestring, "YMD")
+{txt}
+{com}. gen date=mofd(datec)
+{txt}
+{com}. format date %tm
+{txt}
+{com}. 
+. *2e tsset your data
+. tsset date
+{res}{txt}{col 9}time variable:  {res}{col 25}date, 1939m1 to 2020m12
+{txt}{col 17}delta:  {res}1 month
+{txt}
+{com}. 
+. *2f
+. gen ln_us_epr=log(us_epr)
+{txt}(108 missing values generated)
+
+{com}. gen ln_fl_nonfarm=log(fl_nonfarm)
+{txt}
+{com}. gen ln_fl_lf=log(fl_lf)
+{txt}(444 missing values generated)
+
+{com}. gen ln_fl_bp=log(fl_bp)
+{txt}(588 missing values generated)
+
+{com}. 
+{txt}end of do-file
+
+{com}. do "/var/folders/99/5g4rbsld0s9cpjm53wfklclc0000gn/T//SD54504.000000"
+{txt}
+{com}. corr ln_us_epr l1.ln_us_epr
+{txt}(obs=875)
+
+             {c |}                 L.
+             {c |} ln_us_~r ln_us_~r
+{hline 13}{c +}{hline 18}
+   ln_us_epr {c |}
+         --. {c |}{res}   1.0000
+         {txt}L1. {c |}{res}   0.9758   1.0000
+
+{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. do "/var/folders/99/5g4rbsld0s9cpjm53wfklclc0000gn/T//SD54504.000000"
+{txt}
+{com}. corr ln_fl_nonfarm l1.ln_fl_nonfarm
+{txt}(obs=983)
+
+             {c |}                 L.
+             {c |} ln_fl_~m ln_fl_~m
+{hline 13}{c +}{hline 18}
+ln_fl_nonf~m {c |}
+         --. {c |}{res}   1.0000
+         {txt}L1. {c |}{res}   0.9999   1.0000
+
+{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. do "/var/folders/99/5g4rbsld0s9cpjm53wfklclc0000gn/T//SD54504.000000"
+{txt}
+{com}. corr ln_fl_lf l1.ln_fl_lf
+{txt}(obs=539)
+
+             {c |}                 L.
+             {c |} ln_fl_lf ln_fl_lf
+{hline 13}{c +}{hline 18}
+    ln_fl_lf {c |}
+         --. {c |}{res}   1.0000
+         {txt}L1. {c |}{res}   0.9997   1.0000
+
+{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. do "/var/folders/99/5g4rbsld0s9cpjm53wfklclc0000gn/T//SD54504.000000"
+{txt}
+{com}. corr ln_fl_bp l1.ln_fl_bp
+{txt}(obs=395)
+
+             {c |}                 L.
+             {c |} ln_fl_bp ln_fl_bp
+{hline 13}{c +}{hline 18}
+    ln_fl_bp {c |}
+         --. {c |}{res}   1.0000
+         {txt}L1. {c |}{res}   0.9470   1.0000
+
+{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. 
