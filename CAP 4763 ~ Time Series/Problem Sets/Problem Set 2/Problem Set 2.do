@@ -62,10 +62,11 @@ dfuller ln_fl_lf, trend regress
 dfuller ln_fl_bp, trend regress
 
 *4
-reg d.ln_fl_nonfarm l(1/48)d.ln_fl_nonfarm l(12/24)d.ln_us_epr l(1/18, 24)d.ln_fl_lf date
+regress d.ln_fl_nonfarm l(1/48)d.ln_fl_nonfarm l(12/24)d.ln_us_epr l(1/18, 24)d.ln_fl_lf date
 predict res, residual
-ac res
-pac res
+ac res, saving(p4_ac.gph, replace)
+pac res, saving(p4_pac.gph, replace)
+graph combine p4_ac.gph p4_pac.gph, saving(p4_combo.gph, replace)
 estat bgodfrey, lag(1/48)
 
 *5

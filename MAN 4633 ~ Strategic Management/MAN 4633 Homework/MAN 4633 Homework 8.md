@@ -78,5 +78,35 @@
 
 > All uncited quotes are from the textbook
 
-​	
+An Analysis of the Ford Motor Company in SWOT format.
+
+**Topic**
+
+​	This SWOT analysis discusses the Ford Motor Company and their foray into intelligent mobility with their Ford Dynamic Shuttle program. The goal of the program was to fill a gap in the transportation market in high population density areas by creating what were essentially on-demand and custom carpools. Ultimately, the venture shutdown in 2019 (https://techcrunch.com/2019/01/10/ford-is-shutting-down-chariot-shuttle-service/). While no details were given about why the program shutdown, it is speculated that it was due to failing ridership numbers.
+
+**Strengths**
+
+- Ford has a global automotive manufacturing network
+- Ford has many properties and different R&D departments that can work together
+- Good idea
+- Air conditioning is a big draw in India
+
+**Weaknesses**
+
+- Weak financial position in the 21st centure after the Great Recession in 2009
+- No large scale prior experience in the intelligent mobility sector
+- Untested idea from an automotive company
+- Does not work well on a small scale
+
+**Opportunities**
+
+- There is a gap in the transportation market between taxis and ride hailing and mass transit services
+- Ford has the manufacturing chops to custom-build vehicles that are able to best serve the needs of the program
+
+**Threats**
+
+- Existing mass transit such as subways or buses
+- Uber, Lyft, and other ride hailing services
+- Taxis
+- The program not catching on
 
