@@ -71,15 +71,15 @@ vehicles %>%
   select(id, make, model, hwy) %>% 
   filter(hwy == min(hwy))
 
-vehicles[which(vehicles$hwy == min(vehicles$hwy)),]
+vehicles[which(vehicles$hwy == min(vehicles$hwy)),c('id', 'make', 'model', 'hwy')]
 ```
 
 (f) (8 points) Which 2013 Acura model has the best highway MPG? Which 2015 Honda model has the best highway MPG?
 ```{r}
 vehicles %>%
-  filter(make == "Acura", year == "2013") %>% 
-  arrange(desc(hwy)) %>% 
-  select(year, make, model, hwy) %>% 
+  filter(make == "Acura", year == "2013") %>%
+  arrange(desc(hwy)) %>%
+  select(year, make, model, hwy) %>%
   filter(hwy == max(hwy))
 
 head(arrange(vehicles[vehicles$make == "Acura" & vehicles$year == "2013",], desc(hwy)), 1)
@@ -126,8 +126,11 @@ flights[flights$dest == "TPA", c('origin', 'dest', 'dep_time')]
 of those flights? 
 ```{r}
 flights %>% 
-  filter(origin == "JFK" , dest == "MCO") %>% 
+  filter(origin == "JFK" & dest == "MCO") %>% 
   summarise(mean = mean(air_time, na.rm = T), min = min(air_time, na.rm = T), max = max(air_time,na.rm = T))
+  # mutate(mean = mean(air_time, na.rm = T), min = min(air_time, na.rm = T), max = max(air_time, na.rm = T)) %>%
+  # select(mean, min, max) %>%
+  # head(1)
  
 summarise(flights, mean = mean(flights$air_time[flights$origin == "JFK" & flights$dest == "MCO"], na.rm = T), 
           min = min(flights$air_time[flights$origin == "JFK" & flights$dest == "MCO"], na.rm = T), 
@@ -153,7 +156,7 @@ dep_delay_by_month %>%
 ```{r}
 flights %>% 
   group_by(dest) %>% 
-  summarise(avg_arr_delay = mean(arr_delay, na.rm = T)) %>% 
+  summarise(avg_arr_delay = mean(arr_delay, na.rm = T)) %>%
   select(dest, avg_arr_delay) %>%
   arrange(desc(avg_arr_delay))
 ```
