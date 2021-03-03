@@ -1,0 +1,197 @@
+---
+title: "Introduction to Data Science"
+subtitle: "Homework 3"
+author: 
+output: html_notebook
+---
+
+
+
+# Problem 1 
+
+Load the `tidyverse` package
+
+```{r, message=FALSE, warning=FALSE}
+library(tidyverse)
+```
+
+In this problem you will work with vehicle fuel economy data from the US EPA (Environmental Protection Agency), ranging from 1985-2015. 
+
+Read the data using the code below:
+
+```{r, message=FALSE, warning=FALSE}
+vehicles <- read_csv("https://raw.githubusercontent.com/reisanar/datasets/master/vehicles.csv")
+```
+
+   Variable  | Description
+-------------|-----------------------------------------
+`id`         | Unique EPA identifier
+`make`       | Manufacturer
+`model`      | Model name
+`year`       | Model year
+`class`      | EPA vehicle size class
+`trans`      | Transmission
+`drive`      | Drive train
+`cyl`        | Number of cylinders
+`displ`      | Engine displacement, in litres
+`fuel`       | Fuel type
+`hwy`        | Highway fuel economy, in mpg
+`cty`        | City fuel economy, in mpg
+
+
+(a) (6 points) Select the different manufacturers (makes) of the cars in this data set. Save this vector in a variable called `makes`
+```{r}
+makes <- unique(vehicles$make)
+```
+
+(b) (6 points) Can you determine how many different car manufacturers are represented by the data set?
+```{r}
+length(makes)
+```
+
+(c) (6 points) Filter the data set for vehicles manufactured in 1998.
+```{r}
+vehicles %>% 
+  filter(year == "1998")
+
+vehicles[as.numeric(vehicles$year) == 1998,]
+```
+
+(d) (8 points) Mutate the 1998 cars data frame to add a column `average` that has the average gas mileage (between city and highway MPG) for each car
+```{r}
+vehicles %>% 
+  filter(year == "1998") %>% 
+  mutate(average = (cty+hwy)/2)
+```
+
+(e) (8 points) Of all vehicles, what is the vehicle ID of the vehicle with the worst highway MPG?
+```{r}
+vehicles %>% 
+  arrange(hwy) %>% 
+  select(id, make, model, hwy) %>% 
+  filter(hwy == min(hwy))
+
+vehicles[which(vehicles$hwy == min(vehicles$hwy)),]
+```
+
+(f) (8 points) Which 2013 Acura model has the best highway MPG? Which 2015 Honda model has the best highway MPG?
+```{r}
+vehicles %>%
+  filter(make == "Acura", year == "2013") %>% 
+  arrange(desc(hwy)) %>% 
+  select(year, make, model, hwy) %>% 
+  filter(hwy == max(hwy))
+
+head(arrange(vehicles[vehicles$make == "Acura" & vehicles$year == "2013",], desc(hwy)), 1)
+```
+
+```{r}
+vehicles %>%
+  filter(make == "Honda", year == "2015") %>% 
+  arrange(desc(hwy)) %>% 
+  select(year, make, model, hwy) %>% 
+  filter(hwy == max(hwy))
+
+head(arrange(vehicles[vehicles$make == "Honda" & vehicles$year == "2015",], desc(hwy)), 1)
+```
+
+
+
+# Problem 2
+
+Load the `nycflights13` packages. 
+
+```{r}
+library(nycflights13)
+```
+
+
+```{r}
+head(flights)
+glimpse(flights)
+```
+
+Use the `flights` dataframe to answer the following questions. 
+
+(a) (6 points) Find all flights headed to TPA, and select only the origin, destination, and the departure time.
+```{r}
+flights %>% 
+  filter(dest == "TPA") %>% 
+  select(origin, dest, dep_time)
+
+flights[flights$dest == "TPA", c('origin', 'dest', 'dep_time')]
+```
+
+(b) (6 points) Consider flights from JFK to MCO. What was the average, minimum, and maximum _air time_
+of those flights? 
+```{r}
+flights %>% 
+  filter(origin == "JFK" , dest == "MCO") %>% 
+  summarise(mean = mean(air_time, na.rm = T), min = min(air_time, na.rm = T), max = max(air_time,na.rm = T))
+ 
+summarise(flights, mean = mean(flights$air_time[flights$origin == "JFK" & flights$dest == "MCO"], na.rm = T), 
+          min = min(flights$air_time[flights$origin == "JFK" & flights$dest == "MCO"], na.rm = T), 
+          max = max(flights$air_time[flights$origin == "JFK" & flights$dest == "MCO"],na.rm = T))
+```
+
+(c) (6 points) What was the average _departure delay_ in each month? Save this as a data frame `dep_delay_by_month`. (Hint: you may have to perform a grouping operation then summarizing your data).
+```{r}
+flights %>% 
+  group_by(month) %>% 
+  summarise(avg_dep_delay = mean(dep_delay, na.rm = T)) -> dep_delay_by_month
+
+dep_delay_by_month
+``` 
+
+(d) (8 points) Which month had the greatest average _departure delay_?
+```{r}
+dep_delay_by_month %>% 
+  filter(avg_dep_delay == max(avg_dep_delay))
+```
+
+(e) (8 points) To which destinations were the average _arrival delays_ the highest?
+```{r}
+flights %>% 
+  group_by(dest) %>% 
+  summarise(avg_arr_delay = mean(arr_delay, na.rm = T)) %>% 
+  select(dest, avg_arr_delay) %>%
+  arrange(desc(avg_arr_delay))
+```
+
+(f) (8 points) Which airline had the smallest average _arrival delay_?
+```{r}
+flights %>% 
+  group_by(carrier) %>% 
+  summarise(avg_arr_delay = mean(arr_delay, na.rm = T)) %>% 
+  select(carrier, avg_arr_delay) %>%
+  filter(avg_arr_delay == min(avg_arr_delay))
+```
+
+(g) (8 points) Find all flights that were operated by United, American, or Delta.
+```{r}
+airlines
+```
+
+```{r}
+flights %>% 
+  filter(carrier == "UA" | carrier == "AA" | carrier == "DL") %>% 
+  select(carrier, year, origin, dest)
+  
+```
+
+(h) (8 points) Find all the flights (if any) headed to Orlando, Tampa, or Miami with a scheduled departure time later than 8:00 PM.
+```{r}
+grep("Miami", airports$name)
+airports[877,]
+```
+
+```{r}
+flights %>% 
+  filter(dest == "ORD" | dest == "TPA" | dest == "MIA") %>% 
+  filter(sched_dep_time > 2000) %>% 
+  select(dest, sched_dep_time)
+```
+
+
+
+
