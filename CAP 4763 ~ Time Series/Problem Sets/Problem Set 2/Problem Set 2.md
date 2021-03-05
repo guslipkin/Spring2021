@@ -4,7 +4,9 @@
 
 **CAP 4763 Time Series Modelling and Forecasting**
 
+> All <u>underlined</u> portions are the corrections
 
+> All uncited quotes are from the problem set
 
 # Table of Contents
 
@@ -19,11 +21,6 @@
 |                [**Appendix A**](#Appendix-A)                 |
 |                [**Appendix B**](#Appendix-B)                 |
 
-<img src="Problem Set 2.assets/spongebob.png" alt="spongebob" style="zoom:50%;" />
-
-> I joke but I really shouldn't. I'm spending so much time worrying about how to do things in STATA and trying to understand how it works and make it do what I want that I have no clue what's going on in this class. I have become so frustrated with STATA to the point of crying at least once for each Problem Set and several times in between.
-> I have no doubt that no matter how hard I try, I will fail the midterm.
-
 <div style="page-break-after: always; break-after: page;"></div>
 
 ## Part A
@@ -34,19 +31,26 @@
 
 2. Suppose after first differencing a model is $∆y_t = δ-φ−2φt+ρ∆y_{t-1}+β∆x_{t-1}+∆r_t$. What was it before the first difference was taken? (Hint: both $t$ and $t^2$ are in it.)
 
-- $y_t=\delta t+\varphi t^2+\varphi t-\varphi +\rho y_{t-1}+\beta x_{t-1}+r_t$
+- $y_t=\delta t+\varphi t^2+\varphi t-\varphi +\rho y_{t-1}+\beta x_{t-1}+r_t$ <u><- WRONG</u>
+- $\Delta y_t=\delta-\phi+2\phi t+\rho\Delta t_{t-1} + \beta\Delta x_{t-1} + \Delta r_t$ <u><- RIGHT</u>
 
 3. Suppose you are originally interested in the model $y_t=\alpha+\delta t+\rho y_{t-1}+\beta x_{t-1}+r_t$, where $r_t=\gamma r_{t-1} + \varepsilon_t$ and $\varepsilon_t$ is an independent random disturbance. Write the dynamically complete model in first differences. Hint: first substitute to make the model dynamically complete, and then take the first difference.
 
-- $y_t=\alpha+\delta t+\rho y_{t-1}+\beta x_{t-1} + \gamma r_{t-1} + \varepsilon_t$
-- $\Delta y_t=\delta+\rho\Delta y_{t-1}+\beta\Delta x_{t-1}+\gamma\Delta r_{t-1} + \Delta\varepsilon_t$
-
-
+- $y_t=\alpha+\delta t+\rho y_{t-1}+\beta x_{t-1} + \gamma r_{t-1} + \varepsilon_t$ <u><- WRONG</u>
+- $\Delta y_t=\delta+\rho\Delta y_{t-1}+\beta\Delta x_{t-1}+\gamma\Delta r_{t-1} + \Delta\varepsilon_t$ <u><- WRONG</u>
+- $\Delta y_t = \delta(1-\gamma)+(\rho+\gamma)\Delta y_{t-1}-\gamma\rho\Delta y_{t-2}+\beta\Delta x_{t-2} + \varepsilon_t-\varepsilon_{t-1}$<u><- RIGHT</u>
 
 ## Part B
 
 ### 3. Autocorrelation and Weak Dependence
    1. Obtain the correlation of each variable with its one period lag.
+
+| <u>Variable</u>    | <u>Correlation with Lag</u> |
+| ------------------ | --------------------------- |
+| <u>lnflnonfarm</u> | <u>.9981</u>                |
+| <u>lnfllf</u>      | <u>.9994</u>                |
+| <u>lnusepr</u>     | <u>.9821</u>                |
+| <u>lnflbp</u>      | <u>.9477</u>                |
 
 | (obs=875) | corr ln_us_epr l1.ln_us_epr |
 |--|----------------------------- |
@@ -84,43 +88,42 @@
 
 2. Obtain the autocorrelogram and partial autocorrelagram for each variable.
 
-![combo_ln_us_epr](Problem Set 2.assets/combo_ln_us_epr-4350086.png)
+<img src="Problem Set 2.assets/combo_ln_us_epr-4350086.png" alt="combo_ln_us_epr" style="zoom:50%;" />
 
-![combo_ln_fl_nonfarm](Problem Set 2.assets/combo_ln_fl_nonfarm.png)
+<img src="Problem Set 2.assets/combo_ln_fl_nonfarm.png" alt="combo_ln_fl_nonfarm" style="zoom:50%;" />
 
-![combo_ln_fl_lf](Problem Set 2.assets/combo_ln_fl_lf.png)
+<img src="Problem Set 2.assets/combo_ln_fl_lf.png" alt="combo_ln_fl_lf" style="zoom:50%;" />
 
 ​	For the above three graphs, because all of the points are outside and above the cone, we can conclude that there is an autoregressive term in the data and should consult the partial autocorrelation graph. The PAC suggests that this is a higher order moving average.
 
-![combo_ln_fl_bp](Problem Set 2.assets/combo_ln_fl_bp.png)
+<img src="Problem Set 2.assets/combo_ln_fl_bp.png" alt="combo_ln_fl_bp" style="zoom:50%;" />
 
 ​	For the last graph, the autocorrelation is not all outside of the confidence interval. When we look at the PAC we see that there are significant correlations in the first few terms followed by insignificant correlations in the rest. This suggests the order of the autoregressive term.
 
 3. Conduct the Dickey-Fuller unit root rest for each variable.
 
-> I promise I really wanted to do nice tables here but for the life of me couldn't get stata to let me copy them properly or export them and I really didn't want to transcribe them
+| <u>Variable</u>    | <u>Dickey-Fuller p-value</u> |
+| ------------------ | ---------------------------- |
+| <u>lnflnonfarm</u> | <u>.0328</u>                 |
+| <u>lnfllf</u>      | <u>.6285</u>                 |
+| <u>lnusepr</u>     | <u>.2246</u>                 |
+| <u>lnflbp</u>      | <u>.7774</u>                 |
 
-![image-20210226095848771](Problem Set 2.assets/image-20210226095848771.png)
+<img src="Problem Set 2.assets/image-20210226095848771.png" alt="image-20210226095848771" style="zoom: 67%;" />
 
-![image-20210226095938636](Problem Set 2.assets/image-20210226095938636.png)
+<img src="Problem Set 2.assets/image-20210226095938636.png" alt="image-20210226095938636" style="zoom: 67%;" />
 
-![image-20210226095947360](Problem Set 2.assets/image-20210226095947360.png)
+<img src="Problem Set 2.assets/image-20210226095947360.png" alt="image-20210226095947360" style="zoom:67%;" />
 
-![image-20210226095959649](Problem Set 2.assets/image-20210226095959649.png)
+<img src="Problem Set 2.assets/image-20210226095959649.png" alt="image-20210226095959649" style="zoom:67%;" />
 
 ​	For both Dickey-Fuller of the ln_us_epr, the p-value is extremely low at .0082 and so we accept the null hypothesis. For all others, we fail to reject the null hypothesis. Especially ln_fl_nonfarm and ln_fl_lf.
+
+4. "<u>Looking at the AC and PAC, all four show strong enough first order autoregressive relationships to merit differencing. We can reject the null of an I(1) process for the log of non-farm employment. But, the partial autocorrelation coefficient is so close to one that we should difference anyway. The AC and PAC for the log difference of non-farm employment are bwlow, illustrating the differences are clearly not I(1).</u>"
 
 ### 4. ARDL Model and Breusch-Godfrey Test
 
 Given the results of the previous question, transform the data as needed and estimate a dynamically complete ARDL model for non-farm employment. Include at least one lag of the relevant dependent variable. How many additional lags of the dependent variable, and how many lags of which independent variables you include, are up to you. Looking back at what you did for Problem Set 1 might be informative, but don’t be limited by it. Produce and interpret the AC and PAC for the residuals and the results of a Breusch-Godfrey test. In your write up, justify your specification and interpret the results.
-
-> I really wanted to try doing every other lag rather than every lag as Jake suggested but I couldn't find a way to generate a sequence of every other number in a set range. I tried doing 
->
-> ```
-> gen seq3 = 2*mod(_n-1,48)
-> ```
->
-> but couldn't check if it was right because the data viewer isn't showing anything then when I tried to use it I got an error that it wasn't a valid list of numbers.
 
 | .                                           | regress d.ln_fl_nonfarm l(1/48)d.ln_fl_nonfarm | l(12/24)d.ln_us_epr | l(1/18, 24)d.ln_fl_lf | date |
 | ------------------------------------------- | ---------------------------------------------- | ------------------- | --------------------- | ---- |
@@ -224,7 +227,7 @@ Given the results of the previous question, transform the data as needed and est
 | _cons         | .0058495  | .0022338  | 2.62  | 0.009 | .0014592   | .0102399  |
 |               |           |           |       |       |            |           |
 
-![p4_combo](Problem Set 2.assets/p4_combo.png)
+<img src="Problem Set 2.assets/p4_combo.png" alt="p4_combo" style="zoom:50%;" />
 
 ​	I don't think there's any correlation because almost everything is inside the interval.
 
@@ -286,20 +289,17 @@ Given the results of the previous question, transform the data as needed and est
 | 48                        | 40.617 | 48   | 0.7664      |
 | H0: no serial correlation |        |      |             |
 
-> I'm so confused. It is at this point that I'm giving up trying to interpret stuff. I've spent nearly all day on it and am just as lost as before. I understand the basic commands such as regress and gen and all that. I know how to use the other commands. I don't understand what the functions are doing or why the results mean what they are said to mean. I feel like I'm being asked to draw an owl and these are my only instructions:
->
->  ![draw the rest of the fucking owl](https://i.imgur.com/RadSf.jpg) 
->
-> I know you've said time and time again that I don't need to know what stata's doing in the background but I don't understand the math and I can't see what stata's doing for the math. In lecture all I see is a bunch of letters set up for an equation that doesn't mean anything to me outside of super abstract concepts.
-> Hailey and Jake and Mohammad will do their best to help me through everything. I'm reasonably certain that I can pass with about a 2 or so if my grade calculator is correct and my estimates are too. I'm not sure if it's worth it to stay in and just accept the hit to my GPA or not. Anyways. I'm going to turn this in now. I hope you're not too disappointed.
+<img src="Problem Set 2.assets/Screen Shot 2021-03-05 at 3.49.33 PM.png" alt="Screen Shot 2021-03-05 at 3.49.33 PM" style="zoom:67%;" />
 
 ### 5. Dynamically Complete Models and Newey-West Standard Errors
 
-![image-20210226112823870](Problem Set 2.assets/image-20210226112823870.png)
+<img src="Problem Set 2.assets/image-20210226112823870.png" alt="image-20210226112823870" style="zoom:67%;" />
 
-![image-20210226112844332](Problem Set 2.assets/image-20210226112844332.png)
+<img src="Problem Set 2.assets/image-20210226112844332.png" alt="image-20210226112844332" style="zoom:67%;" />
 
 if fuller high, can't reject
+
+<img src="Problem Set 2.assets/Screen Shot 2021-03-05 at 3.50.27 PM.png" alt="Screen Shot 2021-03-05 at 3.50.27 PM" style="zoom:67%;" />
 
 ## Appendix A
 
@@ -384,4 +384,4 @@ log close
 
 ## Appendix B
 
-![image-20210226181013623](Problem Set 2.assets/image-20210226181013623.png)
+<img src="Problem Set 2.assets/image-20210226181013623.png" alt="image-20210226181013623" style="zoom:67%;" />

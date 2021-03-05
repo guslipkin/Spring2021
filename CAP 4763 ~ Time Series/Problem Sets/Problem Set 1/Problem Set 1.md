@@ -4,6 +4,10 @@
 
 **CAP 4763 Time Series Modelling and Forecasting**
 
+> Corrections are <u>underlined</u>
+
+> All uncited quotes are from the Problem Set 1 official solution
+
 
 
 # Table of Contents
@@ -34,6 +38,18 @@
 > Explain why the size of Florida’s labor force, the prime age employment to population ratio, and Florida building permits, might be closely related to the number of nonfarm jobs in Florida in a static long run sense. You might want to make some time series plots to give your data context. (Perhaps where one variable is employment and the other, on the other axis, is one of the other variables.)
 
 The size of Florida's labor force can only increase for a few reasons. People either grow up and get a job or people move into the state for one reason or another. These would increase the prime age employment to population ratio but those people need places to work. They could either work in construction or any affiliated field which handles building permits or they could work in a building being constructed by the people handling those permits. In the meantime, as farming becomes more efficient and reliant on technology, not as many people are needed to farm the same parcels of land. This leads to more people employed in non-farm jobs.
+
+"<u>We can think of the number employed as the product of the portion of those in the labor market that are employed and the number that want work and so are in the market. Then the log of total employment is the sum of the logs of those two pieces. From there:</u>
+
+- <u>The number that want to work should closely track labor force in Florida.</u>
+
+- <u>The fraction of those that want to be employed that are employed tracks the strength of the Florida economy, which closely tracks the strength of the national economy, for which the</u>
+
+  <u>employment to population ratio is a good proxy.</u>
+
+- <u>Construction is a large part of Florida’s economic base, due to constant in-migration. So,</u>
+
+  <u>variations in the strength of the economy may be reflected somewhat in building permits.</u>"
 
 ## 3b
 > Estimate the static model relating monthly nonfarm employment in Florida to the other three variables (all in logs) without controlling for seasonal impacts or a time trend.
@@ -90,7 +106,7 @@ The size of Florida's labor force can only increase for a few reasons. People ei
 ## 3d
 > Compare your results from b and c and interpret any differences. What do the seasonal and time trend variables contribute?
 
-Adding the seasonal and time trend variables transform the data into true time series data and give context to the changes. From both you can see that there is a general increase in nonfarm employment. However, by adding the month indicators, you can see that nonfarm employment decreases ever so slightly from March to November, presumably due to prime farming season.
+Adding the seasonal and time trend variables transform the data into true time series data and give context to the changes. From both you can see that there is a general increase in nonfarm employment. However, by adding the month indicators, you can see that nonfarm employment decreases ever so slightly from March to November, presumably due to prime farming season. "<u>All three coefficients change slightly. The time trend controls for growth at a constant rate over time, while the month indicators control for seasonality. For example, construction employment varies with the weather, employment always varies with holidays, and in Florida employment also varies with tourist season. Presumably, controlling for these effects allows the model to better reveal the underlying relationships between the other variables. (The caveat is we have not checked this data for stationarity or weak dependence, which comes later.)</u>"
 
 ## 3e
 > Why should you be cautious using the results of these models for testing any hypotheses about the underlying relationships?
@@ -239,7 +255,7 @@ In time series data, the past affects the future and observations are not indepe
 ## 4d
 > Compare your results from a and c and interpret any differences. What do the seasonal and time trend variables contribute?
 
-The model in 4a is accurate to the data it was given but does not make sense and has no practical application because the data is not organized in any way and does not account for the data being time series data.
+The model in 4a is accurate to the data it was given but does not make sense and has no practical application because the data is not organized in any way and does not account for the data being time series data. "<u>This is largely the same as it was for question 3. The difference is that since we are controlling for one year ago, the lags themselves may capture some of the seasonal difference in the first model, and that adding seasonal effects purges that, changing the results potentially at all lags. This, though, it just more of the same basic thing.</u>"
 
 ## 4e
 > Estimate two alternative models that contain month indicators and a time trend but that impose a more parsimonious lag structure for the predictor variables. Explain your choices.
@@ -345,10 +361,13 @@ The model in 4a is accurate to the data it was given but does not make sense and
 
 ​	Based on the MSE of each model, the first one is a little bit better but I don't think either is great. 
 
+​	"<u>The most important lags would seem to be the most recent month, and the same month a year ago.</u>"
+
 
 <div style="page-break-after: always; break-after: page;"></div>
 
 # Appendix A
+
 ```
 clear
 set more off
