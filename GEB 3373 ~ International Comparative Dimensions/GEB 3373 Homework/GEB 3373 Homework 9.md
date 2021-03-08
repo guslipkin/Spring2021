@@ -11,7 +11,12 @@
    2. "Evaluate the respective costs, benefits, and risks of entering each"
    3. "Select those that hold the most potential for entry or expansion"
 2. What are some of the basic issues a firm must confront when choosing an entry mode for a new foreign market? 
+   - Market potential
+   - Levels of competition
+   - Legal and political environment
+   - Sociocultural influences
 3. What is exporting? Why has it increased so dramatically in recent years?
+   - "exporting is the process of sending goods or services from one country to other countries for use or sale there." 
 4. What are the primary advantages and disadvantages of exporting?
 5. What are three forms of exporting?
 6. What is an export intermediary? What is its role? What are the various types of export intermediaxkries?
