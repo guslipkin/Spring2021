@@ -17,5 +17,38 @@
 4. Review Valve Corporation’s company handbook online: **[www.valvesoftware.com/company/Valve_Handbook_LowRes.pdf](www.valvesoftware.com/company/Valve_Handbook_LowRes.pdf)**. Specifically, focus on Valve’s corporate structure. Valve has hundreds of employees but no managers or bosses at all. Valve’s gaming success hinges on innovative and completely original experiences like Portal and Half-Life. Does it seem that Valve’s corporate structure uniquely promotes this type of gaming innovation? Why or why not? How would you characterize Valve’s organizational structure? Is it completely unique, or could it be characterized as a multidivisional, matrix, or functional structure? Explain your answer.
    - I'm shocked that this link actually worked. Managers lock people down on specific tasks. By eliminating managers, people are free to work on what they want to work on. I think it doesn't work that well because they still haven't released Half-Life 3. Valve says their organizational structure is flat. It is unique as far as I know. Valve has a multidivisional structure because people are loosely aligned with a specific area of work but move freely among that area.
 
+<div style="page-break-after: always; break-after: page;"></div>
+
 ## Case Study
 
+This is an analysis of *Conflict Palm Oil and PepsiCo’s Ethical Dilemma* in the PESTEL style.
+
+**Political**
+
+- "RAN, a prominent environmental NGO based in San Francisco, California, had been working to protect rainforests and the human rights of those living in and around those forests."
+- "RAN singled out PepsiCo as a major Conflict Palm Oil laggard on the “Snack Food 20” list as it had failed to put adequate policies and procurement practices in place, and was almost unquestionably using Conflict Palm Oil. "
+
+**Economic**
+
+- "PepsiCo committed through the Roundtable for Sustainable Palm Oil4 (RSPO) in 2010 to source exclusively 100% RSPO certified sustainable palm oil by 2015."
+- "For the year 2014, PepsiCo had total revenues of $66.68 billion and net profit of \$6.51 billion (see Exhibit 1)"
+
+**Sociocultural**
+
+- PepsiCo was dropped from the DJSI because they were using Conflict Palm Oil
+- "Following months of protests from several environmental groups, PepsiCo came out with a revamped palm oil commitment in September 2015."
+
+**Technological**
+
+- If PepsiCo was able to find a sustainable substitute for palm oil, they would not be in this mess
+
+**Environmental**
+
+- PepsiCo was dropped from the DJSI because they were using Conflict Palm Oil
+- "PepsiCo committed through the Roundtable for Sustainable Palm Oil4 (RSPO) in 2010 to source exclusively 100% RSPO certified sustainable palm oil by 2015."
+- "Following months of protests from several environmental groups, PepsiCo came out with a revamped palm oil commitment in September 2015. [...] Environmental groups were disappointed with the changes in the new commitment and said PepsiCo continued to fail to take responsibility for the impact of its products sold globally."
+- "Under its environmental sustainability initia- tives, PepsiCo promised to be a good citizen of the world committed to protecting natural resources by proper use of land, energy, and packaging in its operations."
+
+**Legal/Regulatory Factors**
+
+- Unfortunately, this whole problem is due to a lack of regulation in the palm oil industry.
