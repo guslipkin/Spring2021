@@ -1,0 +1,1246 @@
+{smcl}
+{txt}{sf}{ul off}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}/Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Problem Set 3/Problem Set 1.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}13 Mar 2021, 16:15:16
+{txt}
+{com}. 
+. *2d Generate a monthly date variable (make its display format monthly time, %tm)
+. gen datec=date(datestring, "YMD")
+{txt}
+{com}. gen date=mofd(datec)
+{txt}
+{com}. format date %tm
+{txt}
+{com}. 
+. *2e tsset your data
+. tsset date
+{res}{txt}{col 9}time variable:  {res}{col 25}date, 1939m1 to 2020m12
+{txt}{col 17}delta:  {res}1 month
+{txt}
+{com}. 
+. *2f
+. gen ln_us_epr=log(us_epr)
+{txt}(108 missing values generated)
+
+{com}. gen ln_fl_nonfarm=log(fl_nonfarm)
+{txt}
+{com}. gen ln_fl_lf=log(fl_lf)
+{txt}(444 missing values generated)
+
+{com}. gen ln_fl_bp=log(fl_bp)
+{txt}(588 missing values generated)
+
+{com}. 
+. *model
+. reg d.lnflnonfarm l(1/12)d.lnflnonfarm l(0/12)d.lnfllf l(0/12)d.lnusepr l(0/12)d.lnflbp i.month date
+{err}variable {bf}lnflnonfarm{sf} not found
+{txt}{search r(111), local:r(111);}
+
+end of do-file
+
+{search r(111), local:r(111);}
+
+{com}. do "/Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Problem Set 3/Problem Set 3.do"
+{txt}
+{com}. *1a
+. clear
+{txt}
+{com}. set obs 30
+{txt}{p}
+number of observations (_N)  was 0,
+now 30
+{p_end}
+
+{com}. gen t=[_n]
+{txt}
+{com}. tsset t
+{res}{txt}{col 9}time variable:  {res}{col 25}t, 1 to 30
+{txt}{col 17}delta:  {res}1 unit
+{txt}
+{com}. gen r=rnormal()
+{txt}
+{com}. gen y=r if t<4
+{txt}(27 missing values generated)
+
+{com}. replace y=0.5+0.5*l.y-0.1*l2.y+0.25*l3.y+r if t>=4 
+{txt}(27 real changes made)
+
+{com}. drop r
+{txt}
+{com}. 
+. *model
+. reg d.y l1d.y
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        28
+{txt}{hline 13}{c +}{hline 34}   F(1, 26)        = {res}     4.63
+{txt}       Model {c |} {res} 2.74763409         1  2.74763409   {txt}Prob > F        ={res}    0.0408
+{txt}    Residual {c |} {res} 15.4235288        26  .593212647   {txt}R-squared       ={res}    0.1512
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.1186
+{txt}       Total {c |} {res} 18.1711629        27  .673006033   {txt}Root MSE        =   {res}  .7702
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         D.y{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 11}y {c |}
+{space 9}LD. {c |}{col 14}{res}{space 2}-.2689811{col 26}{space 2}  .124982{col 37}{space 1}   -2.15{col 46}{space 3}0.041{col 54}{space 4}-.5258852{col 67}{space 3}-.0120769
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2}-.0806423{col 26}{space 2} .1458525{col 37}{space 1}   -0.55{col 46}{space 3}0.585{col 54}{space 4}-.3804464{col 67}{space 3} .2191618
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. *aic/bic
+. estat ic
+
+{txt}Akaike's information criterion and Bayesian information criterion
+
+{hline 13}{c TT}{hline 63}
+       Model {c |}          N   ll(null)  ll(model)      df        AIC        BIC
+{hline 13}{c +}{hline 63}
+{ralign 12:.}{col 14}{c |}{res}{col 16}        28{col 28}-33.67712{col 39}-31.38193{col 50}     2{col 58} 66.76387{col 69} 69.42828
+{txt}{hline 13}{c BT}{hline 63}
+{p 0 6 0 77}Note: BIC uses N = number of observations. See {helpb bic_note:{bind:[R] BIC note}}.{p_end}
+
+{com}. scalar define df1=el(r(S),1,4)
+{txt}
+{com}. scalar define aic1=el(r(S),1,5)
+{txt}
+{com}. scalar define bic1=el(r(S),1,6)
+{txt}
+{com}. *10 fold cv rmse
+. crossfold reg d.y l1d.y
+{res}
+{txt}{space 0}{space 0}{ralign 12:}{space 1}{c |}{space 1}{ralign 9:RMSE}{space 1}
+{space 0}{hline 13}{c   +}{hline 11}
+{space 0}{space 0}{ralign 12:est1}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .5309562}}}{space 1}
+{space 0}{space 0}{ralign 12:est2}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .7011316}}}{space 1}
+{space 0}{space 0}{ralign 12:est3}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.185724}}}{space 1}
+{space 0}{space 0}{ralign 12:est4}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .7840237}}}{space 1}
+{space 0}{space 0}{ralign 12:est5}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .5797786}}}{space 1}
+
+{com}. scalar define k=10
+{txt}
+{com}. matrix kMSE=r(est)'*r(est)
+{txt}
+{com}. scalar krmse1=(el(kMSE,1,1)/k)^.5
+{txt}
+{com}. scalar list krmse1
+{txt}    krmse1 = {res} .55948884
+{txt}
+{com}. matrix drop kMSE
+{txt}
+{com}. scalar drop k
+{txt}
+{com}. *loocv
+. loocv reg d.y l1d.y
+
+
+{txt} Leave-One-Out Cross-Validation Results 
+{hline 25}{c TT}{hline 15}
+         Method          {c |}{col 30} Value
+{hline 25}{c +}{hline 15}
+Root Mean Squared Errors {c |}{col 30}{res}.73559376
+{txt}Mean Absolute Errors     {c |}{col 30}{res}.54415621
+{txt}Pseudo-R2                {c |} {col 30}{res}.00331972
+{txt}{hline 25}{c BT}{hline 15}
+
+{com}. scalar define loormse1=r(rmse)
+{txt}
+{com}. 
+. reg d.y l2d.y
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        27
+{txt}{hline 13}{c +}{hline 34}   F(1, 25)        = {res}     3.90
+{txt}       Model {c |} {res} 1.86989114         1  1.86989114   {txt}Prob > F        ={res}    0.0595
+{txt}    Residual {c |} {res}  11.996555        25  .479862201   {txt}R-squared       ={res}    0.1349
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.1002
+{txt}       Total {c |} {res} 13.8664462        26  .533324852   {txt}Root MSE        =   {res} .69272
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         D.y{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 11}y {c |}
+{space 8}L2D. {c |}{col 14}{res}{space 2}-.2219139{col 26}{space 2} .1124177{col 37}{space 1}   -1.97{col 46}{space 3}0.060{col 54}{space 4}-.4534424{col 67}{space 3} .0096146
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} -.009314{col 26}{space 2} .1335579{col 37}{space 1}   -0.07{col 46}{space 3}0.945{col 54}{space 4}-.2843815{col 67}{space 3} .2657536
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. estat ic
+
+{txt}Akaike's information criterion and Bayesian information criterion
+
+{hline 13}{c TT}{hline 63}
+       Model {c |}          N   ll(null)  ll(model)      df        AIC        BIC
+{hline 13}{c +}{hline 63}
+{ralign 12:.}{col 14}{c |}{res}{col 16}        27{col 28}-29.31541{col 39}-27.35991{col 50}     2{col 58} 58.71981{col 69} 61.31149
+{txt}{hline 13}{c BT}{hline 63}
+{p 0 6 0 77}Note: BIC uses N = number of observations. See {helpb bic_note:{bind:[R] BIC note}}.{p_end}
+
+{com}. scalar define df2=el(r(S),1,4)
+{txt}
+{com}. scalar define aic2=el(r(S),1,5)
+{txt}
+{com}. scalar define bic2=el(r(S),1,6)
+{txt}
+{com}. crossfold reg d.y l2d.y
+{res}
+{txt}{space 0}{space 0}{ralign 12:}{space 1}{c |}{space 1}{ralign 9:RMSE}{space 1}
+{space 0}{hline 13}{c   +}{hline 11}
+{space 0}{space 0}{ralign 12:est1}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .5951864}}}{space 1}
+{space 0}{space 0}{ralign 12:est2}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.020993}}}{space 1}
+{space 0}{space 0}{ralign 12:est3}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .5192386}}}{space 1}
+{space 0}{space 0}{ralign 12:est4}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .5079894}}}{space 1}
+{space 0}{space 0}{ralign 12:est5}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .8109782}}}{space 1}
+
+{com}. scalar define k=10
+{txt}
+{com}. matrix kMSE=r(est)'*r(est)
+{txt}
+{com}. scalar krmse2=(el(kMSE,1,1)/k)^.5
+{txt}
+{com}. scalar list krmse2
+{txt}    krmse2 = {res} .50813589
+{txt}
+{com}. matrix drop kMSE
+{txt}
+{com}. scalar drop k
+{txt}
+{com}. loocv reg d.y l2d.y
+
+
+{txt} Leave-One-Out Cross-Validation Results 
+{hline 25}{c TT}{hline 15}
+         Method          {c |}{col 30} Value
+{hline 25}{c +}{hline 15}
+Root Mean Squared Errors {c |}{col 30}{res}.76118489
+{txt}Mean Absolute Errors     {c |}{col 30}{res}.58413914
+{txt}Pseudo-R2                {c |} {col 30}{res}.01163746
+{txt}{hline 25}{c BT}{hline 15}
+
+{com}. scalar define loormse2=r(rmse)
+{txt}
+{com}. 
+. reg d.y l3d.y
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        26
+{txt}{hline 13}{c +}{hline 34}   F(1, 24)        = {res}     1.76
+{txt}       Model {c |} {res} .891361775         1  .891361775   {txt}Prob > F        ={res}    0.1971
+{txt}    Residual {c |} {res} 12.1563568        24  .506514865   {txt}R-squared       ={res}    0.0683
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0295
+{txt}       Total {c |} {res} 13.0477185        25  .521908742   {txt}Root MSE        =   {res}  .7117
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         D.y{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 11}y {c |}
+{space 8}L3D. {c |}{col 14}{res}{space 2} .1543626{col 26}{space 2}  .116362{col 37}{space 1}    1.33{col 46}{space 3}0.197{col 54}{space 4}-.0857968{col 67}{space 3} .3945219
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2}-.0065221{col 26}{space 2} .1400601{col 37}{space 1}   -0.05{col 46}{space 3}0.963{col 54}{space 4}-.2955918{col 67}{space 3} .2825477
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. estat ic
+
+{txt}Akaike's information criterion and Bayesian information criterion
+
+{hline 13}{c TT}{hline 63}
+       Model {c |}          N   ll(null)  ll(model)      df        AIC        BIC
+{hline 13}{c +}{hline 63}
+{ralign 12:.}{col 14}{c |}{res}{col 16}        26{col 28}-27.92912{col 39}-27.00923{col 50}     2{col 58} 58.01845{col 69} 60.53464
+{txt}{hline 13}{c BT}{hline 63}
+{p 0 6 0 77}Note: BIC uses N = number of observations. See {helpb bic_note:{bind:[R] BIC note}}.{p_end}
+
+{com}. scalar define df3=el(r(S),1,4)
+{txt}
+{com}. scalar define aic3=el(r(S),1,5)
+{txt}
+{com}. scalar define bic3=el(r(S),1,6)
+{txt}
+{com}. crossfold reg d.y l3d.y
+{res}
+{txt}{space 0}{space 0}{ralign 12:}{space 1}{c |}{space 1}{ralign 9:RMSE}{space 1}
+{space 0}{hline 13}{c   +}{hline 11}
+{space 0}{space 0}{ralign 12:est1}{space 1}{c |}{space 1}{ralign 9:{res:{sf:  .560003}}}{space 1}
+{space 0}{space 0}{ralign 12:est2}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.038029}}}{space 1}
+{space 0}{space 0}{ralign 12:est3}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .6511468}}}{space 1}
+{space 0}{space 0}{ralign 12:est4}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .9633849}}}{space 1}
+{space 0}{space 0}{ralign 12:est5}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .2887519}}}{space 1}
+
+{com}. scalar define k=10
+{txt}
+{com}. matrix kMSE=r(est)'*r(est)
+{txt}
+{com}. scalar krmse3=(el(kMSE,1,1)/k)^.5
+{txt}
+{com}. scalar list krmse3
+{txt}    krmse3 = {res} .53165655
+{txt}
+{com}. matrix drop kMSE
+{txt}
+{com}. scalar drop k
+{txt}
+{com}. loocv reg d.y l3d.y
+
+
+{txt} Leave-One-Out Cross-Validation Results 
+{hline 25}{c TT}{hline 15}
+         Method          {c |}{col 30} Value
+{hline 25}{c +}{hline 15}
+Root Mean Squared Errors {c |}{col 30}{res}.80050522
+{txt}Mean Absolute Errors     {c |}{col 30}{res}.60014174
+{txt}Pseudo-R2                {c |} {col 30}{res}.18390478
+{txt}{hline 25}{c BT}{hline 15}
+
+{com}. scalar define loormse3=r(rmse)
+{txt}
+{com}. 
+. reg d.y l1d.y l2d.y
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        27
+{txt}{hline 13}{c +}{hline 34}   F(2, 24)        = {res}     2.70
+{txt}       Model {c |} {res} 2.54415029         2  1.27207515   {txt}Prob > F        ={res}    0.0878
+{txt}    Residual {c |} {res} 11.3222959        24  .471762328   {txt}R-squared       ={res}    0.1835
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.1154
+{txt}       Total {c |} {res} 13.8664462        26  .533324852   {txt}Root MSE        =   {res} .68685
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         D.y{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 11}y {c |}
+{space 9}LD. {c |}{col 14}{res}{space 2}-.2098396{col 26}{space 2} .1755236{col 37}{space 1}   -1.20{col 46}{space 3}0.244{col 54}{space 4}-.5721026{col 67}{space 3} .1524234
+{txt}{space 8}L2D. {c |}{col 14}{res}{space 2}-.2782149{col 26}{space 2} .1210051{col 37}{space 1}   -2.30{col 46}{space 3}0.031{col 54}{space 4}-.5279572{col 67}{space 3}-.0284725
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2}-.0237057{col 26}{space 2} .1329719{col 37}{space 1}   -0.18{col 46}{space 3}0.860{col 54}{space 4}-.2981462{col 67}{space 3} .2507348
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. estat ic
+
+{txt}Akaike's information criterion and Bayesian information criterion
+
+{hline 13}{c TT}{hline 63}
+       Model {c |}          N   ll(null)  ll(model)      df        AIC        BIC
+{hline 13}{c +}{hline 63}
+{ralign 12:.}{col 14}{c |}{res}{col 16}        27{col 28}-29.31541{col 39}-26.57899{col 50}     3{col 58} 59.15798{col 69} 63.04549
+{txt}{hline 13}{c BT}{hline 63}
+{p 0 6 0 77}Note: BIC uses N = number of observations. See {helpb bic_note:{bind:[R] BIC note}}.{p_end}
+
+{com}. scalar define df12=el(r(S),1,4)
+{txt}
+{com}. scalar define aic12=el(r(S),1,5)
+{txt}
+{com}. scalar define bic12=el(r(S),1,6)
+{txt}
+{com}. crossfold reg d.y l1d.y l2d.y
+{res}
+{txt}{space 0}{space 0}{ralign 12:}{space 1}{c |}{space 1}{ralign 9:RMSE}{space 1}
+{space 0}{hline 13}{c   +}{hline 11}
+{space 0}{space 0}{ralign 12:est1}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .6167559}}}{space 1}
+{space 0}{space 0}{ralign 12:est2}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .5650816}}}{space 1}
+{space 0}{space 0}{ralign 12:est3}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .3386249}}}{space 1}
+{space 0}{space 0}{ralign 12:est4}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.001348}}}{space 1}
+{space 0}{space 0}{ralign 12:est5}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .7273002}}}{space 1}
+
+{com}. scalar define k=10
+{txt}
+{com}. matrix kMSE=r(est)'*r(est)
+{txt}
+{com}. scalar krmse12=(el(kMSE,1,1)/k)^.5
+{txt}
+{com}. scalar list krmse12
+{txt}   krmse12 = {res} .48435884
+{txt}
+{com}. matrix drop kMSE
+{txt}
+{com}. scalar drop k
+{txt}
+{com}. loocv reg d.y l1d.y l2d.y
+
+
+{txt} Leave-One-Out Cross-Validation Results 
+{hline 25}{c TT}{hline 15}
+         Method          {c |}{col 30} Value
+{hline 25}{c +}{hline 15}
+Root Mean Squared Errors {c |}{col 30}{res}.7665321
+{txt}Mean Absolute Errors     {c |}{col 30}{res}.59481523
+{txt}Pseudo-R2                {c |} {col 30}{res}.00050316
+{txt}{hline 25}{c BT}{hline 15}
+
+{com}. scalar define loormse12=r(rmse)
+{txt}
+{com}. 
+. reg d.y l1d.y l3d.y
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        26
+{txt}{hline 13}{c +}{hline 34}   F(2, 23)        = {res}     1.04
+{txt}       Model {c |} {res}  1.0827854         2  .541392699   {txt}Prob > F        ={res}    0.3693
+{txt}    Residual {c |} {res} 11.9649331        23  .520214485   {txt}R-squared       ={res}    0.0830
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0032
+{txt}       Total {c |} {res} 13.0477185        25  .521908742   {txt}Root MSE        =   {res} .72126
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         D.y{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 11}y {c |}
+{space 9}LD. {c |}{col 14}{res}{space 2} -.128269{col 26}{space 2} .2114536{col 37}{space 1}   -0.61{col 46}{space 3}0.550{col 54}{space 4} -.565694{col 67}{space 3} .3091561
+{txt}{space 8}L3D. {c |}{col 14}{res}{space 2} .1243628{col 26}{space 2} .1278755{col 37}{space 1}    0.97{col 46}{space 3}0.341{col 54}{space 4}-.1401678{col 67}{space 3} .3888934
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2}-.0046723{col 26}{space 2} .1419743{col 37}{space 1}   -0.03{col 46}{space 3}0.974{col 54}{space 4}-.2983685{col 67}{space 3} .2890238
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. estat ic
+
+{txt}Akaike's information criterion and Bayesian information criterion
+
+{hline 13}{c TT}{hline 63}
+       Model {c |}          N   ll(null)  ll(model)      df        AIC        BIC
+{hline 13}{c +}{hline 63}
+{ralign 12:.}{col 14}{c |}{res}{col 16}        26{col 28}-27.92912{col 39}-26.80289{col 50}     3{col 58} 59.60578{col 69} 63.38007
+{txt}{hline 13}{c BT}{hline 63}
+{p 0 6 0 77}Note: BIC uses N = number of observations. See {helpb bic_note:{bind:[R] BIC note}}.{p_end}
+
+{com}. scalar define df13=el(r(S),1,4)
+{txt}
+{com}. scalar define aic13=el(r(S),1,5)
+{txt}
+{com}. scalar define bic13=el(r(S),1,6)
+{txt}
+{com}. crossfold reg d.y l1d.y l3d.y
+{res}
+{txt}{space 0}{space 0}{ralign 12:}{space 1}{c |}{space 1}{ralign 9:RMSE}{space 1}
+{space 0}{hline 13}{c   +}{hline 11}
+{space 0}{space 0}{ralign 12:est1}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .5612533}}}{space 1}
+{space 0}{space 0}{ralign 12:est2}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .4456097}}}{space 1}
+{space 0}{space 0}{ralign 12:est3}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .3905584}}}{space 1}
+{space 0}{space 0}{ralign 12:est4}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.167093}}}{space 1}
+{space 0}{space 0}{ralign 12:est5}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .7423934}}}{space 1}
+
+{com}. scalar define k=10
+{txt}
+{com}. matrix kMSE=r(est)'*r(est)
+{txt}
+{com}. scalar krmse13=(el(kMSE,1,1)/k)^.5
+{txt}
+{com}. scalar list krmse13
+{txt}   krmse13 = {res}  .5078743
+{txt}
+{com}. matrix drop kMSE
+{txt}
+{com}. scalar drop k
+{txt}
+{com}. loocv reg d.y l1d.y l3d.y
+
+
+{txt} Leave-One-Out Cross-Validation Results 
+{hline 25}{c TT}{hline 15}
+         Method          {c |}{col 30} Value
+{hline 25}{c +}{hline 15}
+Root Mean Squared Errors {c |}{col 30}{res}.82890711
+{txt}Mean Absolute Errors     {c |}{col 30}{res}.60566223
+{txt}Pseudo-R2                {c |} {col 30}{res}.22037169
+{txt}{hline 25}{c BT}{hline 15}
+
+{com}. scalar define loormse13=r(rmse)
+{txt}
+{com}. 
+. reg d.y       l2d.y l3d.y
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        26
+{txt}{hline 13}{c +}{hline 34}   F(2, 23)        = {res}     1.40
+{txt}       Model {c |} {res} 1.41696901         2  .708484506   {txt}Prob > F        ={res}    0.2666
+{txt}    Residual {c |} {res} 11.6307495        23  .505684762   {txt}R-squared       ={res}    0.1086
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0311
+{txt}       Total {c |} {res} 13.0477185        25  .521908742   {txt}Root MSE        =   {res} .71112
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         D.y{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 11}y {c |}
+{space 8}L2D. {c |}{col 14}{res}{space 2}-.1852804{col 26}{space 2} .1817351{col 37}{space 1}   -1.02{col 46}{space 3}0.319{col 54}{space 4} -.561228{col 67}{space 3} .1906672
+{txt}{space 8}L3D. {c |}{col 14}{res}{space 2}  .104805{col 26}{space 2}  .126019{col 37}{space 1}    0.83{col 46}{space 3}0.414{col 54}{space 4}-.1558852{col 67}{space 3} .3654951
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2}-.0195349{col 26}{space 2} .1405261{col 37}{space 1}   -0.14{col 46}{space 3}0.891{col 54}{space 4}-.3102353{col 67}{space 3} .2711655
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. estat ic
+
+{txt}Akaike's information criterion and Bayesian information criterion
+
+{hline 13}{c TT}{hline 63}
+       Model {c |}          N   ll(null)  ll(model)      df        AIC        BIC
+{hline 13}{c +}{hline 63}
+{ralign 12:.}{col 14}{c |}{res}{col 16}        26{col 28}-27.92912{col 39}-26.43463{col 50}     3{col 58} 58.86926{col 69} 62.64355
+{txt}{hline 13}{c BT}{hline 63}
+{p 0 6 0 77}Note: BIC uses N = number of observations. See {helpb bic_note:{bind:[R] BIC note}}.{p_end}
+
+{com}. scalar define df23=el(r(S),1,4)
+{txt}
+{com}. scalar define aic23=el(r(S),1,5)
+{txt}
+{com}. scalar define bic23=el(r(S),1,6)
+{txt}
+{com}. crossfold reg d.y       l2d.y l3d.y
+{res}
+{txt}{space 0}{space 0}{ralign 12:}{space 1}{c |}{space 1}{ralign 9:RMSE}{space 1}
+{space 0}{hline 13}{c   +}{hline 11}
+{space 0}{space 0}{ralign 12:est1}{space 1}{c |}{space 1}{ralign 9:{res:{sf:  1.05197}}}{space 1}
+{space 0}{space 0}{ralign 12:est2}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .7563533}}}{space 1}
+{space 0}{space 0}{ralign 12:est3}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .6457727}}}{space 1}
+{space 0}{space 0}{ralign 12:est4}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .3976723}}}{space 1}
+{space 0}{space 0}{ralign 12:est5}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .5979739}}}{space 1}
+
+{com}. scalar define k=10
+{txt}
+{com}. matrix kMSE=r(est)'*r(est)
+{txt}
+{com}. scalar krmse23=(el(kMSE,1,1)/k)^.5
+{txt}
+{com}. scalar list krmse23
+{txt}   krmse23 = {res} .51102348
+{txt}
+{com}. matrix drop kMSE
+{txt}
+{com}. scalar drop k
+{txt}
+{com}. loocv reg d.y       l2d.y l3d.y
+
+
+{txt} Leave-One-Out Cross-Validation Results 
+{hline 25}{c TT}{hline 15}
+         Method          {c |}{col 30} Value
+{hline 25}{c +}{hline 15}
+Root Mean Squared Errors {c |}{col 30}{res}.82063972
+{txt}Mean Absolute Errors     {c |}{col 30}{res}.63974676
+{txt}Pseudo-R2                {c |} {col 30}{res}.0196449
+{txt}{hline 25}{c BT}{hline 15}
+
+{com}. scalar define loormse23=r(rmse)
+{txt}
+{com}. 
+. reg d.y l1d.y l2d.y l3d.y
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        26
+{txt}{hline 13}{c +}{hline 34}   F(3, 22)        = {res}     1.18
+{txt}       Model {c |} {res} 1.81248164         3  .604160546   {txt}Prob > F        ={res}    0.3390
+{txt}    Residual {c |} {res} 11.2352369        22  .510692587   {txt}R-squared       ={res}    0.1389
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0215
+{txt}       Total {c |} {res} 13.0477185        25  .521908742   {txt}Root MSE        =   {res} .71463
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         D.y{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 11}y {c |}
+{space 9}LD. {c |}{col 14}{res}{space 2}-.1898721{col 26}{space 2} .2157549{col 37}{space 1}   -0.88{col 46}{space 3}0.388{col 54}{space 4}-.6373203{col 67}{space 3} .2575762
+{txt}{space 8}L2D. {c |}{col 14}{res}{space 2}-.2248158{col 26}{space 2}  .188077{col 37}{space 1}   -1.20{col 46}{space 3}0.245{col 54}{space 4}-.6148635{col 67}{space 3} .1652319
+{txt}{space 8}L3D. {c |}{col 14}{res}{space 2} .0498227{col 26}{space 2} .1412143{col 37}{space 1}    0.35{col 46}{space 3}0.728{col 54}{space 4}-.2430379{col 67}{space 3} .3426832
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2}-.0195735{col 26}{space 2} .1412202{col 37}{space 1}   -0.14{col 46}{space 3}0.891{col 54}{space 4}-.3124463{col 67}{space 3} .2732993
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. estat ic
+
+{txt}Akaike's information criterion and Bayesian information criterion
+
+{hline 13}{c TT}{hline 63}
+       Model {c |}          N   ll(null)  ll(model)      df        AIC        BIC
+{hline 13}{c +}{hline 63}
+{ralign 12:.}{col 14}{c |}{res}{col 16}        26{col 28}-27.92912{col 39}-25.98486{col 50}     4{col 58} 59.96972{col 69} 65.00211
+{txt}{hline 13}{c BT}{hline 63}
+{p 0 6 0 77}Note: BIC uses N = number of observations. See {helpb bic_note:{bind:[R] BIC note}}.{p_end}
+
+{com}. scalar define df123=el(r(S),1,4)
+{txt}
+{com}. scalar define aic123=el(r(S),1,5)
+{txt}
+{com}. scalar define bic123=el(r(S),1,6)
+{txt}
+{com}. crossfold reg d.y l1d.y l2d.y l3d.y
+{res}
+{txt}{space 0}{space 0}{ralign 12:}{space 1}{c |}{space 1}{ralign 9:RMSE}{space 1}
+{space 0}{hline 13}{c   +}{hline 11}
+{space 0}{space 0}{ralign 12:est1}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .5489031}}}{space 1}
+{space 0}{space 0}{ralign 12:est2}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .4243126}}}{space 1}
+{space 0}{space 0}{ralign 12:est3}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.166623}}}{space 1}
+{space 0}{space 0}{ralign 12:est4}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .8721026}}}{space 1}
+{space 0}{space 0}{ralign 12:est5}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .6154937}}}{space 1}
+
+{com}. scalar define k=10
+{txt}
+{com}. matrix kMSE=r(est)'*r(est)
+{txt}
+{com}. scalar krmse123=(el(kMSE,1,1)/k)^.5
+{txt}
+{com}. scalar list krmse123
+{txt}  krmse123 = {res} .54605322
+{txt}
+{com}. matrix drop kMSE
+{txt}
+{com}. scalar drop k
+{txt}
+{com}. loocv reg d.y l1d.y l2d.y l3d.y
+
+
+{txt} Leave-One-Out Cross-Validation Results 
+{hline 25}{c TT}{hline 15}
+         Method          {c |}{col 30} Value
+{hline 25}{c +}{hline 15}
+Root Mean Squared Errors {c |}{col 30}{res}.84687677
+{txt}Mean Absolute Errors     {c |}{col 30}{res}.65841662
+{txt}Pseudo-R2                {c |} {col 30}{res}.01496687
+{txt}{hline 25}{c BT}{hline 15}
+
+{com}. scalar define loormse123=r(rmse)
+{txt}
+{com}. 
+. matrix drop _all
+{txt}
+{com}. matrix fit1=(df1,aic1,bic1,krmse1,loormse1)
+{txt}
+{com}. matrix fit2=(df2,aic2,bic2,krmse2,loormse2)
+{txt}
+{com}. matrix fit3=(df3,aic3,bic3,krmse3,loormse3)
+{txt}
+{com}. matrix fit12=(df12,aic12,bic12,krmse12,loormse12)
+{txt}
+{com}. matrix fit13=(df13,aic13,bic13,krmse13,loormse13)
+{txt}
+{com}. matrix fit23=(df23,aic23,bic23,krmse23,loormse23)
+{txt}
+{com}. matrix fit123=(df123,aic123,bic123,krmse123,loormse123)
+{txt}
+{com}. matrix FIT=fit1\fit2\fit3\fit12\fit13\fit23\fit123
+{txt}
+{com}. matrix rownames FIT="Model 1" "Model 2" "Model 3" "Model 12" "Model 13" "Model 23" "Model 123"
+{txt}
+{com}. matrix colnames FIT=df AIC BIC K(10)RMSE LOORMSE
+{txt}
+{com}. matrix list FIT
+{res}
+{txt}FIT[7,5]
+                  df        AIC        BIC  K(10)RMSE    LOORMSE
+  Model 1 {res}         2  66.763869  69.428278  .55948884  .73559376
+{txt}  Model 2 {res}         2  58.719813  61.311486  .50813589  .76118489
+{txt}  Model 3 {res}         2  58.018452  60.534645  .53165655  .80050522
+{txt} Model 12 {res}         3   59.15798   63.04549  .48435884   .7665321
+{txt} Model 13 {res}         3  59.605777  63.380067   .5078743  .82890711
+{txt} Model 23 {res}         3  58.869256  62.643546  .51102348  .82063972
+{txt}Model 123 {res}         4  59.969724   65.00211  .54605322  .84687677
+{reset}
+{com}. 
+. *1b
+. clear
+{txt}
+{com}. set obs 300
+{txt}{p}
+number of observations (_N)  was 0,
+now 300
+{p_end}
+
+{com}. gen t=[_n]
+{txt}
+{com}. tsset t
+{res}{txt}{col 9}time variable:  {res}{col 25}t, 1 to 300
+{txt}{col 17}delta:  {res}1 unit
+{txt}
+{com}. gen r=rnormal()
+{txt}
+{com}. gen y=r if t<4
+{txt}(297 missing values generated)
+
+{com}. replace y=0.5+0.5*l.y-0.1*l2.y+0.25*l3.y+r if t>=4 
+{txt}(297 real changes made)
+
+{com}. drop r
+{txt}
+{com}. 
+. *model
+. reg d.y l1d.y
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       298
+{txt}{hline 13}{c +}{hline 34}   F(1, 296)       = {res}    25.44
+{txt}       Model {c |} {res} 32.4532283         1  32.4532283   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 377.658955       296  1.27587485   {txt}R-squared       ={res}    0.0791
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0760
+{txt}       Total {c |} {res} 410.112184       297   1.3808491   {txt}Root MSE        =   {res} 1.1295
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         D.y{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 11}y {c |}
+{space 9}LD. {c |}{col 14}{res}{space 2}-.2812396{col 26}{space 2} .0557637{col 37}{space 1}   -5.04{col 46}{space 3}0.000{col 54}{space 4}-.3909832{col 67}{space 3}-.1714961
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} .0142327{col 26}{space 2} .0654357{col 37}{space 1}    0.22{col 46}{space 3}0.828{col 54}{space 4}-.1145455{col 67}{space 3} .1430109
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. *aic/bic
+. estat ic
+
+{txt}Akaike's information criterion and Bayesian information criterion
+
+{hline 13}{c TT}{hline 63}
+       Model {c |}          N   ll(null)  ll(model)      df        AIC        BIC
+{hline 13}{c +}{hline 63}
+{ralign 12:.}{col 14}{c |}{res}{col 16}       298{col 28}-470.4249{col 39}-458.1415{col 50}     2{col 58}  920.283{col 69} 927.6772
+{txt}{hline 13}{c BT}{hline 63}
+{p 0 6 0 77}Note: BIC uses N = number of observations. See {helpb bic_note:{bind:[R] BIC note}}.{p_end}
+
+{com}. scalar define df1=el(r(S),1,4)
+{txt}
+{com}. scalar define aic1=el(r(S),1,5)
+{txt}
+{com}. scalar define bic1=el(r(S),1,6)
+{txt}
+{com}. *10 fold cv rmse
+. crossfold reg d.y l1d.y
+{res}
+{txt}{space 0}{space 0}{ralign 12:}{space 1}{c |}{space 1}{ralign 9:RMSE}{space 1}
+{space 0}{hline 13}{c   +}{hline 11}
+{space 0}{space 0}{ralign 12:est1}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.159028}}}{space 1}
+{space 0}{space 0}{ralign 12:est2}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.270689}}}{space 1}
+{space 0}{space 0}{ralign 12:est3}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.116998}}}{space 1}
+{space 0}{space 0}{ralign 12:est4}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .9711987}}}{space 1}
+{space 0}{space 0}{ralign 12:est5}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.112407}}}{space 1}
+
+{com}. scalar define k=10
+{txt}
+{com}. matrix kMSE=r(est)'*r(est)
+{txt}
+{com}. scalar krmse1=(el(kMSE,1,1)/k)^.5
+{txt}
+{com}. scalar list krmse1
+{txt}    krmse1 = {res}  .7991468
+{txt}
+{com}. matrix drop kMSE
+{txt}
+{com}. scalar drop k
+{txt}
+{com}. *loocv
+. loocv reg d.y l1d.y
+
+
+{txt} Leave-One-Out Cross-Validation Results 
+{hline 25}{c TT}{hline 15}
+         Method          {c |}{col 30} Value
+{hline 25}{c +}{hline 15}
+Root Mean Squared Errors {c |}{col 30}{res}1.1299274
+{txt}Mean Absolute Errors     {c |}{col 30}{res}.89967417
+{txt}Pseudo-R2                {c |} {col 30}{res}.06999402
+{txt}{hline 25}{c BT}{hline 15}
+
+{com}. scalar define loormse1=r(rmse)
+{txt}
+{com}. 
+. reg d.y l2d.y
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       297
+{txt}{hline 13}{c +}{hline 34}   F(1, 295)       = {res}    29.86
+{txt}       Model {c |} {res} 37.6039913         1  37.6039913   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 371.475512       295  1.25923902   {txt}R-squared       ={res}    0.0919
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0888
+{txt}       Total {c |} {res} 409.079503       296  1.38202535   {txt}Root MSE        =   {res} 1.1222
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         D.y{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 11}y {c |}
+{space 8}L2D. {c |}{col 14}{res}{space 2}-.3027962{col 26}{space 2} .0554099{col 37}{space 1}   -5.46{col 46}{space 3}0.000{col 54}{space 4} -.411845{col 67}{space 3}-.1937474
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2}  .010643{col 26}{space 2} .0651164{col 37}{space 1}    0.16{col 46}{space 3}0.870{col 54}{space 4}-.1175086{col 67}{space 3} .1387945
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. estat ic
+
+{txt}Akaike's information criterion and Bayesian information criterion
+
+{hline 13}{c TT}{hline 63}
+       Model {c |}          N   ll(null)  ll(model)      df        AIC        BIC
+{hline 13}{c +}{hline 63}
+{ralign 12:.}{col 14}{c |}{res}{col 16}       297{col 28}-468.9711{col 39}-454.6517{col 50}     2{col 58} 913.3035{col 69} 920.6909
+{txt}{hline 13}{c BT}{hline 63}
+{p 0 6 0 77}Note: BIC uses N = number of observations. See {helpb bic_note:{bind:[R] BIC note}}.{p_end}
+
+{com}. scalar define df2=el(r(S),1,4)
+{txt}
+{com}. scalar define aic2=el(r(S),1,5)
+{txt}
+{com}. scalar define bic2=el(r(S),1,6)
+{txt}
+{com}. crossfold reg d.y l2d.y
+{res}
+{txt}{space 0}{space 0}{ralign 12:}{space 1}{c |}{space 1}{ralign 9:RMSE}{space 1}
+{space 0}{hline 13}{c   +}{hline 11}
+{space 0}{space 0}{ralign 12:est1}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.229751}}}{space 1}
+{space 0}{space 0}{ralign 12:est2}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.086868}}}{space 1}
+{space 0}{space 0}{ralign 12:est3}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.168207}}}{space 1}
+{space 0}{space 0}{ralign 12:est4}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.106821}}}{space 1}
+{space 0}{space 0}{ralign 12:est5}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.004898}}}{space 1}
+
+{com}. scalar define k=10
+{txt}
+{com}. matrix kMSE=r(est)'*r(est)
+{txt}
+{com}. scalar krmse2=(el(kMSE,1,1)/k)^.5
+{txt}
+{com}. scalar list krmse2
+{txt}    krmse2 = {res} .79329393
+{txt}
+{com}. matrix drop kMSE
+{txt}
+{com}. scalar drop k
+{txt}
+{com}. loocv reg d.y l2d.y
+
+
+{txt} Leave-One-Out Cross-Validation Results 
+{hline 25}{c TT}{hline 15}
+         Method          {c |}{col 30} Value
+{hline 25}{c +}{hline 15}
+Root Mean Squared Errors {c |}{col 30}{res}1.1276576
+{txt}Mean Absolute Errors     {c |}{col 30}{res}.89298605
+{txt}Pseudo-R2                {c |} {col 30}{res}.07925965
+{txt}{hline 25}{c BT}{hline 15}
+
+{com}. scalar define loormse2=r(rmse)
+{txt}
+{com}. 
+. reg d.y l3d.y
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       296
+{txt}{hline 13}{c +}{hline 34}   F(1, 294)       = {res}     5.91
+{txt}       Model {c |} {res} 8.00382153         1  8.00382153   {txt}Prob > F        ={res}    0.0157
+{txt}    Residual {c |} {res} 398.184504       294  1.35436906   {txt}R-squared       ={res}    0.0197
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0164
+{txt}       Total {c |} {res} 406.188326       295  1.37690958   {txt}Root MSE        =   {res} 1.1638
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         D.y{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 11}y {c |}
+{space 8}L3D. {c |}{col 14}{res}{space 2}   .13976{col 26}{space 2} .0574914{col 37}{space 1}    2.43{col 46}{space 3}0.016{col 54}{space 4} .0266132{col 67}{space 3} .2529069
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} .0009502{col 26}{space 2} .0676444{col 37}{space 1}    0.01{col 46}{space 3}0.989{col 54}{space 4}-.1321784{col 67}{space 3} .1340787
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. estat ic
+
+{txt}Akaike's information criterion and Bayesian information criterion
+
+{hline 13}{c TT}{hline 63}
+       Model {c |}          N   ll(null)  ll(model)      df        AIC        BIC
+{hline 13}{c +}{hline 63}
+{ralign 12:.}{col 14}{c |}{res}{col 16}       296{col 28}-466.8415{col 39}-463.8961{col 50}     2{col 58} 931.7922{col 69} 939.1729
+{txt}{hline 13}{c BT}{hline 63}
+{p 0 6 0 77}Note: BIC uses N = number of observations. See {helpb bic_note:{bind:[R] BIC note}}.{p_end}
+
+{com}. scalar define df3=el(r(S),1,4)
+{txt}
+{com}. scalar define aic3=el(r(S),1,5)
+{txt}
+{com}. scalar define bic3=el(r(S),1,6)
+{txt}
+{com}. crossfold reg d.y l3d.y
+{res}
+{txt}{space 0}{space 0}{ralign 12:}{space 1}{c |}{space 1}{ralign 9:RMSE}{space 1}
+{space 0}{hline 13}{c   +}{hline 11}
+{space 0}{space 0}{ralign 12:est1}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.015192}}}{space 1}
+{space 0}{space 0}{ralign 12:est2}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.178592}}}{space 1}
+{space 0}{space 0}{ralign 12:est3}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.376532}}}{space 1}
+{space 0}{space 0}{ralign 12:est4}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.199756}}}{space 1}
+{space 0}{space 0}{ralign 12:est5}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.046682}}}{space 1}
+
+{com}. scalar define k=10
+{txt}
+{com}. matrix kMSE=r(est)'*r(est)
+{txt}
+{com}. scalar krmse3=(el(kMSE,1,1)/k)^.5
+{txt}
+{com}. scalar list krmse3
+{txt}    krmse3 = {res} .82761644
+{txt}
+{com}. matrix drop kMSE
+{txt}
+{com}. scalar drop k
+{txt}
+{com}. loocv reg d.y l3d.y
+
+
+{txt} Leave-One-Out Cross-Validation Results 
+{hline 25}{c TT}{hline 15}
+         Method          {c |}{col 30} Value
+{hline 25}{c +}{hline 15}
+Root Mean Squared Errors {c |}{col 30}{res}1.1746318
+{txt}Mean Absolute Errors     {c |}{col 30}{res}.93777107
+{txt}Pseudo-R2                {c |} {col 30}{res}.00908427
+{txt}{hline 25}{c BT}{hline 15}
+
+{com}. scalar define loormse3=r(rmse)
+{txt}
+{com}. 
+. reg d.y l1d.y l2d.y
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       297
+{txt}{hline 13}{c +}{hline 34}   F(2, 294)       = {res}    45.26
+{txt}       Model {c |} {res} 96.3079952         2  48.1539976   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 312.771508       294  1.06384867   {txt}R-squared       ={res}    0.2354
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.2302
+{txt}       Total {c |} {res} 409.079503       296  1.38202535   {txt}Root MSE        =   {res} 1.0314
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         D.y{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 11}y {c |}
+{space 9}LD. {c |}{col 14}{res}{space 2}-.3954018{col 26}{space 2} .0532286{col 37}{space 1}   -7.43{col 46}{space 3}0.000{col 54}{space 4}-.5001592{col 67}{space 3}-.2906445
+{txt}{space 8}L2D. {c |}{col 14}{res}{space 2}-.4134261{col 26}{space 2} .0530628{col 37}{space 1}   -7.79{col 46}{space 3}0.000{col 54}{space 4}-.5178572{col 67}{space 3}-.3089951
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} .0182253{col 26}{space 2} .0598604{col 37}{space 1}    0.30{col 46}{space 3}0.761{col 54}{space 4}-.0995839{col 67}{space 3} .1360344
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. estat ic
+
+{txt}Akaike's information criterion and Bayesian information criterion
+
+{hline 13}{c TT}{hline 63}
+       Model {c |}          N   ll(null)  ll(model)      df        AIC        BIC
+{hline 13}{c +}{hline 63}
+{ralign 12:.}{col 14}{c |}{res}{col 16}       297{col 28}-468.9711{col 39}-429.1082{col 50}     3{col 58} 864.2165{col 69} 875.2977
+{txt}{hline 13}{c BT}{hline 63}
+{p 0 6 0 77}Note: BIC uses N = number of observations. See {helpb bic_note:{bind:[R] BIC note}}.{p_end}
+
+{com}. scalar define df12=el(r(S),1,4)
+{txt}
+{com}. scalar define aic12=el(r(S),1,5)
+{txt}
+{com}. scalar define bic12=el(r(S),1,6)
+{txt}
+{com}. crossfold reg d.y l1d.y l2d.y
+{res}
+{txt}{space 0}{space 0}{ralign 12:}{space 1}{c |}{space 1}{ralign 9:RMSE}{space 1}
+{space 0}{hline 13}{c   +}{hline 11}
+{space 0}{space 0}{ralign 12:est1}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.028352}}}{space 1}
+{space 0}{space 0}{ralign 12:est2}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.135098}}}{space 1}
+{space 0}{space 0}{ralign 12:est3}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.024392}}}{space 1}
+{space 0}{space 0}{ralign 12:est4}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.026938}}}{space 1}
+{space 0}{space 0}{ralign 12:est5}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .9663113}}}{space 1}
+
+{com}. scalar define k=10
+{txt}
+{com}. matrix kMSE=r(est)'*r(est)
+{txt}
+{com}. scalar krmse12=(el(kMSE,1,1)/k)^.5
+{txt}
+{com}. scalar list krmse12
+{txt}   krmse12 = {res} .73373661
+{txt}
+{com}. matrix drop kMSE
+{txt}
+{com}. scalar drop k
+{txt}
+{com}. loocv reg d.y l1d.y l2d.y
+
+
+{txt} Leave-One-Out Cross-Validation Results 
+{hline 25}{c TT}{hline 15}
+         Method          {c |}{col 30} Value
+{hline 25}{c +}{hline 15}
+Root Mean Squared Errors {c |}{col 30}{res}1.0336873
+{txt}Mean Absolute Errors     {c |}{col 30}{res}.80038097
+{txt}Pseudo-R2                {c |} {col 30}{res}.22621675
+{txt}{hline 25}{c BT}{hline 15}
+
+{com}. scalar define loormse12=r(rmse)
+{txt}
+{com}. 
+. reg d.y l1d.y l3d.y
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       296
+{txt}{hline 13}{c +}{hline 34}   F(2, 293)       = {res}    13.43
+{txt}       Model {c |} {res} 34.1102638         2  17.0551319   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 372.078062       293    1.269891   {txt}R-squared       ={res}    0.0840
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0777
+{txt}       Total {c |} {res} 406.188326       295  1.37690958   {txt}Root MSE        =   {res} 1.1269
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         D.y{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 11}y {c |}
+{space 9}LD. {c |}{col 14}{res}{space 2}-.2658004{col 26}{space 2} .0586226{col 37}{space 1}   -4.53{col 46}{space 3}0.000{col 54}{space 4}-.3811752{col 67}{space 3}-.1504257
+{txt}{space 8}L3D. {c |}{col 14}{res}{space 2} .0598352{col 26}{space 2} .0583937{col 37}{space 1}    1.02{col 46}{space 3}0.306{col 54}{space 4}-.0550891{col 67}{space 3} .1747595
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} .0050283{col 26}{space 2} .0655069{col 37}{space 1}    0.08{col 46}{space 3}0.939{col 54}{space 4}-.1238954{col 67}{space 3} .1339521
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. estat ic
+
+{txt}Akaike's information criterion and Bayesian information criterion
+
+{hline 13}{c TT}{hline 63}
+       Model {c |}          N   ll(null)  ll(model)      df        AIC        BIC
+{hline 13}{c +}{hline 63}
+{ralign 12:.}{col 14}{c |}{res}{col 16}       296{col 28}-466.8415{col 39}  -453.86{col 50}     3{col 58} 913.7199{col 69}  924.791
+{txt}{hline 13}{c BT}{hline 63}
+{p 0 6 0 77}Note: BIC uses N = number of observations. See {helpb bic_note:{bind:[R] BIC note}}.{p_end}
+
+{com}. scalar define df13=el(r(S),1,4)
+{txt}
+{com}. scalar define aic13=el(r(S),1,5)
+{txt}
+{com}. scalar define bic13=el(r(S),1,6)
+{txt}
+{com}. crossfold reg d.y l1d.y l3d.y
+{res}
+{txt}{space 0}{space 0}{ralign 12:}{space 1}{c |}{space 1}{ralign 9:RMSE}{space 1}
+{space 0}{hline 13}{c   +}{hline 11}
+{space 0}{space 0}{ralign 12:est1}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.274667}}}{space 1}
+{space 0}{space 0}{ralign 12:est2}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.030772}}}{space 1}
+{space 0}{space 0}{ralign 12:est3}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.009429}}}{space 1}
+{space 0}{space 0}{ralign 12:est4}{space 1}{c |}{space 1}{ralign 9:{res:{sf:  1.04898}}}{space 1}
+{space 0}{space 0}{ralign 12:est5}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.245479}}}{space 1}
+
+{com}. scalar define k=10
+{txt}
+{com}. matrix kMSE=r(est)'*r(est)
+{txt}
+{com}. scalar krmse13=(el(kMSE,1,1)/k)^.5
+{txt}
+{com}. scalar list krmse13
+{txt}   krmse13 = {res} .79735764
+{txt}
+{com}. matrix drop kMSE
+{txt}
+{com}. scalar drop k
+{txt}
+{com}. loocv reg d.y l1d.y l3d.y
+
+
+{txt} Leave-One-Out Cross-Validation Results 
+{hline 25}{c TT}{hline 15}
+         Method          {c |}{col 30} Value
+{hline 25}{c +}{hline 15}
+Root Mean Squared Errors {c |}{col 30}{res}1.1385096
+{txt}Mean Absolute Errors     {c |}{col 30}{res}.90968478
+{txt}Pseudo-R2                {c |} {col 30}{res}.06801495
+{txt}{hline 25}{c BT}{hline 15}
+
+{com}. scalar define loormse13=r(rmse)
+{txt}
+{com}. 
+. reg d.y       l2d.y l3d.y
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       296
+{txt}{hline 13}{c +}{hline 34}   F(2, 293)       = {res}    14.93
+{txt}       Model {c |} {res} 37.5699834         2  18.7849917   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 368.618343       293  1.25808308   {txt}R-squared       ={res}    0.0925
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0863
+{txt}       Total {c |} {res} 406.188326       295  1.37690958   {txt}Root MSE        =   {res} 1.1216
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         D.y{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 11}y {c |}
+{space 8}L2D. {c |}{col 14}{res}{space 2}-.2807309{col 26}{space 2} .0579092{col 37}{space 1}   -4.85{col 46}{space 3}0.000{col 54}{space 4}-.3947015{col 67}{space 3}-.1667602
+{txt}{space 8}L3D. {c |}{col 14}{res}{space 2} .0609737{col 26}{space 2} .0577443{col 37}{space 1}    1.06{col 46}{space 3}0.292{col 54}{space 4}-.0526725{col 67}{space 3}   .17462
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2}  .005796{col 26}{space 2} .0652032{col 37}{space 1}    0.09{col 46}{space 3}0.929{col 54}{space 4}-.1225299{col 67}{space 3} .1341219
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. estat ic
+
+{txt}Akaike's information criterion and Bayesian information criterion
+
+{hline 13}{c TT}{hline 63}
+       Model {c |}          N   ll(null)  ll(model)      df        AIC        BIC
+{hline 13}{c +}{hline 63}
+{ralign 12:.}{col 14}{c |}{res}{col 16}       296{col 28}-466.8415{col 39}-452.4774{col 50}     3{col 58} 910.9547{col 69} 922.0258
+{txt}{hline 13}{c BT}{hline 63}
+{p 0 6 0 77}Note: BIC uses N = number of observations. See {helpb bic_note:{bind:[R] BIC note}}.{p_end}
+
+{com}. scalar define df23=el(r(S),1,4)
+{txt}
+{com}. scalar define aic23=el(r(S),1,5)
+{txt}
+{com}. scalar define bic23=el(r(S),1,6)
+{txt}
+{com}. crossfold reg d.y       l2d.y l3d.y
+{res}
+{txt}{space 0}{space 0}{ralign 12:}{space 1}{c |}{space 1}{ralign 9:RMSE}{space 1}
+{space 0}{hline 13}{c   +}{hline 11}
+{space 0}{space 0}{ralign 12:est1}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.196006}}}{space 1}
+{space 0}{space 0}{ralign 12:est2}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.152752}}}{space 1}
+{space 0}{space 0}{ralign 12:est3}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .9937113}}}{space 1}
+{space 0}{space 0}{ralign 12:est4}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.153085}}}{space 1}
+{space 0}{space 0}{ralign 12:est5}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.114163}}}{space 1}
+
+{com}. scalar define k=10
+{txt}
+{com}. matrix kMSE=r(est)'*r(est)
+{txt}
+{com}. scalar krmse23=(el(kMSE,1,1)/k)^.5
+{txt}
+{com}. scalar list krmse23
+{txt}   krmse23 = {res} .79483921
+{txt}
+{com}. matrix drop kMSE
+{txt}
+{com}. scalar drop k
+{txt}
+{com}. loocv reg d.y       l2d.y l3d.y
+
+
+{txt} Leave-One-Out Cross-Validation Results 
+{hline 25}{c TT}{hline 15}
+         Method          {c |}{col 30} Value
+{hline 25}{c +}{hline 15}
+Root Mean Squared Errors {c |}{col 30}{res}1.13258
+{txt}Mean Absolute Errors     {c |}{col 30}{res}.89501195
+{txt}Pseudo-R2                {c |} {col 30}{res}.07766854
+{txt}{hline 25}{c BT}{hline 15}
+
+{com}. scalar define loormse23=r(rmse)
+{txt}
+{com}. 
+. reg d.y l1d.y l2d.y l3d.y
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       296
+{txt}{hline 13}{c +}{hline 34}   F(3, 292)       = {res}    31.88
+{txt}       Model {c |} {res}   100.2198         3  33.4065999   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 305.968526       292  1.04783742   {txt}R-squared       ={res}    0.2467
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.2390
+{txt}       Total {c |} {res} 406.188326       295  1.37690958   {txt}Root MSE        =   {res} 1.0236
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         D.y{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 11}y {c |}
+{space 9}LD. {c |}{col 14}{res}{space 2}-.4485444{col 26}{space 2} .0580086{col 37}{space 1}   -7.73{col 46}{space 3}0.000{col 54}{space 4}-.5627124{col 67}{space 3}-.3343764
+{txt}{space 8}L2D. {c |}{col 14}{res}{space 2}-.4572866{col 26}{space 2} .0575709{col 37}{space 1}   -7.94{col 46}{space 3}0.000{col 54}{space 4}-.5705932{col 67}{space 3}  -.34398
+{txt}{space 8}L3D. {c |}{col 14}{res}{space 2}-.1234511{col 26}{space 2}  .057845{col 37}{space 1}   -2.13{col 46}{space 3}0.034{col 54}{space 4}-.2372972{col 67}{space 3}-.0096051
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} .0157256{col 26}{space 2} .0595199{col 37}{space 1}    0.26{col 46}{space 3}0.792{col 54}{space 4}-.1014167{col 67}{space 3}  .132868
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. estat ic
+
+{txt}Akaike's information criterion and Bayesian information criterion
+
+{hline 13}{c TT}{hline 63}
+       Model {c |}          N   ll(null)  ll(model)      df        AIC        BIC
+{hline 13}{c +}{hline 63}
+{ralign 12:.}{col 14}{c |}{res}{col 16}       296{col 28}-466.8415{col 39} -424.908{col 50}     4{col 58}  857.816{col 69} 872.5774
+{txt}{hline 13}{c BT}{hline 63}
+{p 0 6 0 77}Note: BIC uses N = number of observations. See {helpb bic_note:{bind:[R] BIC note}}.{p_end}
+
+{com}. scalar define df123=el(r(S),1,4)
+{txt}
+{com}. scalar define aic123=el(r(S),1,5)
+{txt}
+{com}. scalar define bic123=el(r(S),1,6)
+{txt}
+{com}. crossfold reg d.y l1d.y l2d.y l3d.y
+{res}
+{txt}{space 0}{space 0}{ralign 12:}{space 1}{c |}{space 1}{ralign 9:RMSE}{space 1}
+{space 0}{hline 13}{c   +}{hline 11}
+{space 0}{space 0}{ralign 12:est1}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.187325}}}{space 1}
+{space 0}{space 0}{ralign 12:est2}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.056686}}}{space 1}
+{space 0}{space 0}{ralign 12:est3}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.154597}}}{space 1}
+{space 0}{space 0}{ralign 12:est4}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .8454546}}}{space 1}
+{space 0}{space 0}{ralign 12:est5}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .8369101}}}{space 1}
+
+{com}. scalar define k=10
+{txt}
+{com}. matrix kMSE=r(est)'*r(est)
+{txt}
+{com}. scalar krmse123=(el(kMSE,1,1)/k)^.5
+{txt}
+{com}. scalar list krmse123
+{txt}  krmse123 = {res} .72626665
+{txt}
+{com}. matrix drop kMSE
+{txt}
+{com}. scalar drop k
+{txt}
+{com}. loocv reg d.y l1d.y l2d.y l3d.y
+
+
+{txt} Leave-One-Out Cross-Validation Results 
+{hline 25}{c TT}{hline 15}
+         Method          {c |}{col 30} Value
+{hline 25}{c +}{hline 15}
+Root Mean Squared Errors {c |}{col 30}{res}1.0313176
+{txt}Mean Absolute Errors     {c |}{col 30}{res}.80050268
+{txt}Pseudo-R2                {c |} {col 30}{res}.23492148
+{txt}{hline 25}{c BT}{hline 15}
+
+{com}. scalar define loormse123=r(rmse)
+{txt}
+{com}. 
+. matrix drop _all
+{txt}
+{com}. matrix fit1=(df1,aic1,bic1,krmse1,loormse1)
+{txt}
+{com}. matrix fit2=(df2,aic2,bic2,krmse2,loormse2)
+{txt}
+{com}. matrix fit3=(df3,aic3,bic3,krmse3,loormse3)
+{txt}
+{com}. matrix fit12=(df12,aic12,bic12,krmse12,loormse12)
+{txt}
+{com}. matrix fit13=(df13,aic13,bic13,krmse13,loormse13)
+{txt}
+{com}. matrix fit23=(df23,aic23,bic23,krmse23,loormse23)
+{txt}
+{com}. matrix fit123=(df123,aic123,bic123,krmse123,loormse123)
+{txt}
+{com}. matrix FIT=fit1\fit2\fit3\fit12\fit13\fit23\fit123
+{txt}
+{com}. matrix rownames FIT="Model 1" "Model 2" "Model 3" "Model 12" "Model 13" "Model 23" "Model 123"
+{txt}
+{com}. matrix colnames FIT=df AIC BIC K(10)RMSE LOORMSE
+{txt}
+{com}. matrix list FIT
+{res}
+{txt}FIT[7,5]
+                  df        AIC        BIC  K(10)RMSE    LOORMSE
+  Model 1 {res}         2  920.28299  927.67718   .7991468  1.1299274
+{txt}  Model 2 {res}         2  913.30348  920.69094  .79329393  1.1276576
+{txt}  Model 3 {res}         2  931.79219  939.17291  .82761644  1.1746318
+{txt} Model 12 {res}         3   864.2165   875.2977  .73373661  1.0336873
+{txt} Model 13 {res}         3   913.7199  924.79098  .79735764  1.1385096
+{txt} Model 23 {res}         3  910.95471  922.02579  .79483921    1.13258
+{txt}Model 123 {res}         4  857.81596  872.57739  .72626665  1.0313176
+{reset}
+{com}. 
+. *2
+. clear
+{txt}
+{com}. cd "/Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Problem Set 3"
+{res}/Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Problem Set 3
+{txt}
+{com}. import delimited "Assignment_1_Monthly.txt"
+{res}{text}(5 vars, 984 obs)
+
+{com}. 
+. rename lnu02300000 us_epr
+{res}{txt}
+{com}. rename flnan fl_nonfarm
+{res}{txt}
+{com}. rename fllfn fl_lf
+{res}{txt}
+{com}. rename flbppriv fl_bp
+{res}{txt}
+{com}. rename date datestring
+{res}{txt}
+{com}. 
+. *2c Turn on a log file
+. log using "Problem Set 1", replace
+{err}log file already open
+{txt}{search r(604), local:r(604);}
+
+end of do-file
+
+{search r(604), local:r(604);}
+
+{com}. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}/Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Problem Set 3/Problem Set 1.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}13 Mar 2021, 16:18:37
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}

@@ -115,11 +115,7 @@ $$
 
 ## Expected Marginal Utility
 
-<<<<<<< HEAD
 ​	As we established in [*Profit Maximization*](#Profit-Maximization), I provide no added value to the log card project over any other person performing the same task. I will concede, of course, that I already know which buttons to press to update my spreadsheets and no one else does, but those tasks are easy to teach in under fifteen minutes and can therefore be ignored. Because I provide no added value to the project, when my supervisor asks me to work on log cards, they have a marginal utility of zero while I am doing that work. 
-=======
-​	As we established in [*Profit Maximization*](#Profit-Maximization), I provide no added value to the log card project over any other employee. 
->>>>>>> 3022f715f779b267941ffeee4b444c3111238797
 
 ​	What is the company's expected marginal utility for each unit of time I am on a special project? This is relatively easy to answer because of the nature of the special projects I am assigned to. Each special project has progress that can be measured by tasks completed or percent completion when done by hand such as transcribing part numbers into a spreadsheet or trying to find duplicate part numbers. However, when writing a program that does these tasks it is exceptionally rare that a computer running the program would take as long as a human would to do the same task.
 
@@ -134,4 +130,23 @@ $$
 # Conclusion
 
 ​	I may be tooting my own horn, so to speak, but I do not think that MiGrocery could have hired a better and more productive intern. I have shown time and time again that I am able to use skills in my toolset to expertly optimize current workloads and to automate tasks that could take weeks to complete by hand. Through profit maximization techniques with estimated numbers, I have shown that I can be more than ten times as productive as an employee doing the same task by hand. In discussing expected marginal utility, we learned that it makes sense for me to take on any special project that is expected to take more than a week to complete or that is an ongoing project. Because I am so much more productive on special projects, it makes sense for me to be switched to those full time rather than kept on log cards and loaned out to special projects on occasion.
+
+
+
+
+
+> Notes
+
+- time rate of value matters
+  - w = function of time to completion (raised to a negative)
+- v is amount of time put into it
+- Gus has limited time per week but morons aren't limited
+- Make w a function of time to completion and v is a function increasing in my time (2nd derivative is negative), then an internal solution should present 
+- Get in time to completion in a concrete way
+- Explain T
+- NPV changes over time when doing things by hand 
+  - Os and Ms are a sum
+- value moving forward is function of my time put into T
+  - Ms asymptotes off to 1
+- Talk theory before math
 
