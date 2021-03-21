@@ -28,3 +28,40 @@
 
 ### Tim Cook’s Leadership and Management Style: Building His Own Legacy at Apple
 
+**Competitors:**
+
+Mobile Phones:
+
+- Samsung
+- Google
+- Huawei
+- Oppo
+- Xiaomi
+
+Computers:
+
+- Dell
+- HP/Compaq
+- IBM
+- Intel
+- Microsoft
+
+**Suppliers:**
+
+- Reduced the number of suppliers from 100 to 24
+- Reduced inventory level to 6 days
+- Decreased manufacturing cycle time to 2 months from 4 months
+- Decreased warehouses from 19 to 9
+- Other technology manufacturers. I don't believe Apple has any of their own plants.
+
+**Buyers:**
+
+- You and me!
+
+**Substitute Products:**
+
+- It really depends. If you want a substitute product that performs the same functions, take a look at the competitors section. If you want a true competitor, then the question is much more difficult. They have no true competitors, especially because they are also a lifestyle brand which is something that no other tech company has been able to pull off.
+
+**New Entrants:**
+
+- There are not many new entrants into Apple's competitor space. The biggest may be competitors in the accessories markets.

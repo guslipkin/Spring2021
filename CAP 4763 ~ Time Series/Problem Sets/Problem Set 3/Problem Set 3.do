@@ -1,4 +1,3 @@
-*2c Turn on a log file
 log using "Problem Set 3", replace
 *1a
 clear
@@ -363,3 +362,5 @@ matrix FIT=fit1\fit2\fit3\fit4
 matrix rownames FIT="Model 1" "Model 2" "Model 3" "Model 4"
 matrix colnames FIT=df AIC BIC K(10)RMSE LOORMSE
 matrix list FIT
+
+log close

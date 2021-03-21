@@ -3,7 +3,7 @@
       name:  {res}<unnamed>
        {txt}log:  {res}/Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Problem Set 3/Problem Set 3.smcl
   {txt}log type:  {res}smcl
- {txt}opened on:  {res}13 Mar 2021, 16:22:14
+ {txt}opened on:  {res}15 Mar 2021, 19:19:30
 {txt}
 {com}. *1a
 . clear
@@ -35,19 +35,19 @@ now 30
 . reg d.y l1d.y
 
 {txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        28
-{txt}{hline 13}{c +}{hline 34}   F(1, 26)        = {res}     4.81
-{txt}       Model {c |} {res} 9.37074123         1  9.37074123   {txt}Prob > F        ={res}    0.0373
-{txt}    Residual {c |} {res}  50.602983        26  1.94626858   {txt}R-squared       ={res}    0.1562
-{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.1238
-{txt}       Total {c |} {res} 59.9737242        27  2.22124905   {txt}Root MSE        =   {res} 1.3951
+{txt}{hline 13}{c +}{hline 34}   F(1, 26)        = {res}     7.29
+{txt}       Model {c |} {res} 5.98982946         1  5.98982946   {txt}Prob > F        ={res}    0.0120
+{txt}    Residual {c |} {res} 21.3591043        26  .821504011   {txt}R-squared       ={res}    0.2190
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.1890
+{txt}       Total {c |} {res} 27.3489337        27  1.01292347   {txt}Root MSE        =   {res} .90637
 
 {txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {col 1}         D.y{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
 {hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {space 11}y {c |}
-{space 9}LD. {c |}{col 14}{res}{space 2}-.3854003{col 26}{space 2} .1756412{col 37}{space 1}   -2.19{col 46}{space 3}0.037{col 54}{space 4}-.7464361{col 67}{space 3}-.0243646
+{space 9}LD. {c |}{col 14}{res}{space 2}-.4480631{col 26}{space 2} .1659346{col 37}{space 1}   -2.70{col 46}{space 3}0.012{col 54}{space 4}-.7891465{col 67}{space 3}-.1069798
 {txt}{space 12} {c |}
-{space 7}_cons {c |}{col 14}{res}{space 2} .0257289{col 26}{space 2} .2637115{col 37}{space 1}    0.10{col 46}{space 3}0.923{col 54}{space 4}-.5163378{col 67}{space 3} .5677957
+{space 7}_cons {c |}{col 14}{res}{space 2} .0946765{col 26}{space 2} .1720709{col 37}{space 1}    0.55{col 46}{space 3}0.587{col 54}{space 4}-.2590203{col 67}{space 3} .4483734
 {txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {res}{txt}
 {com}. *aic/bic
@@ -58,7 +58,7 @@ now 30
 {hline 13}{c TT}{hline 63}
        Model {c |}          N   ll(null)  ll(model)      df        AIC        BIC
 {hline 13}{c +}{hline 63}
-{ralign 12:.}{col 14}{c |}{res}{col 16}        28{col 28}-50.39411{col 39}-48.01556{col 50}     2{col 58} 100.0311{col 69} 102.6955
+{ralign 12:.}{col 14}{c |}{res}{col 16}        28{col 28} -39.4009{col 39}-35.94011{col 50}     2{col 58} 75.88022{col 69} 78.54463
 {txt}{hline 13}{c BT}{hline 63}
 {p 0 6 0 77}Note: BIC uses N = number of observations. See {helpb bic_note:{bind:[R] BIC note}}.{p_end}
 
@@ -73,11 +73,11 @@ now 30
 {res}
 {txt}{space 0}{space 0}{ralign 12:}{space 1}{c |}{space 1}{ralign 9:RMSE}{space 1}
 {space 0}{hline 13}{c   +}{hline 11}
-{space 0}{space 0}{ralign 12:est1}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.112398}}}{space 1}
-{space 0}{space 0}{ralign 12:est2}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 2.277036}}}{space 1}
-{space 0}{space 0}{ralign 12:est3}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .6975975}}}{space 1}
-{space 0}{space 0}{ralign 12:est4}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.420353}}}{space 1}
-{space 0}{space 0}{ralign 12:est5}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.635883}}}{space 1}
+{space 0}{space 0}{ralign 12:est1}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .7602895}}}{space 1}
+{space 0}{space 0}{ralign 12:est2}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .6312166}}}{space 1}
+{space 0}{space 0}{ralign 12:est3}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.110403}}}{space 1}
+{space 0}{space 0}{ralign 12:est4}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.269966}}}{space 1}
+{space 0}{space 0}{ralign 12:est5}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .4469951}}}{space 1}
 
 {com}. scalar define k=10
 {txt}
@@ -86,7 +86,7 @@ now 30
 {com}. scalar krmse1=(el(kMSE,1,1)/k)^.5
 {txt}
 {com}. scalar list krmse1
-{txt}    krmse1 = {res} 1.0771482
+{txt}    krmse1 = {res} .63419929
 {txt}
 {com}. matrix drop kMSE
 {txt}
@@ -100,9 +100,9 @@ now 30
 {hline 25}{c TT}{hline 15}
          Method          {c |}{col 30} Value
 {hline 25}{c +}{hline 15}
-Root Mean Squared Errors {c |}{col 30}{res}1.3100452
-{txt}Mean Absolute Errors     {c |}{col 30}{res}1.076301
-{txt}Pseudo-R2                {c |} {col 30}{res}.09106834
+Root Mean Squared Errors {c |}{col 30}{res}.95384454
+{txt}Mean Absolute Errors     {c |}{col 30}{res}.77314162
+{txt}Pseudo-R2                {c |} {col 30}{res}.0999433
 {txt}{hline 25}{c BT}{hline 15}
 
 {com}. scalar define loormse1=r(rmse)
@@ -111,19 +111,19 @@ Root Mean Squared Errors {c |}{col 30}{res}1.3100452
 . reg d.y l2d.y
 
 {txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        27
-{txt}{hline 13}{c +}{hline 34}   F(1, 25)        = {res}     2.91
-{txt}       Model {c |} {res}  6.2247925         1   6.2247925   {txt}Prob > F        ={res}    0.1002
-{txt}    Residual {c |} {res} 53.4125558        25  2.13650223   {txt}R-squared       ={res}    0.1044
-{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0686
-{txt}       Total {c |} {res} 59.6373483        26  2.29374417   {txt}Root MSE        =   {res} 1.4617
+{txt}{hline 13}{c +}{hline 34}   F(1, 25)        = {res}     0.14
+{txt}       Model {c |} {res} .141091522         1  .141091522   {txt}Prob > F        ={res}    0.7148
+{txt}    Residual {c |} {res} 25.8136069        25  1.03254427   {txt}R-squared       ={res}    0.0054
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}   -0.0343
+{txt}       Total {c |} {res} 25.9546984        26   .99825763   {txt}Root MSE        =   {res} 1.0161
 
 {txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {col 1}         D.y{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
 {hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {space 11}y {c |}
-{space 8}L2D. {c |}{col 14}{res}{space 2}-.3142255{col 26}{space 2} .1840902{col 37}{space 1}   -1.71{col 46}{space 3}0.100{col 54}{space 4}-.6933662{col 67}{space 3} .0649153
+{space 8}L2D. {c |}{col 14}{res}{space 2}  -.06877{col 26}{space 2} .1860386{col 37}{space 1}   -0.37{col 46}{space 3}0.715{col 54}{space 4}-.4519236{col 67}{space 3} .3143836
 {txt}{space 12} {c |}
-{space 7}_cons {c |}{col 14}{res}{space 2} .0467762{col 26}{space 2} .2814011{col 37}{space 1}    0.17{col 46}{space 3}0.869{col 54}{space 4}-.5327803{col 67}{space 3} .6263327
+{space 7}_cons {c |}{col 14}{res}{space 2} .1002526{col 26}{space 2} .1964497{col 37}{space 1}    0.51{col 46}{space 3}0.614{col 54}{space 4}-.3043431{col 67}{space 3} .5048482
 {txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {res}{txt}
 {com}. estat ic
@@ -133,7 +133,7 @@ Root Mean Squared Errors {c |}{col 30}{res}1.3100452
 {hline 13}{c TT}{hline 63}
        Model {c |}          N   ll(null)  ll(model)      df        AIC        BIC
 {hline 13}{c +}{hline 63}
-{ralign 12:.}{col 14}{c |}{res}{col 16}        27{col 28}-49.00935{col 39}-47.52116{col 50}     2{col 58} 99.04232{col 69}  101.634
+{ralign 12:.}{col 14}{c |}{res}{col 16}        27{col 28} -37.7783{col 39}-37.70472{col 50}     2{col 58} 79.40943{col 69} 82.00111
 {txt}{hline 13}{c BT}{hline 63}
 {p 0 6 0 77}Note: BIC uses N = number of observations. See {helpb bic_note:{bind:[R] BIC note}}.{p_end}
 
@@ -147,11 +147,11 @@ Root Mean Squared Errors {c |}{col 30}{res}1.3100452
 {res}
 {txt}{space 0}{space 0}{ralign 12:}{space 1}{c |}{space 1}{ralign 9:RMSE}{space 1}
 {space 0}{hline 13}{c   +}{hline 11}
-{space 0}{space 0}{ralign 12:est1}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.461298}}}{space 1}
-{space 0}{space 0}{ralign 12:est2}{space 1}{c |}{space 1}{ralign 9:{res:{sf:  1.71597}}}{space 1}
-{space 0}{space 0}{ralign 12:est3}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.072944}}}{space 1}
-{space 0}{space 0}{ralign 12:est4}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.598202}}}{space 1}
-{space 0}{space 0}{ralign 12:est5}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.601993}}}{space 1}
+{space 0}{space 0}{ralign 12:est1}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .9021655}}}{space 1}
+{space 0}{space 0}{ralign 12:est2}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .7459198}}}{space 1}
+{space 0}{space 0}{ralign 12:est3}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.167232}}}{space 1}
+{space 0}{space 0}{ralign 12:est4}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.243048}}}{space 1}
+{space 0}{space 0}{ralign 12:est5}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.326711}}}{space 1}
 
 {com}. scalar define k=10
 {txt}
@@ -160,7 +160,7 @@ Root Mean Squared Errors {c |}{col 30}{res}1.3100452
 {com}. scalar krmse2=(el(kMSE,1,1)/k)^.5
 {txt}
 {com}. scalar list krmse2
-{txt}    krmse2 = {res} 1.0654475
+{txt}    krmse2 = {res} .77704956
 {txt}
 {com}. matrix drop kMSE
 {txt}
@@ -173,9 +173,9 @@ Root Mean Squared Errors {c |}{col 30}{res}1.3100452
 {hline 25}{c TT}{hline 15}
          Method          {c |}{col 30} Value
 {hline 25}{c +}{hline 15}
-Root Mean Squared Errors {c |}{col 30}{res}1.4113265
-{txt}Mean Absolute Errors     {c |}{col 30}{res}1.0941938
-{txt}Pseudo-R2                {c |} {col 30}{res}.00465048
+Root Mean Squared Errors {c |}{col 30}{res}1.110311
+{txt}Mean Absolute Errors     {c |}{col 30}{res}.8857642
+{txt}Pseudo-R2                {c |} {col 30}{res}.30515038
 {txt}{hline 25}{c BT}{hline 15}
 
 {com}. scalar define loormse2=r(rmse)
@@ -184,19 +184,19 @@ Root Mean Squared Errors {c |}{col 30}{res}1.4113265
 . reg d.y l3d.y
 
 {txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        26
-{txt}{hline 13}{c +}{hline 34}   F(1, 24)        = {res}     5.99
-{txt}       Model {c |} {res} 9.60495036         1  9.60495036   {txt}Prob > F        ={res}    0.0221
-{txt}    Residual {c |} {res} 38.4718291        24  1.60299288   {txt}R-squared       ={res}    0.1998
-{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.1664
-{txt}       Total {c |} {res} 48.0767794        25  1.92307118   {txt}Root MSE        =   {res} 1.2661
+{txt}{hline 13}{c +}{hline 34}   F(1, 24)        = {res}     0.09
+{txt}       Model {c |} {res} .100885437         1  .100885437   {txt}Prob > F        ={res}    0.7619
+{txt}    Residual {c |} {res}  25.778986        24  1.07412442   {txt}R-squared       ={res}    0.0039
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}   -0.0376
+{txt}       Total {c |} {res} 25.8798714        25  1.03519486   {txt}Root MSE        =   {res} 1.0364
 
 {txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {col 1}         D.y{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
 {hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {space 11}y {c |}
-{space 8}L3D. {c |}{col 14}{res}{space 2} .4218312{col 26}{space 2} .1723284{col 37}{space 1}    2.45{col 46}{space 3}0.022{col 54}{space 4} .0661628{col 67}{space 3} .7774995
+{space 8}L3D. {c |}{col 14}{res}{space 2} .0592101{col 26}{space 2} .1932007{col 37}{space 1}    0.31{col 46}{space 3}0.762{col 54}{space 4}-.3395366{col 67}{space 3} .4579567
 {txt}{space 12} {c |}
-{space 7}_cons {c |}{col 14}{res}{space 2}-.0993333{col 26}{space 2}  .248617{col 37}{space 1}   -0.40{col 46}{space 3}0.693{col 54}{space 4}-.6124535{col 67}{space 3} .4137869
+{space 7}_cons {c |}{col 14}{res}{space 2} .0747593{col 26}{space 2} .2050307{col 37}{space 1}    0.36{col 46}{space 3}0.719{col 54}{space 4}-.3484032{col 67}{space 3} .4979218
 {txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {res}{txt}
 {com}. estat ic
@@ -206,7 +206,7 @@ Root Mean Squared Errors {c |}{col 30}{res}1.4113265
 {hline 13}{c TT}{hline 63}
        Model {c |}          N   ll(null)  ll(model)      df        AIC        BIC
 {hline 13}{c +}{hline 63}
-{ralign 12:.}{col 14}{c |}{res}{col 16}        26{col 28}-44.88354{col 39}-41.98619{col 50}     2{col 58} 87.97238{col 69} 90.48857
+{ralign 12:.}{col 14}{c |}{res}{col 16}        26{col 28} -36.8322{col 39}-36.78142{col 50}     2{col 58} 77.56284{col 69} 80.07904
 {txt}{hline 13}{c BT}{hline 63}
 {p 0 6 0 77}Note: BIC uses N = number of observations. See {helpb bic_note:{bind:[R] BIC note}}.{p_end}
 
@@ -220,11 +220,11 @@ Root Mean Squared Errors {c |}{col 30}{res}1.4113265
 {res}
 {txt}{space 0}{space 0}{ralign 12:}{space 1}{c |}{space 1}{ralign 9:RMSE}{space 1}
 {space 0}{hline 13}{c   +}{hline 11}
-{space 0}{space 0}{ralign 12:est1}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.066417}}}{space 1}
-{space 0}{space 0}{ralign 12:est2}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.682052}}}{space 1}
-{space 0}{space 0}{ralign 12:est3}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .9296141}}}{space 1}
-{space 0}{space 0}{ralign 12:est4}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.515601}}}{space 1}
-{space 0}{space 0}{ralign 12:est5}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .6957141}}}{space 1}
+{space 0}{space 0}{ralign 12:est1}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.260278}}}{space 1}
+{space 0}{space 0}{ralign 12:est2}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .5783534}}}{space 1}
+{space 0}{space 0}{ralign 12:est3}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .4936832}}}{space 1}
+{space 0}{space 0}{ralign 12:est4}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.409555}}}{space 1}
+{space 0}{space 0}{ralign 12:est5}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.043313}}}{space 1}
 
 {com}. scalar define k=10
 {txt}
@@ -233,7 +233,7 @@ Root Mean Squared Errors {c |}{col 30}{res}1.4113265
 {com}. scalar krmse3=(el(kMSE,1,1)/k)^.5
 {txt}
 {com}. scalar list krmse3
-{txt}    krmse3 = {res} .87245586
+{txt}    krmse3 = {res} .72400711
 {txt}
 {com}. matrix drop kMSE
 {txt}
@@ -246,9 +246,9 @@ Root Mean Squared Errors {c |}{col 30}{res}1.4113265
 {hline 25}{c TT}{hline 15}
          Method          {c |}{col 30} Value
 {hline 25}{c +}{hline 15}
-Root Mean Squared Errors {c |}{col 30}{res}1.3744629
-{txt}Mean Absolute Errors     {c |}{col 30}{res}1.0710599
-{txt}Pseudo-R2                {c |} {col 30}{res}.00021361
+Root Mean Squared Errors {c |}{col 30}{res}1.1233063
+{txt}Mean Absolute Errors     {c |}{col 30}{res}.89965294
+{txt}Pseudo-R2                {c |} {col 30}{res}.59352903
 {txt}{hline 25}{c BT}{hline 15}
 
 {com}. scalar define loormse3=r(rmse)
@@ -257,20 +257,20 @@ Root Mean Squared Errors {c |}{col 30}{res}1.3744629
 . reg d.y l1d.y l2d.y
 
 {txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        27
-{txt}{hline 13}{c +}{hline 34}   F(2, 24)        = {res}    10.46
-{txt}       Model {c |} {res} 27.7759273         2  13.8879637   {txt}Prob > F        ={res}    0.0005
-{txt}    Residual {c |} {res}  31.861421        24  1.32755921   {txt}R-squared       ={res}    0.4657
-{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.4212
-{txt}       Total {c |} {res} 59.6373483        26  2.29374417   {txt}Root MSE        =   {res} 1.1522
+{txt}{hline 13}{c +}{hline 34}   F(2, 24)        = {res}     4.75
+{txt}       Model {c |} {res} 7.35816653         2  3.67908326   {txt}Prob > F        ={res}    0.0183
+{txt}    Residual {c |} {res} 18.5965319        24  .774855494   {txt}R-squared       ={res}    0.2835
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.2238
+{txt}       Total {c |} {res} 25.9546984        26   .99825763   {txt}Root MSE        =   {res} .88026
 
 {txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {col 1}         D.y{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
 {hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {space 11}y {c |}
-{space 9}LD. {c |}{col 14}{res}{space 2}-.6531086{col 26}{space 2} .1620979{col 37}{space 1}   -4.03{col 46}{space 3}0.000{col 54}{space 4}-.9876622{col 67}{space 3}-.3185551
-{txt}{space 8}L2D. {c |}{col 14}{res}{space 2}-.5665481{col 26}{space 2} .1580495{col 37}{space 1}   -3.58{col 46}{space 3}0.001{col 54}{space 4}-.8927462{col 67}{space 3}  -.24035
+{space 9}LD. {c |}{col 14}{res}{space 2}-.5821105{col 26}{space 2} .1907371{col 37}{space 1}   -3.05{col 46}{space 3}0.005{col 54}{space 4}-.9757726{col 67}{space 3}-.1884485
+{txt}{space 8}L2D. {c |}{col 14}{res}{space 2}-.3293629{col 26}{space 2} .1823834{col 37}{space 1}   -1.81{col 46}{space 3}0.083{col 54}{space 4}-.7057837{col 67}{space 3}  .047058
 {txt}{space 12} {c |}
-{space 7}_cons {c |}{col 14}{res}{space 2} .0568892{col 26}{space 2} .2218344{col 37}{space 1}    0.26{col 46}{space 3}0.800{col 54}{space 4}-.4009545{col 67}{space 3} .5147329
+{space 7}_cons {c |}{col 14}{res}{space 2} .1501327{col 26}{space 2} .1709626{col 37}{space 1}    0.88{col 46}{space 3}0.389{col 54}{space 4}-.2027167{col 67}{space 3}  .502982
 {txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {res}{txt}
 {com}. estat ic
@@ -280,7 +280,7 @@ Root Mean Squared Errors {c |}{col 30}{res}1.3744629
 {hline 13}{c TT}{hline 63}
        Model {c |}          N   ll(null)  ll(model)      df        AIC        BIC
 {hline 13}{c +}{hline 63}
-{ralign 12:.}{col 14}{c |}{res}{col 16}        27{col 28}-49.00935{col 39}-40.54639{col 50}     3{col 58} 87.09277{col 69} 90.98029
+{ralign 12:.}{col 14}{c |}{res}{col 16}        27{col 28} -37.7783{col 39}-33.27771{col 50}     3{col 58} 72.55541{col 69} 76.44292
 {txt}{hline 13}{c BT}{hline 63}
 {p 0 6 0 77}Note: BIC uses N = number of observations. See {helpb bic_note:{bind:[R] BIC note}}.{p_end}
 
@@ -294,11 +294,11 @@ Root Mean Squared Errors {c |}{col 30}{res}1.3744629
 {res}
 {txt}{space 0}{space 0}{ralign 12:}{space 1}{c |}{space 1}{ralign 9:RMSE}{space 1}
 {space 0}{hline 13}{c   +}{hline 11}
-{space 0}{space 0}{ralign 12:est1}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.219388}}}{space 1}
-{space 0}{space 0}{ralign 12:est2}{space 1}{c |}{space 1}{ralign 9:{res:{sf:  1.61235}}}{space 1}
-{space 0}{space 0}{ralign 12:est3}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.364884}}}{space 1}
-{space 0}{space 0}{ralign 12:est4}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.499326}}}{space 1}
-{space 0}{space 0}{ralign 12:est5}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .5852968}}}{space 1}
+{space 0}{space 0}{ralign 12:est1}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .2755585}}}{space 1}
+{space 0}{space 0}{ralign 12:est2}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.280924}}}{space 1}
+{space 0}{space 0}{ralign 12:est3}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .8959287}}}{space 1}
+{space 0}{space 0}{ralign 12:est4}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .8905425}}}{space 1}
+{space 0}{space 0}{ralign 12:est5}{space 1}{c |}{space 1}{ralign 9:{res:{sf:  .782406}}}{space 1}
 
 {com}. scalar define k=10
 {txt}
@@ -307,7 +307,7 @@ Root Mean Squared Errors {c |}{col 30}{res}1.3744629
 {com}. scalar krmse12=(el(kMSE,1,1)/k)^.5
 {txt}
 {com}. scalar list krmse12
-{txt}   krmse12 = {res} .92412326
+{txt}   krmse12 = {res} .62646722
 {txt}
 {com}. matrix drop kMSE
 {txt}
@@ -320,9 +320,9 @@ Root Mean Squared Errors {c |}{col 30}{res}1.3744629
 {hline 25}{c TT}{hline 15}
          Method          {c |}{col 30} Value
 {hline 25}{c +}{hline 15}
-Root Mean Squared Errors {c |}{col 30}{res}1.2240304
-{txt}Mean Absolute Errors     {c |}{col 30}{res}1.003742
-{txt}Pseudo-R2                {c |} {col 30}{res}.20895142
+Root Mean Squared Errors {c |}{col 30}{res}.97005343
+{txt}Mean Absolute Errors     {c |}{col 30}{res}.76316726
+{txt}Pseudo-R2                {c |} {col 30}{res}.13999295
 {txt}{hline 25}{c BT}{hline 15}
 
 {com}. scalar define loormse12=r(rmse)
@@ -331,20 +331,20 @@ Root Mean Squared Errors {c |}{col 30}{res}1.2240304
 . reg d.y l1d.y l3d.y
 
 {txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        26
-{txt}{hline 13}{c +}{hline 34}   F(2, 23)        = {res}     4.74
-{txt}       Model {c |} {res} 14.0249497         2  7.01247487   {txt}Prob > F        ={res}    0.0189
-{txt}    Residual {c |} {res} 34.0518297        23  1.48051433   {txt}R-squared       ={res}    0.2917
-{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.2301
-{txt}       Total {c |} {res} 48.0767794        25  1.92307118   {txt}Root MSE        =   {res} 1.2168
+{txt}{hline 13}{c +}{hline 34}   F(2, 23)        = {res}     2.64
+{txt}       Model {c |} {res} 4.83662497         2  2.41831248   {txt}Prob > F        ={res}    0.0926
+{txt}    Residual {c |} {res} 21.0432464        23  .914923758   {txt}R-squared       ={res}    0.1869
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.1162
+{txt}       Total {c |} {res} 25.8798714        25  1.03519486   {txt}Root MSE        =   {res} .95652
 
 {txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {col 1}         D.y{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
 {hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {space 11}y {c |}
-{space 9}LD. {c |}{col 14}{res}{space 2}-.2895413{col 26}{space 2} .1675736{col 37}{space 1}   -1.73{col 46}{space 3}0.097{col 54}{space 4}-.6361938{col 67}{space 3} .0571112
-{txt}{space 8}L3D. {c |}{col 14}{res}{space 2} .3184413{col 26}{space 2} .1760925{col 37}{space 1}    1.81{col 46}{space 3}0.084{col 54}{space 4}-.0458337{col 67}{space 3} .6827164
+{space 9}LD. {c |}{col 14}{res}{space 2}-.4285231{col 26}{space 2} .1883531{col 37}{space 1}   -2.28{col 46}{space 3}0.033{col 54}{space 4}-.8181613{col 67}{space 3} -.038885
+{txt}{space 8}L3D. {c |}{col 14}{res}{space 2} .0320856{col 26}{space 2} .1787074{col 37}{space 1}    0.18{col 46}{space 3}0.859{col 54}{space 4}-.3375988{col 67}{space 3}   .40177
 {txt}{space 12} {c |}
-{space 7}_cons {c |}{col 14}{res}{space 2}-.0764919{col 26}{space 2} .2392958{col 37}{space 1}   -0.32{col 46}{space 3}0.752{col 54}{space 4}-.5715129{col 67}{space 3} .4185291
+{space 7}_cons {c |}{col 14}{res}{space 2} .1149156{col 26}{space 2} .1900488{col 37}{space 1}    0.60{col 46}{space 3}0.551{col 54}{space 4}-.2782303{col 67}{space 3} .5080615
 {txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {res}{txt}
 {com}. estat ic
@@ -354,7 +354,7 @@ Root Mean Squared Errors {c |}{col 30}{res}1.2240304
 {hline 13}{c TT}{hline 63}
        Model {c |}          N   ll(null)  ll(model)      df        AIC        BIC
 {hline 13}{c +}{hline 63}
-{ralign 12:.}{col 14}{c |}{res}{col 16}        26{col 28}-44.88354{col 39}-40.39964{col 50}     3{col 58} 86.79927{col 69} 90.57356
+{ralign 12:.}{col 14}{c |}{res}{col 16}        26{col 28} -36.8322{col 39}-34.14268{col 50}     3{col 58} 74.28537{col 69} 78.05965
 {txt}{hline 13}{c BT}{hline 63}
 {p 0 6 0 77}Note: BIC uses N = number of observations. See {helpb bic_note:{bind:[R] BIC note}}.{p_end}
 
@@ -368,11 +368,11 @@ Root Mean Squared Errors {c |}{col 30}{res}1.2240304
 {res}
 {txt}{space 0}{space 0}{ralign 12:}{space 1}{c |}{space 1}{ralign 9:RMSE}{space 1}
 {space 0}{hline 13}{c   +}{hline 11}
-{space 0}{space 0}{ralign 12:est1}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.104078}}}{space 1}
-{space 0}{space 0}{ralign 12:est2}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.111889}}}{space 1}
-{space 0}{space 0}{ralign 12:est3}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.035368}}}{space 1}
-{space 0}{space 0}{ralign 12:est4}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.683677}}}{space 1}
-{space 0}{space 0}{ralign 12:est5}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.393027}}}{space 1}
+{space 0}{space 0}{ralign 12:est1}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .8978038}}}{space 1}
+{space 0}{space 0}{ralign 12:est2}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .7710074}}}{space 1}
+{space 0}{space 0}{ralign 12:est3}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.453003}}}{space 1}
+{space 0}{space 0}{ralign 12:est4}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .9490036}}}{space 1}
+{space 0}{space 0}{ralign 12:est5}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .5381048}}}{space 1}
 
 {com}. scalar define k=10
 {txt}
@@ -381,7 +381,7 @@ Root Mean Squared Errors {c |}{col 30}{res}1.2240304
 {com}. scalar krmse13=(el(kMSE,1,1)/k)^.5
 {txt}
 {com}. scalar list krmse13
-{txt}   krmse13 = {res} .91118392
+{txt}   krmse13 = {res} .68570296
 {txt}
 {com}. matrix drop kMSE
 {txt}
@@ -394,9 +394,9 @@ Root Mean Squared Errors {c |}{col 30}{res}1.2240304
 {hline 25}{c TT}{hline 15}
          Method          {c |}{col 30} Value
 {hline 25}{c +}{hline 15}
-Root Mean Squared Errors {c |}{col 30}{res}1.3544357
-{txt}Mean Absolute Errors     {c |}{col 30}{res}1.0365483
-{txt}Pseudo-R2                {c |} {col 30}{res}.01736833
+Root Mean Squared Errors {c |}{col 30}{res}1.0320119
+{txt}Mean Absolute Errors     {c |}{col 30}{res}.83683368
+{txt}Pseudo-R2                {c |} {col 30}{res}.07234527
 {txt}{hline 25}{c BT}{hline 15}
 
 {com}. scalar define loormse13=r(rmse)
@@ -405,20 +405,20 @@ Root Mean Squared Errors {c |}{col 30}{res}1.3544357
 . reg d.y       l2d.y l3d.y
 
 {txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        26
-{txt}{hline 13}{c +}{hline 34}   F(2, 23)        = {res}     2.98
-{txt}       Model {c |} {res} 9.88321808         2  4.94160904   {txt}Prob > F        ={res}    0.0709
-{txt}    Residual {c |} {res} 38.1935613        23  1.66058962   {txt}R-squared       ={res}    0.2056
-{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.1365
-{txt}       Total {c |} {res} 48.0767794        25  1.92307118   {txt}Root MSE        =   {res} 1.2886
+{txt}{hline 13}{c +}{hline 34}   F(2, 23)        = {res}     0.11
+{txt}       Model {c |} {res} .237741921         2  .118870961   {txt}Prob > F        ={res}    0.8993
+{txt}    Residual {c |} {res} 25.6421295        23   1.1148752   {txt}R-squared       ={res}    0.0092
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}   -0.0770
+{txt}       Total {c |} {res} 25.8798714        25  1.03519486   {txt}Root MSE        =   {res} 1.0559
 
 {txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {col 1}         D.y{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
 {hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {space 11}y {c |}
-{space 8}L2D. {c |}{col 14}{res}{space 2}-.0751178{col 26}{space 2} .1835027{col 37}{space 1}   -0.41{col 46}{space 3}0.686{col 54}{space 4}-.4547221{col 67}{space 3} .3044865
-{txt}{space 8}L3D. {c |}{col 14}{res}{space 2} .3885463{col 26}{space 2} .1933275{col 37}{space 1}    2.01{col 46}{space 3}0.056{col 54}{space 4} -.011382{col 67}{space 3} .7884746
+{space 8}L2D. {c |}{col 14}{res}{space 2}-.0805558{col 26}{space 2} .2299203{col 37}{space 1}   -0.35{col 46}{space 3}0.729{col 54}{space 4}-.5561822{col 67}{space 3} .3950705
+{txt}{space 8}L3D. {c |}{col 14}{res}{space 2} .0218562{col 26}{space 2} .2238511{col 37}{space 1}    0.10{col 46}{space 3}0.923{col 54}{space 4} -.441215{col 67}{space 3} .4849274
 {txt}{space 12} {c |}
-{space 7}_cons {c |}{col 14}{res}{space 2}-.0949753{col 26}{space 2} .2532679{col 37}{space 1}   -0.37{col 46}{space 3}0.711{col 54}{space 4}-.6188999{col 67}{space 3} .4289493
+{space 7}_cons {c |}{col 14}{res}{space 2} .0832065{col 26}{space 2} .2102705{col 37}{space 1}    0.40{col 46}{space 3}0.696{col 54}{space 4}-.3517713{col 67}{space 3} .5181842
 {txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {res}{txt}
 {com}. estat ic
@@ -428,7 +428,7 @@ Root Mean Squared Errors {c |}{col 30}{res}1.3544357
 {hline 13}{c TT}{hline 63}
        Model {c |}          N   ll(null)  ll(model)      df        AIC        BIC
 {hline 13}{c +}{hline 63}
-{ralign 12:.}{col 14}{c |}{res}{col 16}        26{col 28}-44.88354{col 39}-41.89182{col 50}     3{col 58} 89.78363{col 69} 93.55792
+{ralign 12:.}{col 14}{c |}{res}{col 16}        26{col 28} -36.8322{col 39}-36.71222{col 50}     3{col 58} 79.42445{col 69} 83.19874
 {txt}{hline 13}{c BT}{hline 63}
 {p 0 6 0 77}Note: BIC uses N = number of observations. See {helpb bic_note:{bind:[R] BIC note}}.{p_end}
 
@@ -442,11 +442,11 @@ Root Mean Squared Errors {c |}{col 30}{res}1.3544357
 {res}
 {txt}{space 0}{space 0}{ralign 12:}{space 1}{c |}{space 1}{ralign 9:RMSE}{space 1}
 {space 0}{hline 13}{c   +}{hline 11}
-{space 0}{space 0}{ralign 12:est1}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.603257}}}{space 1}
-{space 0}{space 0}{ralign 12:est2}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.928031}}}{space 1}
-{space 0}{space 0}{ralign 12:est3}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .6495191}}}{space 1}
-{space 0}{space 0}{ralign 12:est4}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.160426}}}{space 1}
-{space 0}{space 0}{ralign 12:est5}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 2.084854}}}{space 1}
+{space 0}{space 0}{ralign 12:est1}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.202326}}}{space 1}
+{space 0}{space 0}{ralign 12:est2}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.176127}}}{space 1}
+{space 0}{space 0}{ralign 12:est3}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .7737328}}}{space 1}
+{space 0}{space 0}{ralign 12:est4}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.260123}}}{space 1}
+{space 0}{space 0}{ralign 12:est5}{space 1}{c |}{space 1}{ralign 9:{res:{sf:  1.24396}}}{space 1}
 
 {com}. scalar define k=10
 {txt}
@@ -455,7 +455,7 @@ Root Mean Squared Errors {c |}{col 30}{res}1.3544357
 {com}. scalar krmse23=(el(kMSE,1,1)/k)^.5
 {txt}
 {com}. scalar list krmse23
-{txt}   krmse23 = {res} 1.1136793
+{txt}   krmse23 = {res} .81011538
 {txt}
 {com}. matrix drop kMSE
 {txt}
@@ -468,9 +468,9 @@ Root Mean Squared Errors {c |}{col 30}{res}1.3544357
 {hline 25}{c TT}{hline 15}
          Method          {c |}{col 30} Value
 {hline 25}{c +}{hline 15}
-Root Mean Squared Errors {c |}{col 30}{res}1.4355925
-{txt}Mean Absolute Errors     {c |}{col 30}{res}1.1188587
-{txt}Pseudo-R2                {c |} {col 30}{res}1.947e-06
+Root Mean Squared Errors {c |}{col 30}{res}1.1743793
+{txt}Mean Absolute Errors     {c |}{col 30}{res}.93166705
+{txt}Pseudo-R2                {c |} {col 30}{res}.6235484
 {txt}{hline 25}{c BT}{hline 15}
 
 {com}. scalar define loormse23=r(rmse)
@@ -479,21 +479,21 @@ Root Mean Squared Errors {c |}{col 30}{res}1.4355925
 . reg d.y l1d.y l2d.y l3d.y
 
 {txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        26
-{txt}{hline 13}{c +}{hline 34}   F(3, 22)        = {res}     5.53
-{txt}       Model {c |} {res} 20.6739458         3  6.89131525   {txt}Prob > F        ={res}    0.0055
-{txt}    Residual {c |} {res} 27.4028337        22  1.24558335   {txt}R-squared       ={res}    0.4300
-{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.3523
-{txt}       Total {c |} {res} 48.0767794        25  1.92307118   {txt}Root MSE        =   {res} 1.1161
+{txt}{hline 13}{c +}{hline 34}   F(3, 22)        = {res}     3.31
+{txt}       Model {c |} {res} 8.04353552         3  2.68117851   {txt}Prob > F        ={res}    0.0390
+{txt}    Residual {c |} {res} 17.8363359        22   .81074254   {txt}R-squared       ={res}    0.3108
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.2168
+{txt}       Total {c |} {res} 25.8798714        25  1.03519486   {txt}Root MSE        =   {res} .90041
 
 {txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {col 1}         D.y{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
 {hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {space 11}y {c |}
-{space 9}LD. {c |}{col 14}{res}{space 2}-.6057838{col 26}{space 2} .2058158{col 37}{space 1}   -2.94{col 46}{space 3}0.008{col 54}{space 4} -1.03262{col 67}{space 3} -.178948
-{txt}{space 8}L2D. {c |}{col 14}{res}{space 2}-.4916798{col 26}{space 2} .2128093{col 37}{space 1}   -2.31{col 46}{space 3}0.031{col 54}{space 4}-.9330193{col 67}{space 3}-.0503402
-{txt}{space 8}L3D. {c |}{col 14}{res}{space 2}-.0123474{col 26}{space 2} .2158388{col 37}{space 1}   -0.06{col 46}{space 3}0.955{col 54}{space 4}-.4599696{col 67}{space 3} .4352748
+{space 9}LD. {c |}{col 14}{res}{space 2}-.6480901{col 26}{space 2} .2088663{col 37}{space 1}   -3.10{col 46}{space 3}0.005{col 54}{space 4}-1.081252{col 67}{space 3}-.2149279
+{txt}{space 8}L2D. {c |}{col 14}{res}{space 2}-.4593609{col 26}{space 2} .2309682{col 37}{space 1}   -1.99{col 46}{space 3}0.059{col 54}{space 4}-.9383596{col 67}{space 3} .0196377
+{txt}{space 8}L3D. {c |}{col 14}{res}{space 2}-.1948192{col 26}{space 2} .2032633{col 37}{space 1}   -0.96{col 46}{space 3}0.348{col 54}{space 4}-.6163615{col 67}{space 3}  .226723
 {txt}{space 12} {c |}
-{space 7}_cons {c |}{col 14}{res}{space 2}-.0230191{col 26}{space 2}  .220707{col 37}{space 1}   -0.10{col 46}{space 3}0.918{col 54}{space 4}-.4807375{col 67}{space 3} .4346993
+{space 7}_cons {c |}{col 14}{res}{space 2}   .18366{col 26}{space 2}   .18221{col 37}{space 1}    1.01{col 46}{space 3}0.324{col 54}{space 4}-.1942205{col 67}{space 3} .5615405
 {txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {res}{txt}
 {com}. estat ic
@@ -503,7 +503,7 @@ Root Mean Squared Errors {c |}{col 30}{res}1.4355925
 {hline 13}{c TT}{hline 63}
        Model {c |}          N   ll(null)  ll(model)      df        AIC        BIC
 {hline 13}{c +}{hline 63}
-{ralign 12:.}{col 14}{c |}{res}{col 16}        26{col 28}-44.88354{col 39}-37.57555{col 50}     4{col 58}  83.1511{col 69} 88.18349
+{ralign 12:.}{col 14}{c |}{res}{col 16}        26{col 28} -36.8322{col 39}-31.99324{col 50}     4{col 58} 71.98647{col 69} 77.01886
 {txt}{hline 13}{c BT}{hline 63}
 {p 0 6 0 77}Note: BIC uses N = number of observations. See {helpb bic_note:{bind:[R] BIC note}}.{p_end}
 
@@ -517,11 +517,11 @@ Root Mean Squared Errors {c |}{col 30}{res}1.4355925
 {res}
 {txt}{space 0}{space 0}{ralign 12:}{space 1}{c |}{space 1}{ralign 9:RMSE}{space 1}
 {space 0}{hline 13}{c   +}{hline 11}
-{space 0}{space 0}{ralign 12:est1}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.082888}}}{space 1}
-{space 0}{space 0}{ralign 12:est2}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.443814}}}{space 1}
-{space 0}{space 0}{ralign 12:est3}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.336513}}}{space 1}
-{space 0}{space 0}{ralign 12:est4}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .9916596}}}{space 1}
-{space 0}{space 0}{ralign 12:est5}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.851465}}}{space 1}
+{space 0}{space 0}{ralign 12:est1}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.277871}}}{space 1}
+{space 0}{space 0}{ralign 12:est2}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .4126419}}}{space 1}
+{space 0}{space 0}{ralign 12:est3}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.187153}}}{space 1}
+{space 0}{space 0}{ralign 12:est4}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .7160594}}}{space 1}
+{space 0}{space 0}{ralign 12:est5}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .7569776}}}{space 1}
 
 {com}. scalar define k=10
 {txt}
@@ -530,7 +530,7 @@ Root Mean Squared Errors {c |}{col 30}{res}1.4355925
 {com}. scalar krmse123=(el(kMSE,1,1)/k)^.5
 {txt}
 {com}. scalar list krmse123
-{txt}  krmse123 = {res} .97235917
+{txt}  krmse123 = {res} .65561544
 {txt}
 {com}. matrix drop kMSE
 {txt}
@@ -543,9 +543,9 @@ Root Mean Squared Errors {c |}{col 30}{res}1.4355925
 {hline 25}{c TT}{hline 15}
          Method          {c |}{col 30} Value
 {hline 25}{c +}{hline 15}
-Root Mean Squared Errors {c |}{col 30}{res}1.299231
-{txt}Mean Absolute Errors     {c |}{col 30}{res}1.0818027
-{txt}Pseudo-R2                {c |} {col 30}{res}.1153209
+Root Mean Squared Errors {c |}{col 30}{res}1.0025941
+{txt}Mean Absolute Errors     {c |}{col 30}{res}.78300616
+{txt}Pseudo-R2                {c |} {col 30}{res}.14309964
 {txt}{hline 25}{c BT}{hline 15}
 
 {com}. scalar define loormse123=r(rmse)
@@ -577,13 +577,13 @@ Root Mean Squared Errors {c |}{col 30}{res}1.299231
 {res}
 {txt}FIT[7,5]
                   df        AIC        BIC  K(10)RMSE    LOORMSE
-  Model 1 {res}         2  100.03113  102.69554  1.0771482  1.3100452
-{txt}  Model 2 {res}         2  99.042323    101.634  1.0654475  1.4113265
-{txt}  Model 3 {res}         2  87.972377   90.48857  .87245586  1.3744629
-{txt} Model 12 {res}         3  87.092775  90.980285  .92412326  1.2240304
-{txt} Model 13 {res}         3  86.799272  90.573561  .91118392  1.3544357
-{txt} Model 23 {res}         3  89.783634  93.557924  1.1136793  1.4355925
-{txt}Model 123 {res}         4  83.151101  88.183487  .97235917   1.299231
+  Model 1 {res}         2  75.880218  78.544627  .63419929  .95384454
+{txt}  Model 2 {res}         2  79.409433  82.001106  .77704956   1.110311
+{txt}  Model 3 {res}         2  77.562845  80.079038  .72400711  1.1233063
+{txt} Model 12 {res}         3  72.555413  76.442924  .62646722  .97005343
+{txt} Model 13 {res}         3  74.285365  78.059655  .68570296  1.0320119
+{txt} Model 23 {res}         3  79.424447  83.198737  .81011538  1.1743793
+{txt}Model 123 {res}         4  71.986474  77.018861  .65561544  1.0025941
 {reset}
 {com}. 
 . *1b
@@ -616,19 +616,19 @@ now 300
 . reg d.y l1d.y
 
 {txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       298
-{txt}{hline 13}{c +}{hline 34}   F(1, 296)       = {res}    36.18
-{txt}       Model {c |} {res} 46.8252707         1  46.8252707   {txt}Prob > F        ={res}    0.0000
-{txt}    Residual {c |} {res}  383.04981       296   1.2940872   {txt}R-squared       ={res}    0.1089
-{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.1059
-{txt}       Total {c |} {res} 429.875081       297  1.44739084   {txt}Root MSE        =   {res} 1.1376
+{txt}{hline 13}{c +}{hline 34}   F(1, 296)       = {res}    30.29
+{txt}       Model {c |} {res} 40.2287435         1  40.2287435   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res}  393.11806       296  1.32810155   {txt}R-squared       ={res}    0.0928
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0898
+{txt}       Total {c |} {res} 433.346804       297  1.45908015   {txt}Root MSE        =   {res} 1.1524
 
 {txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {col 1}         D.y{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
 {hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {space 11}y {c |}
-{space 9}LD. {c |}{col 14}{res}{space 2}-.3307592{col 26}{space 2} .0549862{col 37}{space 1}   -6.02{col 46}{space 3}0.000{col 54}{space 4}-.4389726{col 67}{space 3}-.2225458
+{space 9}LD. {c |}{col 14}{res}{space 2}-.3047742{col 26}{space 2} .0553765{col 37}{space 1}   -5.50{col 46}{space 3}0.000{col 54}{space 4}-.4137557{col 67}{space 3}-.1957926
 {txt}{space 12} {c |}
-{space 7}_cons {c |}{col 14}{res}{space 2} .0064346{col 26}{space 2} .0659013{col 37}{space 1}    0.10{col 46}{space 3}0.922{col 54}{space 4}-.1232598{col 67}{space 3}  .136129
+{space 7}_cons {c |}{col 14}{res}{space 2} .0055929{col 26}{space 2} .0667596{col 37}{space 1}    0.08{col 46}{space 3}0.933{col 54}{space 4}-.1257907{col 67}{space 3} .1369765
 {txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {res}{txt}
 {com}. *aic/bic
@@ -639,7 +639,7 @@ now 300
 {hline 13}{c TT}{hline 63}
        Model {c |}          N   ll(null)  ll(model)      df        AIC        BIC
 {hline 13}{c +}{hline 63}
-{ralign 12:.}{col 14}{c |}{res}{col 16}       298{col 28}-477.4375{col 39}-460.2533{col 50}     2{col 58} 924.5067{col 69} 931.9009
+{ralign 12:.}{col 14}{c |}{res}{col 16}       298{col 28} -478.636{col 39}-464.1191{col 50}     2{col 58} 932.2383{col 69} 939.6325
 {txt}{hline 13}{c BT}{hline 63}
 {p 0 6 0 77}Note: BIC uses N = number of observations. See {helpb bic_note:{bind:[R] BIC note}}.{p_end}
 
@@ -654,11 +654,11 @@ now 300
 {res}
 {txt}{space 0}{space 0}{ralign 12:}{space 1}{c |}{space 1}{ralign 9:RMSE}{space 1}
 {space 0}{hline 13}{c   +}{hline 11}
-{space 0}{space 0}{ralign 12:est1}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.094534}}}{space 1}
-{space 0}{space 0}{ralign 12:est2}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .9855699}}}{space 1}
-{space 0}{space 0}{ralign 12:est3}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.166015}}}{space 1}
-{space 0}{space 0}{ralign 12:est4}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.241781}}}{space 1}
-{space 0}{space 0}{ralign 12:est5}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.219975}}}{space 1}
+{space 0}{space 0}{ralign 12:est1}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.070865}}}{space 1}
+{space 0}{space 0}{ralign 12:est2}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.307489}}}{space 1}
+{space 0}{space 0}{ralign 12:est3}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.076643}}}{space 1}
+{space 0}{space 0}{ralign 12:est4}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.144266}}}{space 1}
+{space 0}{space 0}{ralign 12:est5}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.153222}}}{space 1}
 
 {com}. scalar define k=10
 {txt}
@@ -667,7 +667,7 @@ now 300
 {com}. scalar krmse1=(el(kMSE,1,1)/k)^.5
 {txt}
 {com}. scalar list krmse1
-{txt}    krmse1 = {res} .80989532
+{txt}    krmse1 = {res} .81576385
 {txt}
 {com}. matrix drop kMSE
 {txt}
@@ -681,9 +681,9 @@ now 300
 {hline 25}{c TT}{hline 15}
          Method          {c |}{col 30} Value
 {hline 25}{c +}{hline 15}
-Root Mean Squared Errors {c |}{col 30}{res}1.1434785
-{txt}Mean Absolute Errors     {c |}{col 30}{res}.90230612
-{txt}Pseudo-R2                {c |} {col 30}{res}.09900363
+Root Mean Squared Errors {c |}{col 30}{res}1.1602627
+{txt}Mean Absolute Errors     {c |}{col 30}{res}.9370285
+{txt}Pseudo-R2                {c |} {col 30}{res}.08032407
 {txt}{hline 25}{c BT}{hline 15}
 
 {com}. scalar define loormse1=r(rmse)
@@ -692,19 +692,19 @@ Root Mean Squared Errors {c |}{col 30}{res}1.1434785
 . reg d.y l2d.y
 
 {txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       297
-{txt}{hline 13}{c +}{hline 34}   F(1, 295)       = {res}     9.81
-{txt}       Model {c |} {res} 13.8381255         1  13.8381255   {txt}Prob > F        ={res}    0.0019
-{txt}    Residual {c |} {res} 415.998273       295  1.41016364   {txt}R-squared       ={res}    0.0322
-{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0289
-{txt}       Total {c |} {res} 429.836399       296     1.45215   {txt}Root MSE        =   {res} 1.1875
+{txt}{hline 13}{c +}{hline 34}   F(1, 295)       = {res}    28.21
+{txt}       Model {c |} {res} 37.8014875         1  37.8014875   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 395.272758       295  1.33990765   {txt}R-squared       ={res}    0.0873
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0842
+{txt}       Total {c |} {res} 433.074246       296  1.46308867   {txt}Root MSE        =   {res} 1.1575
 
 {txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {col 1}         D.y{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
 {hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {space 11}y {c |}
-{space 8}L2D. {c |}{col 14}{res}{space 2}-.1798642{col 26}{space 2}  .057417{col 37}{space 1}   -3.13{col 46}{space 3}0.002{col 54}{space 4}-.2928631{col 67}{space 3}-.0668653
+{space 8}L2D. {c |}{col 14}{res}{space 2}-.2956623{col 26}{space 2} .0556646{col 37}{space 1}   -5.31{col 46}{space 3}0.000{col 54}{space 4}-.4052123{col 67}{space 3}-.1861123
 {txt}{space 12} {c |}
-{space 7}_cons {c |}{col 14}{res}{space 2} .0037256{col 26}{space 2} .0689082{col 37}{space 1}    0.05{col 46}{space 3}0.957{col 54}{space 4}-.1318884{col 67}{space 3} .1393395
+{space 7}_cons {c |}{col 14}{res}{space 2} .0080967{col 26}{space 2} .0671695{col 37}{space 1}    0.12{col 46}{space 3}0.904{col 54}{space 4}-.1240954{col 67}{space 3} .1402888
 {txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {res}{txt}
 {com}. estat ic
@@ -714,7 +714,7 @@ Root Mean Squared Errors {c |}{col 30}{res}1.1434785
 {hline 13}{c TT}{hline 63}
        Model {c |}          N   ll(null)  ll(model)      df        AIC        BIC
 {hline 13}{c +}{hline 63}
-{ralign 12:.}{col 14}{c |}{res}{col 16}       297{col 28}-476.3211{col 39}-471.4617{col 50}     2{col 58} 946.9233{col 69} 954.3108
+{ralign 12:.}{col 14}{c |}{res}{col 16}       297{col 28}-477.4355{col 39}-463.8726{col 50}     2{col 58} 931.7451{col 69} 939.1326
 {txt}{hline 13}{c BT}{hline 63}
 {p 0 6 0 77}Note: BIC uses N = number of observations. See {helpb bic_note:{bind:[R] BIC note}}.{p_end}
 
@@ -728,11 +728,11 @@ Root Mean Squared Errors {c |}{col 30}{res}1.1434785
 {res}
 {txt}{space 0}{space 0}{ralign 12:}{space 1}{c |}{space 1}{ralign 9:RMSE}{space 1}
 {space 0}{hline 13}{c   +}{hline 11}
-{space 0}{space 0}{ralign 12:est1}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.162501}}}{space 1}
-{space 0}{space 0}{ralign 12:est2}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.127178}}}{space 1}
-{space 0}{space 0}{ralign 12:est3}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.136588}}}{space 1}
-{space 0}{space 0}{ralign 12:est4}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.246382}}}{space 1}
-{space 0}{space 0}{ralign 12:est5}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.260984}}}{space 1}
+{space 0}{space 0}{ralign 12:est1}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.155929}}}{space 1}
+{space 0}{space 0}{ralign 12:est2}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.318321}}}{space 1}
+{space 0}{space 0}{ralign 12:est3}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.105786}}}{space 1}
+{space 0}{space 0}{ralign 12:est4}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.208012}}}{space 1}
+{space 0}{space 0}{ralign 12:est5}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.006752}}}{space 1}
 
 {com}. scalar define k=10
 {txt}
@@ -741,7 +741,7 @@ Root Mean Squared Errors {c |}{col 30}{res}1.1434785
 {com}. scalar krmse2=(el(kMSE,1,1)/k)^.5
 {txt}
 {com}. scalar list krmse2
-{txt}    krmse2 = {res} .84007861
+{txt}    krmse2 = {res} .82278473
 {txt}
 {com}. matrix drop kMSE
 {txt}
@@ -754,9 +754,9 @@ Root Mean Squared Errors {c |}{col 30}{res}1.1434785
 {hline 25}{c TT}{hline 15}
          Method          {c |}{col 30} Value
 {hline 25}{c +}{hline 15}
-Root Mean Squared Errors {c |}{col 30}{res}1.1846049
-{txt}Mean Absolute Errors     {c |}{col 30}{res}.94258712
-{txt}Pseudo-R2                {c |} {col 30}{res}.02374743
+Root Mean Squared Errors {c |}{col 30}{res}1.164344
+{txt}Mean Absolute Errors     {c |}{col 30}{res}.96184136
+{txt}Pseudo-R2                {c |} {col 30}{res}.07534286
 {txt}{hline 25}{c BT}{hline 15}
 
 {com}. scalar define loormse2=r(rmse)
@@ -765,19 +765,19 @@ Root Mean Squared Errors {c |}{col 30}{res}1.1846049
 . reg d.y l3d.y
 
 {txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       296
-{txt}{hline 13}{c +}{hline 34}   F(1, 294)       = {res}     4.84
-{txt}       Model {c |} {res}  6.9533564         1   6.9533564   {txt}Prob > F        ={res}    0.0286
-{txt}    Residual {c |} {res} 422.481069       294  1.43701044   {txt}R-squared       ={res}    0.0162
-{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0128
-{txt}       Total {c |} {res} 429.434425       295  1.45570992   {txt}Root MSE        =   {res} 1.1988
+{txt}{hline 13}{c +}{hline 34}   F(1, 294)       = {res}    14.20
+{txt}       Model {c |} {res} 19.9598466         1  19.9598466   {txt}Prob > F        ={res}    0.0002
+{txt}    Residual {c |} {res} 413.112855       294  1.40514577   {txt}R-squared       ={res}    0.0461
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0428
+{txt}       Total {c |} {res} 433.072702       295  1.46804306   {txt}Root MSE        =   {res} 1.1854
 
 {txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {col 1}         D.y{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
 {hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {space 11}y {c |}
-{space 8}L3D. {c |}{col 14}{res}{space 2}  .127862{col 26}{space 2} .0581265{col 37}{space 1}    2.20{col 46}{space 3}0.029{col 54}{space 4} .0134652{col 67}{space 3} .2422588
+{space 8}L3D. {c |}{col 14}{res}{space 2}  .214962{col 26}{space 2} .0570353{col 37}{space 1}    3.77{col 46}{space 3}0.000{col 54}{space 4} .1027128{col 67}{space 3} .3272113
 {txt}{space 12} {c |}
-{space 7}_cons {c |}{col 14}{res}{space 2}-.0007504{col 26}{space 2} .0696766{col 37}{space 1}   -0.01{col 46}{space 3}0.991{col 54}{space 4}-.1378786{col 67}{space 3} .1363778
+{space 7}_cons {c |}{col 14}{res}{space 2} .0037681{col 26}{space 2} .0689004{col 37}{space 1}    0.05{col 46}{space 3}0.956{col 54}{space 4}-.1318325{col 67}{space 3} .1393686
 {txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {res}{txt}
 {com}. estat ic
@@ -787,7 +787,7 @@ Root Mean Squared Errors {c |}{col 30}{res}1.1846049
 {hline 13}{c TT}{hline 63}
        Model {c |}          N   ll(null)  ll(model)      df        AIC        BIC
 {hline 13}{c +}{hline 63}
-{ralign 12:.}{col 14}{c |}{res}{col 16}       296{col 28} -475.078{col 39} -472.662{col 50}     2{col 58}  949.324{col 69} 956.7047
+{ralign 12:.}{col 14}{c |}{res}{col 16}       296{col 28}-476.3266{col 39}-469.3433{col 50}     2{col 58} 942.6866{col 69} 950.0673
 {txt}{hline 13}{c BT}{hline 63}
 {p 0 6 0 77}Note: BIC uses N = number of observations. See {helpb bic_note:{bind:[R] BIC note}}.{p_end}
 
@@ -801,11 +801,11 @@ Root Mean Squared Errors {c |}{col 30}{res}1.1846049
 {res}
 {txt}{space 0}{space 0}{ralign 12:}{space 1}{c |}{space 1}{ralign 9:RMSE}{space 1}
 {space 0}{hline 13}{c   +}{hline 11}
-{space 0}{space 0}{ralign 12:est1}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.246446}}}{space 1}
-{space 0}{space 0}{ralign 12:est2}{space 1}{c |}{space 1}{ralign 9:{res:{sf:  1.18287}}}{space 1}
-{space 0}{space 0}{ralign 12:est3}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.268704}}}{space 1}
-{space 0}{space 0}{ralign 12:est4}{space 1}{c |}{space 1}{ralign 9:{res:{sf:    1.197}}}{space 1}
-{space 0}{space 0}{ralign 12:est5}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.116089}}}{space 1}
+{space 0}{space 0}{ralign 12:est1}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.220885}}}{space 1}
+{space 0}{space 0}{ralign 12:est2}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.300472}}}{space 1}
+{space 0}{space 0}{ralign 12:est3}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.206425}}}{space 1}
+{space 0}{space 0}{ralign 12:est4}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.047378}}}{space 1}
+{space 0}{space 0}{ralign 12:est5}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.156072}}}{space 1}
 
 {com}. scalar define k=10
 {txt}
@@ -814,7 +814,7 @@ Root Mean Squared Errors {c |}{col 30}{res}1.1846049
 {com}. scalar krmse3=(el(kMSE,1,1)/k)^.5
 {txt}
 {com}. scalar list krmse3
-{txt}    krmse3 = {res} .85093375
+{txt}    krmse3 = {res} .84087751
 {txt}
 {com}. matrix drop kMSE
 {txt}
@@ -827,9 +827,9 @@ Root Mean Squared Errors {c |}{col 30}{res}1.1846049
 {hline 25}{c TT}{hline 15}
          Method          {c |}{col 30} Value
 {hline 25}{c +}{hline 15}
-Root Mean Squared Errors {c |}{col 30}{res}1.1939647
-{txt}Mean Absolute Errors     {c |}{col 30}{res}.94309875
-{txt}Pseudo-R2                {c |} {col 30}{res}.0076316
+Root Mean Squared Errors {c |}{col 30}{res}1.1927634
+{txt}Mean Absolute Errors     {c |}{col 30}{res}.97432674
+{txt}Pseudo-R2                {c |} {col 30}{res}.03508471
 {txt}{hline 25}{c BT}{hline 15}
 
 {com}. scalar define loormse3=r(rmse)
@@ -838,20 +838,20 @@ Root Mean Squared Errors {c |}{col 30}{res}1.1939647
 . reg d.y l1d.y l2d.y
 
 {txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       297
-{txt}{hline 13}{c +}{hline 34}   F(2, 294)       = {res}    37.38
-{txt}       Model {c |} {res} 87.1381638         2  43.5690819   {txt}Prob > F        ={res}    0.0000
-{txt}    Residual {c |} {res} 342.698235       294  1.16564025   {txt}R-squared       ={res}    0.2027
-{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.1973
-{txt}       Total {c |} {res} 429.836399       296     1.45215   {txt}Root MSE        =   {res} 1.0796
+{txt}{hline 13}{c +}{hline 34}   F(2, 294)       = {res}    51.48
+{txt}       Model {c |} {res}  112.32631         2   56.163155   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 320.747936       294  1.09097937   {txt}R-squared       ={res}    0.2594
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.2543
+{txt}       Total {c |} {res} 433.074246       296  1.46308867   {txt}Root MSE        =   {res} 1.0445
 
 {txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {col 1}         D.y{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
 {hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {space 11}y {c |}
-{space 9}LD. {c |}{col 14}{res}{space 2}-.4387437{col 26}{space 2} .0553275{col 37}{space 1}   -7.93{col 46}{space 3}0.000{col 54}{space 4}-.5476318{col 67}{space 3}-.3298555
-{txt}{space 8}L2D. {c |}{col 14}{res}{space 2}-.3241894{col 26}{space 2} .0552839{col 37}{space 1}   -5.86{col 46}{space 3}0.000{col 54}{space 4}-.4329916{col 67}{space 3}-.2153871
+{space 9}LD. {c |}{col 14}{res}{space 2}-.4357756{col 26}{space 2} .0527255{col 37}{space 1}   -8.26{col 46}{space 3}0.000{col 54}{space 4}-.5395429{col 67}{space 3}-.3320084
+{txt}{space 8}L2D. {c |}{col 14}{res}{space 2}-.4291487{col 26}{space 2} .0527612{col 37}{space 1}   -8.13{col 46}{space 3}0.000{col 54}{space 4}-.5329862{col 67}{space 3}-.3253111
 {txt}{space 12} {c |}
-{space 7}_cons {c |}{col 14}{res}{space 2} .0087586{col 26}{space 2} .0626528{col 37}{space 1}    0.14{col 46}{space 3}0.889{col 54}{space 4}-.1145464{col 67}{space 3} .1320635
+{space 7}_cons {c |}{col 14}{res}{space 2} .0117439{col 26}{space 2} .0606114{col 37}{space 1}    0.19{col 46}{space 3}0.846{col 54}{space 4}-.1075433{col 67}{space 3} .1310311
 {txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {res}{txt}
 {com}. estat ic
@@ -861,7 +861,7 @@ Root Mean Squared Errors {c |}{col 30}{res}1.1939647
 {hline 13}{c TT}{hline 63}
        Model {c |}          N   ll(null)  ll(model)      df        AIC        BIC
 {hline 13}{c +}{hline 63}
-{ralign 12:.}{col 14}{c |}{res}{col 16}       297{col 28}-476.3211{col 39}-442.6778{col 50}     3{col 58} 891.3556{col 69} 902.4368
+{ralign 12:.}{col 14}{c |}{res}{col 16}       297{col 28}-477.4355{col 39}-432.8479{col 50}     3{col 58} 871.6957{col 69} 882.7769
 {txt}{hline 13}{c BT}{hline 63}
 {p 0 6 0 77}Note: BIC uses N = number of observations. See {helpb bic_note:{bind:[R] BIC note}}.{p_end}
 
@@ -875,11 +875,11 @@ Root Mean Squared Errors {c |}{col 30}{res}1.1939647
 {res}
 {txt}{space 0}{space 0}{ralign 12:}{space 1}{c |}{space 1}{ralign 9:RMSE}{space 1}
 {space 0}{hline 13}{c   +}{hline 11}
-{space 0}{space 0}{ralign 12:est1}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.103816}}}{space 1}
-{space 0}{space 0}{ralign 12:est2}{space 1}{c |}{space 1}{ralign 9:{res:{sf:  1.00634}}}{space 1}
-{space 0}{space 0}{ralign 12:est3}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.223929}}}{space 1}
-{space 0}{space 0}{ralign 12:est4}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.009721}}}{space 1}
-{space 0}{space 0}{ralign 12:est5}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.042586}}}{space 1}
+{space 0}{space 0}{ralign 12:est1}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .9054228}}}{space 1}
+{space 0}{space 0}{ralign 12:est2}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .9939704}}}{space 1}
+{space 0}{space 0}{ralign 12:est3}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.153992}}}{space 1}
+{space 0}{space 0}{ralign 12:est4}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.044548}}}{space 1}
+{space 0}{space 0}{ralign 12:est5}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.095283}}}{space 1}
 
 {com}. scalar define k=10
 {txt}
@@ -888,7 +888,7 @@ Root Mean Squared Errors {c |}{col 30}{res}1.1939647
 {com}. scalar krmse12=(el(kMSE,1,1)/k)^.5
 {txt}
 {com}. scalar list krmse12
-{txt}   krmse12 = {res} .76391454
+{txt}   krmse12 = {res} .73689822
 {txt}
 {com}. matrix drop kMSE
 {txt}
@@ -901,9 +901,9 @@ Root Mean Squared Errors {c |}{col 30}{res}1.1939647
 {hline 25}{c TT}{hline 15}
          Method          {c |}{col 30} Value
 {hline 25}{c +}{hline 15}
-Root Mean Squared Errors {c |}{col 30}{res}1.0796206
-{txt}Mean Absolute Errors     {c |}{col 30}{res}.85135316
-{txt}Pseudo-R2                {c |} {col 30}{res}.18855255
+Root Mean Squared Errors {c |}{col 30}{res}1.0505398
+{txt}Mean Absolute Errors     {c |}{col 30}{res}.8495225
+{txt}Pseudo-R2                {c |} {col 30}{res}.2471428
 {txt}{hline 25}{c BT}{hline 15}
 
 {com}. scalar define loormse12=r(rmse)
@@ -912,20 +912,20 @@ Root Mean Squared Errors {c |}{col 30}{res}1.0796206
 . reg d.y l1d.y l3d.y
 
 {txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       296
-{txt}{hline 13}{c +}{hline 34}   F(2, 293)       = {res}    18.99
-{txt}       Model {c |} {res} 49.2763026         2  24.6381513   {txt}Prob > F        ={res}    0.0000
-{txt}    Residual {c |} {res} 380.158123       293    1.297468   {txt}R-squared       ={res}    0.1147
-{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.1087
-{txt}       Total {c |} {res} 429.434425       295  1.45570992   {txt}Root MSE        =   {res} 1.1391
+{txt}{hline 13}{c +}{hline 34}   F(2, 293)       = {res}    18.07
+{txt}       Model {c |} {res} 47.5617458         2  23.7808729   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 385.510956       293  1.31573705   {txt}R-squared       ={res}    0.1098
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.1037
+{txt}       Total {c |} {res} 433.072702       295  1.46804306   {txt}Root MSE        =   {res} 1.1471
 
 {txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {col 1}         D.y{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
 {hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {space 11}y {c |}
-{space 9}LD. {c |}{col 14}{res}{space 2}-.3197148{col 26}{space 2} .0559787{col 37}{space 1}   -5.71{col 46}{space 3}0.000{col 54}{space 4}-.4298862{col 67}{space 3}-.2095434
-{txt}{space 8}L3D. {c |}{col 14}{res}{space 2} .0719894{col 26}{space 2} .0560919{col 37}{space 1}    1.28{col 46}{space 3}0.200{col 54}{space 4}-.0384047{col 67}{space 3} .1823835
+{space 9}LD. {c |}{col 14}{res}{space 2}-.2642997{col 26}{space 2} .0577048{col 37}{space 1}   -4.58{col 46}{space 3}0.000{col 54}{space 4}-.3778681{col 67}{space 3}-.1507313
+{txt}{space 8}L3D. {c |}{col 14}{res}{space 2} .1369759{col 26}{space 2} .0577577{col 37}{space 1}    2.37{col 46}{space 3}0.018{col 54}{space 4} .0233034{col 67}{space 3} .2506484
 {txt}{space 12} {c |}
-{space 7}_cons {c |}{col 14}{res}{space 2}  .001935{col 26}{space 2} .0662089{col 37}{space 1}    0.03{col 46}{space 3}0.977{col 54}{space 4}-.1283703{col 67}{space 3} .1322404
+{space 7}_cons {c |}{col 14}{res}{space 2} .0062375{col 26}{space 2} .0666745{col 37}{space 1}    0.09{col 46}{space 3}0.926{col 54}{space 4}-.1249842{col 67}{space 3} .1374591
 {txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {res}{txt}
 {com}. estat ic
@@ -935,7 +935,7 @@ Root Mean Squared Errors {c |}{col 30}{res}1.0796206
 {hline 13}{c TT}{hline 63}
        Model {c |}          N   ll(null)  ll(model)      df        AIC        BIC
 {hline 13}{c +}{hline 63}
-{ralign 12:.}{col 14}{c |}{res}{col 16}       296{col 28} -475.078{col 39}-457.0395{col 50}     3{col 58}  920.079{col 69} 931.1501
+{ralign 12:.}{col 14}{c |}{res}{col 16}       296{col 28}-476.3266{col 39}-459.1089{col 50}     3{col 58} 924.2178{col 69} 935.2889
 {txt}{hline 13}{c BT}{hline 63}
 {p 0 6 0 77}Note: BIC uses N = number of observations. See {helpb bic_note:{bind:[R] BIC note}}.{p_end}
 
@@ -949,11 +949,11 @@ Root Mean Squared Errors {c |}{col 30}{res}1.0796206
 {res}
 {txt}{space 0}{space 0}{ralign 12:}{space 1}{c |}{space 1}{ralign 9:RMSE}{space 1}
 {space 0}{hline 13}{c   +}{hline 11}
-{space 0}{space 0}{ralign 12:est1}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.278274}}}{space 1}
-{space 0}{space 0}{ralign 12:est2}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.141176}}}{space 1}
-{space 0}{space 0}{ralign 12:est3}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.124585}}}{space 1}
-{space 0}{space 0}{ralign 12:est4}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .9496801}}}{space 1}
-{space 0}{space 0}{ralign 12:est5}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.192545}}}{space 1}
+{space 0}{space 0}{ralign 12:est1}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.144654}}}{space 1}
+{space 0}{space 0}{ralign 12:est2}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.043574}}}{space 1}
+{space 0}{space 0}{ralign 12:est3}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.244819}}}{space 1}
+{space 0}{space 0}{ralign 12:est4}{space 1}{c |}{space 1}{ralign 9:{res:{sf:  1.14139}}}{space 1}
+{space 0}{space 0}{ralign 12:est5}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.214143}}}{space 1}
 
 {com}. scalar define k=10
 {txt}
@@ -962,7 +962,7 @@ Root Mean Squared Errors {c |}{col 30}{res}1.0796206
 {com}. scalar krmse13=(el(kMSE,1,1)/k)^.5
 {txt}
 {com}. scalar list krmse13
-{txt}   krmse13 = {res} .80777578
+{txt}   krmse13 = {res} .82010777
 {txt}
 {com}. matrix drop kMSE
 {txt}
@@ -975,9 +975,9 @@ Root Mean Squared Errors {c |}{col 30}{res}1.0796206
 {hline 25}{c TT}{hline 15}
          Method          {c |}{col 30} Value
 {hline 25}{c +}{hline 15}
-Root Mean Squared Errors {c |}{col 30}{res}1.141645
-{txt}Mean Absolute Errors     {c |}{col 30}{res}.89791916
-{txt}Pseudo-R2                {c |} {col 30}{res}.09124642
+Root Mean Squared Errors {c |}{col 30}{res}1.1555101
+{txt}Mean Absolute Errors     {c |}{col 30}{res}.9348069
+{txt}Pseudo-R2                {c |} {col 30}{res}.09434506
 {txt}{hline 25}{c BT}{hline 15}
 
 {com}. scalar define loormse13=r(rmse)
@@ -986,20 +986,20 @@ Root Mean Squared Errors {c |}{col 30}{res}1.141645
 . reg d.y       l2d.y l3d.y
 
 {txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       296
-{txt}{hline 13}{c +}{hline 34}   F(2, 293)       = {res}     5.77
-{txt}       Model {c |} {res}  16.263417         2  8.13170852   {txt}Prob > F        ={res}    0.0035
-{txt}    Residual {c |} {res} 413.171008       293  1.41013996   {txt}R-squared       ={res}    0.0379
-{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0313
-{txt}       Total {c |} {res} 429.434425       295  1.45570992   {txt}Root MSE        =   {res} 1.1875
+{txt}{hline 13}{c +}{hline 34}   F(2, 293)       = {res}    17.08
+{txt}       Model {c |} {res}  45.215903         2  22.6079515   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 387.856799       293  1.32374334   {txt}R-squared       ={res}    0.1044
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0983
+{txt}       Total {c |} {res} 433.072702       295  1.46804306   {txt}Root MSE        =   {res} 1.1505
 
 {txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {col 1}         D.y{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
 {hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {space 11}y {c |}
-{space 8}L2D. {c |}{col 14}{res}{space 2}-.1565832{col 26}{space 2} .0609396{col 37}{space 1}   -2.57{col 46}{space 3}0.011{col 54}{space 4}-.2765181{col 67}{space 3}-.0366482
-{txt}{space 8}L3D. {c |}{col 14}{res}{space 2} .0757621{col 26}{space 2} .0610463{col 37}{space 1}    1.24{col 46}{space 3}0.216{col 54}{space 4}-.0443827{col 67}{space 3} .1959068
+{space 8}L2D. {c |}{col 14}{res}{space 2}-.2538017{col 26}{space 2}  .058105{col 37}{space 1}   -4.37{col 46}{space 3}0.000{col 54}{space 4}-.3681577{col 67}{space 3}-.1394456
+{txt}{space 8}L3D. {c |}{col 14}{res}{space 2} .1374621{col 26}{space 2} .0581324{col 37}{space 1}    2.36{col 46}{space 3}0.019{col 54}{space 4}  .023052{col 67}{space 3} .2518721
 {txt}{space 12} {c |}
-{space 7}_cons {c |}{col 14}{res}{space 2} .0005042{col 26}{space 2} .0690239{col 37}{space 1}    0.01{col 46}{space 3}0.994{col 54}{space 4}-.1353412{col 67}{space 3} .1363496
+{space 7}_cons {c |}{col 14}{res}{space 2} .0064038{col 26}{space 2} .0668776{col 37}{space 1}    0.10{col 46}{space 3}0.924{col 54}{space 4}-.1252176{col 67}{space 3} .1380252
 {txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {res}{txt}
 {com}. estat ic
@@ -1009,7 +1009,7 @@ Root Mean Squared Errors {c |}{col 30}{res}1.141645
 {hline 13}{c TT}{hline 63}
        Model {c |}          N   ll(null)  ll(model)      df        AIC        BIC
 {hline 13}{c +}{hline 63}
-{ralign 12:.}{col 14}{c |}{res}{col 16}       296{col 28} -475.078{col 39}-469.3641{col 50}     3{col 58} 944.7282{col 69} 955.7993
+{ralign 12:.}{col 14}{c |}{res}{col 16}       296{col 28}-476.3266{col 39}-460.0068{col 50}     3{col 58} 926.0135{col 69} 937.0846
 {txt}{hline 13}{c BT}{hline 63}
 {p 0 6 0 77}Note: BIC uses N = number of observations. See {helpb bic_note:{bind:[R] BIC note}}.{p_end}
 
@@ -1023,11 +1023,11 @@ Root Mean Squared Errors {c |}{col 30}{res}1.141645
 {res}
 {txt}{space 0}{space 0}{ralign 12:}{space 1}{c |}{space 1}{ralign 9:RMSE}{space 1}
 {space 0}{hline 13}{c   +}{hline 11}
-{space 0}{space 0}{ralign 12:est1}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.017514}}}{space 1}
-{space 0}{space 0}{ralign 12:est2}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.226657}}}{space 1}
-{space 0}{space 0}{ralign 12:est3}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.246839}}}{space 1}
-{space 0}{space 0}{ralign 12:est4}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.140176}}}{space 1}
-{space 0}{space 0}{ralign 12:est5}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.307274}}}{space 1}
+{space 0}{space 0}{ralign 12:est1}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.261762}}}{space 1}
+{space 0}{space 0}{ralign 12:est2}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.151197}}}{space 1}
+{space 0}{space 0}{ralign 12:est3}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.047751}}}{space 1}
+{space 0}{space 0}{ralign 12:est4}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.195764}}}{space 1}
+{space 0}{space 0}{ralign 12:est5}{space 1}{c |}{space 1}{ralign 9:{res:{sf:   1.0922}}}{space 1}
 
 {com}. scalar define k=10
 {txt}
@@ -1036,7 +1036,7 @@ Root Mean Squared Errors {c |}{col 30}{res}1.141645
 {com}. scalar krmse23=(el(kMSE,1,1)/k)^.5
 {txt}
 {com}. scalar list krmse23
-{txt}   krmse23 = {res} .84282826
+{txt}   krmse23 = {res} .81472913
 {txt}
 {com}. matrix drop kMSE
 {txt}
@@ -1049,9 +1049,9 @@ Root Mean Squared Errors {c |}{col 30}{res}1.141645
 {hline 25}{c TT}{hline 15}
          Method          {c |}{col 30} Value
 {hline 25}{c +}{hline 15}
-Root Mean Squared Errors {c |}{col 30}{res}1.1815341
-{txt}Mean Absolute Errors     {c |}{col 30}{res}.93790345
-{txt}Pseudo-R2                {c |} {col 30}{res}.02781348
+Root Mean Squared Errors {c |}{col 30}{res}1.1606538
+{txt}Mean Absolute Errors     {c |}{col 30}{res}.94993411
+{txt}Pseudo-R2                {c |} {col 30}{res}.08627031
 {txt}{hline 25}{c BT}{hline 15}
 
 {com}. scalar define loormse23=r(rmse)
@@ -1060,21 +1060,21 @@ Root Mean Squared Errors {c |}{col 30}{res}1.1815341
 . reg d.y l1d.y l2d.y l3d.y
 
 {txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       296
-{txt}{hline 13}{c +}{hline 34}   F(3, 292)       = {res}    25.66
-{txt}       Model {c |} {res} 89.5869348         3  29.8623116   {txt}Prob > F        ={res}    0.0000
-{txt}    Residual {c |} {res}  339.84749       292  1.16386127   {txt}R-squared       ={res}    0.2086
-{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.2005
-{txt}       Total {c |} {res} 429.434425       295  1.45570992   {txt}Root MSE        =   {res} 1.0788
+{txt}{hline 13}{c +}{hline 34}   F(3, 292)       = {res}    34.57
+{txt}       Model {c |} {res} 113.494499         3  37.8314998   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 319.578203       292   1.0944459   {txt}R-squared       ={res}    0.2621
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.2545
+{txt}       Total {c |} {res} 433.072702       295  1.46804306   {txt}Root MSE        =   {res} 1.0462
 
 {txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {col 1}         D.y{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
 {hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {space 11}y {c |}
-{space 9}LD. {c |}{col 14}{res}{space 2}-.4631607{col 26}{space 2} .0583527{col 37}{space 1}   -7.94{col 46}{space 3}0.000{col 54}{space 4}-.5780058{col 67}{space 3}-.3483156
-{txt}{space 8}L2D. {c |}{col 14}{res}{space 2}-.3586029{col 26}{space 2} .0609333{col 37}{space 1}   -5.89{col 46}{space 3}0.000{col 54}{space 4}-.4785271{col 67}{space 3}-.2386788
-{txt}{space 8}L3D. {c |}{col 14}{res}{space 2}-.0723968{col 26}{space 2} .0585169{col 37}{space 1}   -1.24{col 46}{space 3}0.217{col 54}{space 4}-.1875651{col 67}{space 3} .0427715
+{space 9}LD. {c |}{col 14}{res}{space 2}-.4616699{col 26}{space 2} .0584503{col 37}{space 1}   -7.90{col 46}{space 3}0.000{col 54}{space 4}-.5767071{col 67}{space 3}-.3466327
+{txt}{space 8}L2D. {c |}{col 14}{res}{space 2}-.4554328{col 26}{space 2} .0586774{col 37}{space 1}   -7.76{col 46}{space 3}0.000{col 54}{space 4}-.5709171{col 67}{space 3}-.3399486
+{txt}{space 8}L3D. {c |}{col 14}{res}{space 2}-.0603309{col 26}{space 2} .0584902{col 37}{space 1}   -1.03{col 46}{space 3}0.303{col 54}{space 4}-.1754466{col 67}{space 3} .0547848
 {txt}{space 12} {c |}
-{space 7}_cons {c |}{col 14}{res}{space 2} .0060132{col 26}{space 2} .0627112{col 37}{space 1}    0.10{col 46}{space 3}0.924{col 54}{space 4}-.1174101{col 67}{space 3} .1294365
+{space 7}_cons {c |}{col 14}{res}{space 2} .0128112{col 26}{space 2} .0608155{col 37}{space 1}    0.21{col 46}{space 3}0.833{col 54}{space 4}-.1068812{col 67}{space 3} .1325036
 {txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {res}{txt}
 {com}. estat ic
@@ -1084,7 +1084,7 @@ Root Mean Squared Errors {c |}{col 30}{res}1.1815341
 {hline 13}{c TT}{hline 63}
        Model {c |}          N   ll(null)  ll(model)      df        AIC        BIC
 {hline 13}{c +}{hline 63}
-{ralign 12:.}{col 14}{c |}{res}{col 16}       296{col 28} -475.078{col 39}-440.4502{col 50}     4{col 58} 888.9003{col 69} 903.6618
+{ralign 12:.}{col 14}{c |}{res}{col 16}       296{col 28}-476.3266{col 39}-431.3489{col 50}     4{col 58} 870.6978{col 69} 885.4592
 {txt}{hline 13}{c BT}{hline 63}
 {p 0 6 0 77}Note: BIC uses N = number of observations. See {helpb bic_note:{bind:[R] BIC note}}.{p_end}
 
@@ -1098,11 +1098,11 @@ Root Mean Squared Errors {c |}{col 30}{res}1.1815341
 {res}
 {txt}{space 0}{space 0}{ralign 12:}{space 1}{c |}{space 1}{ralign 9:RMSE}{space 1}
 {space 0}{hline 13}{c   +}{hline 11}
-{space 0}{space 0}{ralign 12:est1}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.012817}}}{space 1}
-{space 0}{space 0}{ralign 12:est2}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.135009}}}{space 1}
-{space 0}{space 0}{ralign 12:est3}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .9754602}}}{space 1}
-{space 0}{space 0}{ralign 12:est4}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.109119}}}{space 1}
-{space 0}{space 0}{ralign 12:est5}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.150393}}}{space 1}
+{space 0}{space 0}{ralign 12:est1}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.193648}}}{space 1}
+{space 0}{space 0}{ralign 12:est2}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .9485697}}}{space 1}
+{space 0}{space 0}{ralign 12:est3}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.119405}}}{space 1}
+{space 0}{space 0}{ralign 12:est4}{space 1}{c |}{space 1}{ralign 9:{res:{sf: 1.049818}}}{space 1}
+{space 0}{space 0}{ralign 12:est5}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .9232315}}}{space 1}
 
 {com}. scalar define k=10
 {txt}
@@ -1111,7 +1111,7 @@ Root Mean Squared Errors {c |}{col 30}{res}1.1815341
 {com}. scalar krmse123=(el(kMSE,1,1)/k)^.5
 {txt}
 {com}. scalar list krmse123
-{txt}  krmse123 = {res} .76283116
+{txt}  krmse123 = {res} .74378241
 {txt}
 {com}. matrix drop kMSE
 {txt}
@@ -1124,9 +1124,9 @@ Root Mean Squared Errors {c |}{col 30}{res}1.1815341
 {hline 25}{c TT}{hline 15}
          Method          {c |}{col 30} Value
 {hline 25}{c +}{hline 15}
-Root Mean Squared Errors {c |}{col 30}{res}1.0818979
-{txt}Mean Absolute Errors     {c |}{col 30}{res}.85225225
-{txt}Pseudo-R2                {c |} {col 30}{res}.18382203
+Root Mean Squared Errors {c |}{col 30}{res}1.0551773
+{txt}Mean Absolute Errors     {c |}{col 30}{res}.85532304
+{txt}Pseudo-R2                {c |} {col 30}{res}.24451175
 {txt}{hline 25}{c BT}{hline 15}
 
 {com}. scalar define loormse123=r(rmse)
@@ -1158,13 +1158,13 @@ Root Mean Squared Errors {c |}{col 30}{res}1.0818979
 {res}
 {txt}FIT[7,5]
                   df        AIC        BIC  K(10)RMSE    LOORMSE
-  Model 1 {res}         2  924.50669  931.90087  .80989532  1.1434785
-{txt}  Model 2 {res}         2  946.92333   954.3108  .84007861  1.1846049
-{txt}  Model 3 {res}         2  949.32403  956.70474  .85093375  1.1939647
-{txt} Model 12 {res}         3  891.35558  902.43677  .76391454  1.0796206
-{txt} Model 13 {res}         3  920.07905  931.15013  .80777578   1.141645
-{txt} Model 23 {res}         3  944.72824  955.79932  .84282826  1.1815341
-{txt}Model 123 {res}         4  888.90031  903.66175  .76283116  1.0818979
+  Model 1 {res}         2  932.23828  939.63247  .81576385  1.1602627
+{txt}  Model 2 {res}         2  931.74513   939.1326  .82278473   1.164344
+{txt}  Model 3 {res}         2  942.68657  950.06729  .84087751  1.1927634
+{txt} Model 12 {res}         3  871.69575  882.77694  .73689822  1.0505398
+{txt} Model 13 {res}         3  924.21782   935.2889  .82010777  1.1555101
+{txt} Model 23 {res}         3  926.01353  937.08461  .81472913  1.1606538
+{txt}Model 123 {res}         4  870.69781  885.45925  .74378241  1.0551773
 {reset}
 {com}. 
 . *2
@@ -1330,11 +1330,11 @@ Root Mean Squared Errors {c |}{col 30}{res}1.0818979
 {res}
 {txt}{space 0}{space 0}{ralign 12:}{space 1}{c |}{space 1}{ralign 9:RMSE}{space 1}
 {space 0}{hline 13}{c   +}{hline 11}
-{space 0}{space 0}{ralign 12:est1}{space 1}{c |}{space 1}{ralign 9:{res:{sf:  .003705}}}{space 1}
-{space 0}{space 0}{ralign 12:est2}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .0066257}}}{space 1}
-{space 0}{space 0}{ralign 12:est3}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .0057882}}}{space 1}
-{space 0}{space 0}{ralign 12:est4}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .0150161}}}{space 1}
-{space 0}{space 0}{ralign 12:est5}{space 1}{c |}{space 1}{ralign 9:{res:{sf:  .004778}}}{space 1}
+{space 0}{space 0}{ralign 12:est1}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .0041889}}}{space 1}
+{space 0}{space 0}{ralign 12:est2}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .0108909}}}{space 1}
+{space 0}{space 0}{ralign 12:est3}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .0039031}}}{space 1}
+{space 0}{space 0}{ralign 12:est4}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .0059736}}}{space 1}
+{space 0}{space 0}{ralign 12:est5}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .0061815}}}{space 1}
 
 {com}. scalar define k=10
 {txt}
@@ -1343,7 +1343,7 @@ Root Mean Squared Errors {c |}{col 30}{res}1.0818979
 {com}. scalar krmse1=(el(kMSE,1,1)/k)^.5
 {txt}
 {com}. scalar list krmse1
-{txt}    krmse1 = {res} .00582619
+{txt}    krmse1 = {res} .00474646
 {txt}
 {com}. matrix drop kMSE
 {txt}
@@ -1445,11 +1445,11 @@ Root Mean Squared Errors {c |}{col 30}{res}.00746943
 {res}
 {txt}{space 0}{space 0}{ralign 12:}{space 1}{c |}{space 1}{ralign 9:RMSE}{space 1}
 {space 0}{hline 13}{c   +}{hline 11}
-{space 0}{space 0}{ralign 12:est1}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .0054204}}}{space 1}
-{space 0}{space 0}{ralign 12:est2}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .0043726}}}{space 1}
-{space 0}{space 0}{ralign 12:est3}{space 1}{c |}{space 1}{ralign 9:{res:{sf:  .007304}}}{space 1}
-{space 0}{space 0}{ralign 12:est4}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .0149082}}}{space 1}
-{space 0}{space 0}{ralign 12:est5}{space 1}{c |}{space 1}{ralign 9:{res:{sf:  .004407}}}{space 1}
+{space 0}{space 0}{ralign 12:est1}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .0083028}}}{space 1}
+{space 0}{space 0}{ralign 12:est2}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .0107218}}}{space 1}
+{space 0}{space 0}{ralign 12:est3}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .0037125}}}{space 1}
+{space 0}{space 0}{ralign 12:est4}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .0057848}}}{space 1}
+{space 0}{space 0}{ralign 12:est5}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .0054343}}}{space 1}
 
 {com}. scalar define k=10
 {txt}
@@ -1458,7 +1458,7 @@ Root Mean Squared Errors {c |}{col 30}{res}.00746943
 {com}. scalar krmse2=(el(kMSE,1,1)/k)^.5
 {txt}
 {com}. scalar list krmse2
-{txt}    krmse2 = {res}  .0058611
+{txt}    krmse2 = {res}  .0051056
 {txt}
 {com}. matrix drop kMSE
 {txt}
@@ -1556,11 +1556,11 @@ Root Mean Squared Errors {c |}{col 30}{res}.00634841
 {res}
 {txt}{space 0}{space 0}{ralign 12:}{space 1}{c |}{space 1}{ralign 9:RMSE}{space 1}
 {space 0}{hline 13}{c   +}{hline 11}
-{space 0}{space 0}{ralign 12:est1}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .0057533}}}{space 1}
-{space 0}{space 0}{ralign 12:est2}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .0064607}}}{space 1}
-{space 0}{space 0}{ralign 12:est3}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .0059547}}}{space 1}
-{space 0}{space 0}{ralign 12:est4}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .0151864}}}{space 1}
-{space 0}{space 0}{ralign 12:est5}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .0048957}}}{space 1}
+{space 0}{space 0}{ralign 12:est1}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .0049165}}}{space 1}
+{space 0}{space 0}{ralign 12:est2}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .0059758}}}{space 1}
+{space 0}{space 0}{ralign 12:est3}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .0057349}}}{space 1}
+{space 0}{space 0}{ralign 12:est4}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .0069113}}}{space 1}
+{space 0}{space 0}{ralign 12:est5}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .0156106}}}{space 1}
 
 {com}. scalar define k=10
 {txt}
@@ -1569,7 +1569,7 @@ Root Mean Squared Errors {c |}{col 30}{res}.00634841
 {com}. scalar krmse3=(el(kMSE,1,1)/k)^.5
 {txt}
 {com}. scalar list krmse3
-{txt}    krmse3 = {res} .00604065
+{txt}    krmse3 = {res} .00619861
 {txt}
 {com}. matrix drop kMSE
 {txt}
@@ -1667,11 +1667,11 @@ Root Mean Squared Errors {c |}{col 30}{res}.00808926
 {res}
 {txt}{space 0}{space 0}{ralign 12:}{space 1}{c |}{space 1}{ralign 9:RMSE}{space 1}
 {space 0}{hline 13}{c   +}{hline 11}
-{space 0}{space 0}{ralign 12:est1}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .0068184}}}{space 1}
-{space 0}{space 0}{ralign 12:est2}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .0147962}}}{space 1}
-{space 0}{space 0}{ralign 12:est3}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .0037832}}}{space 1}
-{space 0}{space 0}{ralign 12:est4}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .0043009}}}{space 1}
-{space 0}{space 0}{ralign 12:est5}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .0036678}}}{space 1}
+{space 0}{space 0}{ralign 12:est1}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .0041409}}}{space 1}
+{space 0}{space 0}{ralign 12:est2}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .0152337}}}{space 1}
+{space 0}{space 0}{ralign 12:est3}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .0066411}}}{space 1}
+{space 0}{space 0}{ralign 12:est4}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .0048066}}}{space 1}
+{space 0}{space 0}{ralign 12:est5}{space 1}{c |}{space 1}{ralign 9:{res:{sf:  .006126}}}{space 1}
 
 {com}. scalar define k=10
 {txt}
@@ -1680,7 +1680,7 @@ Root Mean Squared Errors {c |}{col 30}{res}.00808926
 {com}. scalar krmse4=(el(kMSE,1,1)/k)^.5
 {txt}
 {com}. scalar list krmse4
-{txt}    krmse4 = {res} .00558284
+{txt}    krmse4 = {res} .00594936
 {txt}
 {com}. matrix drop kMSE
 {txt}
@@ -1721,24 +1721,17 @@ Root Mean Squared Errors {c |}{col 30}{res}.01062333
 {res}
 {txt}FIT[4,5]
                  df         AIC         BIC   K(10)RMSE     LOORMSE
-Model 1 {res}         64  -3105.8368  -2853.1626   .00582619   .00746943
-{txt}Model 2 {res}         34  -3164.4562  -3029.3467    .0058611   .00634841
-{txt}Model 3 {res}         33  -2874.5257  -2744.2405   .00604065   .00808926
-{txt}Model 4 {res}         33  -3612.8403  -3472.7828   .00558284   .01062333
+Model 1 {res}         64  -3105.8368  -2853.1626   .00474646   .00746943
+{txt}Model 2 {res}         34  -3164.4562  -3029.3467    .0051056   .00634841
+{txt}Model 3 {res}         33  -2874.5257  -2744.2405   .00619861   .00808926
+{txt}Model 4 {res}         33  -3612.8403  -3472.7828   .00594936   .01062333
 {reset}
 {com}. 
-{txt}end of do-file
-
-{com}. run ssc install gsreg
-{err}{p 0 4 2}
-file ssc.do
-not found
-{p_end}
-{txt}{search r(601), local:r(601);}
-
-{com}. ssc install gsreg
-{txt}checking {hilite:gsreg} consistency and verifying not already installed...
-installing into /Users/guslipkin/Library/Application Support/Stata/ado/plus/...
-installation complete.
-
-{com}. 
+. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}/Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Problem Set 3/Problem Set 3.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}15 Mar 2021, 19:20:04
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}

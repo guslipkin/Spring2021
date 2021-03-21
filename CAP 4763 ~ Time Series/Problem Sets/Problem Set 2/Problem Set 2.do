@@ -16,7 +16,7 @@ rename flbppriv fl_bp
 rename date datestring
 
 *2c Turn on a log file
-log using "Problem Set 1", replace
+log using "Problem Set 2", replace
 
 *2d Generate a monthly date variable (make its display format monthly time, %tm)
 gen datec=date(datestring, "YMD")
