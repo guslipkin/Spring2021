@@ -1,0 +1,156 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(openxlsx)
+library(tidyverse)
+hr <- read.xlsx("../ENT 2112 Bicycle Project/IndustrySalesForceCompensation-Q4.xlsx")
+means <- hr %>%
+  group_by(Quarter, Type) %>%
+  summarise(
+    Salary = mean(Salary),
+    HealthBenefits = mean(HealthBenefits),
+    Vacation = mean(Vacation),
+    Pension = mean(Pension),
+    TotalYearlyCost = mean(TotalYearlyCost),
+    Satisfaction = mean(Satisfaction),
+    Company = "Mean", .groups = "keep") %>%
+  select(Company, Salary, HealthBenefits, Vacation, Pension, TotalYearlyCost, Satisfaction, Quarter, Type)
+
+colors <- c("#ABE188", "#BD00E3", "#D1E891", "#F7EF99", "#F4D590", "#F1BB87", "#F4A578", "#F78E69", "#5D675B")
+```
+
+```{r}
+hr %>%
+  ggplot(aes(x = Quarter, y = Salary, fill = Company)) +
+  geom_col(position = 'dodge') +
+  geom_line(data = means) +
+  scale_fill_manual(values = colors) +
+  facet_grid(~Type) +
+  ggtitle("Employee Salary by Quarter")
+
+hr %>%
+  ggplot(aes(x = Quarter, y = HealthBenefits, fill = Company)) +
+  geom_col(position = 'dodge') +
+  geom_line(data = means) +
+  scale_fill_manual(values = colors) +
+  facet_grid(~Type) +
+  ggtitle("Employee Health Benefits by Quarter") +
+  ylab("Health Benefits")
+
+hr %>%
+  ggplot(aes(x = Quarter, y = Vacation, fill = Company)) +
+  geom_col(position = 'dodge') +
+  geom_line(data = means) +
+  scale_fill_manual(values = colors) +
+  facet_grid(~Type) +
+  ggtitle("Employee Vacation by Quarter")
+
+hr %>%
+  ggplot(aes(x = Quarter, y = Pension, fill = Company)) +
+  geom_col(position = 'dodge') +
+  geom_line(data = means) +
+  scale_fill_manual(values = colors) +
+  facet_grid(~Type) +
+  ggtitle("Employee Pension by Quarter")
+
+hr %>%
+  ggplot(aes(x = Quarter, y = TotalYearlyCost, fill = Company)) +
+  geom_col(position = 'dodge') +
+  geom_line(data = means) +
+  scale_fill_manual(values = colors) +
+  facet_grid(~Type) +
+  ggtitle("Total Yearly Compensation Package Cost by Quarter") +
+  ylab("Total Yearly Cost")
+
+hr %>%
+  ggplot(aes(x = Quarter, y = Satisfaction, fill = Company)) +
+  geom_col(position = 'dodge') +
+  geom_line(data = means) +
+  scale_fill_manual(values = colors) +
+  facet_grid(~Type) +
+  ggtitle("Employee Satisfaction by Quarter")
+```
+
+```{r}
+sales <- read.xlsx("../ENT 2112 Bicycle Project/CompetitorsSalesForce-Q4.xlsx")
+
+sales <- sales %>%
+  pivot_longer(cols = c(Total, Service, Recreation, Mountain, Speed), names_to = "Type")
+
+salesMeans <- sales %>%
+  group_by(Quarter, City, Type) %>%
+  summarise(
+    value = mean(value),
+    Company = "Mean", 
+    .groups = "keep") %>%
+  select(City, Company, Quarter, Type, value)
+
+sales %>%
+  filter(City != "Bangalore" & Type != "Service" & Type != "Total") %>%
+  ggplot(aes(x = Quarter, y = value, fill = Company)) +
+  geom_col(position = 'dodge') +
+  geom_line(data = salesMeans[salesMeans$City != "Bangalore" & salesMeans$Type != "Service" & salesMeans$Type != "Total",]) +
+  scale_fill_manual(values = colors) +
+  facet_grid(City ~ Type) +
+  ylab("Number of Staff by Type") +
+  ggtitle("Store Sales Staff Numbers by City and Type")
+
+sales %>%
+  filter(City != "Bangalore" & Type == "Service") %>%
+  ggplot(aes(x = Quarter, y = value, fill = Company)) +
+  geom_col(position = 'dodge') +
+  geom_line(data = salesMeans[salesMeans$City != "Bangalore" & salesMeans$Type == "Service",]) +
+  scale_fill_manual(values = colors) +
+  facet_grid(~City) +
+  ylab("Number of Service Staff by Type") +
+  ggtitle("Store Service Staff Numbers by City")
+```
+
+```{r}
+prod <- read.xlsx("../ENT 2112 Bicycle Project/FactoryLocations-Q4.xlsx")
+
+prod <- prod %>%
+  pivot_longer(cols = c(Fixed, Operating, Overtime), names_to = "Type", values_to = "Value")
+
+prodMeans <- prod %>%
+  group_by(Quarter, Type) %>%
+  summarise(
+    Value = mean(Value),
+    Company = "Mean", 
+    .groups = "keep") %>%
+  select(Company, Quarter, Type, Value)
+
+prod %>%
+  ggplot(aes(x = Quarter, y = Value, fill = Company)) +
+  geom_col(position = 'dodge') +
+  geom_line(data = prodMeans) +
+  scale_fill_manual(values = colors) +
+  facet_grid(~Type) +
+  ggtitle("Production Capacity by Quarter") +
+  ylab("Unit Capability")
+
+prod %>%
+  filter(Company == "Atomic Bikes") %>%
+  ggplot(aes(x = Quarter, y = Value)) +
+  geom_bar(
+    aes(fill = "Fixed"),
+    data = prod[prod$Type == "Fixed" &
+                  prod$Company == "Atomic Bikes", ],
+    stat = "identity",
+    fill = "#BD00E3"
+  ) +
+  geom_bar(
+    aes(fill = "Operating"),
+    data = prod[prod$Type == "Operating" &
+                  prod$Company == "Atomic Bikes", ],
+    stat = "identity",
+    fill = "#E770FF"
+  ) +
+  ylab("Production Capacity") +
+  ggtitle("Production Capacity Utilization by Quarter") +
+  labs(subtitle = "Light purple is Operating Capacity. Dark purple is Fixed Capacity")
+```
+
