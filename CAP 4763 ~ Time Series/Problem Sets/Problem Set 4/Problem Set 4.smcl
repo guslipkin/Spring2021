@@ -3,7 +3,7 @@
       name:  {res}<unnamed>
        {txt}log:  {res}/Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Problem Set 4/Problem Set 4.smcl
   {txt}log type:  {res}smcl
- {txt}opened on:  {res}20 Mar 2021, 16:55:35
+ {txt}opened on:  {res}23 Mar 2021, 19:55:41
 {txt}
 {com}. 
 . *2d Generate a monthly date variable (make its display format monthly time, %tm)
@@ -734,6 +734,8 @@ r1 {res} .00341856  .00356652  .00352901  .00347889
 {com}. gen lbnonfarm2=nonfarm2-1.96*e(rmse)
 {txt}(591 missing values generated)
 
+{com}. tsline ubnonfarm2 lbnonfarm2 nonfarm2 d.nonfarm2 if tin(2017m12, 2018m12)
+{res}{txt}
 {com}. reg d.lnflnonfarm l(1/12)d.lnflnonfarm l(1/2,12)d.lnfllf l(1/2,12)d.lnflbp i.month date if tin(,2018m12)
 
 {txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       359
@@ -798,6 +800,8 @@ r1 {res} .00341856  .00356652  .00352901  .00347889
 {com}. gen lbnonfarm3=nonfarm3-1.96*e(rmse)
 {txt}(601 missing values generated)
 
+{com}. tsline ubnonfarm3 lbnonfarm3 nonfarm3 d.nonfarm3 if tin(2017m12, 2018m12)
+{res}{txt}
 {com}. reg d.lnflnonfarm l(1/12,24)d.lnflnonfarm l(1/2,12,24)d.lnfllf l(1/2,12,24)d.lnusepr i.month if tin(,2018m12)
 
 {txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       491
@@ -864,6 +868,8 @@ r1 {res} .00341856  .00356652  .00352901  .00347889
 {com}. gen lbnonfarm4=nonfarm4-1.96*e(rmse)
 {txt}(469 missing values generated)
 
+{com}. tsline ubnonfarm4 lbnonfarm4 nonfarm4 d.nonfarm4 if tin(2017m12, 2018m12)
+{res}{txt}
 {com}. 
 . *5
 . reg d.lnflnonfarm l(1/12)d.lnflnonfarm l(1/12)d.lnfllf l(1/12)d.lnusepr l(1/12)d.lnflbp i.month date
@@ -1329,20 +1335,23 @@ Model 1 {res}         61  -3114.0527  -2875.1644   .00341856   .00380836
 {space 7}_cons {c |}{col 14}{res}{space 2}-.0119962{col 26}{space 2} .0017171{col 37}{space 1}   -6.99{col 46}{space 3}0.000{col 54}{space 4}-.0153705{col 67}{space 3}-.0086219
 {txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {res}{txt}
-{com}. predict nonfarm44
+{com}. predict nonfarm6
 {txt}(option {bf:xb} assumed; fitted values)
 (469 missing values generated)
 
-{com}. gen pnonfarm44=exp(nonfarm44+l.fl_nonfarm)
-{txt}(972 missing values generated)
+{com}. predict stdfore6, stdf
+{txt}(469 missing values generated)
 
-{com}. gen ubpnonfarm44=pnonfarm44+1.96*e(rmse)
-{txt}(972 missing values generated)
+{com}. gen pnonfarm6=exp(l.lnflnonfarm+nonfarm6)*exp(.5*e(rmse)^2)
+{txt}(469 missing values generated)
 
-{com}. gen lbpnonfarm44=pnonfarm44-1.96*e(rmse)
-{txt}(972 missing values generated)
+{com}. gen ubpnonfarm6=exp(l.lnflnonfarm+nonfarm6+1.96*stdfore6)*exp(.5*e(rmse)^2)
+{txt}(469 missing values generated)
 
-{com}. tsline ubpnonfarm44 lbpnonfarm44 pnonfarm44 fl_nonfarm if tin(2016m12,2019m12), tline(2018m12)
+{com}. gen lbpnonfarm6=exp(l.lnflnonfarm+nonfarm6-1.96*stdfore6)*exp(.5*e(rmse)^2)
+{txt}(469 missing values generated)
+
+{com}. tsline ubpnonfarm6 lbpnonfarm6 pnonfarm6 fl_nonfarm if tin(2016m12,2019m12), tline(2018m12)
 {res}{txt}
 {com}. 
 . *7
@@ -1406,27 +1415,66 @@ Model 1 {res}         61  -3114.0527  -2875.1644   .00341856   .00380836
 {txt}(option {bf:xb} assumed; fitted values)
 (469 missing values generated)
 
-{com}. predict pres47 if tin(,2018m12), residual
-{txt}(481 missing values generated)
+{com}. predict pres47 if tin(2016m12,2018m12), residual
+{txt}(947 missing values generated)
 
-{com}. gen exppres=exp(pres47) if tin(,2018m12)
-{txt}(481 missing values generated)
+{com}. gen exppres47=exp(pres47) if tin(2016m12,2018m12)
+{txt}(947 missing values generated)
 
-{com}. summ exppres
+{com}. summ exppres47
 
 {txt}    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
 {hline 13}{c +}{hline 57}
-{space 5}exppres {c |}{res}        491    1.000006    .0033619   .9796714   1.016379
+{space 3}exppres47 {c |}{res}         25    .9995604    .0061667   .9796714   1.016379
 {txt}
-{com}. gen pnonfarm47=r(mean)*pnonfarm44
+{com}. gen pnonfarm47=r(mean)*exp(l.lnflnonfarm+nonfarm47)
+{txt}(469 missing values generated)
+
+{com}. _pctile exppres47, percentile(2.5,97.5) 
+{txt}
+{com}. gen lbnonfarm47=r(r1)*exp(l.lnflnonfarm+nonfarm47)
+{txt}(469 missing values generated)
+
+{com}. gen ubnonfarm47=r(r2)*exp(l.lnflnonfarm+nonfarm47)
+{txt}(469 missing values generated)
+
+{com}. tsline ubpnonfarm47 lbpnonfarm47 pnonfarm47 fl_nonfarm if tin(2016m12,2019m12), tline(2018m12)
+{err}variable {bf}ubpnonfarm47{sf} not found
+{txt}{search r(111), local:r(111);}
+
+end of do-file
+
+{search r(111), local:r(111);}
+
+{com}. do "/var/folders/99/5g4rbsld0s9cpjm53wfklclc0000gn/T//SD05048.000000"
+{txt}
+{com}. gen lbpnonfarm47=r(r1)*exp(l.lnflnonfarm+nonfarm47)
 {txt}(972 missing values generated)
 
-{com}. gen ubpnonfarm47=pnonfarm44+1.96*e(rmse)
+{com}. gen ubpnonfarm47=r(r2)*exp(l.lnflnonfarm+nonfarm47)
 {txt}(972 missing values generated)
 
-{com}. gen lbpnonfarm47=pnonfarm44-1.96*e(rmse)
-{txt}(972 missing values generated)
+{com}. tsline ubpnonfarm47 lbpnonfarm47 pnonfarm47 fl_nonfarm if tin(2016m12,2019m12), tline(2018m12)
+{res}{txt}
+{com}. 
+{txt}end of do-file
 
+{com}. do "/var/folders/99/5g4rbsld0s9cpjm53wfklclc0000gn/T//SD05048.000000"
+{txt}
+{com}. tsline ubpnonfarm6 lbpnonfarm6 pnonfarm6 fl_nonfarm if tin(2016m12,2019m12), tline(2018m12)
+{res}{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. do "/var/folders/99/5g4rbsld0s9cpjm53wfklclc0000gn/T//SD05048.000000"
+{txt}
+{com}. tsline ubpnonfarm47 lbpnonfarm47 pnonfarm47 fl_nonfarm if tin(2016m12,2019m12), tline(2018m12)
+{res}{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. do "/var/folders/99/5g4rbsld0s9cpjm53wfklclc0000gn/T//SD05048.000000"
+{txt}
 {com}. tsline ubpnonfarm47 lbpnonfarm47 pnonfarm47 fl_nonfarm if tin(2016m12,2019m12), tline(2018m12)
 {res}{txt}
 {com}. 

@@ -67,14 +67,17 @@ reg d.lnflnonfarm l(1/12)d.lnflnonfarm l(1/2)d.lnfllf l(1/2)d.lnusepr l(1/2)d.ln
 predict nonfarm2
 gen ubnonfarm2=nonfarm2+1.96*e(rmse)
 gen lbnonfarm2=nonfarm2-1.96*e(rmse)
+tsline ubnonfarm2 lbnonfarm2 nonfarm2 d.nonfarm2 if tin(2017m12, 2018m12)
 reg d.lnflnonfarm l(1/12)d.lnflnonfarm l(1/2,12)d.lnfllf l(1/2,12)d.lnflbp i.month date if tin(,2018m12)
 predict nonfarm3
 gen ubnonfarm3=nonfarm3+1.96*e(rmse)
 gen lbnonfarm3=nonfarm3-1.96*e(rmse)
+tsline ubnonfarm3 lbnonfarm3 nonfarm3 d.nonfarm3 if tin(2017m12, 2018m12)
 reg d.lnflnonfarm l(1/12,24)d.lnflnonfarm l(1/2,12,24)d.lnfllf l(1/2,12,24)d.lnusepr i.month if tin(,2018m12)
 predict nonfarm4
 gen ubnonfarm4=nonfarm4+1.96*e(rmse)
 gen lbnonfarm4=nonfarm4-1.96*e(rmse)
+tsline ubnonfarm4 lbnonfarm4 nonfarm4 d.nonfarm4 if tin(2017m12, 2018m12)
 
 *5
 reg d.lnflnonfarm l(1/12)d.lnflnonfarm l(1/12)d.lnfllf l(1/12)d.lnusepr l(1/12)d.lnflbp i.month date
@@ -121,25 +124,61 @@ matrix list FIT
 
 *6
 reg d.lnflnonfarm l(1/12,24)d.lnflnonfarm l(1/2,12,24)d.lnfllf l(1/2,12,24)d.lnusepr i.month if tin(,2018m12)
-predict nonfarm44
-gen pnonfarm44=exp(nonfarm44+l.fl_nonfarm)
-gen ubpnonfarm44=pnonfarm44+1.96*e(rmse)
-gen lbpnonfarm44=pnonfarm44-1.96*e(rmse)
-tsline ubpnonfarm44 lbpnonfarm44 pnonfarm44 fl_nonfarm if tin(2016m12,2019m12), tline(2018m12)
+predict nonfarm6
+predict stdfore6, stdf
+gen pnonfarm6=exp(l.lnflnonfarm+nonfarm6)*exp(.5*e(rmse)^2)
+gen ubpnonfarm6=exp(l.lnflnonfarm+nonfarm6+1.96*stdfore6)*exp(.5*e(rmse)^2)
+gen lbpnonfarm6=exp(l.lnflnonfarm+nonfarm6-1.96*stdfore6)*exp(.5*e(rmse)^2)
+tsline ubpnonfarm6 lbpnonfarm6 pnonfarm6 fl_nonfarm if tin(2016m12,2019m12), tline(2018m12)
 
 *7
 reg d.lnflnonfarm l(1/12,24)d.lnflnonfarm l(1/2,12,24)d.lnfllf l(1/2,12,24)d.lnusepr i.month if tin(,2018m12)
 predict nonfarm47
-predict pres47 if tin(,2018m12), residual
-gen exppres=exp(pres47) if tin(,2018m12)
-summ exppres
-gen pnonfarm47=r(mean)*pnonfarm44
-gen ubpnonfarm47=pnonfarm44+1.96*e(rmse)
-gen lbpnonfarm47=pnonfarm44-1.96*e(rmse)
+predict pres47 if tin(2016m12,2018m12), residual
+gen exppres47=exp(pres47) if tin(2016m12,2018m12)
+summ exppres47
+gen pnonfarm47=r(mean)*exp(l.lnflnonfarm+nonfarm47)
+_pctile exppres47, percentile(2.5,97.5) 
+gen lbpnonfarm47=r(r1)*exp(l.lnflnonfarm+nonfarm47)
+gen ubpnonfarm47=r(r2)*exp(l.lnflnonfarm+nonfarm47)
 tsline ubpnonfarm47 lbpnonfarm47 pnonfarm47 fl_nonfarm if tin(2016m12,2019m12), tline(2018m12)
 
+
+predict nonfarm7
+predict pres7 if tin(2016m12,2018m12), residual
+gen exppres7=exp(pres7) if tin(2016m12,2018m12)
+summ exppres7
+gen pnonfarm7=r(mean)*exp(l.lfl_nonfarm+nonfarm7)
+_pctile exppres7, percentile(2.5,97.5) 
+gen lbnonfarm7=r(r1)*exp(l.lfl_nonfarm+nonfarm7)
+gen ubnonfarm7=r(r2)*exp(l.lfl_nonfarm+nonfarm7)
 *8
 tsappend, add(1)
 replace month=month(dofm(date)) if month==.
 
 *9
+reg d.lnflnonfarm l(1/12,24)d.lnflnonfarm l(1/2,12,24)d.lnfllf l(1/2,12,24)d.lnusepr i.month if tin(,2018m12)
+predict nonfarm9
+predict pres9 if tin(,2019m12), residual
+gen exppres9=exp(pres9) if tin(,2019m12)
+summ exppres9
+gen pnonfarm9=r(mean)*exp(l.lnflnonfarm+nonfarm9)
+_pctile exppres9, percentile(2.5,97.5) 
+gen lbnonfarm9=r(r1)*exp(l.lnflnonfarm+nonfarm9)
+gen ubnonfarm9=r(r2)*exp(l.lnflnonfarm+nonfarm9)
+tsline ubnonfarm9 lbnonfarm9  pnonfarm9 fl_nonfarm if tin(2016m12,2020m1), tline(2019m12)
+
+*10
+reg d.lnflnonfarm l(1/12,24)d.lnflnonfarm l(1/2,12,24)d.lnfllf l(1/2,12,24)d.lnusepr i.month if tin(,2018m12)
+predict nonfarm10
+predict stdfore10, stdf
+gen pnonfarm10=exp(l.lnflnonfarm+nonfarm10)*exp(.5*e(rmse)^2)
+gen ubnonfarm10=exp(l.lnflnonfarm+nonfarm10+1.96*stdfore10)*exp(.5*e(rmse)^2)
+gen lbnonfarm10=exp(l.lnflnonfarm+nonfarm10-1.96*stdfore10)*exp(.5*e(rmse)^2)
+tsline ubnonfarm10 lbnonfarm10 pnonfarm10 fl_nonfarm if tin(2016m12,2020m1), tline(2019m12)
+
+*11
+tsline fl_nonfarm if tin(2018m12,2020m1) 
+tsline  ubnonfarm10 lbnonfarm10 pnonfarm10 if tin(2019m12,), tline(2019m12)
+
+log close
