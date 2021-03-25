@@ -16,7 +16,35 @@
 4. If you were an executive at a company that had a pervasive yet problematic culture, what steps would you take to change it? Using Google Scholar or your university library’s access to EBSCO, LexisNexis, or other databases, search for recent articles in business publications on “culture change.” What role did the executives play in the culture change? How does this differ from what you would have done to change the culture?
    - Executives love to dictate a culture change and make a company "their own" but they never work on the ground floor where their culture is being implemented. Very frequently it does not mesh with the reality of working on the ground floor. Executives must practice what they preach and must have experience and continue to work on the ground floor on occassion so that they are staying in touch with the environments that their employees work in. If I am ever an executive, I will make sure I am staying in touch.
 
+<div style="page-break-after: always; break-after: page;"></div>
+
 ## Fitbit, Inc.: Has the Company Outgrown Its Strategy?
 
+​	Since this case study was written, Fitbit was acquired by Google. I would imagine that their entire strategy has since changed. This analysis will use the SOAR method.
 
+**Strengths**
 
+- Early market entry
+- Solid financials even if they're not the best
+
+**Opportunities**
+
+- The market didn't really exist outside of pedometers before they created it
+- Design flaws could be improved and the resulting situations could be solved
+  - Antenna problems
+  - Design flaws
+  - Allergic reactions to materials
+  - Too much information created a cluttered website
+  - Privacy issues
+  - New product launch costs
+
+**Aspirations**
+
+- Become a more highly valued company
+- Create devices that give more detailed medical information
+
+**Results**
+
+- That remains to be seen. I'm curious where they'll go now that they're owned by Google
+
+Now that I've tried to do SOAR, I think a different approach may have been better. A SWOT analysis would be better or analyzing their core competencies and what they could bring to the market.
