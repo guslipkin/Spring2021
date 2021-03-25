@@ -143,15 +143,6 @@ gen lbpnonfarm47=r(r1)*exp(l.lnflnonfarm+nonfarm47)
 gen ubpnonfarm47=r(r2)*exp(l.lnflnonfarm+nonfarm47)
 tsline ubpnonfarm47 lbpnonfarm47 pnonfarm47 fl_nonfarm if tin(2016m12,2019m12), tline(2018m12)
 
-
-predict nonfarm7
-predict pres7 if tin(2016m12,2018m12), residual
-gen exppres7=exp(pres7) if tin(2016m12,2018m12)
-summ exppres7
-gen pnonfarm7=r(mean)*exp(l.lfl_nonfarm+nonfarm7)
-_pctile exppres7, percentile(2.5,97.5) 
-gen lbnonfarm7=r(r1)*exp(l.lfl_nonfarm+nonfarm7)
-gen ubnonfarm7=r(r2)*exp(l.lfl_nonfarm+nonfarm7)
 *8
 tsappend, add(1)
 replace month=month(dofm(date)) if month==.
@@ -178,7 +169,6 @@ gen lbnonfarm10=exp(l.lnflnonfarm+nonfarm10-1.96*stdfore10)*exp(.5*e(rmse)^2)
 tsline ubnonfarm10 lbnonfarm10 pnonfarm10 fl_nonfarm if tin(2016m12,2020m1), tline(2019m12)
 
 *11
-tsline fl_nonfarm if tin(2018m12,2020m1) 
-tsline  ubnonfarm10 lbnonfarm10 pnonfarm10 if tin(2019m12,), tline(2019m12)
+tsline fl_nonfarm if tin(2018m12,2020m1) || tsline  ubnonfarm10 lbnonfarm10 pnonfarm10 if tin(2019m12,), tline(2019m12)
 
 log close
