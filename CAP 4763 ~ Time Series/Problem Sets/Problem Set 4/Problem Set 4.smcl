@@ -3,7 +3,7 @@
       name:  {res}<unnamed>
        {txt}log:  {res}/Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Problem Set 4/Problem Set 4.smcl
   {txt}log type:  {res}smcl
- {txt}opened on:  {res}23 Mar 2021, 19:55:41
+ {txt}opened on:  {res}23 Mar 2021, 21:24:45
 {txt}
 {com}. 
 . *2d Generate a monthly date variable (make its display format monthly time, %tm)
@@ -1432,52 +1432,194 @@ Model 1 {res}         61  -3114.0527  -2875.1644   .00341856   .00380836
 
 {com}. _pctile exppres47, percentile(2.5,97.5) 
 {txt}
-{com}. gen lbnonfarm47=r(r1)*exp(l.lnflnonfarm+nonfarm47)
-{txt}(469 missing values generated)
-
-{com}. gen ubnonfarm47=r(r2)*exp(l.lnflnonfarm+nonfarm47)
-{txt}(469 missing values generated)
-
-{com}. tsline ubpnonfarm47 lbpnonfarm47 pnonfarm47 fl_nonfarm if tin(2016m12,2019m12), tline(2018m12)
-{err}variable {bf}ubpnonfarm47{sf} not found
-{txt}{search r(111), local:r(111);}
-
-end of do-file
-
-{search r(111), local:r(111);}
-
-{com}. do "/var/folders/99/5g4rbsld0s9cpjm53wfklclc0000gn/T//SD05048.000000"
-{txt}
 {com}. gen lbpnonfarm47=r(r1)*exp(l.lnflnonfarm+nonfarm47)
-{txt}(972 missing values generated)
+{txt}(469 missing values generated)
 
 {com}. gen ubpnonfarm47=r(r2)*exp(l.lnflnonfarm+nonfarm47)
-{txt}(972 missing values generated)
+{txt}(469 missing values generated)
 
 {com}. tsline ubpnonfarm47 lbpnonfarm47 pnonfarm47 fl_nonfarm if tin(2016m12,2019m12), tline(2018m12)
 {res}{txt}
 {com}. 
-{txt}end of do-file
-
-{com}. do "/var/folders/99/5g4rbsld0s9cpjm53wfklclc0000gn/T//SD05048.000000"
+. *8
+. tsappend, add(1)
 {txt}
-{com}. tsline ubpnonfarm6 lbpnonfarm6 pnonfarm6 fl_nonfarm if tin(2016m12,2019m12), tline(2018m12)
+{com}. replace month=month(dofm(date)) if month==.
+{txt}(1 real change made)
+
+{com}. 
+. *9
+. reg d.lnflnonfarm l(1/12,24)d.lnflnonfarm l(1/2,12,24)d.lnfllf l(1/2,12,24)d.lnusepr i.month if tin(,2018m12)
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       491
+{txt}{hline 13}{c +}{hline 34}   F(32, 458)      = {res}   109.93
+{txt}       Model {c |} {res} .042575775        32  .001330493   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} .005543023       458  .000012103   {txt}R-squared       ={res}    0.8848
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.8768
+{txt}       Total {c |} {res} .048118799       490  .000098202   {txt}Root MSE        =   {res} .00348
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}D.          {col 14}{c |}
+{col 1} lnflnonfarm{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 1}lnflnonfarm {c |}
+{space 9}LD. {c |}{col 14}{res}{space 2}-.0311684{col 26}{space 2} .0380987{col 37}{space 1}   -0.82{col 46}{space 3}0.414{col 54}{space 4}-.1060383{col 67}{space 3} .0437014
+{txt}{space 8}L2D. {c |}{col 14}{res}{space 2} .0011509{col 26}{space 2} .0387186{col 37}{space 1}    0.03{col 46}{space 3}0.976{col 54}{space 4}-.0749371{col 67}{space 3}  .077239
+{txt}{space 8}L3D. {c |}{col 14}{res}{space 2} .1811019{col 26}{space 2} .0383354{col 37}{space 1}    4.72{col 46}{space 3}0.000{col 54}{space 4} .1057668{col 67}{space 3} .2564371
+{txt}{space 8}L4D. {c |}{col 14}{res}{space 2}  .122168{col 26}{space 2} .0372877{col 37}{space 1}    3.28{col 46}{space 3}0.001{col 54}{space 4} .0488919{col 67}{space 3}  .195444
+{txt}{space 8}L5D. {c |}{col 14}{res}{space 2} .1131335{col 26}{space 2} .0394764{col 37}{space 1}    2.87{col 46}{space 3}0.004{col 54}{space 4} .0355562{col 67}{space 3} .1907107
+{txt}{space 8}L6D. {c |}{col 14}{res}{space 2} .0897111{col 26}{space 2} .0411525{col 37}{space 1}    2.18{col 46}{space 3}0.030{col 54}{space 4} .0088401{col 67}{space 3} .1705822
+{txt}{space 8}L7D. {c |}{col 14}{res}{space 2} .0046318{col 26}{space 2} .0409493{col 37}{space 1}    0.11{col 46}{space 3}0.910{col 54}{space 4}-.0758401{col 67}{space 3} .0851037
+{txt}{space 8}L8D. {c |}{col 14}{res}{space 2}-.0345244{col 26}{space 2} .0396846{col 37}{space 1}   -0.87{col 46}{space 3}0.385{col 54}{space 4}-.1125109{col 67}{space 3}  .043462
+{txt}{space 8}L9D. {c |}{col 14}{res}{space 2} .0809663{col 26}{space 2} .0376451{col 37}{space 1}    2.15{col 46}{space 3}0.032{col 54}{space 4} .0069878{col 67}{space 3} .1549448
+{txt}{space 7}L10D. {c |}{col 14}{res}{space 2}-.1108451{col 26}{space 2} .0375797{col 37}{space 1}   -2.95{col 46}{space 3}0.003{col 54}{space 4}-.1846951{col 67}{space 3}-.0369951
+{txt}{space 7}L11D. {c |}{col 14}{res}{space 2}-.0221662{col 26}{space 2}   .03865{col 37}{space 1}   -0.57{col 46}{space 3}0.567{col 54}{space 4}-.0981196{col 67}{space 3} .0537872
+{txt}{space 7}L12D. {c |}{col 14}{res}{space 2} .3376832{col 26}{space 2} .0476368{col 37}{space 1}    7.09{col 46}{space 3}0.000{col 54}{space 4} .2440695{col 67}{space 3} .4312969
+{txt}{space 7}L24D. {c |}{col 14}{res}{space 2} .2364096{col 26}{space 2}   .04478{col 37}{space 1}    5.28{col 46}{space 3}0.000{col 54}{space 4}   .14841{col 67}{space 3} .3244093
+{txt}{space 12} {c |}
+{space 6}lnfllf {c |}
+{space 9}LD. {c |}{col 14}{res}{space 2}-.1300766{col 26}{space 2} .0692757{col 37}{space 1}   -1.88{col 46}{space 3}0.061{col 54}{space 4}-.2662142{col 67}{space 3} .0060609
+{txt}{space 8}L2D. {c |}{col 14}{res}{space 2}-.2188669{col 26}{space 2} .0684865{col 37}{space 1}   -3.20{col 46}{space 3}0.001{col 54}{space 4}-.3534536{col 67}{space 3}-.0842802
+{txt}{space 7}L12D. {c |}{col 14}{res}{space 2}-.0319706{col 26}{space 2}  .070685{col 37}{space 1}   -0.45{col 46}{space 3}0.651{col 54}{space 4}-.1708776{col 67}{space 3} .1069365
+{txt}{space 7}L24D. {c |}{col 14}{res}{space 2} .2248965{col 26}{space 2}   .06562{col 37}{space 1}    3.43{col 46}{space 3}0.001{col 54}{space 4} .0959428{col 67}{space 3} .3538501
+{txt}{space 12} {c |}
+{space 5}lnusepr {c |}
+{space 9}LD. {c |}{col 14}{res}{space 2} .1537422{col 26}{space 2}  .092086{col 37}{space 1}    1.67{col 46}{space 3}0.096{col 54}{space 4}-.0272212{col 67}{space 3} .3347056
+{txt}{space 8}L2D. {c |}{col 14}{res}{space 2} .2542549{col 26}{space 2} .0916164{col 37}{space 1}    2.78{col 46}{space 3}0.006{col 54}{space 4} .0742143{col 67}{space 3} .4342955
+{txt}{space 7}L12D. {c |}{col 14}{res}{space 2}-.0218538{col 26}{space 2} .0949163{col 37}{space 1}   -0.23{col 46}{space 3}0.818{col 54}{space 4}-.2083793{col 67}{space 3} .1646718
+{txt}{space 7}L24D. {c |}{col 14}{res}{space 2}-.4432243{col 26}{space 2} .0880674{col 37}{space 1}   -5.03{col 46}{space 3}0.000{col 54}{space 4}-.6162905{col 67}{space 3}-.2701581
+{txt}{space 12} {c |}
+{space 7}month {c |}
+{space 10}2  {c |}{col 14}{res}{space 2} .0133765{col 26}{space 2}  .002229{col 37}{space 1}    6.00{col 46}{space 3}0.000{col 54}{space 4} .0089962{col 67}{space 3} .0177569
+{txt}{space 10}3  {c |}{col 14}{res}{space 2} .0150211{col 26}{space 2} .0024611{col 37}{space 1}    6.10{col 46}{space 3}0.000{col 54}{space 4} .0101847{col 67}{space 3} .0198576
+{txt}{space 10}4  {c |}{col 14}{res}{space 2} .0140381{col 26}{space 2} .0025223{col 37}{space 1}    5.57{col 46}{space 3}0.000{col 54}{space 4} .0090814{col 67}{space 3} .0189949
+{txt}{space 10}5  {c |}{col 14}{res}{space 2} .0082786{col 26}{space 2} .0023045{col 37}{space 1}    3.59{col 46}{space 3}0.000{col 54}{space 4} .0037499{col 67}{space 3} .0128072
+{txt}{space 10}6  {c |}{col 14}{res}{space 2} .0092759{col 26}{space 2} .0023797{col 37}{space 1}    3.90{col 46}{space 3}0.000{col 54}{space 4} .0045993{col 67}{space 3} .0139524
+{txt}{space 10}7  {c |}{col 14}{res}{space 2} .0081629{col 26}{space 2} .0019705{col 37}{space 1}    4.14{col 46}{space 3}0.000{col 54}{space 4} .0042905{col 67}{space 3} .0120353
+{txt}{space 10}8  {c |}{col 14}{res}{space 2} .0119157{col 26}{space 2} .0020208{col 37}{space 1}    5.90{col 46}{space 3}0.000{col 54}{space 4} .0079446{col 67}{space 3} .0158868
+{txt}{space 10}9  {c |}{col 14}{res}{space 2} .0141217{col 26}{space 2} .0020005{col 37}{space 1}    7.06{col 46}{space 3}0.000{col 54}{space 4} .0101904{col 67}{space 3}  .018053
+{txt}{space 9}10  {c |}{col 14}{res}{space 2} .0242635{col 26}{space 2} .0025397{col 37}{space 1}    9.55{col 46}{space 3}0.000{col 54}{space 4} .0192726{col 67}{space 3} .0292543
+{txt}{space 9}11  {c |}{col 14}{res}{space 2} .0162918{col 26}{space 2} .0023257{col 37}{space 1}    7.01{col 46}{space 3}0.000{col 54}{space 4} .0117215{col 67}{space 3} .0208621
+{txt}{space 9}12  {c |}{col 14}{res}{space 2}  .012759{col 26}{space 2} .0018654{col 37}{space 1}    6.84{col 46}{space 3}0.000{col 54}{space 4} .0090932{col 67}{space 3} .0164248
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2}-.0119962{col 26}{space 2} .0017171{col 37}{space 1}   -6.99{col 46}{space 3}0.000{col 54}{space 4}-.0153705{col 67}{space 3}-.0086219
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. predict nonfarm9
+{txt}(option {bf:xb} assumed; fitted values)
+(469 missing values generated)
+
+{com}. predict pres9 if tin(,2019m12), residual
+{txt}(470 missing values generated)
+
+{com}. gen exppres9=exp(pres9) if tin(,2019m12)
+{txt}(470 missing values generated)
+
+{com}. summ exppres9
+
+{txt}    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 4}exppres9 {c |}{res}        503    1.000002    .0033683   .9796714   1.016379
+{txt}
+{com}. gen pnonfarm9=r(mean)*exp(l.lnflnonfarm+nonfarm9)
+{txt}(469 missing values generated)
+
+{com}. _pctile exppres9, percentile(2.5,97.5) 
+{txt}
+{com}. gen lbnonfarm9=r(r1)*exp(l.lnflnonfarm+nonfarm9)
+{txt}(469 missing values generated)
+
+{com}. gen ubnonfarm9=r(r2)*exp(l.lnflnonfarm+nonfarm9)
+{txt}(469 missing values generated)
+
+{com}. tsline ubnonfarm9 lbnonfarm9  pnonfarm9 fl_nonfarm if tin(2016m12,2020m1), tline(2019m12)
 {res}{txt}
 {com}. 
-{txt}end of do-file
+. *10
+. reg d.lnflnonfarm l(1/12,24)d.lnflnonfarm l(1/2,12,24)d.lnfllf l(1/2,12,24)d.lnusepr i.month if tin(,2018m12)
 
-{com}. do "/var/folders/99/5g4rbsld0s9cpjm53wfklclc0000gn/T//SD05048.000000"
-{txt}
-{com}. tsline ubpnonfarm47 lbpnonfarm47 pnonfarm47 fl_nonfarm if tin(2016m12,2019m12), tline(2018m12)
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       491
+{txt}{hline 13}{c +}{hline 34}   F(32, 458)      = {res}   109.93
+{txt}       Model {c |} {res} .042575775        32  .001330493   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} .005543023       458  .000012103   {txt}R-squared       ={res}    0.8848
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.8768
+{txt}       Total {c |} {res} .048118799       490  .000098202   {txt}Root MSE        =   {res} .00348
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}D.          {col 14}{c |}
+{col 1} lnflnonfarm{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 1}lnflnonfarm {c |}
+{space 9}LD. {c |}{col 14}{res}{space 2}-.0311684{col 26}{space 2} .0380987{col 37}{space 1}   -0.82{col 46}{space 3}0.414{col 54}{space 4}-.1060383{col 67}{space 3} .0437014
+{txt}{space 8}L2D. {c |}{col 14}{res}{space 2} .0011509{col 26}{space 2} .0387186{col 37}{space 1}    0.03{col 46}{space 3}0.976{col 54}{space 4}-.0749371{col 67}{space 3}  .077239
+{txt}{space 8}L3D. {c |}{col 14}{res}{space 2} .1811019{col 26}{space 2} .0383354{col 37}{space 1}    4.72{col 46}{space 3}0.000{col 54}{space 4} .1057668{col 67}{space 3} .2564371
+{txt}{space 8}L4D. {c |}{col 14}{res}{space 2}  .122168{col 26}{space 2} .0372877{col 37}{space 1}    3.28{col 46}{space 3}0.001{col 54}{space 4} .0488919{col 67}{space 3}  .195444
+{txt}{space 8}L5D. {c |}{col 14}{res}{space 2} .1131335{col 26}{space 2} .0394764{col 37}{space 1}    2.87{col 46}{space 3}0.004{col 54}{space 4} .0355562{col 67}{space 3} .1907107
+{txt}{space 8}L6D. {c |}{col 14}{res}{space 2} .0897111{col 26}{space 2} .0411525{col 37}{space 1}    2.18{col 46}{space 3}0.030{col 54}{space 4} .0088401{col 67}{space 3} .1705822
+{txt}{space 8}L7D. {c |}{col 14}{res}{space 2} .0046318{col 26}{space 2} .0409493{col 37}{space 1}    0.11{col 46}{space 3}0.910{col 54}{space 4}-.0758401{col 67}{space 3} .0851037
+{txt}{space 8}L8D. {c |}{col 14}{res}{space 2}-.0345244{col 26}{space 2} .0396846{col 37}{space 1}   -0.87{col 46}{space 3}0.385{col 54}{space 4}-.1125109{col 67}{space 3}  .043462
+{txt}{space 8}L9D. {c |}{col 14}{res}{space 2} .0809663{col 26}{space 2} .0376451{col 37}{space 1}    2.15{col 46}{space 3}0.032{col 54}{space 4} .0069878{col 67}{space 3} .1549448
+{txt}{space 7}L10D. {c |}{col 14}{res}{space 2}-.1108451{col 26}{space 2} .0375797{col 37}{space 1}   -2.95{col 46}{space 3}0.003{col 54}{space 4}-.1846951{col 67}{space 3}-.0369951
+{txt}{space 7}L11D. {c |}{col 14}{res}{space 2}-.0221662{col 26}{space 2}   .03865{col 37}{space 1}   -0.57{col 46}{space 3}0.567{col 54}{space 4}-.0981196{col 67}{space 3} .0537872
+{txt}{space 7}L12D. {c |}{col 14}{res}{space 2} .3376832{col 26}{space 2} .0476368{col 37}{space 1}    7.09{col 46}{space 3}0.000{col 54}{space 4} .2440695{col 67}{space 3} .4312969
+{txt}{space 7}L24D. {c |}{col 14}{res}{space 2} .2364096{col 26}{space 2}   .04478{col 37}{space 1}    5.28{col 46}{space 3}0.000{col 54}{space 4}   .14841{col 67}{space 3} .3244093
+{txt}{space 12} {c |}
+{space 6}lnfllf {c |}
+{space 9}LD. {c |}{col 14}{res}{space 2}-.1300766{col 26}{space 2} .0692757{col 37}{space 1}   -1.88{col 46}{space 3}0.061{col 54}{space 4}-.2662142{col 67}{space 3} .0060609
+{txt}{space 8}L2D. {c |}{col 14}{res}{space 2}-.2188669{col 26}{space 2} .0684865{col 37}{space 1}   -3.20{col 46}{space 3}0.001{col 54}{space 4}-.3534536{col 67}{space 3}-.0842802
+{txt}{space 7}L12D. {c |}{col 14}{res}{space 2}-.0319706{col 26}{space 2}  .070685{col 37}{space 1}   -0.45{col 46}{space 3}0.651{col 54}{space 4}-.1708776{col 67}{space 3} .1069365
+{txt}{space 7}L24D. {c |}{col 14}{res}{space 2} .2248965{col 26}{space 2}   .06562{col 37}{space 1}    3.43{col 46}{space 3}0.001{col 54}{space 4} .0959428{col 67}{space 3} .3538501
+{txt}{space 12} {c |}
+{space 5}lnusepr {c |}
+{space 9}LD. {c |}{col 14}{res}{space 2} .1537422{col 26}{space 2}  .092086{col 37}{space 1}    1.67{col 46}{space 3}0.096{col 54}{space 4}-.0272212{col 67}{space 3} .3347056
+{txt}{space 8}L2D. {c |}{col 14}{res}{space 2} .2542549{col 26}{space 2} .0916164{col 37}{space 1}    2.78{col 46}{space 3}0.006{col 54}{space 4} .0742143{col 67}{space 3} .4342955
+{txt}{space 7}L12D. {c |}{col 14}{res}{space 2}-.0218538{col 26}{space 2} .0949163{col 37}{space 1}   -0.23{col 46}{space 3}0.818{col 54}{space 4}-.2083793{col 67}{space 3} .1646718
+{txt}{space 7}L24D. {c |}{col 14}{res}{space 2}-.4432243{col 26}{space 2} .0880674{col 37}{space 1}   -5.03{col 46}{space 3}0.000{col 54}{space 4}-.6162905{col 67}{space 3}-.2701581
+{txt}{space 12} {c |}
+{space 7}month {c |}
+{space 10}2  {c |}{col 14}{res}{space 2} .0133765{col 26}{space 2}  .002229{col 37}{space 1}    6.00{col 46}{space 3}0.000{col 54}{space 4} .0089962{col 67}{space 3} .0177569
+{txt}{space 10}3  {c |}{col 14}{res}{space 2} .0150211{col 26}{space 2} .0024611{col 37}{space 1}    6.10{col 46}{space 3}0.000{col 54}{space 4} .0101847{col 67}{space 3} .0198576
+{txt}{space 10}4  {c |}{col 14}{res}{space 2} .0140381{col 26}{space 2} .0025223{col 37}{space 1}    5.57{col 46}{space 3}0.000{col 54}{space 4} .0090814{col 67}{space 3} .0189949
+{txt}{space 10}5  {c |}{col 14}{res}{space 2} .0082786{col 26}{space 2} .0023045{col 37}{space 1}    3.59{col 46}{space 3}0.000{col 54}{space 4} .0037499{col 67}{space 3} .0128072
+{txt}{space 10}6  {c |}{col 14}{res}{space 2} .0092759{col 26}{space 2} .0023797{col 37}{space 1}    3.90{col 46}{space 3}0.000{col 54}{space 4} .0045993{col 67}{space 3} .0139524
+{txt}{space 10}7  {c |}{col 14}{res}{space 2} .0081629{col 26}{space 2} .0019705{col 37}{space 1}    4.14{col 46}{space 3}0.000{col 54}{space 4} .0042905{col 67}{space 3} .0120353
+{txt}{space 10}8  {c |}{col 14}{res}{space 2} .0119157{col 26}{space 2} .0020208{col 37}{space 1}    5.90{col 46}{space 3}0.000{col 54}{space 4} .0079446{col 67}{space 3} .0158868
+{txt}{space 10}9  {c |}{col 14}{res}{space 2} .0141217{col 26}{space 2} .0020005{col 37}{space 1}    7.06{col 46}{space 3}0.000{col 54}{space 4} .0101904{col 67}{space 3}  .018053
+{txt}{space 9}10  {c |}{col 14}{res}{space 2} .0242635{col 26}{space 2} .0025397{col 37}{space 1}    9.55{col 46}{space 3}0.000{col 54}{space 4} .0192726{col 67}{space 3} .0292543
+{txt}{space 9}11  {c |}{col 14}{res}{space 2} .0162918{col 26}{space 2} .0023257{col 37}{space 1}    7.01{col 46}{space 3}0.000{col 54}{space 4} .0117215{col 67}{space 3} .0208621
+{txt}{space 9}12  {c |}{col 14}{res}{space 2}  .012759{col 26}{space 2} .0018654{col 37}{space 1}    6.84{col 46}{space 3}0.000{col 54}{space 4} .0090932{col 67}{space 3} .0164248
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2}-.0119962{col 26}{space 2} .0017171{col 37}{space 1}   -6.99{col 46}{space 3}0.000{col 54}{space 4}-.0153705{col 67}{space 3}-.0086219
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. predict nonfarm10
+{txt}(option {bf:xb} assumed; fitted values)
+(469 missing values generated)
+
+{com}. predict stdfore10, stdf
+{txt}(469 missing values generated)
+
+{com}. gen pnonfarm10=exp(l.lnflnonfarm+nonfarm10)*exp(.5*e(rmse)^2)
+{txt}(469 missing values generated)
+
+{com}. gen ubnonfarm10=exp(l.lnflnonfarm+nonfarm10+1.96*stdfore10)*exp(.5*e(rmse)^2)
+{txt}(469 missing values generated)
+
+{com}. gen lbnonfarm10=exp(l.lnflnonfarm+nonfarm10-1.96*stdfore10)*exp(.5*e(rmse)^2)
+{txt}(469 missing values generated)
+
+{com}. tsline ubnonfarm10 lbnonfarm10 pnonfarm10 fl_nonfarm if tin(2016m12,2020m1), tline(2019m12)
 {res}{txt}
 {com}. 
-{txt}end of do-file
-
-{com}. do "/var/folders/99/5g4rbsld0s9cpjm53wfklclc0000gn/T//SD05048.000000"
-{txt}
-{com}. tsline ubpnonfarm47 lbpnonfarm47 pnonfarm47 fl_nonfarm if tin(2016m12,2019m12), tline(2018m12)
+. *11
+. tsline fl_nonfarm if tin(2018m12,2020m1) || tsline  ubnonfarm10 lbnonfarm10 pnonfarm10 if tin(2019m12,), tline(2019m12)
 {res}{txt}
 {com}. 
-{txt}end of do-file
-
-{com}. 
+. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}/Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Problem Set 4/Problem Set 4.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}23 Mar 2021, 21:25:10
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}
