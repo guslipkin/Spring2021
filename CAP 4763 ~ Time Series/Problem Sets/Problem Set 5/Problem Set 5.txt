@@ -1,0 +1,591 @@
+                                                       ___  ____  ____  ____  ____(R)
+                                                      /__    /   ____/   /   ____/   
+                                                     ___/   /   /___/   /   /___/    
+                                                       Statistics/Data analysis      
+      
+      -------------------------------------------------------------------------------
+            name:  <unnamed>
+             log:  /Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Probl
+      > em Sets/Problem Set 5/Problem Set 5.smcl
+        log type:  smcl
+       opened on:  28 Mar 2021, 20:57:14
+      
+     1 . 
+     2 . gen datec=date(datestring, "YMD")
+      
+     3 . gen date=mofd(datec)
+      
+     4 . gen month=month(datec)
+      
+     5 . format date %tm
+      
+     6 . 
+     7 . tsset date
+              time variable:  date, 1939m1 to 2020m12
+                      delta:  1 month
+      
+     8 . 
+     9 . gen lnusepr=log(us_epr)
+      (108 missing values generated)
+      
+    10 . gen lnflnonfarm=log(fl_nonfarm)
+      
+    11 . gen lnfllf=log(fl_lf)
+      (444 missing values generated)
+      
+    12 . gen lnflbp=log(fl_bp)
+      (588 missing values generated)
+      
+    13 . 
+    14 . *1
+    15 . drop if !tin(1990m1,2019m12)
+      (624 observations deleted)
+      
+    16 . 
+    17 . *2
+    18 . tsset date
+              time variable:  date, 1990m1 to 2019m12
+                      delta:  1 month
+      
+    19 . tsappend, add(1)
+      
+    20 . replace month=month(dofm(date)) if month==.
+      (1 real change made)
+      
+    21 . 
+    22 . *3
+    23 . gen m1=0
+      
+    24 . replace m1=1 if month==1
+      (31 real changes made)
+      
+    25 . gen m2=0
+      
+    26 . replace m2=1 if month==2
+      (30 real changes made)
+      
+    27 . gen m3=0
+      
+    28 . replace m3=1 if month==3
+      (30 real changes made)
+      
+    29 . gen m4=0
+      
+    30 . replace m4=1 if month==4
+      (30 real changes made)
+      
+    31 . gen m5=0
+      
+    32 . replace m5=1 if month==5
+      (30 real changes made)
+      
+    33 . gen m6=0
+      
+    34 . replace m6=1 if month==6
+      (30 real changes made)
+      
+    35 . gen m7=0
+      
+    36 . replace m7=1 if month==7
+      (30 real changes made)
+      
+    37 . gen m8=0
+      
+    38 . replace m8=1 if month==8
+      (30 real changes made)
+      
+    39 . gen m9=0
+      
+    40 . replace m9=1 if month==9
+      (30 real changes made)
+      
+    41 . gen m10=0
+      
+    42 . replace m10=1 if month==10
+      (30 real changes made)
+      
+    43 . gen m11=0
+      
+    44 . replace m11=1 if month==11
+      (30 real changes made)
+      
+    45 . gen m12=0
+      
+    46 . replace m11=1 if month==12
+      (30 real changes made)
+      
+    47 . 
+    48 . gen dlnflnonfarm=d.lnflnonfarm
+      (2 missing values generated)
+      
+    49 . gen l1dlnflnonfarm=l1d.lnflnonfarm
+      (2 missing values generated)
+      
+    50 . gen l2dlnflnonfarm=l2d.lnflnonfarm
+      (3 missing values generated)
+      
+    51 . gen l3dlnflnonfarm=l3d.lnflnonfarm
+      (4 missing values generated)
+      
+    52 . gen l4dlnflnonfarm=l4d.lnflnonfarm
+      (5 missing values generated)
+      
+    53 . gen l5dlnflnonfarm=l5d.lnflnonfarm
+      (6 missing values generated)
+      
+    54 . gen l6dlnflnonfarm=l6d.lnflnonfarm
+      (7 missing values generated)
+      
+    55 . gen l7dlnflnonfarm=l7d.lnflnonfarm
+      (8 missing values generated)
+      
+    56 . gen l8dlnflnonfarm=l8d.lnflnonfarm
+      (9 missing values generated)
+      
+    57 . gen l9dlnflnonfarm=l9d.lnflnonfarm
+      (10 missing values generated)
+      
+    58 . gen l10dlnflnonfarm=l10d.lnflnonfarm
+      (11 missing values generated)
+      
+    59 . gen l11dlnflnonfarm=l11d.lnflnonfarm
+      (12 missing values generated)
+      
+    60 . gen l12dlnflnonfarm=l12d.lnflnonfarm
+      (13 missing values generated)
+      
+    61 . gen l24dlnflnonfarm=l24d.lnflnonfarm
+      (25 missing values generated)
+      
+    62 . 
+    63 . gen dlnfllf=d.lnfllf
+      (2 missing values generated)
+      
+    64 . gen l1dlnfllf=l1d.lnfllf
+      (2 missing values generated)
+      
+    65 . gen l2dlnfllf=l2d.lnfllf
+      (3 missing values generated)
+      
+    66 . gen l3dlnfllf=l3d.lnfllf
+      (4 missing values generated)
+      
+    67 . gen l4dlnfllf=l4d.lnfllf
+      (5 missing values generated)
+      
+    68 . gen l5dlnfllf=l5d.lnfllf
+      (6 missing values generated)
+      
+    69 . gen l6dlnfllf=l6d.lnfllf
+      (7 missing values generated)
+      
+    70 . gen l7dlnfllf=l7d.lnfllf
+      (8 missing values generated)
+      
+    71 . gen l8dlnfllf=l8d.lnfllf
+      (9 missing values generated)
+      
+    72 . gen l9dlnfllf=l9d.lnfllf
+      (10 missing values generated)
+      
+    73 . gen l10dlnfllf=l10d.lnfllf
+      (11 missing values generated)
+      
+    74 . gen l11dlnfllf=l11d.lnfllf
+      (12 missing values generated)
+      
+    75 . gen l12dlnfllf=l12d.lnfllf
+      (13 missing values generated)
+      
+    76 . gen l24dlnfllf=l24d.lnfllf
+      (25 missing values generated)
+      
+    77 . 
+    78 . gen dlnusepr=d.lnusepr
+      (2 missing values generated)
+      
+    79 . gen l1dlnusepr=l1d.lnusepr
+      (2 missing values generated)
+      
+    80 . gen l2dlnusepr=l2d.lnusepr
+      (3 missing values generated)
+      
+    81 . gen l3dlnusepr=l3d.lnusepr
+      (4 missing values generated)
+      
+    82 . gen l4dlnusepr=l4d.lnusepr
+      (5 missing values generated)
+      
+    83 . gen l5dlnusepr=l5d.lnusepr
+      (6 missing values generated)
+      
+    84 . gen l6dlnusepr=l6d.lnusepr
+      (7 missing values generated)
+      
+    85 . gen l7dlnusepr=l7d.lnusepr
+      (8 missing values generated)
+      
+    86 . gen l8dlnusepr=l8d.lnusepr
+      (9 missing values generated)
+      
+    87 . gen l9dlnusepr=l9d.lnusepr
+      (10 missing values generated)
+      
+    88 . gen l10dlnusepr=l10d.lnusepr
+      (11 missing values generated)
+      
+    89 . gen l11dlnusepr=l11d.lnusepr
+      (12 missing values generated)
+      
+    90 . gen l12dlnusepr=l12d.lnusepr
+      (13 missing values generated)
+      
+    91 . gen l24dlnusepr=l24d.lnusepr
+      (25 missing values generated)
+      
+    92 . 
+    93 . /*
+      > gsreg dlnflnonfarm l1dlnflnonfarm l3dlnflnonfarm l6dlnflnonfarm l9dlnflnonfar
+      > m ///
+      >       l12dlnflnonfarm l24dlnflnonfarm ///
+      >           l1dlnfllf l3dlnfllf l6dlnfllf l9dlnfllf ///
+      >       l12dlnfllf l24dlnfllf ///
+      >           l1dlnusepr l3dlnusepr l6dlnusepr l9dlnusepr ///
+      >       l12dlnusepr l24dlnusepr if tin(1990m1,2019m12), ///
+      >         ncomb(1,6) aic outsample(24) fix(m1 m3 m6 m9 m12) ///
+      >         samesample nindex( -1 aic -1 bic -1 rmse_out) results(gsreg_dlnrer) r
+      > eplace
+      > */
+    94 . 
+    95 . *5
+    96 . /* 
+      > Best model
+      > reg dlnflnonfarm l3dlnflnonfarm l6dlnflnonfarm l12dlnflnonfarm l24dlnflnonfar
+      > m 
+      >         l24dlnfllf l6dlnusepr m1 m3 m6 m9 m12
+      > */
+    97 . scalar drop _all
+      
+    98 . quietly forval w=48(12)240 {
+      
+    99 . scalar list
+      RWmaxobs240 =        240
+      RWminobs240 =         47
+       RWrmse240 =  .00388122
+      RWmaxobs228 =        228
+      RWminobs228 =         47
+       RWrmse228 =  .00388153
+      RWmaxobs216 =        216
+      RWminobs216 =         47
+       RWrmse216 =  .00389316
+      RWmaxobs204 =        204
+      RWminobs204 =         47
+       RWrmse204 =  .00390349
+      RWmaxobs192 =        192
+      RWminobs192 =         47
+       RWrmse192 =    .003894
+      RWmaxobs180 =        180
+      RWminobs180 =         47
+       RWrmse180 =  .00389184
+      RWmaxobs168 =        168
+      RWminobs168 =         47
+       RWrmse168 =  .00387958
+      RWmaxobs156 =        156
+      RWminobs156 =         47
+       RWrmse156 =  .00387308
+      RWmaxobs144 =        144
+      RWminobs144 =         47
+       RWrmse144 =   .0039239
+      RWmaxobs132 =        132
+      RWminobs132 =         47
+       RWrmse132 =  .00388104
+      RWmaxobs120 =        120
+      RWminobs120 =         47
+       RWrmse120 =   .0038731
+      RWmaxobs108 =        108
+      RWminobs108 =         47
+       RWrmse108 =  .00386798
+      RWmaxobs96 =         96
+      RWminobs96 =         47
+        RWrmse96 =  .00396002
+      RWmaxobs84 =         84
+      RWminobs84 =         47
+        RWrmse84 =  .00397336
+      RWmaxobs72 =         72
+      RWminobs72 =         47
+        RWrmse72 =  .00399579
+      RWmaxobs60 =         60
+      RWminobs60 =         47
+        RWrmse60 =  .00414814
+      RWmaxobs48 =         48
+      RWminobs48 =         47
+        RWrmse48 =  .00435839
+      
+   100 . /*
+      > RWmaxobs156 =        156
+      > RWminobs156 =         47
+      > RWrmse156 =  .00387308
+      > */
+   101 . 
+   102 . /*
+      > Smallest / best model
+      > reg dlnflnonfarm l12dlnflnonfarm m1 m3 m6 m9 m12
+      > */
+   103 . scalar drop _all
+      
+   104 . quietly forval w=48(12)240 {
+      
+   105 . scalar list
+      RWmaxobs240 =        240
+      RWminobs240 =         59
+       RWrmse240 =  .00408422
+      RWmaxobs228 =        228
+      RWminobs228 =         59
+       RWrmse228 =  .00407004
+      RWmaxobs216 =        216
+      RWminobs216 =         59
+       RWrmse216 =  .00408989
+      RWmaxobs204 =        204
+      RWminobs204 =         59
+       RWrmse204 =  .00409955
+      RWmaxobs192 =        192
+      RWminobs192 =         59
+       RWrmse192 =  .00410829
+      RWmaxobs180 =        180
+      RWminobs180 =         59
+       RWrmse180 =  .00409741
+      RWmaxobs168 =        168
+      RWminobs168 =         59
+       RWrmse168 =  .00409249
+      RWmaxobs156 =        156
+      RWminobs156 =         59
+       RWrmse156 =   .0040872
+      RWmaxobs144 =        144
+      RWminobs144 =         59
+       RWrmse144 =  .00412686
+      RWmaxobs132 =        132
+      RWminobs132 =         59
+       RWrmse132 =  .00409696
+      RWmaxobs120 =        120
+      RWminobs120 =         59
+       RWrmse120 =  .00407987
+      RWmaxobs108 =        108
+      RWminobs108 =         59
+       RWrmse108 =  .00411602
+      RWmaxobs96 =         96
+      RWminobs96 =         59
+        RWrmse96 =  .00415802
+      RWmaxobs84 =         84
+      RWminobs84 =         59
+        RWrmse84 =  .00419014
+      RWmaxobs72 =         72
+      RWminobs72 =         59
+        RWrmse72 =  .00421357
+      RWmaxobs60 =         60
+      RWminobs60 =         59
+        RWrmse60 =  .00428083
+      RWmaxobs48 =         48
+      RWminobs48 =         48
+        RWrmse48 =  .00431464
+      
+   106 . /*
+      > RWmaxobs228 =        228
+      > RWminobs228 =         59
+      > RWrmse228 =  .00407004
+      > 
+      > */
+   107 . 
+   108 . /*
+      > Best medium length model
+      > reg dlnflnonfarm l3dlnflnonfarm l12dlnflnonfarm l24dlnflnonfarm l6dlnusepr
+      >         m1 m3 m6 m9 m12
+      > */
+   109 . scalar drop _all
+      
+   110 . quietly forval w=48(12)240 {
+      
+   111 . scalar list
+      RWmaxobs240 =        240
+      RWminobs240 =         47
+       RWrmse240 =  .00392293
+      RWmaxobs228 =        228
+      RWminobs228 =         47
+       RWrmse228 =  .00392007
+      RWmaxobs216 =        216
+      RWminobs216 =         47
+       RWrmse216 =  .00393809
+      RWmaxobs204 =        204
+      RWminobs204 =         47
+       RWrmse204 =  .00394526
+      RWmaxobs192 =        192
+      RWminobs192 =         47
+       RWrmse192 =  .00394292
+      RWmaxobs180 =        180
+      RWminobs180 =         47
+       RWrmse180 =  .00394243
+      RWmaxobs168 =        168
+      RWminobs168 =         47
+       RWrmse168 =  .00392743
+      RWmaxobs156 =        156
+      RWminobs156 =         47
+       RWrmse156 =  .00391717
+      RWmaxobs144 =        144
+      RWminobs144 =         47
+       RWrmse144 =  .00400005
+      RWmaxobs132 =        132
+      RWminobs132 =         47
+       RWrmse132 =  .00396689
+      RWmaxobs120 =        120
+      RWminobs120 =         47
+       RWrmse120 =  .00396377
+      RWmaxobs108 =        108
+      RWminobs108 =         47
+       RWrmse108 =   .0039582
+      RWmaxobs96 =         96
+      RWminobs96 =         47
+        RWrmse96 =  .00404142
+      RWmaxobs84 =         84
+      RWminobs84 =         47
+        RWrmse84 =  .00406506
+      RWmaxobs72 =         72
+      RWminobs72 =         47
+        RWrmse72 =  .00409348
+      RWmaxobs60 =         60
+      RWminobs60 =         47
+        RWrmse60 =  .00425552
+      RWmaxobs48 =         48
+      RWminobs48 =         47
+        RWrmse48 =   .0044495
+      
+   112 . /*
+      > RWmaxobs156 =        156
+      > RWminobs156 =         47
+      > RWrmse156 =  .00391717
+      > */
+   113 . 
+   114 . *6
+   115 . /*
+      > RWmaxobs156 =        156
+      > RWminobs156 =         47
+      > RWrmse156 =  .00387308
+      > */
+   116 . scalar drop _all
+      
+   117 . quietly forval w=156(12)156 {
+      
+   118 . summ nobs // checking all had a full window
+      
+          Variable |        Obs        Mean    Std. Dev.       Min        Max
+      -------------+---------------------------------------------------------
+              nobs |        289    135.2561    32.98122         47        156
+      
+   119 . *get error info for normal interval
+   120 . summ errsq
+      
+          Variable |        Obs        Mean    Std. Dev.       Min        Max
+      -------------+---------------------------------------------------------
+             errsq |        288     .000015    .0000471   1.10e-12   .0005431
+      
+   121 . scalar rwrmse=r(mean)^0.5
+      
+   122 . scalar list rwrmse
+          rwrmse =  .00387308
+      
+   123 . gen res=(d.lnflnonfarm-pred)
+      (73 missing values generated)
+      
+   124 . _pctile res, percentile(2.5,97.5)
+      
+   125 . return list
+      
+      scalars:
+                       r(r1) =  -.0074653569608927
+                       r(r2) =  .0065394379198551
+      
+   126 . 
+   127 . *8
+   128 . *Normal
+   129 . predict temp if tin(2020m1,2020m1)
+      (option xb assumed; fitted values)
+      (360 missing values generated)
+      
+   130 . replace pred=temp if tin(2020m1,2020m1)
+      (0 real changes made)
+      
+   131 . drop temp
+      
+   132 . gen pnonfarm=exp(l.lnflnonfarm+pred+(rwrmse^2)/2)
+      (72 missing values generated)
+      
+   133 . gen ubound=exp(l.lnflnonfarm+pred+1.96*rwrmse+(rwrmse^2)/2)
+      (72 missing values generated)
+      
+   134 . gen lbound=exp(l.lnflnonfarm+pred-1.96*rwrmse+(rwrmse^2)/2)
+      (72 missing values generated)
+      
+   135 . list month pnonfarm lbound ubound if tin(2020m1,2020m1)
+      
+           +----------------------------------------+
+           | month   pnonfarm     lbound     ubound |
+           |----------------------------------------|
+      361. |     1   9001.077   8933.007   9069.667 |
+           +----------------------------------------+
+      
+   136 . tsline pnonfarm lbound ubound fl_nonfarm if tin(2019m1,2020m1), tline(2019m12
+      > ) saving("Nonfarm_Normal", replace)
+      (file Nonfarm_Normal.gph saved)
+      
+   137 . 
+   138 . *Empirical
+   139 . drop res
+      
+   140 . gen res=(d.lnflnonfarm-pred)
+      (73 missing values generated)
+      
+   141 . gen expres=exp(res)
+      (73 missing values generated)
+      
+   142 . summ expres
+      
+          Variable |        Obs        Mean    Std. Dev.       Min        Max
+      -------------+---------------------------------------------------------
+            expres |        288    .9997746    .0038735   .9777296   1.023579
+      
+   143 . scalar meanexpres=r(mean)
+      
+   144 . gen pnonfarme=exp(l.lnflnonfarm+pred)*meanexpres
+      (72 missing values generated)
+      
+   145 . _pctile res, percentile(2.5,97.5)
+      
+   146 . return list
+      
+      scalars:
+                       r(r1) =  -.0074653569608927
+                       r(r2) =  .0065394379198551
+      
+   147 . gen lbounde=exp(l.lnflnonfarm+pred+r(r1))*meanexpres
+      (72 missing values generated)
+      
+   148 . gen ubounde=exp(l.lnflnonfarm+pred+r(r2))*meanexpres
+      (72 missing values generated)
+      
+   149 . list month pnonfarme lbounde ubounde if tin(2020m1,2020m1)
+      
+           +----------------------------------------+
+           | month   pnonfa~e    lbounde    ubounde |
+           |----------------------------------------|
+      361. |     1   8998.981   8932.051   9058.022 |
+           +----------------------------------------+
+      
+   150 . tsline pnonfarme lbounde ubounde fl_nonfarm if tin(2019m1,2020m1), ///
+      >         tline(2019m12) saving("Nonfarm_Epirical", replace)
+      (file Nonfarm_Epirical.gph saved)
+      
+   151 . 
+   152 . *9      
+   153 . tsline pnonfarm pnonfarme fl_nonfarm lbound lbounde ubound ubounde ///
+      >  if tin(2019m1,2020m1), tline(2019m12) saving("Normal_vs_Empirical", replace)
+      (file Normal_vs_Empirical.gph saved)
+      
+   154 .  

@@ -75,6 +75,7 @@ gen lnrgdppc=ln(rgdppc)
 /*
 As of here, variables are loaded and/or created.
 So, I am commenting out what need not be repeated for the current lesson.
+*/
 
 
 twoway (tsline lnreratio) (tsline lnrgdppc, yaxis(2))
@@ -134,9 +135,9 @@ twoway (tsline reslnreratio) (tsline reslnrgdppc, yaxis(2)) if tin(2005q1,2019q3
 *What about the apparent seasonal effects?
 
 *Add quarterly indicators to deal with seasonality
-*/
+
 generate quarter=quarter(datec)
-/*
+
 reg lnreratio lnrgdppc i.quarter date
 
 *Look at detrended data
@@ -211,9 +212,6 @@ esttab lnreratio*
 esttab lnreratio* using "lnreratio models.rtf", replace
 *Can enter options to change what is there or how it looks.
 
-
-STOP
-
 *2-4-2021
 
 *Recall we were looking at models like this
@@ -279,10 +277,10 @@ tsline rgdppc if tin(2005q1,2019q3)
 *Then talk about the math of AR and MA processes
 
 
-*/
 
 
-/*
+
+
 *Material for 2-16
 
 
@@ -324,9 +322,9 @@ dfuller lnreratio if tin(1980q1,2019q3), trend lags(4) regress
 **Good idea to work with first differenced data
 
 *End for 2-16
-*/
 
-/*
+
+
 *Start for 2-18-2021
 
 *Let us consider some ARDL Models:
@@ -370,11 +368,11 @@ drop res
 predict res if e(sample)==1, residual
 pac res
 
-*/
+
 
 *End for 2-18-2021
 
-/*
+
 
 *2-23-2021
 
@@ -433,9 +431,9 @@ newey d.lnreratio l(0/8)d.lnrgdp i.quarter if tin(1980q1,2019q3), lag(8)
 *How to decide which among candidate models is best?
 *We will revisit this again and again.
 
-*/
+
 tabulate quarter, generate(q) // An alternative way to get quarter inicators
-/*
+
 browse // look at data
 
 
@@ -505,7 +503,6 @@ Go to the board and discuss AIC, BIC, LOOCV, K-Fold Cross validation*/
 
 *End 3-4-2021
 
-*/
 
 
 *3-9-2021

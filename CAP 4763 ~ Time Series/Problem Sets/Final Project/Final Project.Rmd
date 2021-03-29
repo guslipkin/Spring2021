@@ -1,0 +1,69 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(openxlsx)
+library(tidyverse)
+library(MTS)
+library(forecast)
+library(lubridate)
+```
+
+> The project is to forecast the March non-seasonally adjusted estimates of average weekly earnings and total employment for private employers (total private) for a Florida MSA of your choice and write up a professional report on your forecast.
+
+```{r}
+df <- read.xlsx("TS2020_Final_Project.xlsx", sheet = "Monthly")
+# Count == All Employees: Total Private in The Villages, FL (MSA)
+# Hours == Average Weekly Hours of All Employees: Total Private in The Villages, FL (MSA)
+# Hourly == Average Hourly Earnings of All Employees: Total Private in The Villages, FL (MSA)
+# Earnings == Average Weekly Earnings of All Employees: Total Private in The Villages, FL (MSA)
+# Service == All Employees: Private Service Providing in The Villages, FL (MSA)
+
+# blank == default unit
+# CCA == Continuously Compounded Annual Rate of Change
+# CCH == Continuously Compounded Rate of Change
+# CH1 == Change from Year Ago, units per Week
+# CHG == Change, units per week
+# LOG == Natural Log of units per Week
+# PC1 == Percent Change from Year Ago
+# PCA == Compounded Annual Rate of Change
+# PCH == Percent Change
+colnames(df) <- c("Count", "CountCCA", "CountCCH", "CountCH1", "CountCHG", "CountLOG", "CountPC1", "CountPCA", "CountPCH",
+                  "Hours", "HoursCCA", "HoursCCH", "HoursCH1", "HoursCHG", "HoursLOG", "HoursPC1", "HoursPCA", "HoursPCH",
+                  "Hourly", "HourlyCCA", "HourlyCCH", "HourlyCH1", "HourlyCHG", "HourlyLOG", "HourlyPC1", "HourlyPCA", "HourlyPCH",
+                  "Earnings", "EarningsCCA", "EarningsCCH", "EarningsCH1", "EarningsCHG", "EarningsLOG", "EarningsPC1", "EarningsPCA", "EarningsPCH",
+                  "Service", "ServiceCCA", "ServiceCCH", "ServiceCH1", "ServiceCHG", "ServiceLOG", "ServicePC1", "ServicePCA", "ServicePCH")
+df$Month <- rep(1:12, length.out = nrow(df))
+df$Quarter <- rep(1:4, each = 3, length.out = nrow(df))
+df$Year <- rep(1990:2021, each = 12, length.out = nrow(df))
+# df$Datestring <- paste(df$Year, "m", df$Month, sep = "")
+df$Date <- as.Date(paste(df$Year, df$Month, 1, sep = "/"), format = "%Y/%m/%d", tz = "")
+
+df$Date
+
+fullDF <- df
+minDF <- df %>% select(Count, Hours, Hourly, Earnings, Service, Month, Quarter, Year, Date)
+logDF <- minDF
+write.xlsx(minDF, "../Final Project/minDF.xlsx")
+
+logDF[,c("Count", "Hours", "Hourly", "Earnings", "Service")] <- log(logDF[,c("Count", "Hours", "Hourly", "Earnings", "Service")])
+countDF <- df %>% select(Count, CountCCA, Month, Quarter, Year)
+hoursDF <- df %>% select(Hours)
+hourlyDF <- df %>% select(Hourly, Month, Quarter, Year)
+earningsDF <- df %>% select(Earnings, Month, Quarter, Year)
+serviceDF <- df %>% select(Service, Month, Quarter, Year)
+```
+
+
+```{r}
+ts <- as.ts(minDF, start = c(1990, 1), frequency = 12)
+
+fit.Count <- tslm(Earnings ~ Hours + Hourly, data = ts)
+CV(fit.Count)
+autoplot(ts[,'Earnings'], series = "Data") +
+  autolayer(fitted(fit.Count), series = "Fitted")
+monthplot(ts, )
+```
+

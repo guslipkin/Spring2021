@@ -1,0 +1,593 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}/Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Problem Set 5/Problem Set 5.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}28 Mar 2021, 20:57:14
+{txt}
+{com}. 
+. gen datec=date(datestring, "YMD")
+{txt}
+{com}. gen date=mofd(datec)
+{txt}
+{com}. gen month=month(datec)
+{txt}
+{com}. format date %tm
+{txt}
+{com}. 
+. tsset date
+{res}{txt}{col 9}time variable:  {res}{col 25}date, 1939m1 to 2020m12
+{txt}{col 17}delta:  {res}1 month
+{txt}
+{com}. 
+. gen lnusepr=log(us_epr)
+{txt}(108 missing values generated)
+
+{com}. gen lnflnonfarm=log(fl_nonfarm)
+{txt}
+{com}. gen lnfllf=log(fl_lf)
+{txt}(444 missing values generated)
+
+{com}. gen lnflbp=log(fl_bp)
+{txt}(588 missing values generated)
+
+{com}. 
+. *1
+. drop if !tin(1990m1,2019m12)
+{txt}(624 observations deleted)
+
+{com}. 
+. *2
+. tsset date
+{res}{txt}{col 9}time variable:  {res}{col 25}date, 1990m1 to 2019m12
+{txt}{col 17}delta:  {res}1 month
+{txt}
+{com}. tsappend, add(1)
+{txt}
+{com}. replace month=month(dofm(date)) if month==.
+{txt}(1 real change made)
+
+{com}. 
+. *3
+. gen m1=0
+{txt}
+{com}. replace m1=1 if month==1
+{txt}(31 real changes made)
+
+{com}. gen m2=0
+{txt}
+{com}. replace m2=1 if month==2
+{txt}(30 real changes made)
+
+{com}. gen m3=0
+{txt}
+{com}. replace m3=1 if month==3
+{txt}(30 real changes made)
+
+{com}. gen m4=0
+{txt}
+{com}. replace m4=1 if month==4
+{txt}(30 real changes made)
+
+{com}. gen m5=0
+{txt}
+{com}. replace m5=1 if month==5
+{txt}(30 real changes made)
+
+{com}. gen m6=0
+{txt}
+{com}. replace m6=1 if month==6
+{txt}(30 real changes made)
+
+{com}. gen m7=0
+{txt}
+{com}. replace m7=1 if month==7
+{txt}(30 real changes made)
+
+{com}. gen m8=0
+{txt}
+{com}. replace m8=1 if month==8
+{txt}(30 real changes made)
+
+{com}. gen m9=0
+{txt}
+{com}. replace m9=1 if month==9
+{txt}(30 real changes made)
+
+{com}. gen m10=0
+{txt}
+{com}. replace m10=1 if month==10
+{txt}(30 real changes made)
+
+{com}. gen m11=0
+{txt}
+{com}. replace m11=1 if month==11
+{txt}(30 real changes made)
+
+{com}. gen m12=0
+{txt}
+{com}. replace m11=1 if month==12
+{txt}(30 real changes made)
+
+{com}. 
+. gen dlnflnonfarm=d.lnflnonfarm
+{txt}(2 missing values generated)
+
+{com}. gen l1dlnflnonfarm=l1d.lnflnonfarm
+{txt}(2 missing values generated)
+
+{com}. gen l2dlnflnonfarm=l2d.lnflnonfarm
+{txt}(3 missing values generated)
+
+{com}. gen l3dlnflnonfarm=l3d.lnflnonfarm
+{txt}(4 missing values generated)
+
+{com}. gen l4dlnflnonfarm=l4d.lnflnonfarm
+{txt}(5 missing values generated)
+
+{com}. gen l5dlnflnonfarm=l5d.lnflnonfarm
+{txt}(6 missing values generated)
+
+{com}. gen l6dlnflnonfarm=l6d.lnflnonfarm
+{txt}(7 missing values generated)
+
+{com}. gen l7dlnflnonfarm=l7d.lnflnonfarm
+{txt}(8 missing values generated)
+
+{com}. gen l8dlnflnonfarm=l8d.lnflnonfarm
+{txt}(9 missing values generated)
+
+{com}. gen l9dlnflnonfarm=l9d.lnflnonfarm
+{txt}(10 missing values generated)
+
+{com}. gen l10dlnflnonfarm=l10d.lnflnonfarm
+{txt}(11 missing values generated)
+
+{com}. gen l11dlnflnonfarm=l11d.lnflnonfarm
+{txt}(12 missing values generated)
+
+{com}. gen l12dlnflnonfarm=l12d.lnflnonfarm
+{txt}(13 missing values generated)
+
+{com}. gen l24dlnflnonfarm=l24d.lnflnonfarm
+{txt}(25 missing values generated)
+
+{com}. 
+. gen dlnfllf=d.lnfllf
+{txt}(2 missing values generated)
+
+{com}. gen l1dlnfllf=l1d.lnfllf
+{txt}(2 missing values generated)
+
+{com}. gen l2dlnfllf=l2d.lnfllf
+{txt}(3 missing values generated)
+
+{com}. gen l3dlnfllf=l3d.lnfllf
+{txt}(4 missing values generated)
+
+{com}. gen l4dlnfllf=l4d.lnfllf
+{txt}(5 missing values generated)
+
+{com}. gen l5dlnfllf=l5d.lnfllf
+{txt}(6 missing values generated)
+
+{com}. gen l6dlnfllf=l6d.lnfllf
+{txt}(7 missing values generated)
+
+{com}. gen l7dlnfllf=l7d.lnfllf
+{txt}(8 missing values generated)
+
+{com}. gen l8dlnfllf=l8d.lnfllf
+{txt}(9 missing values generated)
+
+{com}. gen l9dlnfllf=l9d.lnfllf
+{txt}(10 missing values generated)
+
+{com}. gen l10dlnfllf=l10d.lnfllf
+{txt}(11 missing values generated)
+
+{com}. gen l11dlnfllf=l11d.lnfllf
+{txt}(12 missing values generated)
+
+{com}. gen l12dlnfllf=l12d.lnfllf
+{txt}(13 missing values generated)
+
+{com}. gen l24dlnfllf=l24d.lnfllf
+{txt}(25 missing values generated)
+
+{com}. 
+. gen dlnusepr=d.lnusepr
+{txt}(2 missing values generated)
+
+{com}. gen l1dlnusepr=l1d.lnusepr
+{txt}(2 missing values generated)
+
+{com}. gen l2dlnusepr=l2d.lnusepr
+{txt}(3 missing values generated)
+
+{com}. gen l3dlnusepr=l3d.lnusepr
+{txt}(4 missing values generated)
+
+{com}. gen l4dlnusepr=l4d.lnusepr
+{txt}(5 missing values generated)
+
+{com}. gen l5dlnusepr=l5d.lnusepr
+{txt}(6 missing values generated)
+
+{com}. gen l6dlnusepr=l6d.lnusepr
+{txt}(7 missing values generated)
+
+{com}. gen l7dlnusepr=l7d.lnusepr
+{txt}(8 missing values generated)
+
+{com}. gen l8dlnusepr=l8d.lnusepr
+{txt}(9 missing values generated)
+
+{com}. gen l9dlnusepr=l9d.lnusepr
+{txt}(10 missing values generated)
+
+{com}. gen l10dlnusepr=l10d.lnusepr
+{txt}(11 missing values generated)
+
+{com}. gen l11dlnusepr=l11d.lnusepr
+{txt}(12 missing values generated)
+
+{com}. gen l12dlnusepr=l12d.lnusepr
+{txt}(13 missing values generated)
+
+{com}. gen l24dlnusepr=l24d.lnusepr
+{txt}(25 missing values generated)
+
+{com}. 
+. /*
+> gsreg dlnflnonfarm l1dlnflnonfarm l3dlnflnonfarm l6dlnflnonfarm l9dlnflnonfarm ///
+>       l12dlnflnonfarm l24dlnflnonfarm ///
+>           l1dlnfllf l3dlnfllf l6dlnfllf l9dlnfllf ///
+>       l12dlnfllf l24dlnfllf ///
+>           l1dlnusepr l3dlnusepr l6dlnusepr l9dlnusepr ///
+>       l12dlnusepr l24dlnusepr if tin(1990m1,2019m12), ///
+>         ncomb(1,6) aic outsample(24) fix(m1 m3 m6 m9 m12) ///
+>         samesample nindex( -1 aic -1 bic -1 rmse_out) results(gsreg_dlnrer) replace
+> */
+. 
+. *5
+. /* 
+> Best model
+> reg dlnflnonfarm l3dlnflnonfarm l6dlnflnonfarm l12dlnflnonfarm l24dlnflnonfarm 
+>         l24dlnfllf l6dlnusepr m1 m3 m6 m9 m12
+> */
+. scalar drop _all
+{txt}
+{com}. quietly forval w=48(12)240 {c -(}
+{txt}
+{com}. scalar list
+{txt}RWmaxobs240 = {res}       240
+{txt}RWminobs240 = {res}        47
+{txt} RWrmse240 = {res} .00388122
+{txt}RWmaxobs228 = {res}       228
+{txt}RWminobs228 = {res}        47
+{txt} RWrmse228 = {res} .00388153
+{txt}RWmaxobs216 = {res}       216
+{txt}RWminobs216 = {res}        47
+{txt} RWrmse216 = {res} .00389316
+{txt}RWmaxobs204 = {res}       204
+{txt}RWminobs204 = {res}        47
+{txt} RWrmse204 = {res} .00390349
+{txt}RWmaxobs192 = {res}       192
+{txt}RWminobs192 = {res}        47
+{txt} RWrmse192 = {res}   .003894
+{txt}RWmaxobs180 = {res}       180
+{txt}RWminobs180 = {res}        47
+{txt} RWrmse180 = {res} .00389184
+{txt}RWmaxobs168 = {res}       168
+{txt}RWminobs168 = {res}        47
+{txt} RWrmse168 = {res} .00387958
+{txt}RWmaxobs156 = {res}       156
+{txt}RWminobs156 = {res}        47
+{txt} RWrmse156 = {res} .00387308
+{txt}RWmaxobs144 = {res}       144
+{txt}RWminobs144 = {res}        47
+{txt} RWrmse144 = {res}  .0039239
+{txt}RWmaxobs132 = {res}       132
+{txt}RWminobs132 = {res}        47
+{txt} RWrmse132 = {res} .00388104
+{txt}RWmaxobs120 = {res}       120
+{txt}RWminobs120 = {res}        47
+{txt} RWrmse120 = {res}  .0038731
+{txt}RWmaxobs108 = {res}       108
+{txt}RWminobs108 = {res}        47
+{txt} RWrmse108 = {res} .00386798
+{txt}RWmaxobs96 = {res}        96
+{txt}RWminobs96 = {res}        47
+{txt}  RWrmse96 = {res} .00396002
+{txt}RWmaxobs84 = {res}        84
+{txt}RWminobs84 = {res}        47
+{txt}  RWrmse84 = {res} .00397336
+{txt}RWmaxobs72 = {res}        72
+{txt}RWminobs72 = {res}        47
+{txt}  RWrmse72 = {res} .00399579
+{txt}RWmaxobs60 = {res}        60
+{txt}RWminobs60 = {res}        47
+{txt}  RWrmse60 = {res} .00414814
+{txt}RWmaxobs48 = {res}        48
+{txt}RWminobs48 = {res}        47
+{txt}  RWrmse48 = {res} .00435839
+{txt}
+{com}. /*
+> RWmaxobs156 =        156
+> RWminobs156 =         47
+> RWrmse156 =  .00387308
+> */
+. 
+. /*
+> Smallest / best model
+> reg dlnflnonfarm l12dlnflnonfarm m1 m3 m6 m9 m12
+> */
+. scalar drop _all
+{txt}
+{com}. quietly forval w=48(12)240 {c -(}
+{txt}
+{com}. scalar list
+{txt}RWmaxobs240 = {res}       240
+{txt}RWminobs240 = {res}        59
+{txt} RWrmse240 = {res} .00408422
+{txt}RWmaxobs228 = {res}       228
+{txt}RWminobs228 = {res}        59
+{txt} RWrmse228 = {res} .00407004
+{txt}RWmaxobs216 = {res}       216
+{txt}RWminobs216 = {res}        59
+{txt} RWrmse216 = {res} .00408989
+{txt}RWmaxobs204 = {res}       204
+{txt}RWminobs204 = {res}        59
+{txt} RWrmse204 = {res} .00409955
+{txt}RWmaxobs192 = {res}       192
+{txt}RWminobs192 = {res}        59
+{txt} RWrmse192 = {res} .00410829
+{txt}RWmaxobs180 = {res}       180
+{txt}RWminobs180 = {res}        59
+{txt} RWrmse180 = {res} .00409741
+{txt}RWmaxobs168 = {res}       168
+{txt}RWminobs168 = {res}        59
+{txt} RWrmse168 = {res} .00409249
+{txt}RWmaxobs156 = {res}       156
+{txt}RWminobs156 = {res}        59
+{txt} RWrmse156 = {res}  .0040872
+{txt}RWmaxobs144 = {res}       144
+{txt}RWminobs144 = {res}        59
+{txt} RWrmse144 = {res} .00412686
+{txt}RWmaxobs132 = {res}       132
+{txt}RWminobs132 = {res}        59
+{txt} RWrmse132 = {res} .00409696
+{txt}RWmaxobs120 = {res}       120
+{txt}RWminobs120 = {res}        59
+{txt} RWrmse120 = {res} .00407987
+{txt}RWmaxobs108 = {res}       108
+{txt}RWminobs108 = {res}        59
+{txt} RWrmse108 = {res} .00411602
+{txt}RWmaxobs96 = {res}        96
+{txt}RWminobs96 = {res}        59
+{txt}  RWrmse96 = {res} .00415802
+{txt}RWmaxobs84 = {res}        84
+{txt}RWminobs84 = {res}        59
+{txt}  RWrmse84 = {res} .00419014
+{txt}RWmaxobs72 = {res}        72
+{txt}RWminobs72 = {res}        59
+{txt}  RWrmse72 = {res} .00421357
+{txt}RWmaxobs60 = {res}        60
+{txt}RWminobs60 = {res}        59
+{txt}  RWrmse60 = {res} .00428083
+{txt}RWmaxobs48 = {res}        48
+{txt}RWminobs48 = {res}        48
+{txt}  RWrmse48 = {res} .00431464
+{txt}
+{com}. /*
+> RWmaxobs228 =        228
+> RWminobs228 =         59
+> RWrmse228 =  .00407004
+> 
+> */
+. 
+. /*
+> Best medium length model
+> reg dlnflnonfarm l3dlnflnonfarm l12dlnflnonfarm l24dlnflnonfarm l6dlnusepr
+>         m1 m3 m6 m9 m12
+> */
+. scalar drop _all
+{txt}
+{com}. quietly forval w=48(12)240 {c -(}
+{txt}
+{com}. scalar list
+{txt}RWmaxobs240 = {res}       240
+{txt}RWminobs240 = {res}        47
+{txt} RWrmse240 = {res} .00392293
+{txt}RWmaxobs228 = {res}       228
+{txt}RWminobs228 = {res}        47
+{txt} RWrmse228 = {res} .00392007
+{txt}RWmaxobs216 = {res}       216
+{txt}RWminobs216 = {res}        47
+{txt} RWrmse216 = {res} .00393809
+{txt}RWmaxobs204 = {res}       204
+{txt}RWminobs204 = {res}        47
+{txt} RWrmse204 = {res} .00394526
+{txt}RWmaxobs192 = {res}       192
+{txt}RWminobs192 = {res}        47
+{txt} RWrmse192 = {res} .00394292
+{txt}RWmaxobs180 = {res}       180
+{txt}RWminobs180 = {res}        47
+{txt} RWrmse180 = {res} .00394243
+{txt}RWmaxobs168 = {res}       168
+{txt}RWminobs168 = {res}        47
+{txt} RWrmse168 = {res} .00392743
+{txt}RWmaxobs156 = {res}       156
+{txt}RWminobs156 = {res}        47
+{txt} RWrmse156 = {res} .00391717
+{txt}RWmaxobs144 = {res}       144
+{txt}RWminobs144 = {res}        47
+{txt} RWrmse144 = {res} .00400005
+{txt}RWmaxobs132 = {res}       132
+{txt}RWminobs132 = {res}        47
+{txt} RWrmse132 = {res} .00396689
+{txt}RWmaxobs120 = {res}       120
+{txt}RWminobs120 = {res}        47
+{txt} RWrmse120 = {res} .00396377
+{txt}RWmaxobs108 = {res}       108
+{txt}RWminobs108 = {res}        47
+{txt} RWrmse108 = {res}  .0039582
+{txt}RWmaxobs96 = {res}        96
+{txt}RWminobs96 = {res}        47
+{txt}  RWrmse96 = {res} .00404142
+{txt}RWmaxobs84 = {res}        84
+{txt}RWminobs84 = {res}        47
+{txt}  RWrmse84 = {res} .00406506
+{txt}RWmaxobs72 = {res}        72
+{txt}RWminobs72 = {res}        47
+{txt}  RWrmse72 = {res} .00409348
+{txt}RWmaxobs60 = {res}        60
+{txt}RWminobs60 = {res}        47
+{txt}  RWrmse60 = {res} .00425552
+{txt}RWmaxobs48 = {res}        48
+{txt}RWminobs48 = {res}        47
+{txt}  RWrmse48 = {res}  .0044495
+{txt}
+{com}. /*
+> RWmaxobs156 =        156
+> RWminobs156 =         47
+> RWrmse156 =  .00391717
+> */
+. 
+. *6
+. /*
+> RWmaxobs156 =        156
+> RWminobs156 =         47
+> RWrmse156 =  .00387308
+> */
+. scalar drop _all
+{txt}
+{com}. quietly forval w=156(12)156 {c -(}
+{txt}
+{com}. summ nobs // checking all had a full window
+
+{txt}    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 8}nobs {c |}{res}        289    135.2561    32.98122         47        156
+{txt}
+{com}. *get error info for normal interval
+. summ errsq
+
+{txt}    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 7}errsq {c |}{res}        288     .000015    .0000471   1.10e-12   .0005431
+{txt}
+{com}. scalar rwrmse=r(mean)^0.5
+{txt}
+{com}. scalar list rwrmse
+{txt}    rwrmse = {res} .00387308
+{txt}
+{com}. gen res=(d.lnflnonfarm-pred)
+{txt}(73 missing values generated)
+
+{com}. _pctile res, percentile(2.5,97.5)
+{txt}
+{com}. return list
+
+{txt}scalars:
+                 r(r1) =  {res}-.0074653569608927
+                 {txt}r(r2) =  {res}.0065394379198551
+{txt}
+{com}. 
+. *8
+. *Normal
+. predict temp if tin(2020m1,2020m1)
+{txt}(option {bf:xb} assumed; fitted values)
+(360 missing values generated)
+
+{com}. replace pred=temp if tin(2020m1,2020m1)
+{txt}(0 real changes made)
+
+{com}. drop temp
+{txt}
+{com}. gen pnonfarm=exp(l.lnflnonfarm+pred+(rwrmse^2)/2)
+{txt}(72 missing values generated)
+
+{com}. gen ubound=exp(l.lnflnonfarm+pred+1.96*rwrmse+(rwrmse^2)/2)
+{txt}(72 missing values generated)
+
+{com}. gen lbound=exp(l.lnflnonfarm+pred-1.96*rwrmse+(rwrmse^2)/2)
+{txt}(72 missing values generated)
+
+{com}. list month pnonfarm lbound ubound if tin(2020m1,2020m1)
+{txt}
+     {c TLC}{hline 7}{c -}{hline 10}{c -}{hline 10}{c -}{hline 10}{c TRC}
+     {c |} {res}month   pnonfarm     lbound     ubound {txt}{c |}
+     {c LT}{hline 7}{c -}{hline 10}{c -}{hline 10}{c -}{hline 10}{c RT}
+361. {c |} {res}    1   9001.077   8933.007   9069.667 {txt}{c |}
+     {c BLC}{hline 7}{c -}{hline 10}{c -}{hline 10}{c -}{hline 10}{c BRC}
+
+{com}. tsline pnonfarm lbound ubound fl_nonfarm if tin(2019m1,2020m1), tline(2019m12) saving("Nonfarm_Normal", replace)
+{res}{txt}(file Nonfarm_Normal.gph saved)
+
+{com}. 
+. *Empirical
+. drop res
+{txt}
+{com}. gen res=(d.lnflnonfarm-pred)
+{txt}(73 missing values generated)
+
+{com}. gen expres=exp(res)
+{txt}(73 missing values generated)
+
+{com}. summ expres
+
+{txt}    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 6}expres {c |}{res}        288    .9997746    .0038735   .9777296   1.023579
+{txt}
+{com}. scalar meanexpres=r(mean)
+{txt}
+{com}. gen pnonfarme=exp(l.lnflnonfarm+pred)*meanexpres
+{txt}(72 missing values generated)
+
+{com}. _pctile res, percentile(2.5,97.5)
+{txt}
+{com}. return list
+
+{txt}scalars:
+                 r(r1) =  {res}-.0074653569608927
+                 {txt}r(r2) =  {res}.0065394379198551
+{txt}
+{com}. gen lbounde=exp(l.lnflnonfarm+pred+r(r1))*meanexpres
+{txt}(72 missing values generated)
+
+{com}. gen ubounde=exp(l.lnflnonfarm+pred+r(r2))*meanexpres
+{txt}(72 missing values generated)
+
+{com}. list month pnonfarme lbounde ubounde if tin(2020m1,2020m1)
+{txt}
+     {c TLC}{hline 7}{c -}{hline 10}{c -}{hline 10}{c -}{hline 10}{c TRC}
+     {c |} {res}month   pnonfa~e    lbounde    ubounde {txt}{c |}
+     {c LT}{hline 7}{c -}{hline 10}{c -}{hline 10}{c -}{hline 10}{c RT}
+361. {c |} {res}    1   8998.981   8932.051   9058.022 {txt}{c |}
+     {c BLC}{hline 7}{c -}{hline 10}{c -}{hline 10}{c -}{hline 10}{c BRC}
+
+{com}. tsline pnonfarme lbounde ubounde fl_nonfarm if tin(2019m1,2020m1), ///
+>         tline(2019m12) saving("Nonfarm_Epirical", replace)
+{res}{txt}(file Nonfarm_Epirical.gph saved)
+
+{com}. 
+. *9      
+. tsline pnonfarm pnonfarme fl_nonfarm lbound lbounde ubound ubounde ///
+>  if tin(2019m1,2020m1), tline(2019m12) saving("Normal_vs_Empirical", replace)
+{res}{txt}(file Normal_vs_Empirical.gph saved)
+
+{com}.  
+. translate "Problem Set 5.smcl" "Problem Set 5.txt", replace
+{txt}(file Problem Set 5.txt written in .txt format)
+
+{com}. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}/Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Problem Set 5/Problem Set 5.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}28 Mar 2021, 20:58:58
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}
