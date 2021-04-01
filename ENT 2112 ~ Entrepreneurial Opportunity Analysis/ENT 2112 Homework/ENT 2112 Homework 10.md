@@ -4,29 +4,81 @@
 
 > All uncited quotes are from the textbook
 
+1. Why do start-up firms need capital investment? Can they sustain themselves without it?
+
+   - Firms need capital investment so that they have money to invest in themselves before they are turning a profit and able to fund their own growth. It is possible to fund without it but it is much much more difficult.
+
+2. What is meant by the term *burn rate*? What are the consequences of experiencing a negative burn rate for a relatively long period of time?
+
+   - "A company’s **burn rate** is the rate at which it is spending its capital until it reaches profitability. Although a negative cash flow is sometimes justified early in a firm’s life—to build plants and buy equipment, train employees, and establish its brand—it can cause severe complications. A firm usually fails if it burns through all of its capital before it becomes profitable. This is why inadequate financial resources is a primary reason new firms fail."
+
+3. What are the different stages involved in venture capital funding? Briefly describe each one.
+
+   1. "**Seed funding**: Investment made very early in a venture’s life to fund the development of a prototype and feasi- bility analysis.
+   2. **Start-up funding**: Investment made to firms exhibiting few if any commercial sales but in which product develop- ment and market research are reasonably complete. Management is in place, and the firm has its business model. Funding is needed to start production.
+   3. **First-stage funding**: Funding that occurs when the firm has started commercial production and sales but requires financing to ramp up its production capacity.
+   4. **Second-stage funding**: Funding that occurs when a firm is successfully selling a product but needs to expand both its capacity and its markets.
+   5. **Mezzanine financing**: Investment made in a firm to provide for further expansion or to bridge its financing needs before launching an IPO or before a buyout.
+   6. **Buyout funding**: Funding provided to help one company acquire another."
+
+4. To what extent do entrepreneurs rely on their personal funds and funds from friends and families to finance their ventures? What are the three rules of thumb that a business owner should follow when asking friends and family members for start-up funds?
+
+   - "Friends and family are the second source of funds for many new ventures. According to the same Fundable data, 38 percent of start-ups receive funds from friends and family, with an average investment of $23,000.7 This type of con- tribution often comes in the form of loans or investments, but can also involve outright gifts, foregone or delayed compensation (if a friend or family member works for the new venture), or reduced or free rent. For example, Cisco Systems, the giant producer of Internet routers and switches, started in the house of one of its cofounder’s parents.
+
+     There are three rules of thumb that entrepreneurs should follow when asking friends and family members for money. First, the request should be presented in a businesslike manner, just as one would deal with a banker or investor. The potential of the business along with the risks involved should be carefully and fully described. Second, if the help the entrepreneur receives is in the form of a loan, a promissory note should be prepared, with a repayment schedule, and the note should be signed by both parties. Stipulating the terms of the loan in writing reduces the potential of a misunderstanding and protects both the entre- preneur and the friend or family member providing the funding. Third, financial help should be requested only from those who are in a legitimate position to offer assistance. It is not a good idea to ask certain friends or family members, regardless of how much they may have expressed a willingness to help, for assis- tance if losing the money would cripple them financially. Entrepreneurs who are unable to repay a loan to a friend or family member risk not only damaging their business relationship with them, but their personal relationship as well.
+
+     Loan agreements to facilitate a friends and family loan can be obtained via an attorney. There are also Internet-based companies that walk entrepreneurs and friends or family members who are willing to make a loan through the steps of preparing a legally enforceable loan agreement and promissory note. Exam- ples include LegalZoom, RocketLawyer, and Nolo. A **promissory note** details the terms of a loan agreement. If you’d like to see how it works, go to RocketLawyer.com/LoanAgreement and follow the online prompts."
+
+5. What sources of personal financing are available to entrepreneurs?
+
+   - Personal funds, friends and family, and bootstrapping
+
+6. Describe the three steps involved in properly preparing to raise debt or equity financing.
+
+   1. "**Step 1** **Determine precisely how much money the company needs.** Con- structing and analyzing documented cash flow statements and projec- tions for needed capital expenditures are actions taken to complete this step."
+   2. "**Step 2** **Determine the most appropriate type of financing or funding.** Equity and debt financing are the two most common alternatives for raising money."
+   3. "**Step 3** **Developing a strategy for engaging potential investors or bankers.** There are three steps to developing a strategy for engaging potential investors or bankers."
+
+7. What is the difference between equity funding and debt financing?
+
+   - " **Equity financing** (or funding) means exchanging partial ownership of a firm, usually in the form of stock, in return for funding. [...] **Debt financing** is getting a loan. The most common sources of debt financing are commercial banks and Small Business Administration (SBA) guaranteed loans."
+
+8. What are the most common sources of equity funding.
+
+   - "**Business angels** are individuals who invest their personal capital directly in start-ups. The term *angel* was first used in conjunction with finance to describe wealthy New Yorkers who invested in Broadway plays."
+   - "**Venture capital** is money that is invested by venture capital firms in start- ups and small businesses with exceptional growth potential."
+   - "Another source of equity funding is to sell stock to the public by staging an **initial public offering (IPO)**. An IPO is the first sale of stock by a firm to the public. Any later public issuance of shares is referred to as a **secondary market offering**."
+
+9. Describe the most common sources of debt financing.
+
+   - "Historically, commercial banks have not been viewed as practical sources of financing for start-up firms.37 This sentiment is not a knock against banks; it is just that banks are risk averse, and financing start-ups is risky business."
+   - "**Peer-to-peer lenders** underwrite borrowers but don’t fund the loans directly. Instead, they act as intermediaries between borrowers and individuals or borrowers and institutional investors."
+   - "**Vendor credit** (also known as trade credit) is the credit extended to a business by a vendor in order to allow the business to buy its products and/or services up front but defer payment until later."
+
 10. What should an entrepreneur do before approaching a potential investor for funding?
+
     1. "Determine precisely how much money the company needs."
     2. "Determine the most appropriate type of financing or funding."
     3. "Developing a strategy for engaging potential investors or bankers."
-    
+
 11. Why is it so important to get a personal introduction before approaching a potential investor or banker?
-    
+
     - "it is almost impossible for an entrepreneurial venture’s founders to get an investor’s attention without a personal introduction. One way firms deal with this challenge is by placing individuals on their boards who are acquainted with people in the investment community. [...] A cardinal rule for approaching a banker or an investor is to get a personal introduction. Bankers and investors receive many business plans, and most of them end up in what often becomes an unread stack of paper in a corner in their offices. To have your business plan noticed, find someone who knows the banker or the investor and ask for an introduction."
-    
+
 12. What are the three steps required to effectively engage potential investors or bankers?
     1. "First, the lead entrepreneurs in a new venture should prepare an **elevator speech (or pitch)**—a brief, care- fully constructed statement that outlines the merits of a business opportunity."
     2. "The second step in developing a strategy for engaging potential investors or bankers is more deliberate and requires identifying and contacting the best prospects. First, the new venture should carefully assess the type of financing or funding it is likely to qualify for, as depicted in Table 10.2. Then, a list of potential bankers or investors should be compiled."
     3. "The third step in engaging potential investors or bankers is to be prepared to provide the investor or banker a completed business plan and make a pre- sentation of the plan if requested."
-    
+
 13. What are the three most common sources of equity funding?
     1. Business angels
     2. Venture capital
     3. Initial Public Offerings
-    
+
 14. Describe the nature of business angel funding. What types of people typically become business angels, and what is the unique role that business angels play in the process of funding entrepreneurial firms?
-    
+
     - "**Business angels** are individuals who invest their personal capital directly in start-ups. [...] The proto- typical business angel, who invests in entrepreneurial start-ups, is about 50 years old, has high income and wealth, is well educated, has succeeded as an entrepreneur, and invests in companies that are in the region where he or she lives.14 These investors generally invest between $10,000 and $500,000 in a single company and are looking for companies that have the potential to grow 30 to 40 percent per year before they are acquired or go public. [...] Business angels are valuable because of their willingness to make relatively small investments. This gives access to equity funding to a start-up that needs just \$75,000 rather than the $1 million minimum investment that most ven- ture capitalists require. Many angels are also motivated by more than financial returns; they enjoy the process of mentoring a new firm. Most angels remain fairly anonymous and are matched with entrepreneurs through referrals."
-    
+
 15. What is meant by the term *venture capital?* Where do venture capital firms get their money? What types of firms do venture capitalists commonly want to fund? Why?
 
     - "**Venture capital** is money that is invested by venture capital firms in start- ups and small businesses with exceptional growth potential [...] Venture capital firms are limited partnerships of money managers who raise money in “funds” to invest in start-ups and growing firms. The funds, or pools of money, are raised from high-net-worth individuals, pension plans, university endowments, foreign investors, and similar sources. [...] actually, venture capitalists fund less than 1 percent of new firms.29 As mentioned previously in this chapter, many entrepreneurs become discouraged when they are repeatedly rejected for venture capital funding, even though they may have an excellent business plan. Venture capitalists are looking for the “home run.” The result is that they do not fund the majority of business plans they receive and review."

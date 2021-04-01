@@ -249,8 +249,7 @@ gen res=(d.lnflnonfarm-pred)
 _pctile res, percentile(2.5,97.5)
 return list
 
-*8
-*Normal
+*7
 predict temp if tin(2020m1,2020m1)
 replace pred=temp if tin(2020m1,2020m1)
 drop temp
@@ -260,6 +259,7 @@ gen lbound=exp(l.lnflnonfarm+pred-1.96*rwrmse+(rwrmse^2)/2)
 list month pnonfarm lbound ubound if tin(2020m1,2020m1)
 tsline pnonfarm lbound ubound fl_nonfarm if tin(2019m1,2020m1), tline(2019m12) saving("Nonfarm_Normal", replace)
 
+*8
 *Empirical
 drop res
 gen res=(d.lnflnonfarm-pred)

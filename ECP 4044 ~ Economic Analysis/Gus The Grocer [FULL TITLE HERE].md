@@ -46,11 +46,25 @@
 
 # Analysis
 
+## Expected Marginal Utility
+
+​	As we will establish in [*Profit Maximization*](#Profit-Maximization), I provide no added value to the log card project over any other person performing the same task. I will concede, of course, that I already know which buttons to press to update my spreadsheets and no one else does, but those tasks are easy to teach in under fifteen minutes and can therefore be ignored. Because I provide no added value to the project, when my supervisor asks me to work on log cards, the company has a marginal utility of zero while I am doing that work. 
+
+​	What is the company's expected marginal utility for each unit of time I am on a special project? This is relatively easy to answer because of the nature of the special projects I am assigned to. Each special project has progress that can be measured by tasks completed or percent completion when done by hand such as transcribing part numbers into a spreadsheet or trying to find duplicate part numbers. However, when writing a program that does these tasks it is exceptionally rare that a computer running the program would take as long as a human would to do the same task.
+
+<p style="text-align: center;"><code>Assumption 1: A computer program will always take less time to complete a given task than a human will</code></p>
+
+​	Of course, that program does take time to write. It takes me about a week to write a fully-fledged solution to any special project. If I am able to re-purpose existing code for a new project, that time is cut down to just one or two days.
+
+<p style="text-align: center;"><code>Assumption 2: I will take a week to finish writing a program to complete any given task</code></p>
+
+​		It should now be clear that if any special project is expected to take more than a week to complete, I should be tasked with writing a program to do the task. If the task is expected to be repeated, I should be asked to write a program if the total time spent on the task is more than a week. It may take me more time in the beginning, but at some point the programming time and task time will reach a breakeven point at which point the program will be more efficient.
+
 ## Profit Maximization
 
 ​	At first glance, this presents itself as a constrained optimization problem where the total payoff is a function of my time spent on the log card project, my time spent on special projects, the time it would take someone else to complete the same work, and the urgency of each project. Traditionally, we would need to account for differences in pay, but the problem is much simpler if everyone is paid the same. It is also very easy to add that element back in later as a function of time spent on the project. 
 
-​	We can use the standard $\pi$ as profit. We can also define my time on log cards and special projects as  $M_{L}$ and $M_{S}$, respectively. The time someone else would take is $O_L$ and $O_S$. The urgency of each project should be a ratio that sums to one which we can call $W_L$ and $W_S$ as we are weighing our options. The constant value of each finished project is defined as $V_L$ and $V_S$. However, each project is not yet finished so $D_L$ and $D_S$ denote the percent progress of the project on a zero to one scale. Thus, expected profit is written as
+​	We can use the standard $\pi$ as profit. We can also define my time on log cards and special projects as  $M_{L}$ and $M_{S}$, respectively. The time someone else would take is $O_L$ and $O_S$. The urgency of each project should be a ratio that sums to one which we can call $W_L$ and $W_S$ as we are weighing our options. The constant value of each finished project is defined as $V_L$ and $V_S$. However, each project is not yet finished so $D_L$ and $D_S$ denote the percent progress of the project on a zero to one scale. Interns at MiGrocery are paid \$13 per hour. Thus, expected profit is written as
 
 $$
 \begin{aligned}
@@ -74,7 +88,7 @@ $$
 \end{aligned}
 $$
 
-​	Finally, in order to make this giant mess usable, $T_L$ and $T_S$ must be able to be said in terms of each other. Each special project takes about twenty-five hours to complete. Based on current progress, we can estimate that the log card project would take about ten twenty-five hour weeks to complete. Thus, $T_L = 10T_S$. In order to make sure we are comparing the same amout of time, we must multiply any special project values by ten as well. This means that my and anyone else's time is limited to 250 hours as well. $O_S$ and $10M_S$ become $250-O_L$ and $10(250-M_L)$, respectively. The profit equation becomes
+​	Finally, in order to make this giant mess usable, $T_L$ and $T_S$ must be able to be said in terms of each other. Each special project takes about twenty-five hours to complete. Based on current progress, we can estimate that the log card project would take about ten twenty-five hour weeks to complete. Thus, $T_L = 10T_S$. This only holds for the present moment in time because as time passes, the amount of special projects that can be completed by the time log cards are completed will decrease until the time remaining on the log card project will be equal to the amount of time it will take to complete a given special project. In order to make sure we are comparing the same amout of time, we must multiply any special project values by ten as well. This means that my and anyone else's time is limited to 250 hours as well. $O_S$ and $10M_S$ become $250-O_L$ and $10(250-M_L)$, respectively. The profit equation becomes
 
 $$
 \begin{aligned}
@@ -113,20 +127,6 @@ $$
 
 ​	Proper profit maximization requires taking the first derivative of the profit function. With all of the guesses about the values of constants I made and the ratios that allowed me to put one variable in terms of another, this quickly fell by the wayside. With proper numbers, the equation could be put into solver to give the amount of hours per project that myself and someone else should work on to maximize profit.
 
-## Expected Marginal Utility
-
-​	As we established in [*Profit Maximization*](#Profit-Maximization), I provide no added value to the log card project over any other person performing the same task. I will concede, of course, that I already know which buttons to press to update my spreadsheets and no one else does, but those tasks are easy to teach in under fifteen minutes and can therefore be ignored. Because I provide no added value to the project, when my supervisor asks me to work on log cards, they have a marginal utility of zero while I am doing that work. 
-
-​	What is the company's expected marginal utility for each unit of time I am on a special project? This is relatively easy to answer because of the nature of the special projects I am assigned to. Each special project has progress that can be measured by tasks completed or percent completion when done by hand such as transcribing part numbers into a spreadsheet or trying to find duplicate part numbers. However, when writing a program that does these tasks it is exceptionally rare that a computer running the program would take as long as a human would to do the same task.
-
-<p style="text-align: center;"><code>Assumption 1: A computer program will always take less time to complete a given task than a human will</code></p>
-
-​	Of course, that program does take time to write. It takes me about a week to write a fully-fledged solution to any special project. If I am able to re-purpose existing code for a new project, that time is cut down to just one or two days.
-
-<p style="text-align: center;"><code>Assumption 2: I will take a week to finish writing a program to complete any given task</code></p>
-
-​		It should now be clear that if any special project is expected to take more than a week to complete, I should be tasked with writing a program to do the task. If the task is expected to be repeated, I should be asked to write a program if the total time spent on the task is more than a week. It may take me more time in the beginning, but at some point the programming time and task time will reach a breakeven point at which point the program will be more efficient.
-
 # Conclusion
 
 ​	I may be tooting my own horn, so to speak, but I do not think that MiGrocery could have hired a better and more productive intern. I have shown time and time again that I am able to use skills in my toolset to expertly optimize current workloads and to automate tasks that could take weeks to complete by hand. Through profit maximization techniques with estimated numbers, I have shown that I can be more than ten times as productive as an employee doing the same task by hand. In discussing expected marginal utility, we learned that it makes sense for me to take on any special project that is expected to take more than a week to complete or that is an ongoing project. Because I am so much more productive on special projects, it makes sense for me to be switched to those full time rather than kept on log cards and loaned out to special projects on occasion.
@@ -143,10 +143,10 @@ $$
 - Gus has limited time per week but morons aren't limited
 - Make w a function of time to completion and v is a function increasing in my time (2nd derivative is negative), then an internal solution should present 
 - Get in time to completion in a concrete way
-- Explain T
+- ==Explain T==
 - NPV changes over time when doing things by hand 
   - Os and Ms are a sum
 - value moving forward is function of my time put into T
   - Ms asymptotes off to 1
-- Talk theory before math
+- ==Talk theory before math==
 
