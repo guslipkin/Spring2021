@@ -8,7 +8,7 @@
              log:  /Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Probl
       > em Sets/Problem Set 5/Problem Set 5.smcl
         log type:  smcl
-       opened on:  28 Mar 2021, 20:57:14
+       opened on:  31 Mar 2021, 19:29:06
       
      1 . 
      2 . gen datec=date(datestring, "YMD")
@@ -109,365 +109,346 @@
     44 . replace m11=1 if month==11
       (30 real changes made)
       
-    45 . gen m12=0
-      
-    46 . replace m11=1 if month==12
-      (30 real changes made)
-      
-    47 . 
-    48 . gen dlnflnonfarm=d.lnflnonfarm
+    45 . 
+    46 . gen dlnflnonfarm=d.lnflnonfarm
       (2 missing values generated)
       
-    49 . gen l1dlnflnonfarm=l1d.lnflnonfarm
+    47 . gen l1dlnflnonfarm=l1d.lnflnonfarm
       (2 missing values generated)
       
-    50 . gen l2dlnflnonfarm=l2d.lnflnonfarm
+    48 . gen l2dlnflnonfarm=l2d.lnflnonfarm
       (3 missing values generated)
       
-    51 . gen l3dlnflnonfarm=l3d.lnflnonfarm
+    49 . gen l3dlnflnonfarm=l3d.lnflnonfarm
       (4 missing values generated)
       
-    52 . gen l4dlnflnonfarm=l4d.lnflnonfarm
+    50 . gen l4dlnflnonfarm=l4d.lnflnonfarm
       (5 missing values generated)
       
-    53 . gen l5dlnflnonfarm=l5d.lnflnonfarm
+    51 . gen l5dlnflnonfarm=l5d.lnflnonfarm
       (6 missing values generated)
       
-    54 . gen l6dlnflnonfarm=l6d.lnflnonfarm
+    52 . gen l6dlnflnonfarm=l6d.lnflnonfarm
       (7 missing values generated)
       
-    55 . gen l7dlnflnonfarm=l7d.lnflnonfarm
+    53 . gen l7dlnflnonfarm=l7d.lnflnonfarm
       (8 missing values generated)
       
-    56 . gen l8dlnflnonfarm=l8d.lnflnonfarm
+    54 . gen l8dlnflnonfarm=l8d.lnflnonfarm
       (9 missing values generated)
       
-    57 . gen l9dlnflnonfarm=l9d.lnflnonfarm
+    55 . gen l9dlnflnonfarm=l9d.lnflnonfarm
       (10 missing values generated)
       
-    58 . gen l10dlnflnonfarm=l10d.lnflnonfarm
+    56 . gen l10dlnflnonfarm=l10d.lnflnonfarm
       (11 missing values generated)
       
-    59 . gen l11dlnflnonfarm=l11d.lnflnonfarm
+    57 . gen l11dlnflnonfarm=l11d.lnflnonfarm
       (12 missing values generated)
       
-    60 . gen l12dlnflnonfarm=l12d.lnflnonfarm
+    58 . gen l12dlnflnonfarm=l12d.lnflnonfarm
       (13 missing values generated)
       
-    61 . gen l24dlnflnonfarm=l24d.lnflnonfarm
+    59 . gen l24dlnflnonfarm=l24d.lnflnonfarm
       (25 missing values generated)
       
-    62 . 
-    63 . gen dlnfllf=d.lnfllf
+    60 . 
+    61 . gen dlnfllf=d.lnfllf
       (2 missing values generated)
       
-    64 . gen l1dlnfllf=l1d.lnfllf
+    62 . gen l1dlnfllf=l1d.lnfllf
       (2 missing values generated)
       
-    65 . gen l2dlnfllf=l2d.lnfllf
+    63 . gen l2dlnfllf=l2d.lnfllf
       (3 missing values generated)
       
-    66 . gen l3dlnfllf=l3d.lnfllf
+    64 . gen l3dlnfllf=l3d.lnfllf
       (4 missing values generated)
       
-    67 . gen l4dlnfllf=l4d.lnfllf
+    65 . gen l4dlnfllf=l4d.lnfllf
       (5 missing values generated)
       
-    68 . gen l5dlnfllf=l5d.lnfllf
+    66 . gen l5dlnfllf=l5d.lnfllf
       (6 missing values generated)
       
-    69 . gen l6dlnfllf=l6d.lnfllf
+    67 . gen l6dlnfllf=l6d.lnfllf
       (7 missing values generated)
       
-    70 . gen l7dlnfllf=l7d.lnfllf
+    68 . gen l7dlnfllf=l7d.lnfllf
       (8 missing values generated)
       
-    71 . gen l8dlnfllf=l8d.lnfllf
+    69 . gen l8dlnfllf=l8d.lnfllf
       (9 missing values generated)
       
-    72 . gen l9dlnfllf=l9d.lnfllf
+    70 . gen l9dlnfllf=l9d.lnfllf
       (10 missing values generated)
       
-    73 . gen l10dlnfllf=l10d.lnfllf
+    71 . gen l10dlnfllf=l10d.lnfllf
       (11 missing values generated)
       
-    74 . gen l11dlnfllf=l11d.lnfllf
+    72 . gen l11dlnfllf=l11d.lnfllf
       (12 missing values generated)
       
-    75 . gen l12dlnfllf=l12d.lnfllf
+    73 . gen l12dlnfllf=l12d.lnfllf
       (13 missing values generated)
       
-    76 . gen l24dlnfllf=l24d.lnfllf
+    74 . gen l24dlnfllf=l24d.lnfllf
       (25 missing values generated)
       
-    77 . 
-    78 . gen dlnusepr=d.lnusepr
+    75 . 
+    76 . gen dlnusepr=d.lnusepr
       (2 missing values generated)
       
-    79 . gen l1dlnusepr=l1d.lnusepr
+    77 . gen l1dlnusepr=l1d.lnusepr
       (2 missing values generated)
       
-    80 . gen l2dlnusepr=l2d.lnusepr
+    78 . gen l2dlnusepr=l2d.lnusepr
       (3 missing values generated)
       
-    81 . gen l3dlnusepr=l3d.lnusepr
+    79 . gen l3dlnusepr=l3d.lnusepr
       (4 missing values generated)
       
-    82 . gen l4dlnusepr=l4d.lnusepr
+    80 . gen l4dlnusepr=l4d.lnusepr
       (5 missing values generated)
       
-    83 . gen l5dlnusepr=l5d.lnusepr
+    81 . gen l5dlnusepr=l5d.lnusepr
       (6 missing values generated)
       
-    84 . gen l6dlnusepr=l6d.lnusepr
+    82 . gen l6dlnusepr=l6d.lnusepr
       (7 missing values generated)
       
-    85 . gen l7dlnusepr=l7d.lnusepr
+    83 . gen l7dlnusepr=l7d.lnusepr
       (8 missing values generated)
       
-    86 . gen l8dlnusepr=l8d.lnusepr
+    84 . gen l8dlnusepr=l8d.lnusepr
       (9 missing values generated)
       
-    87 . gen l9dlnusepr=l9d.lnusepr
+    85 . gen l9dlnusepr=l9d.lnusepr
       (10 missing values generated)
       
-    88 . gen l10dlnusepr=l10d.lnusepr
+    86 . gen l10dlnusepr=l10d.lnusepr
       (11 missing values generated)
       
-    89 . gen l11dlnusepr=l11d.lnusepr
+    87 . gen l11dlnusepr=l11d.lnusepr
       (12 missing values generated)
       
-    90 . gen l12dlnusepr=l12d.lnusepr
+    88 . gen l12dlnusepr=l12d.lnusepr
       (13 missing values generated)
       
-    91 . gen l24dlnusepr=l24d.lnusepr
+    89 . gen l24dlnusepr=l24d.lnusepr
       (25 missing values generated)
       
-    92 . 
-    93 . /*
-      > gsreg dlnflnonfarm l1dlnflnonfarm l3dlnflnonfarm l6dlnflnonfarm l9dlnflnonfar
+    90 . 
+    91 . 
+    92 . gsreg dlnflnonfarm l1dlnflnonfarm l3dlnflnonfarm l6dlnflnonfarm l9dlnflnonfar
       > m ///
       >       l12dlnflnonfarm l24dlnflnonfarm ///
       >           l1dlnfllf l3dlnfllf l6dlnfllf l9dlnfllf ///
       >       l12dlnfllf l24dlnfllf ///
       >           l1dlnusepr l3dlnusepr l6dlnusepr l9dlnusepr ///
       >       l12dlnusepr l24dlnusepr if tin(1990m1,2019m12), ///
-      >         ncomb(1,6) aic outsample(24) fix(m1 m3 m6 m9 m12) ///
+      >         ncomb(1,6) aic outsample(24) fix(m1 m3 m6 m9) ///
       >         samesample nindex( -1 aic -1 bic -1 rmse_out) results(gsreg_dlnrer) r
       > eplace
-      > */
-    94 . 
+      ----------------------------------------------------
+      Total Number of Estimations: 31179
+      ----------------------------------------------------
+      ----------------------------------------------------
+      Warning: Estimation could take about 10 minutes 
+      ----------------------------------------------------
+       
+      Computing combinations...
+      Preparing regression list...
+      Doing regressions...
+      Saving results...
+      file gsreg_dlnrer.dta saved
+      ----------------------------------------------------
+      Best estimation in terms of -1 aic -1 bic -1 rmse_out 
+      Estimation number 19215
+      ----------------------------------------------------
+      
+            Source |       SS           df       MS      Number of obs   =       312
+      -------------+----------------------------------   F(10, 301)      =    192.38
+             Model |  .027480005        10     .002748   Prob > F        =    0.0000
+          Residual |  .004299465       301  .000014284   R-squared       =    0.8647
+      -------------+----------------------------------   Adj R-squared   =    0.8602
+             Total |   .03177947       311  .000102185   Root MSE        =    .00378
+      
+      -------------------------------------------------------------------------------
+      --
+         dlnflnonfarm |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interva
+      > l]
+      ----------------+--------------------------------------------------------------
+      --
+                   m1 |  -.0068526   .0013736    -4.99   0.000    -.0095558   -.00414
+      > 94
+                   m3 |   .0009126   .0008591     1.06   0.289    -.0007781    .00260
+      > 33
+                   m6 |  -.0044233   .0010173    -4.35   0.000    -.0064252   -.00242
+      > 14
+                   m9 |  -.0008321   .0008569    -0.97   0.332    -.0025184    .00085
+      > 41
+       l3dlnflnonfarm |   .0992292   .0282426     3.51   0.001     .0436512    .15480
+      > 71
+       l6dlnflnonfarm |   .0741191   .0284776     2.60   0.010     .0180786    .13015
+      > 96
+      l12dlnflnonfarm |   .5446389    .067997     8.01   0.000     .4108292    .67844
+      > 87
+      l24dlnflnonfarm |   .1684682   .0598024     2.82   0.005     .0507844     .2861
+      > 52
+           l24dlnfllf |  -.1553647   .0508596    -3.05   0.002    -.2554501   -.05527
+      > 93
+           l6dlnusepr |   .1231808   .0528785     2.33   0.020     .0191224    .22723
+      > 92
+                _cons |   .0014172   .0003147     4.50   0.000     .0007979    .00203
+      > 65
+      -------------------------------------------------------------------------------
+      --
+      
+    93 . 
+      end of do-file
+      
+    94 . do "/var/folders/2l/fbt5472n7ks1xr82m33g3shw0000gn/T//SD13269.000000"
+      
     95 . *5
     96 . /* 
       > Best model
       > reg dlnflnonfarm l3dlnflnonfarm l6dlnflnonfarm l12dlnflnonfarm l24dlnflnonfar
       > m 
-      >         l24dlnfllf l6dlnusepr m1 m3 m6 m9 m12
+      >         l24dlnfllf l6dlnusepr m1 m3 m6 m9
       > */
     97 . scalar drop _all
       
-    98 . quietly forval w=48(12)240 {
+    98 . quietly forval w=48(12)144 {
       
     99 . scalar list
-      RWmaxobs240 =        240
-      RWminobs240 =         47
-       RWrmse240 =  .00388122
-      RWmaxobs228 =        228
-      RWminobs228 =         47
-       RWrmse228 =  .00388153
-      RWmaxobs216 =        216
-      RWminobs216 =         47
-       RWrmse216 =  .00389316
-      RWmaxobs204 =        204
-      RWminobs204 =         47
-       RWrmse204 =  .00390349
-      RWmaxobs192 =        192
-      RWminobs192 =         47
-       RWrmse192 =    .003894
-      RWmaxobs180 =        180
-      RWminobs180 =         47
-       RWrmse180 =  .00389184
-      RWmaxobs168 =        168
-      RWminobs168 =         47
-       RWrmse168 =  .00387958
-      RWmaxobs156 =        156
-      RWminobs156 =         47
-       RWrmse156 =  .00387308
       RWmaxobs144 =        144
-      RWminobs144 =         47
-       RWrmse144 =   .0039239
+      RWminobs144 =        144
+       RWrmse144 =  .00396645
       RWmaxobs132 =        132
-      RWminobs132 =         47
-       RWrmse132 =  .00388104
+      RWminobs132 =        132
+       RWrmse132 =  .00390407
       RWmaxobs120 =        120
-      RWminobs120 =         47
-       RWrmse120 =   .0038731
+      RWminobs120 =        120
+       RWrmse120 =  .00388926
       RWmaxobs108 =        108
-      RWminobs108 =         47
-       RWrmse108 =  .00386798
+      RWminobs108 =        108
+       RWrmse108 =  .00388844
       RWmaxobs96 =         96
-      RWminobs96 =         47
-        RWrmse96 =  .00396002
+      RWminobs96 =         96
+        RWrmse96 =  .00403691
       RWmaxobs84 =         84
-      RWminobs84 =         47
-        RWrmse84 =  .00397336
+      RWminobs84 =         84
+        RWrmse84 =  .00406426
       RWmaxobs72 =         72
-      RWminobs72 =         47
-        RWrmse72 =  .00399579
+      RWminobs72 =         72
+        RWrmse72 =  .00411873
       RWmaxobs60 =         60
-      RWminobs60 =         47
-        RWrmse60 =  .00414814
+      RWminobs60 =         60
+        RWrmse60 =  .00431692
       RWmaxobs48 =         48
-      RWminobs48 =         47
-        RWrmse48 =  .00435839
+      RWminobs48 =         48
+        RWrmse48 =  .00460352
       
    100 . /*
-      > RWmaxobs156 =        156
-      > RWminobs156 =         47
-      > RWrmse156 =  .00387308
+      > RWmaxobs108 = 108 
+      > RWminobs108 = 108 
+      > RWrmse108 = .00388844
       > */
    101 . 
    102 . /*
       > Smallest / best model
-      > reg dlnflnonfarm l12dlnflnonfarm m1 m3 m6 m9 m12
+      > reg dlnflnonfarm l12dlnflnonfarm m1 m3 m6 m9
       > */
    103 . scalar drop _all
       
-   104 . quietly forval w=48(12)240 {
+   104 . quietly forval w=48(12)144 {
       
    105 . scalar list
-      RWmaxobs240 =        240
-      RWminobs240 =         59
-       RWrmse240 =  .00408422
-      RWmaxobs228 =        228
-      RWminobs228 =         59
-       RWrmse228 =  .00407004
-      RWmaxobs216 =        216
-      RWminobs216 =         59
-       RWrmse216 =  .00408989
-      RWmaxobs204 =        204
-      RWminobs204 =         59
-       RWrmse204 =  .00409955
-      RWmaxobs192 =        192
-      RWminobs192 =         59
-       RWrmse192 =  .00410829
-      RWmaxobs180 =        180
-      RWminobs180 =         59
-       RWrmse180 =  .00409741
-      RWmaxobs168 =        168
-      RWminobs168 =         59
-       RWrmse168 =  .00409249
-      RWmaxobs156 =        156
-      RWminobs156 =         59
-       RWrmse156 =   .0040872
       RWmaxobs144 =        144
-      RWminobs144 =         59
-       RWrmse144 =  .00412686
+      RWminobs144 =        144
+       RWrmse144 =  .00431666
       RWmaxobs132 =        132
-      RWminobs132 =         59
-       RWrmse132 =  .00409696
+      RWminobs132 =        132
+       RWrmse132 =  .00426742
       RWmaxobs120 =        120
-      RWminobs120 =         59
-       RWrmse120 =  .00407987
+      RWminobs120 =        120
+       RWrmse120 =  .00423688
       RWmaxobs108 =        108
-      RWminobs108 =         59
-       RWrmse108 =  .00411602
+      RWminobs108 =        108
+       RWrmse108 =  .00428159
       RWmaxobs96 =         96
-      RWminobs96 =         59
-        RWrmse96 =  .00415802
+      RWminobs96 =         96
+        RWrmse96 =  .00436091
       RWmaxobs84 =         84
-      RWminobs84 =         59
-        RWrmse84 =  .00419014
+      RWminobs84 =         84
+        RWrmse84 =  .00439555
       RWmaxobs72 =         72
-      RWminobs72 =         59
-        RWrmse72 =  .00421357
+      RWminobs72 =         72
+        RWrmse72 =  .00443487
       RWmaxobs60 =         60
-      RWminobs60 =         59
-        RWrmse60 =  .00428083
+      RWminobs60 =         60
+        RWrmse60 =  .00453048
       RWmaxobs48 =         48
       RWminobs48 =         48
-        RWrmse48 =  .00431464
+        RWrmse48 =  .00458215
       
    106 . /*
-      > RWmaxobs228 =        228
-      > RWminobs228 =         59
-      > RWrmse228 =  .00407004
+      > RWmaxobs120 = 120 
+      > RWminobs120 = 120 
+      > RWrmse120 = .00423688
       > 
       > */
    107 . 
    108 . /*
       > Best medium length model
       > reg dlnflnonfarm l3dlnflnonfarm l12dlnflnonfarm l24dlnflnonfarm l6dlnusepr
-      >         m1 m3 m6 m9 m12
+      >         m1 m3 m6 m9
       > */
    109 . scalar drop _all
       
-   110 . quietly forval w=48(12)240 {
+   110 . quietly forval w=48(12)144 {
       
    111 . scalar list
-      RWmaxobs240 =        240
-      RWminobs240 =         47
-       RWrmse240 =  .00392293
-      RWmaxobs228 =        228
-      RWminobs228 =         47
-       RWrmse228 =  .00392007
-      RWmaxobs216 =        216
-      RWminobs216 =         47
-       RWrmse216 =  .00393809
-      RWmaxobs204 =        204
-      RWminobs204 =         47
-       RWrmse204 =  .00394526
-      RWmaxobs192 =        192
-      RWminobs192 =         47
-       RWrmse192 =  .00394292
-      RWmaxobs180 =        180
-      RWminobs180 =         47
-       RWrmse180 =  .00394243
-      RWmaxobs168 =        168
-      RWminobs168 =         47
-       RWrmse168 =  .00392743
-      RWmaxobs156 =        156
-      RWminobs156 =         47
-       RWrmse156 =  .00391717
       RWmaxobs144 =        144
-      RWminobs144 =         47
-       RWrmse144 =  .00400005
+      RWminobs144 =        144
+       RWrmse144 =  .00412303
       RWmaxobs132 =        132
-      RWminobs132 =         47
-       RWrmse132 =  .00396689
+      RWminobs132 =        132
+       RWrmse132 =  .00407538
       RWmaxobs120 =        120
-      RWminobs120 =         47
-       RWrmse120 =  .00396377
+      RWminobs120 =        120
+       RWrmse120 =  .00406735
       RWmaxobs108 =        108
-      RWminobs108 =         47
-       RWrmse108 =   .0039582
+      RWminobs108 =        108
+       RWrmse108 =  .00406403
       RWmaxobs96 =         96
-      RWminobs96 =         47
-        RWrmse96 =  .00404142
+      RWminobs96 =         96
+        RWrmse96 =  .00419684
       RWmaxobs84 =         84
-      RWminobs84 =         47
-        RWrmse84 =  .00406506
+      RWminobs84 =         84
+        RWrmse84 =  .00423362
       RWmaxobs72 =         72
-      RWminobs72 =         47
-        RWrmse72 =  .00409348
+      RWminobs72 =         72
+        RWrmse72 =  .00429113
       RWmaxobs60 =         60
-      RWminobs60 =         47
-        RWrmse60 =  .00425552
+      RWminobs60 =         60
+        RWrmse60 =  .00448591
       RWmaxobs48 =         48
-      RWminobs48 =         47
-        RWrmse48 =   .0044495
+      RWminobs48 =         48
+        RWrmse48 =  .00478837
       
    112 . /*
-      > RWmaxobs156 =        156
-      > RWminobs156 =         47
-      > RWrmse156 =  .00391717
+      > RWmaxobs108 = 108 
+      > RWminobs108 = 108 
+      > RWrmse108 = .00406403
       > */
    113 . 
    114 . *6
    115 . /*
-      > RWmaxobs156 =        156
-      > RWminobs156 =         47
-      > RWrmse156 =  .00387308
+      > RWmaxobs108 = 108 
+      > RWminobs108 = 108 
+      > RWrmse108 = .00388844
       > */
    116 . scalar drop _all
       

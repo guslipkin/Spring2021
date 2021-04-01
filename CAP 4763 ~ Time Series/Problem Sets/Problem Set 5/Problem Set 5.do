@@ -55,8 +55,6 @@ gen m10=0
 replace m10=1 if month==10
 gen m11=0
 replace m11=1 if month==11
-gen m12=0
-replace m11=1 if month==12
 
 gen dlnflnonfarm=d.lnflnonfarm
 gen l1dlnflnonfarm=l1d.lnflnonfarm
@@ -103,32 +101,32 @@ gen l11dlnusepr=l11d.lnusepr
 gen l12dlnusepr=l12d.lnusepr
 gen l24dlnusepr=l24d.lnusepr
 
-/*
+
 gsreg dlnflnonfarm l1dlnflnonfarm l3dlnflnonfarm l6dlnflnonfarm l9dlnflnonfarm ///
       l12dlnflnonfarm l24dlnflnonfarm ///
 	  l1dlnfllf l3dlnfllf l6dlnfllf l9dlnfllf ///
       l12dlnfllf l24dlnfllf ///
 	  l1dlnusepr l3dlnusepr l6dlnusepr l9dlnusepr ///
       l12dlnusepr l24dlnusepr if tin(1990m1,2019m12), ///
-	ncomb(1,6) aic outsample(24) fix(m1 m3 m6 m9 m12) ///
+	ncomb(1,6) aic outsample(24) fix(m1 m3 m6 m9) ///
 	samesample nindex( -1 aic -1 bic -1 rmse_out) results(gsreg_dlnrer) replace
-*/
+
 
 *5
 /* 
 Best model
 reg dlnflnonfarm l3dlnflnonfarm l6dlnflnonfarm l12dlnflnonfarm l24dlnflnonfarm 
-	l24dlnfllf l6dlnusepr m1 m3 m6 m9 m12
+	l24dlnfllf l6dlnusepr m1 m3 m6 m9
 */
 scalar drop _all
-quietly forval w=48(12)240 {
+quietly forval w=48(12)144 {
 gen pred=.
 gen nobs=.
-	forval t=432/720 { 
+	forval t=529/720 { 
 	gen wstart=`t'-`w'
 	gen wend=`t'-1
 	reg d.lnflnonfarm l3d.lnflnonfarm l6d.lnflnonfarm l12d.lnflnonfarm l24d.lnflnonfarm ///
-		l24d.lnfllf l6d.lnusepr m1 m3 m6 m9 m12 ///
+		l24d.lnfllf l6d.lnusepr m1 m3 m6 m9 ///
 		if date>=wstart & date<=wend
 	replace nobs=e(N) if date==`t'
 	predict ptemp
@@ -145,23 +143,23 @@ drop errsq pred nobs
 }
 scalar list
 /*
-RWmaxobs156 =        156
-RWminobs156 =         47
-RWrmse156 =  .00387308
+RWmaxobs108 = 108 
+RWminobs108 = 108 
+RWrmse108 = .00388844
 */
 
 /*
 Smallest / best model
-reg dlnflnonfarm l12dlnflnonfarm m1 m3 m6 m9 m12
+reg dlnflnonfarm l12dlnflnonfarm m1 m3 m6 m9
 */
 scalar drop _all
-quietly forval w=48(12)240 {
+quietly forval w=48(12)144 {
 gen pred=.
 gen nobs=.
-	forval t=432/720 { 
+	forval t=529/720 { 
 	gen wstart=`t'-`w'
 	gen wend=`t'-1
-	reg dlnflnonfarm l12dlnflnonfarm m1 m3 m6 m9 m12 ///
+	reg dlnflnonfarm l12dlnflnonfarm m1 m3 m6 m9 ///
 		if date>=wstart & date<=wend
 	replace nobs=e(N) if date==`t'
 	predict ptemp
@@ -178,26 +176,26 @@ drop errsq pred nobs
 }
 scalar list
 /*
-RWmaxobs228 =        228
-RWminobs228 =         59
-RWrmse228 =  .00407004
+RWmaxobs120 = 120 
+RWminobs120 = 120 
+RWrmse120 = .00423688
 
 */
 
 /*
 Best medium length model
 reg dlnflnonfarm l3dlnflnonfarm l12dlnflnonfarm l24dlnflnonfarm l6dlnusepr
-	m1 m3 m6 m9 m12
+	m1 m3 m6 m9
 */
 scalar drop _all
-quietly forval w=48(12)240 {
+quietly forval w=48(12)144 {
 gen pred=.
 gen nobs=.
-	forval t=432/720 { 
+	forval t=529/720 { 
 	gen wstart=`t'-`w'
 	gen wend=`t'-1
 	reg dlnflnonfarm l3dlnflnonfarm l12dlnflnonfarm l24dlnflnonfarm l6dlnusepr ///
-		m1 m3 m6 m9 m12 ///
+		m1 m3 m6 m9 ///
 		if date>=wstart & date<=wend
 	replace nobs=e(N) if date==`t'
 	predict ptemp
@@ -214,16 +212,16 @@ drop errsq pred nobs
 }
 scalar list
 /*
-RWmaxobs156 =        156
-RWminobs156 =         47
-RWrmse156 =  .00391717
+RWmaxobs108 = 108 
+RWminobs108 = 108 
+RWrmse108 = .00406403
 */
 
 *6
 /*
-RWmaxobs156 =        156
-RWminobs156 =         47
-RWrmse156 =  .00387308
+RWmaxobs108 = 108 
+RWminobs108 = 108 
+RWrmse108 = .00388844
 */
 scalar drop _all
 quietly forval w=156(12)156 {
@@ -233,7 +231,7 @@ gen nobs=.
 	gen wstart=`t'-`w'
 	gen wend=`t'-1
 	reg d.lnflnonfarm l3d.lnflnonfarm l6d.lnflnonfarm l12d.lnflnonfarm l24d.lnflnonfarm ///
-		l24d.lnfllf l6d.lnusepr m1 m3 m6 m9 m12 ///
+		l24d.lnfllf l6d.lnusepr m1 m3 m6 m9 ///
 		if date>=wstart & date<=wend
 	replace nobs=e(N) if date==`t'
 	predict ptemp
@@ -281,5 +279,5 @@ tsline pnonfarme lbounde ubounde fl_nonfarm if tin(2019m1,2020m1), ///
 tsline pnonfarm pnonfarme fl_nonfarm lbound lbounde ubound ubounde ///
  if tin(2019m1,2020m1), tline(2019m12) saving("Normal_vs_Empirical", replace)
  
-translate "Problem Set 5.smcl" "Problem Set 5.txt", replace
+*translate "Problem Set 5.smcl" "Problem Set 5.txt", replace
 log close
