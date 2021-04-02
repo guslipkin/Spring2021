@@ -1,0 +1,442 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}/Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Final Project/Final Project.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res} 1 Apr 2021, 19:18:19
+{txt}
+{com}. import delimited "TS2020_Final_Project_txt2/TS2020_Final_Project_Monthly.txt"
+{res}{text}(6 vars, 374 obs)
+
+{com}. rename smu12455400500000001 Count
+{res}{txt}
+{com}. rename smu12455400500000002 WeekHours
+{res}{txt}
+{com}. rename smu12455400500000003 HourlyEarnings
+{res}{txt}
+{com}. rename smu12455400500000011 WeeklyEarnings
+{res}{txt}
+{com}. rename smu12455400800000001 ServiceCount
+{res}{txt}
+{com}. 
+. 
+. label variable Count "Count"
+{txt}
+{com}. label variable WeekHours "WeekHours"
+{txt}
+{com}. label variable HourlyEarnings "HourlyEarnings"
+{txt}
+{com}. label variable WeeklyEarnings "WeeklyEarnings"
+{txt}
+{com}. label variable ServiceCount "ServiceCount"
+{txt}
+{com}. 
+. 
+. gen datec=date(date, "YMD")
+{txt}
+{com}. gen Date=mofd(datec)
+{txt}
+{com}. gen month=month(datec)
+{txt}
+{com}. format Date %tm
+{txt}
+{com}. tsset Date
+{res}{txt}{col 9}time variable:  {res}{col 25}Date, 1990m1 to 2021m2
+{txt}{col 17}delta:  {res}1 month
+{txt}
+{com}. 
+. gen lnCount = ln(Count)
+{txt}
+{com}. gen lnWeekHours = ln(WeekHours)
+{txt}(252 missing values generated)
+
+{com}. gen lnHourlyEarnings = ln(HourlyEarnings)
+{txt}(252 missing values generated)
+
+{com}. gen lnWeeklyEarnings = ln(WeeklyEarnings)
+{txt}(252 missing values generated)
+
+{com}. gen lnServiceCount = ln(ServiceCount)
+{txt}
+{com}. 
+. gen m1=0
+{txt}
+{com}. replace m1=1 if month==1
+{txt}(32 real changes made)
+
+{com}. gen m2=0
+{txt}
+{com}. replace m2=1 if month==2
+{txt}(32 real changes made)
+
+{com}. gen m3=0
+{txt}
+{com}. replace m3=1 if month==3
+{txt}(31 real changes made)
+
+{com}. gen m4=0
+{txt}
+{com}. replace m4=1 if month==4
+{txt}(31 real changes made)
+
+{com}. gen m5=0
+{txt}
+{com}. replace m5=1 if month==5
+{txt}(31 real changes made)
+
+{com}. gen m6=0
+{txt}
+{com}. replace m6=1 if month==6
+{txt}(31 real changes made)
+
+{com}. gen m7=0
+{txt}
+{com}. replace m7=1 if month==7
+{txt}(31 real changes made)
+
+{com}. gen m8=0
+{txt}
+{com}. replace m8=1 if month==8
+{txt}(31 real changes made)
+
+{com}. gen m9=0
+{txt}
+{com}. replace m9=1 if month==9
+{txt}(31 real changes made)
+
+{com}. gen m10=0
+{txt}
+{com}. replace m10=1 if month==10
+{txt}(31 real changes made)
+
+{com}. gen m11=0
+{txt}
+{com}. replace m11=1 if month==11
+{txt}(31 real changes made)
+
+{com}. gen m12=0
+{txt}
+{com}. replace m12=1 if month==12
+{txt}(31 real changes made)
+
+{com}. 
+. gen dlnCount=d.lnCount
+{txt}(1 missing value generated)
+
+{com}. gen l1dlnCount=l1d.lnCount
+{txt}(2 missing values generated)
+
+{com}. gen l2dlnCount=l2d.lnCount
+{txt}(3 missing values generated)
+
+{com}. gen l3dlnCount=l3d.lnCount
+{txt}(4 missing values generated)
+
+{com}. gen l4dlnCount=l4d.lnCount
+{txt}(5 missing values generated)
+
+{com}. gen l5dlnCount=l5d.lnCount
+{txt}(6 missing values generated)
+
+{com}. gen l6dlnCount=l6d.lnCount
+{txt}(7 missing values generated)
+
+{com}. gen l7dlnCount=l7d.lnCount
+{txt}(8 missing values generated)
+
+{com}. gen l8dlnCount=l8d.lnCount
+{txt}(9 missing values generated)
+
+{com}. gen l9dlnCount=l9d.lnCount
+{txt}(10 missing values generated)
+
+{com}. gen l10dlnCount=l10d.lnCount
+{txt}(11 missing values generated)
+
+{com}. gen l11dlnCount=l11d.lnCount
+{txt}(12 missing values generated)
+
+{com}. gen l12dlnCount=l12d.lnCount
+{txt}(13 missing values generated)
+
+{com}. gen l24dlnCount=l24d.lnCount
+{txt}(25 missing values generated)
+
+{com}. gen l36dlnCount=l36d.lnCount
+{txt}(37 missing values generated)
+
+{com}. gen l48dlnCount=l48d.lnCount
+{txt}(49 missing values generated)
+
+{com}. 
+. gen dlnWeekHours=d.lnWeekHours
+{txt}(253 missing values generated)
+
+{com}. gen l1dlnWeekHours=l1d.lnWeekHours
+{txt}(254 missing values generated)
+
+{com}. gen l2dlnWeekHours=l2d.lnWeekHours
+{txt}(255 missing values generated)
+
+{com}. gen l3dlnWeekHours=l3d.lnWeekHours
+{txt}(256 missing values generated)
+
+{com}. gen l4dlnWeekHours=l4d.lnWeekHours
+{txt}(257 missing values generated)
+
+{com}. gen l5dlnWeekHours=l5d.lnWeekHours
+{txt}(258 missing values generated)
+
+{com}. gen l6dlnWeekHours=l6d.lnWeekHours
+{txt}(259 missing values generated)
+
+{com}. gen l7dlnWeekHours=l7d.lnWeekHours
+{txt}(260 missing values generated)
+
+{com}. gen l8dlnWeekHours=l8d.lnWeekHours
+{txt}(261 missing values generated)
+
+{com}. gen l9dlnWeekHours=l9d.lnWeekHours
+{txt}(262 missing values generated)
+
+{com}. gen l10dlnWeekHours=l10d.lnWeekHours
+{txt}(263 missing values generated)
+
+{com}. gen l11dlnWeekHours=l11d.lnWeekHours
+{txt}(264 missing values generated)
+
+{com}. gen l12dlnWeekHours=l12d.lnWeekHours
+{txt}(265 missing values generated)
+
+{com}. gen l24dlnWeekHours=l24d.lnWeekHours
+{txt}(277 missing values generated)
+
+{com}. gen l36dlnWeekHours=l36d.lnWeekHours
+{txt}(289 missing values generated)
+
+{com}. gen l48dlnWeekHours=l48d.lnWeekHours
+{txt}(301 missing values generated)
+
+{com}. 
+. gen dlnHourlyEarnings=d.lnHourlyEarnings
+{txt}(253 missing values generated)
+
+{com}. gen l1dlnHourlyEarnings=l1d.lnHourlyEarnings
+{txt}(254 missing values generated)
+
+{com}. gen l2dlnHourlyEarnings=l2d.lnHourlyEarnings
+{txt}(255 missing values generated)
+
+{com}. gen l3dlnHourlyEarnings=l3d.lnHourlyEarnings
+{txt}(256 missing values generated)
+
+{com}. gen l4dlnHourlyEarnings=l4d.lnHourlyEarnings
+{txt}(257 missing values generated)
+
+{com}. gen l5dlnHourlyEarnings=l5d.lnHourlyEarnings
+{txt}(258 missing values generated)
+
+{com}. gen l6dlnHourlyEarnings=l6d.lnHourlyEarnings
+{txt}(259 missing values generated)
+
+{com}. gen l7dlnHourlyEarnings=l7d.lnHourlyEarnings
+{txt}(260 missing values generated)
+
+{com}. gen l8dlnHourlyEarnings=l8d.lnHourlyEarnings
+{txt}(261 missing values generated)
+
+{com}. gen l9dlnHourlyEarnings=l9d.lnHourlyEarnings
+{txt}(262 missing values generated)
+
+{com}. gen l10dlnHourlyEarnings=l10d.lnHourlyEarnings
+{txt}(263 missing values generated)
+
+{com}. gen l11dlnHourlyEarnings=l11d.lnHourlyEarnings
+{txt}(264 missing values generated)
+
+{com}. gen l12dlnHourlyEarnings=l12d.lnHourlyEarnings
+{txt}(265 missing values generated)
+
+{com}. gen l24dlnHourlyEarnings=l24d.lnHourlyEarnings
+{txt}(277 missing values generated)
+
+{com}. gen l36dlnHourlyEarnings=l36d.lnHourlyEarnings
+{txt}(289 missing values generated)
+
+{com}. gen l48dlnHourlyEarnings=l48d.lnHourlyEarnings
+{txt}(301 missing values generated)
+
+{com}. 
+. gen dlnWeeklyEarnings=d.lnWeeklyEarnings
+{txt}(253 missing values generated)
+
+{com}. gen l1dlnWeeklyEarnings=l1d.lnWeeklyEarnings
+{txt}(254 missing values generated)
+
+{com}. gen l2dlnWeeklyEarnings=l2d.lnWeeklyEarnings
+{txt}(255 missing values generated)
+
+{com}. gen l3dlnWeeklyEarnings=l3d.lnWeeklyEarnings
+{txt}(256 missing values generated)
+
+{com}. gen l4dlnWeeklyEarnings=l4d.lnWeeklyEarnings
+{txt}(257 missing values generated)
+
+{com}. gen l5dlnWeeklyEarnings=l5d.lnWeeklyEarnings
+{txt}(258 missing values generated)
+
+{com}. gen l6dlnWeeklyEarnings=l6d.lnWeeklyEarnings
+{txt}(259 missing values generated)
+
+{com}. gen l7dlnWeeklyEarnings=l7d.lnWeeklyEarnings
+{txt}(260 missing values generated)
+
+{com}. gen l8dlnWeeklyEarnings=l8d.lnWeeklyEarnings
+{txt}(261 missing values generated)
+
+{com}. gen l9dlnWeeklyEarnings=l9d.lnWeeklyEarnings
+{txt}(262 missing values generated)
+
+{com}. gen l10dlnWeeklyEarnings=l10d.lnWeeklyEarnings
+{txt}(263 missing values generated)
+
+{com}. gen l11dlnWeeklyEarnings=l11d.lnWeeklyEarnings
+{txt}(264 missing values generated)
+
+{com}. gen l12dlnWeeklyEarnings=l12d.lnWeeklyEarnings
+{txt}(265 missing values generated)
+
+{com}. gen l24dlnWeeklyEarnings=l24d.lnWeeklyEarnings
+{txt}(277 missing values generated)
+
+{com}. gen l36dlnWeeklyEarnings=l36d.lnWeeklyEarnings
+{txt}(289 missing values generated)
+
+{com}. gen l48dlnWeeklyEarnings=l48d.lnWeeklyEarnings
+{txt}(301 missing values generated)
+
+{com}. 
+. gen dlnServiceCount=d.lnServiceCount
+{txt}(1 missing value generated)
+
+{com}. gen l1dlnServiceCount=l1d.lnServiceCount
+{txt}(2 missing values generated)
+
+{com}. gen l2dlnServiceCount=l2d.lnServiceCount
+{txt}(3 missing values generated)
+
+{com}. gen l3dlnServiceCount=l3d.lnServiceCount
+{txt}(4 missing values generated)
+
+{com}. gen l4dlnServiceCount=l4d.lnServiceCount
+{txt}(5 missing values generated)
+
+{com}. gen l5dlnServiceCount=l5d.lnServiceCount
+{txt}(6 missing values generated)
+
+{com}. gen l6dlnServiceCount=l6d.lnServiceCount
+{txt}(7 missing values generated)
+
+{com}. gen l7dlnServiceCount=l7d.lnServiceCount
+{txt}(8 missing values generated)
+
+{com}. gen l8dlnServiceCount=l8d.lnServiceCount
+{txt}(9 missing values generated)
+
+{com}. gen l9dlnServiceCount=l9d.lnServiceCount
+{txt}(10 missing values generated)
+
+{com}. gen l10dlnServiceCount=l10d.lnServiceCount
+{txt}(11 missing values generated)
+
+{com}. gen l11dlnServiceCount=l11d.lnServiceCount
+{txt}(12 missing values generated)
+
+{com}. gen l12dlnServiceCount=l12d.lnServiceCount
+{txt}(13 missing values generated)
+
+{com}. gen l24dlnServiceCount=l24d.lnServiceCount
+{txt}(25 missing values generated)
+
+{com}. gen l36dlnServiceCount=l36d.lnServiceCount
+{txt}(37 missing values generated)
+
+{com}. gen l48dlnServiceCount=l48d.lnServiceCount
+{txt}(49 missing values generated)
+
+{com}. 
+. /*
+> The project is to forecast the March non-seasonally adjusted estimates of average weekly earnings and total employment for private employers (total private) for a Florida MSA of your choice and write up a professional report on your forecast.
+> */
+. /* Count and WeeklyEarnings */
+. 
+. summ Count WeekHours HourlyEarnings WeeklyEarnings ServiceCount
+
+{txt}    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 7}Count {c |}{res}        374    14.18556    6.880684        5.3         28
+{txt}{space 3}WeekHours {c |}{res}        122    36.86967    3.804193       28.3       45.8
+{txt}HourlyEarn~s {c |}{res}        122    19.70344    2.910126      15.01       24.6
+{txt}WeeklyEarn~s {c |}{res}        122    719.7972    84.82529     503.79      916.1
+{txt}ServiceCount {c |}{res}        374    10.40455    5.940013        3.9       22.8
+{txt}
+{com}. summ lnCount lnWeekHours lnHourlyEarnings lnWeeklyEarnings lnServiceCount
+
+{txt}    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 5}lnCount {c |}{res}        374      2.5174    .5398403   1.667707   3.332205
+{txt}{space 1}lnWeekHours {c |}{res}        122    3.602049    .1041722   3.342862   3.824284
+{txt}lnHourlyEa~s {c |}{res}        122    2.969891     .148565   2.708717   3.202746
+{txt}lnWeeklyEa~s {c |}{res}        122     6.57194    .1198394   6.222159   6.820126
+{txt}lnServiceC~t {c |}{res}        374     2.16967    .5975865   1.360977    3.12676
+{txt}
+{com}. 
+. ac lnCount, saving(lnCount_ac, replace)
+{res}{txt}(file lnCount_ac.gph saved)
+
+{com}. pac lnCount, saving(lnCount_pac, replace)
+{res}{txt}(file lnCount_pac.gph saved)
+
+{com}. graph combine lnCount_ac.gph lnCount_pac.gph, saving(lnCount_ac_pac, replace)
+{res}{txt}(file lnCount_ac_pac.gph saved)
+
+{com}. graph export "lnCount_ac_pac.png"
+{err}{p 0 4 2}
+file lnCount_ac_pac.png
+already exists
+{p_end}
+{txt}{search r(602), local:r(602);}
+
+end of do-file
+
+{search r(602), local:r(602);}
+
+{com}. do "/var/folders/99/5g4rbsld0s9cpjm53wfklclc0000gn/T//SD13289.000000"
+{txt}
+{com}. summ Count WeekHours HourlyEarnings WeeklyEarnings ServiceCount
+
+{txt}    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 7}Count {c |}{res}        374    14.18556    6.880684        5.3         28
+{txt}{space 3}WeekHours {c |}{res}        122    36.86967    3.804193       28.3       45.8
+{txt}HourlyEarn~s {c |}{res}        122    19.70344    2.910126      15.01       24.6
+{txt}WeeklyEarn~s {c |}{res}        122    719.7972    84.82529     503.79      916.1
+{txt}ServiceCount {c |}{res}        374    10.40455    5.940013        3.9       22.8
+{txt}
+{com}. summ lnCount lnWeekHours lnHourlyEarnings lnWeeklyEarnings lnServiceCount
+
+{txt}    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 5}lnCount {c |}{res}        374      2.5174    .5398403   1.667707   3.332205
+{txt}{space 1}lnWeekHours {c |}{res}        122    3.602049    .1041722   3.342862   3.824284
+{txt}lnHourlyEa~s {c |}{res}        122    2.969891     .148565   2.708717   3.202746
+{txt}lnWeeklyEa~s {c |}{res}        122     6.57194    .1198394   6.222159   6.820126
+{txt}lnServiceC~t {c |}{res}        374     2.16967    .5975865   1.360977    3.12676
+{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. save "/Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Final Project/Untitled.dta", replace
+{txt}file /Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Final Project/Untitled.dta saved
+
+{com}. exit, clear
