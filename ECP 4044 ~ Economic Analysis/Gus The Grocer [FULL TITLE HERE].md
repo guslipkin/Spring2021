@@ -48,7 +48,7 @@
 
 ## Expected Marginal Utility
 
-​	As we will establish in [*Profit Maximization*](#Profit-Maximization), I provide no added value to the log card project over any other person performing the same task. I will concede, of course, that I already know which buttons to press to update my spreadsheets and no one else does, but those tasks are easy to teach in under fifteen minutes and can therefore be ignored. Because I provide no added value to the project, when my supervisor asks me to work on log cards, the company has a marginal utility of zero while I am doing that work. 
+​	As we will establish in [*Profit Maximization*](#Profit-Maximization), I provide no added value to the log card project over any other person performing the same task. I will concede, of course, that I already know which buttons to press to update my spreadsheets and no one else does, but those tasks are easy to teach in under fifteen minutes and can therefore be ignored. Because I provide no added value to the project, when my supervisor asks me to work on log cards the company has a marginal utility of zero while I am doing that work. 
 
 ​	What is the company's expected marginal utility for each unit of time I am on a special project? This is relatively easy to answer because of the nature of the special projects I am assigned to. Each special project has progress that can be measured by tasks completed or percent completion when done by hand such as transcribing part numbers into a spreadsheet or trying to find duplicate part numbers. However, when writing a program that does these tasks it is exceptionally rare that a computer running the program would take as long as a human would to do the same task.
 
@@ -58,7 +58,9 @@
 
 <p style="text-align: center;"><code>Assumption 2: I will take a week to finish writing a program to complete any given task</code></p>
 
-​		It should now be clear that if any special project is expected to take more than a week to complete, I should be tasked with writing a program to do the task. If the task is expected to be repeated, I should be asked to write a program if the total time spent on the task is more than a week. It may take me more time in the beginning, but at some point the programming time and task time will reach a breakeven point at which point the program will be more efficient.
+​		It should now be clear that if any special project is expected to take more than a week to complete, I should be tasked with writing a program to do the task. If the task is expected to be repeated, I should be asked to write a program if the total time spent on the task is more than a week. It may take me more time in the beginning, but at some point the programming time and task time will reach a breakeven point at which point the program will be more efficient.  
+
+​	These assumptions, however, assume that MiGrocery has only one person working on these projects, either me or someone else. I will always take a week to complete a given task, but should they choose to hire a small army, essentially mult-threading the process, the task could be completed in a matter of hours. This problem has a natural solution that the total amount paid to employees to complete the task should be minimized regardless of it is paying one person for many hours or many people for one hour. Alternatively, if a task is crucial to company operations, they could choose to pay more people to complete it more quickly rather than wait for me to construct a solution.
 
 ## Profit Maximization
 
@@ -88,7 +90,7 @@ $$
 \end{aligned}
 $$
 
-​	Finally, in order to make this giant mess usable, $T_L$ and $T_S$ must be able to be said in terms of each other. Each special project takes about twenty-five hours to complete. Based on current progress, we can estimate that the log card project would take about ten twenty-five hour weeks to complete. Thus, $T_L = 10T_S$. This only holds for the present moment in time because as time passes, the amount of special projects that can be completed by the time log cards are completed will decrease until the time remaining on the log card project will be equal to the amount of time it will take to complete a given special project. In order to make sure we are comparing the same amout of time, we must multiply any special project values by ten as well. This means that my and anyone else's time is limited to 250 hours as well. $O_S$ and $10M_S$ become $250-O_L$ and $10(250-M_L)$, respectively. The profit equation becomes
+​	Finally, in order to make this giant mess usable, $T_L$ and $T_S$ must be able to be said in terms of each other. Each special project takes about twenty-five hours to complete. Based on current progress, we can estimate that the log card project would take about ten twenty-five hour weeks to complete. Because I could complete ten special projects in the ten weeks it will take to complete the log card project, $T_L = 10T_S$. This only holds for the present moment in time because as time passes, the amount of special projects that can be completed by the time log cards are completed will decrease until the time remaining on the log card project will be equal to the amount of time it will take to complete a given special project. In order to make sure we are comparing the same amout of time, we must multiply any special project values by ten as well. This means that my and anyone else's time is limited to 250 hours as well. $O_S$ and $10M_S$ become $250-O_L$ and $10(250-M_L)$, respectively. The profit equation becomes
 
 $$
 \begin{aligned}
@@ -100,7 +102,8 @@ $$
 
 $$
 \begin{aligned}
-\pi=(.8*2,000,000)\frac{M_L+O_L}{250} + 10(1-.8)10,000,000\frac{(250-O_L)+10(250-M_L)}{250} - 13(M_L+O_L+10(10(250-M_L))+10(250-O_L))
+\pi=(.8*2,000,000)\frac{M_L+O_L}{250} + 10(1-.8)10,000,000\frac{(250-O_L)+10(250-M_L)}{250} - 
+13(M_L+O_L+10(10(250-M_L))+10(250-O_L))
 \end{aligned}
 $$
 
@@ -140,7 +143,7 @@ $$
 - time rate of value matters
   - w = function of time to completion (raised to a negative)
 - v is amount of time put into it
-- Gus has limited time per week but morons aren't limited
+- ==Gus has limited time per week but morons aren't limited==
 - Make w a function of time to completion and v is a function increasing in my time (2nd derivative is negative), then an internal solution should present 
 - Get in time to completion in a concrete way
 - ==Explain T==
