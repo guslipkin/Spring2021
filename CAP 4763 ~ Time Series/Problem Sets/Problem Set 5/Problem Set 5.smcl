@@ -3,8 +3,22 @@
       name:  {res}<unnamed>
        {txt}log:  {res}/Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Problem Set 5/Problem Set 5.smcl
   {txt}log type:  {res}smcl
- {txt}opened on:  {res}31 Mar 2021, 19:29:06
+ {txt}opened on:  {res} 3 Apr 2021, 21:50:15
 {txt}
+{com}. import delimited "Assignment_1_Monthly.txt"
+{res}{text}(5 vars, 984 obs)
+
+{com}. 
+. rename lnu02300000 us_epr
+{res}{txt}
+{com}. rename flnan fl_nonfarm
+{res}{txt}
+{com}. rename fllfn fl_lf
+{res}{txt}
+{com}. rename flbppriv fl_bp
+{res}{txt}
+{com}. rename date datestring
+{res}{txt}
 {com}. 
 . gen datec=date(datestring, "YMD")
 {txt}
@@ -46,6 +60,19 @@
 {txt}
 {com}. replace month=month(dofm(date)) if month==.
 {txt}(1 real change made)
+
+{com}. 
+. *interlude
+. ac lnflnonfarm, saving("ac_lnflnonfarm.gph", replace)
+{res}{txt}(file ac_lnflnonfarm.gph saved)
+
+{com}. pac lnflnonfarm, saving("pac_lnflnonfarm.gph", replace)
+{res}{txt}(file pac_lnflnonfarm.gph saved)
+
+{com}. graph combine ac_lnflnonfarm.gph pac_lnflnonfarm.gph
+{res}{txt}
+{com}. graph export ac_pac_lnflnonfarm.png, replace
+{txt}(file /Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Problem Set 5/ac_pac_lnflnonfarm.png written in PNG format)
 
 {com}. 
 . *3
@@ -247,7 +274,7 @@
 Total Number of Estimations: {res}31179
 {txt}----------------------------------------------------
 ----------------------------------------------------
-Warning: Estimation could take about {res}10{txt} minutes 
+Warning: Estimation could take about {res}14{txt} minutes 
 ----------------------------------------------------
  
 Computing combinations...
@@ -31463,11 +31490,8 @@ Estimation number {res}19215
 {txt}{hline 16}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {res}{txt}
 {com}. 
-{txt}end of do-file
-
-{com}. do "/var/folders/2l/fbt5472n7ks1xr82m33g3shw0000gn/T//SD13269.000000"
-{txt}
-{com}. *5
+. 
+. *5
 . /* 
 > Best model
 > reg dlnflnonfarm l3dlnflnonfarm l6dlnflnonfarm l12dlnflnonfarm l24dlnflnonfarm 
@@ -31640,8 +31664,7 @@ Estimation number {res}19215
                  {txt}r(r2) =  {res}.0065394379198551
 {txt}
 {com}. 
-. *8
-. *Normal
+. *7
 . predict temp if tin(2020m1,2020m1)
 {txt}(option {bf:xb} assumed; fitted values)
 (360 missing values generated)
@@ -31671,7 +31694,11 @@ Estimation number {res}19215
 {com}. tsline pnonfarm lbound ubound fl_nonfarm if tin(2019m1,2020m1), tline(2019m12) saving("Nonfarm_Normal", replace)
 {res}{txt}(file Nonfarm_Normal.gph saved)
 
+{com}. graph export "nonfarm_normal.png", replace
+{txt}(file /Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Problem Set 5/nonfarm_normal.png written in PNG format)
+
 {com}. 
+. *8
 . *Empirical
 . drop res
 {txt}
@@ -31718,11 +31745,17 @@ Estimation number {res}19215
 >         tline(2019m12) saving("Nonfarm_Epirical", replace)
 {res}{txt}(file Nonfarm_Epirical.gph saved)
 
+{com}. graph export "nonfarm_empirical.png", replace
+{txt}(file /Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Problem Set 5/nonfarm_empirical.png written in PNG format)
+
 {com}. 
 . *9      
 . tsline pnonfarm pnonfarme fl_nonfarm lbound lbounde ubound ubounde ///
 >  if tin(2019m1,2020m1), tline(2019m12) saving("Normal_vs_Empirical", replace)
 {res}{txt}(file Normal_vs_Empirical.gph saved)
+
+{com}. graph export "normal_vs_empirical.png", replace
+{txt}(file /Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Problem Set 5/normal_vs_empirical.png written in PNG format)
 
 {com}.  
 . translate "Problem Set 5.smcl" "Problem Set 5.txt", replace
@@ -31732,7 +31765,7 @@ Estimation number {res}19215
       {txt}name:  {res}<unnamed>
        {txt}log:  {res}/Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Problem Set 5/Problem Set 5.smcl
   {txt}log type:  {res}smcl
- {txt}closed on:  {res}31 Mar 2021, 19:45:24
+ {txt}closed on:  {res} 3 Apr 2021, 22:07:05
 {txt}{.-}
 {smcl}
 {txt}{sf}{ul off}

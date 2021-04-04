@@ -2,6 +2,7 @@ clear
 set more off
 
 cd "/Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Problem Set 5"
+log using "Problem Set 5", replace
 import delimited "Assignment_1_Monthly.txt"
 
 rename lnu02300000 us_epr
@@ -9,8 +10,6 @@ rename flnan fl_nonfarm
 rename fllfn fl_lf
 rename flbppriv fl_bp
 rename date datestring
-
-log using "Problem Set 5", replace
 
 gen datec=date(datestring, "YMD")
 gen date=mofd(datec)
@@ -31,6 +30,12 @@ drop if !tin(1990m1,2019m12)
 tsset date
 tsappend, add(1)
 replace month=month(dofm(date)) if month==.
+
+*interlude
+ac lnflnonfarm, saving("ac_lnflnonfarm.gph", replace)
+pac lnflnonfarm, saving("pac_lnflnonfarm.gph", replace)
+graph combine ac_lnflnonfarm.gph pac_lnflnonfarm.gph
+graph export ac_pac_lnflnonfarm.png, replace
 
 *3
 gen m1=0
@@ -258,6 +263,7 @@ gen ubound=exp(l.lnflnonfarm+pred+1.96*rwrmse+(rwrmse^2)/2)
 gen lbound=exp(l.lnflnonfarm+pred-1.96*rwrmse+(rwrmse^2)/2)
 list month pnonfarm lbound ubound if tin(2020m1,2020m1)
 tsline pnonfarm lbound ubound fl_nonfarm if tin(2019m1,2020m1), tline(2019m12) saving("Nonfarm_Normal", replace)
+graph export "nonfarm_normal.png", replace
 
 *8
 *Empirical
@@ -274,10 +280,12 @@ gen ubounde=exp(l.lnflnonfarm+pred+r(r2))*meanexpres
 list month pnonfarme lbounde ubounde if tin(2020m1,2020m1)
 tsline pnonfarme lbounde ubounde fl_nonfarm if tin(2019m1,2020m1), ///
 	tline(2019m12) saving("Nonfarm_Epirical", replace)
+graph export "nonfarm_empirical.png", replace
 
 *9	
 tsline pnonfarm pnonfarme fl_nonfarm lbound lbounde ubound ubounde ///
  if tin(2019m1,2020m1), tline(2019m12) saving("Normal_vs_Empirical", replace)
+graph export "normal_vs_empirical.png", replace
  
-*translate "Problem Set 5.smcl" "Problem Set 5.txt", replace
+translate "Problem Set 5.smcl" "Problem Set 5.txt", replace
 log close
