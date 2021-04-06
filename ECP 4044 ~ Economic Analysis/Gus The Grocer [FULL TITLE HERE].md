@@ -140,6 +140,11 @@ $$
 
 > Notes
 
+- OR get in function of time to completion and NPV
+  - $NPV = \sum^n_{t=1}\frac{R_t}{(1+i)^t}$
+  - $R_t$ cash flow during time $t$
+  - $i$ discount rate
+  - $t$ time periods
 - time rate of value matters
   - w = function of time to completion (raised to a negative)
 - v is amount of time put into it
@@ -147,9 +152,11 @@ $$
 - Make w a function of time to completion and v is a function increasing in my time (2nd derivative is negative), then an internal solution should present 
 - Get in time to completion in a concrete way
 - ==Explain T==
-- NPV changes over time when doing things by hand 
+- NPV changes over time when doing things by hand
   - Os and Ms are a sum
 - value moving forward is function of my time put into T
   - Ms asymptotes off to 1
 - ==Talk theory before math==
+- Can solve by continuous with internal minimum
+- - 
 
