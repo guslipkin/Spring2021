@@ -151,19 +151,76 @@ summ lnCount lnWeekHours lnHourlyEarnings lnWeeklyEarnings lnServiceCount
 ac lnCount, saving(lnCount_ac, replace)
 pac lnCount, saving(lnCount_pac, replace)
 graph combine lnCount_ac.gph lnCount_pac.gph, saving(lnCount_ac_pac, replace)
-graph export "lnCount_ac_pac.png"
+graph export "lnCount_ac_pac.png", replace
 ** Probably need to difference
 
 ac lnWeeklyEarnings, saving(lnWeeklyEarnings_ac, replace)
 pac lnWeeklyEarnings, saving(lnWeeklyEarnings_pac, replace)
 graph combine lnWeeklyEarnings_ac.gph lnWeeklyEarnings_pac.gph, saving(lnWeeklyEarnings_ac_pac, replace)
-graph export "lnWeeklyEarnings_ac_pac.png"
+graph export "lnWeeklyEarnings_ac_pac.png", replace
 ** Probably need to differencen b
 
 *starter models for count
 *I used a pair plot to examine the rise and fall of variables with respect to each other
 reg d.lnCount l(12,24,36,48)d.lnCount // .01637
+scalar drop _all
+quietly forval w=12(12)144 {
+gen pred=.
+gen nobs=.
+	forval t=421/733 { 
+	gen wstart=`t'-`w'
+	gen wend=`t'-1
+	reg dlnCount l12dlnCount l24dlnCount l36dlnCount l48dlnCount ///
+		if Date>=wstart & Date<=wend
+	replace nobs=e(N) if Date==`t'
+	predict ptemp
+	replace pred=ptemp if Date==`t'
+	drop ptemp wstart wend
+	}
+gen errsq=(pred-d.lnCount)^2
+summ errsq
+scalar RWrmse`w'=r(mean)^.5
+summ nobs
+scalar RWminobs`w'=r(min)
+scalar RWmaxobs`w'=r(max)
+drop errsq pred nobs
+}
+scalar list
+/*
+RWmaxobs132 =        132
+RWminobs132 =         12
+RWrmse132 =   .0172128
+*/
+
 reg d.lnCount l(5,12,24,36,48)d.lnCount l(5)d.lnWeekHours m5 // .01711
+scalar drop _all
+quietly forval w=12(12)84 {
+gen pred=.
+gen nobs=.
+	forval t=641/733 { 
+	gen wstart=`t'-`w'
+	gen wend=`t'-1
+	reg dlnCount l5dlnCount l12dlnCount l24dlnCount l36dlnCount l48dlnCount l5dlnWeekHours m5 ///
+		if Date>=wstart & Date<=wend
+	replace nobs=e(N) if Date==`t'
+	predict ptemp
+	replace pred=ptemp if Date==`t'
+	drop ptemp wstart wend
+	}
+gen errsq=(pred-d.lnCount)^2
+summ errsq
+scalar RWrmse`w'=r(mean)^.5
+summ nobs
+scalar RWminobs`w'=r(min)
+scalar RWmaxobs`w'=r(max)
+drop errsq pred nobs
+}
+scalar list
+/*
+RWmaxobs84 =         84
+RWminobs84 =         23
+RWrmse84 =  .01950911
+*/
 
 /*
 gsreg dlnCount l1dlnCount l2dlnCount l3dlnCount l4dlnCount l5dlnCount l6dlnCount ///
@@ -175,8 +232,65 @@ gsreg dlnCount l1dlnCount l2dlnCount l3dlnCount l4dlnCount l5dlnCount l6dlnCount
 */
 	
 *gsreg suggestions
-reg d.lnCount l12d.lnCount m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11 m12
-reg d.lnCount l(12,36)d.lnCount m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11 m12
+reg d.lnCount l12d.lnCount m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11
+scalar drop _all
+quietly forval w=12(12)144 {
+gen pred=.
+gen nobs=.
+	forval t=385/733 { 
+	gen wstart=`t'-`w'
+	gen wend=`t'-1
+	reg dlnCount l12dlnCount m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11 ///
+		if Date>=wstart & Date<=wend
+	replace nobs=e(N) if Date==`t'
+	predict ptemp
+	replace pred=ptemp if Date==`t'
+	drop ptemp wstart wend
+	}
+gen errsq=(pred-d.lnCount)^2
+summ errsq
+scalar RWrmse`w'=r(mean)^.5
+summ nobs
+scalar RWminobs`w'=r(min)
+scalar RWmaxobs`w'=r(max)
+drop errsq pred nobs
+}
+scalar list
+/*
+RWmaxobs144 =        144
+RWminobs144 =         12
+RWrmse144 =  .01824906
+*/
+
+reg d.lnCount l(12,36)d.lnCount m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11
+scalar drop _all
+quietly forval w=12(12)144 {
+gen pred=.
+gen nobs=.
+	forval t=409/733 { 
+	gen wstart=`t'-`w'
+	gen wend=`t'-1
+	reg dlnCount l12dlnCount l36dlnCount m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11 ///
+		if Date>=wstart & Date<=wend
+	replace nobs=e(N) if Date==`t'
+	predict ptemp
+	replace pred=ptemp if Date==`t'
+	drop ptemp wstart wend
+	}
+gen errsq=(pred-d.lnCount)^2
+summ errsq
+scalar RWrmse`w'=r(mean)^.5
+summ nobs
+scalar RWminobs`w'=r(min)
+scalar RWmaxobs`w'=r(max)
+drop errsq pred nobs
+}
+scalar list
+/*
+RWmaxobs144 =        144
+RWminobs144 =         12
+RWrmse144 =  .01777071
+*/
 
 /*
 gsreg dlnCount l1dlnCount l2dlnCount l3dlnCount l4dlnCount l5dlnCount l6dlnCount ///
@@ -200,13 +314,68 @@ gsreg dlnCount l1dlnCount l2dlnCount l3dlnCount l4dlnCount l5dlnCount l6dlnCount
 	samesample nindex( -1 aic -1 bic -1 rmse_out) results(gsreg_dlnCount_Full) replace
 */
 	
-reg d.lnCount l4d.lnWeekHours l9d.lnWeekHours l8d.HourlyEarnings m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11
+reg d.lnCount l4d.lnWeekHours l9d.lnWeekHours l8d.lnHourlyEarnings m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11
+scalar drop _all
+quietly forval w=12(12)84 {
+gen pred=.
+gen nobs=.
+	forval t=624/733 { 
+	gen wstart=`t'-`w'
+	gen wend=`t'-1
+	reg dlnCount l4dlnWeekHours l9dlnWeekHours l8dlnHourlyEarnings m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11 ///
+		if Date>=wstart & Date<=wend
+	replace nobs=e(N) if Date==`t'
+	predict ptemp
+	replace pred=ptemp if Date==`t'
+	drop ptemp wstart wend
+	}
+gen errsq=(pred-d.lnCount)^2
+summ errsq
+scalar RWrmse`w'=r(mean)^.5
+summ nobs
+scalar RWminobs`w'=r(min)
+scalar RWmaxobs`w'=r(max)
+drop errsq pred nobs
+}
+scalar list
+/*
+RWmaxobs12 =         12
+RWminobs12 =          2
+RWrmse12 =   .0176238
+*/
 
-*Rolling window?
-summ date
+/*----------------------------------------------------------------------------*/
 	
 *starter models for weekly earnings
 reg d.lnWeeklyEarnings l1d.lnWeekHours ld.lnHourlyEarnings
+scalar drop _all
+quietly forval w=12(12)84 {
+gen pred=.
+gen nobs=.
+	forval t=616/733 { 
+	gen wstart=`t'-`w'
+	gen wend=`t'-1
+	reg dlnWeeklyEarnings l1dlnWeekHours l1dlnHourlyEarnings ///
+		if Date>=wstart & Date<=wend
+	replace nobs=e(N) if Date==`t'
+	predict ptemp
+	replace pred=ptemp if Date==`t'
+	drop ptemp wstart wend
+	}
+gen errsq=(pred-d.lnWeeklyEarnings)^2
+summ errsq
+scalar RWrmse`w'=r(mean)^.5
+summ nobs
+scalar RWminobs`w'=r(min)
+scalar RWmaxobs`w'=r(max)
+drop errsq pred nobs
+}
+scalar list
+/*
+RWmaxobs60 =         60
+RWminobs60 =          2
+RWrmse60 =  .06145693
+*/
 
 /*
 gsreg dlnWeeklyEarnings l1dlnWeeklyEarnings l2dlnWeeklyEarnings l3dlnWeeklyEarnings ///
@@ -220,7 +389,64 @@ gsreg dlnWeeklyEarnings l1dlnWeeklyEarnings l2dlnWeeklyEarnings l3dlnWeeklyEarni
 */
 	
 reg d.lnWeeklyEarnings l3d.lnWeeklyEarnings l5d.lnWeeklyEarnings m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11
+scalar drop _all
+quietly forval w=12(12)84 {
+gen pred=.
+gen nobs=.
+	forval t=620/733 {  
+	gen wstart=`t'-`w'
+	gen wend=`t'-1
+	reg dlnWeeklyEarnings l3dlnWeeklyEarnings l5dlnWeeklyEarnings m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11 ///
+		if Date>=wstart & Date<=wend
+	replace nobs=e(N) if Date==`t'
+	predict ptemp
+	replace pred=ptemp if Date==`t'
+	drop ptemp wstart wend
+	}
+gen errsq=(pred-d.lnWeeklyEarnings)^2
+summ errsq
+scalar RWrmse`w'=r(mean)^.5
+summ nobs
+scalar RWminobs`w'=r(min)
+scalar RWmaxobs`w'=r(max)
+drop errsq pred nobs
+}
+scalar list
+/*
+RWmaxobs84 =         84
+RWminobs84 =          2
+RWrmse84 =  .06004448
+*/
+
 reg d.lnWeeklyEarnings l3d.lnWeeklyEarnings l5d.lnWeeklyEarnings l7d.lnWeeklyEarnings
+scalar drop _all
+quietly forval w=12(12)84 {
+gen pred=.
+gen nobs=.
+	forval t=622/733 {  
+	gen wstart=`t'-`w'
+	gen wend=`t'-1
+	reg dlnWeeklyEarnings l3dlnWeeklyEarnings l5dlnWeeklyEarnings l7dlnWeeklyEarnings ///
+		if Date>=wstart & Date<=wend
+	replace nobs=e(N) if Date==`t'
+	predict ptemp
+	replace pred=ptemp if Date==`t'
+	drop ptemp wstart wend
+	}
+gen errsq=(pred-d.lnWeeklyEarnings)^2
+summ errsq
+scalar RWrmse`w'=r(mean)^.5
+summ nobs
+scalar RWminobs`w'=r(min)
+scalar RWmaxobs`w'=r(max)
+drop errsq pred nobs
+}
+scalar list
+/*
+RWmaxobs84 =         84
+RWminobs84 =          2
+RWrmse84 =  .05250414
+*/
 
 /*
 gsreg dlnCount l1dlnCount l2dlnCount l3dlnCount l4dlnCount l5dlnCount l6dlnCount ///
@@ -240,3 +466,4 @@ gsreg dlnCount l1dlnCount l2dlnCount l3dlnCount l4dlnCount l5dlnCount l6dlnCount
 */
 
 log close
+translate "Final Project.smcl" "Final Project.txt", replace
