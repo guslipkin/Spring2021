@@ -74,8 +74,27 @@ $$
 \end{aligned}
 $$
 
-​	Because the weight adds to one, the equation can be quickly rewritten as
+​	
 
+> **Quick pause here. I know the draft is super late but I haven’t fully worked out how I’m doing this so I’m going to put some math and thoughts down here instead of trying to get words in which might be wrong. I know this will also change the math farther down the page.**
+
+- get in function of time to completion and NPV
+  - $NPV = \sum^n_{t=1}\frac{R_t}{(1+i)^t}$
+  - $R_t$ cash flow during time $t$
+    - See my point on the discount rate. But again, I’m not really sure how to apply that here
+  - $i$ discount rate
+    - The time scale of these projects isn’t really long enough for interest or discount rates to have an effect. But the project does become more useful and therefore have more value the more complete it is. I’m not sure how I can apply that here.
+  - $t$ time periods
+    - The scale is in weeks
+- Let’s say time to completion is 10 weeks. Then I have $NPV = \sum^{10}_{t=1}\frac{R_t}{(1+i)^t}$. Couldn’t I calculate the discount rate if I assume that the value of \$1 today is the same as \$1 10 weeks from now? Then I could pinpoint the discount rate for any given project. 
+  - If I know the average discount rate, could I then change cash flow from week to week to simulate how much value is added by completing a certain percentage of the project that week so long as the total cash flow sums to the same value in the end?
+  - Would it be better to calculate future value and current value separately then subtract to get present value? I think this might be the easier way to do it. Would present value just be a flat number while future value uses the NPV equation?
+
+
+
+
+
+Because the weight adds to one, the equation can be quickly rewritten as
 $$
 \begin{aligned}
 \pi=W_LV_LD_L + (1-W_L)V_SD_S - 13(M_L+O_L+M_S+O_S)
