@@ -23,7 +23,7 @@ gen lnflnonfarm=log(fl_nonfarm)
 gen lnfllf=log(fl_lf)
 gen lnflbp=log(fl_bp)
 
-drop if !tin(1990m1,2020m12)
+drop if !tin(1990m1,2019m12)
 
 tsset date
 tsappend, add(12)
@@ -243,50 +243,50 @@ scalar rwrmseH6 = .00373399
 reg dh2lnflnonfarm l(6,9)d.lnflnonfarm l(3,6)d.lnfllf l(3,6)d.lnusepr ///
 		m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11 if tin(2012m1,2019m12)
 predict pd
-gen pflnonfarm=exp((rwrmseH2^2)/2)*exp(l2.lnflnonfarm+pd) if month==tm(2020m2)
-gen ub1=exp((rwrmseH2^2)/2)*exp(l2.lnflnonfarm+pd+1*rwrmseH2) if month==tm(2020m2)
-gen lb1=exp((rwrmseH2^2)/2)*exp(l2.lnflnonfarm+pd-1*rwrmseH2) if month==tm(2020m2)
-gen ub2=exp((rwrmseH2^2)/2)*exp(l2.lnflnonfarm+pd+2*rwrmseH2) if month==tm(2020m2)
-gen lb2=exp((rwrmseH2^2)/2)*exp(l2.lnflnonfarm+pd-2*rwrmseH2) if month==tm(2020m2)
-gen ub3=exp((rwrmseH2^2)/2)*exp(l2.lnflnonfarm+pd+3*rwrmseH2) if month==tm(2020m2)
-gen lb3=exp((rwrmseH2^2)/2)*exp(l2.lnflnonfarm+pd-3*rwrmseH2) if month==tm(2020m2)
+gen pflnonfarm=exp((rwrmseH2^2)/2)*exp(l2.lnflnonfarm+pd) if date==tm(2020m2)
+gen ub1=exp((rwrmseH2^2)/2)*exp(l2.lnflnonfarm+pd+1*rwrmseH2) if date==tm(2020m2)
+gen lb1=exp((rwrmseH2^2)/2)*exp(l2.lnflnonfarm+pd-1*rwrmseH2) if date==tm(2020m2)
+gen ub2=exp((rwrmseH2^2)/2)*exp(l2.lnflnonfarm+pd+2*rwrmseH2) if date==tm(2020m2)
+gen lb2=exp((rwrmseH2^2)/2)*exp(l2.lnflnonfarm+pd-2*rwrmseH2) if date==tm(2020m2)
+gen ub3=exp((rwrmseH2^2)/2)*exp(l2.lnflnonfarm+pd+3*rwrmseH2) if date==tm(2020m2)
+gen lb3=exp((rwrmseH2^2)/2)*exp(l2.lnflnonfarm+pd-3*rwrmseH2) if date==tm(2020m2)
 drop pd
 
-/*
+
 *h4
 reg dh4lnflnonfarm l(6,9,12)d.lnflnonfarm l(6,9)d.lnfllf l(6,9)d.lnusepr ///
 		m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11 if tin(2012m1,2019m12) 
 predict pd
-replace pflnonfarm=exp((rwrmseH4^2)/2)*exp(l4.lnflnonfarm+pd) if month==tm(2020m4)
-replace ub1=exp((rwrmseH4^2)/2)*exp(l4.lnflnonfarm+pd+1*rwrmseH4) if month==tm(2020m4)
-replace lb1=exp((rwrmseH4^2)/2)*exp(l4.lnflnonfarm+pd-1*rwrmseH4) if month==tm(2020m4)
-replace ub2=exp((rwrmseH4^2)/2)*exp(l4.lnflnonfarm+pd+2*rwrmseH4) if month==tm(2020m4)
-replace lb2=exp((rwrmseH4^2)/2)*exp(l4.lnflnonfarm+pd-2*rwrmseH4) if month==tm(2020m4)
-replace ub3=exp((rwrmseH4^2)/2)*exp(l4.lnflnonfarm+pd+3*rwrmseH4) if month==tm(2020m4)
-replace lb3=exp((rwrmseH4^2)/2)*exp(l4.lnflnonfarm+pd-3*rwrmseH4) if month==tm(2020m4)
+replace pflnonfarm=exp((rwrmseH4^2)/2)*exp(l4.lnflnonfarm+pd) if date==tm(2020m4)
+replace ub1=exp((rwrmseH4^2)/2)*exp(l4.lnflnonfarm+pd+1*rwrmseH4) if date==tm(2020m4)
+replace lb1=exp((rwrmseH4^2)/2)*exp(l4.lnflnonfarm+pd-1*rwrmseH4) if date==tm(2020m4)
+replace ub2=exp((rwrmseH4^2)/2)*exp(l4.lnflnonfarm+pd+2*rwrmseH4) if date==tm(2020m4)
+replace lb2=exp((rwrmseH4^2)/2)*exp(l4.lnflnonfarm+pd-2*rwrmseH4) if date==tm(2020m4)
+replace ub3=exp((rwrmseH4^2)/2)*exp(l4.lnflnonfarm+pd+3*rwrmseH4) if date==tm(2020m4)
+replace lb3=exp((rwrmseH4^2)/2)*exp(l4.lnflnonfarm+pd-3*rwrmseH4) if date==tm(2020m4)
 drop pd
 
 *h6
 reg dh6lnflnonfarm l(6,9,12)d.lnflnonfarm l(6,9)d.lnfllf l(6,9)d.lnusepr ///
 		m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11 if tin(2012m1,2019m12)
 predict pd 
-replace pflnonfarm=exp((rwrmseH6^2)/2)*exp(l6.lnflnonfarm+pd) if month==tm(2020m6)
-replace ub1=exp((rwrmseH6^2)/2)*exp(l6.lnflnonfarm+pd+1*rwrmseH6) if month==tm(2020m6)
-replace lb1=exp((rwrmseH6^2)/2)*exp(l6.lnflnonfarm+pd-1*rwrmseH6) if month==tm(2020m6)
-replace ub2=exp((rwrmseH6^2)/2)*exp(l6.lnflnonfarm+pd+2*rwrmseH6) if month==tm(2020m6)
-replace lb2=exp((rwrmseH6^2)/2)*exp(l6.lnflnonfarm+pd-2*rwrmseH6) if month==tm(2020m6)
-replace ub3=exp((rwrmseH6^2)/2)*exp(l6.lnflnonfarm+pd+3*rwrmseH6) if month==tm(2020m6)
-replace lb3=exp((rwrmseH6^2)/2)*exp(l6.lnflnonfarm+pd-3*rwrmseH6) if month==tm(2020m6)
+replace pflnonfarm=exp((rwrmseH6^2)/2)*exp(l6.lnflnonfarm+pd) if date==tm(2020m6)
+replace ub1=exp((rwrmseH6^2)/2)*exp(l6.lnflnonfarm+pd+1*rwrmseH6) if date==tm(2020m6)
+replace lb1=exp((rwrmseH6^2)/2)*exp(l6.lnflnonfarm+pd-1*rwrmseH6) if date==tm(2020m6)
+replace ub2=exp((rwrmseH6^2)/2)*exp(l6.lnflnonfarm+pd+2*rwrmseH6) if date==tm(2020m6)
+replace lb2=exp((rwrmseH6^2)/2)*exp(l6.lnflnonfarm+pd-2*rwrmseH6) if date==tm(2020m6)
+replace ub3=exp((rwrmseH6^2)/2)*exp(l6.lnflnonfarm+pd+3*rwrmseH6) if date==tm(2020m6)
+replace lb3=exp((rwrmseH6^2)/2)*exp(l6.lnflnonfarm+pd-3*rwrmseH6) if date==tm(2020m6)
 drop pd
 
-replace pflnonfarm=fl_nonfarm if month==tm(2019m12)
-replace ub1=fl_nonfarm if month==tm(2019m12)
-replace ub2=fl_nonfarm if month==tm(2019m12)
-replace ub3=fl_nonfarm if month==tm(2019m12)
-replace lb1=fl_nonfarm if month==tm(2019m12)
-replace lb2=fl_nonfarm if month==tm(2019m12)
-replace lb3=fl_nonfarm if month==tm(2019m12)
-*/
+replace pflnonfarm=fl_nonfarm if date==tm(2019m12)
+replace ub1=fl_nonfarm if date==tm(2019m12)
+replace ub2=fl_nonfarm if date==tm(2019m12)
+replace ub3=fl_nonfarm if date==tm(2019m12)
+replace lb1=fl_nonfarm if date==tm(2019m12)
+replace lb2=fl_nonfarm if date==tm(2019m12)
+replace lb3=fl_nonfarm if date==tm(2019m12)
+
 
 *Table
 list month pflnonfarm lb3 lb2 lb1 ub1 ub2 ub3 if tin(2019m12,2020m6)
