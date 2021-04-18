@@ -2,7 +2,7 @@ clear
 set more off
 
 cd "/Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Final Project"
-log using "Final Project.smcl", replace
+*log using "Final Project.smcl", replace
 import delimited "TS2020_Final_Project_txt2/TS2020_Final_Project_Monthly.txt"
 rename smu12455400500000001 Count
 rename smu12455400500000002 WeekHours
@@ -23,6 +23,9 @@ gen Date=mofd(datec)
 gen month=month(datec)
 format Date %tm
 tsset Date
+
+drop if tin(2021m3,)
+tsappend, add(1)
 
 gen lnCount = ln(Count)
 gen lnWeekHours = ln(WeekHours)
@@ -141,6 +144,7 @@ gen l36dlnServiceCount=l36d.lnServiceCount
 gen l48dlnServiceCount=l48d.lnServiceCount
 
 /*
+/*
 The project is to forecast the March non-seasonally adjusted estimates of average weekly earnings and total employment for private employers (total private) for a Florida MSA of your choice and write up a professional report on your forecast.
 */
 /* Count and WeeklyEarnings */
@@ -158,8 +162,11 @@ ac lnWeeklyEarnings, saving(lnWeeklyEarnings_ac, replace)
 pac lnWeeklyEarnings, saving(lnWeeklyEarnings_pac, replace)
 graph combine lnWeeklyEarnings_ac.gph lnWeeklyEarnings_pac.gph, saving(lnWeeklyEarnings_ac_pac, replace)
 graph export "lnWeeklyEarnings_ac_pac.png", replace
-** Probably need to differencen b
+** Probably need to difference
 
+*/
+/*
+HERE
 *starter models for count
 *I used a pair plot to examine the rise and fall of variables with respect to each other
 reg d.lnCount l(12,24,36,48)d.lnCount // .01637
@@ -343,9 +350,44 @@ RWmaxobs12 =         12
 RWminobs12 =          2
 RWrmse12 =   .0176238
 */
+*/
+scalar rwrmse = .0172128
+reg d.lnCount l(12,24,36,48)d.lnCount if tin(,2021m2)
+predict pd
+gen pflcount=exp((rwrmse^2)/2)*exp(l.lnCount+pd) if Date==tm(2021m3)
+gen ub1=exp((rwrmse^2)/2)*exp(l.lnCount+pd+1*rwrmse) if Date==tm(2021m3)
+gen lb1=exp((rwrmse^2)/2)*exp(l.lnCount+pd-1*rwrmse) if Date==tm(2021m3)
+gen ub2=exp((rwrmse^2)/2)*exp(l.lnCount+pd+2*rwrmse) if Date==tm(2021m3)
+gen lb2=exp((rwrmse^2)/2)*exp(l.lnCount+pd-2*rwrmse) if Date==tm(2021m3)
+gen ub3=exp((rwrmse^2)/2)*exp(l.lnCount+pd+3*rwrmse) if Date==tm(2021m3)
+gen lb3=exp((rwrmse^2)/2)*exp(l.lnCount+pd-3*rwrmse) if Date==tm(2021m3)
+drop pd
 
+replace pflcount=Count if Date==tm(2021m2)
+replace ub1=Count if Date==tm(2021m2)
+replace ub2=Count if Date==tm(2021m2)
+replace ub3=Count if Date==tm(2021m2)
+replace lb1=Count if Date==tm(2021m2)
+replace lb2=Count if Date==tm(2021m2)
+replace lb3=Count if Date==tm(2021m2)
+
+twoway (tsrline ub3 ub2 if tin(2020m3,2021m3), ///
+	recast(rarea) fcolor(khaki) fintensity(20) lwidth(none) ) ///
+	(tsrline ub2 ub1 if tin(2020m3,2021m3), ///
+	recast(rarea) fcolor(khaki) fintensity(40) lwidth(none) ) ///
+	(tsrline ub1 pflcount if tin(2020m3,2021m3), ///
+	recast(rarea) fcolor(khaki) fintensity(65) lwidth(none) ) ///
+	(tsrline pflcount lb1 if tin(2020m3,2021m3), ///
+	recast(rarea) fcolor(khaki) fintensity(65) lwidth(none) ) ///
+	(tsrline lb1 lb2 if tin(2020m3,2021m3), ///
+	recast(rarea) fcolor(khaki) fintensity(40) lwidth(none) ) ///
+	(tsrline lb2 lb3 if tin(2020m3,2021m3), ///
+	recast(rarea) fcolor(khaki) fintensity(20) lwidth(none) ) ///
+	(tsline Count pflcount if tin(2020m3,2021m3) , ///
+	lcolor(gs12 teal) lwidth(medthick medthick) ///
+	lpattern(solid longdash)) , scheme(s1mono) legend(off)
 /*----------------------------------------------------------------------------*/
-	
+/*	
 *starter models for weekly earnings
 reg d.lnWeeklyEarnings l1d.lnWeekHours ld.lnHourlyEarnings
 scalar drop _all
@@ -465,5 +507,7 @@ gsreg dlnCount l1dlnCount l2dlnCount l3dlnCount l4dlnCount l5dlnCount l6dlnCount
 	samesample nindex( -1 aic -1 bic -1 rmse_out) results(gsreg_dlnWeeklyEarnings_Full) replace
 */
 
+HERE
+*/
 log close
 translate "Final Project.smcl" "Final Project.txt", replace
