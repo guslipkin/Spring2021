@@ -1,0 +1,42 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+t <- 10
+c <- 1
+d <- .05
+base <- data.frame(time = 1:t, 
+                    cash = rep(c, times = t), 
+                    discount = rep(d, times = t))
+moron <- base
+me <- base
+```
+
+
+```{r}
+# cash
+for(c in 1:10) {
+  base$cash <- c
+  oldDiff <- sum(c)
+  # discount
+  for(d in seq(0, 1, by = .01)) {
+    base$discount <- d
+    for(t in 1:nrow(base)) {
+      miniBase <- base[1:t,]
+      totalMoron <- sum(miniBase$cash / ((1 + miniBase$discount)^miniBase$time))
+      totalMe <- ifelse(t == 10,
+                        0,
+                        sum(base[(t+1):nrow(base),"cash"]) / ((1+d)^(t+1)))
+      diff <- abs(totalMe - totalMoron)
+      if(!is.na(totalMoron) & !is.na(totalMe) & diff < oldDiff) {
+        diffText <- paste("t:", t, "c:", c, "d:", d, "Diff:", diff)
+        diff <- oldDiff
+      }
+    }
+    print(diffText)
+  }
+}
+```
+
