@@ -2,7 +2,7 @@
 
 <p style="text-align: center;">Author: Gus Lipkin</p>
 
-<p style="text-align: center;">Date: February 22, 2021</p>
+<p style="text-align: center;">Date: 21 April 2021</p>
 
 # Table of Contents
 
@@ -64,17 +64,57 @@
 
 ## Profit Maximization
 
-​	At first glance, this presents itself as a constrained optimization problem where the total payoff is a function of my time spent on the log card project, my time spent on special projects, the time it would take someone else to complete the same work, and the urgency of each project. Traditionally, we would need to account for differences in pay, but the problem is much simpler if everyone is paid the same. It is also very easy to add that element back in later as a function of time spent on the project. 
+​	Another, more concrete way, to calculate the value I add to the team is to try and maximize the companies profit by optimizing which projects I am put on and which projects I could be put on that someone else is put on. 
 
-​	We can use the standard $\pi$ as profit. We can also define my time on log cards and special projects as  $M_{L}$ and $M_{S}$, respectively. The time someone else would take is $O_L$ and $O_S$. The urgency of each project should be a ratio that sums to one which we can call $W_L$ and $W_S$ as we are weighing our options. The constant value of each finished project is defined as $V_L$ and $V_S$. However, each project is not yet finished so $D_L$ and $D_S$ denote the percent progress of the project on a zero to one scale. Interns at MiGrocery are paid \$13 per hour. Thus, expected profit is written as
-
+​	The model of profit for a single given project is below. $t$ is the unit of time at which a portion of the completed project is usable and adds value in operations. We start by finding the value of the portion of the project that was completed while I was writing my code where we start at time $t=1$ because we are measuring actionable time units and not real time. We are taking the sum up to $n$ which is just before the time that I am able to run my code and is greater than or equal to $t$. The next portion is the rest of the net present value function left intact where $R_t$ represents the cash flow in time $t$. In this case, $i$ represents the diminishing value of the project as time passes and the marginal rate of return of the project as it nears its completion.
 $$
 \begin{aligned}
-\pi=W_LV_LD_L + W_SV_SD_S - 13(M_L+O_L+M_S+O_S)
+\begin{gather}
+\pi= \sum^n_{t=1}[\frac{R_t}{(1+i)^t}] \\
+n \ge t 
+\end{gather}
+\end{aligned}
+$$
+​	The second term represents the amount of value I provide by completing my code at time $n$ and is also modeled using the net present value formula. This only has one term and is not summed because the cash flow $R_n$ is reprentative of the value added by having the rest of the project completed.
+$$
+\begin{aligned}
+\begin{gather}
+\pi= \sum^n_{t=1}[\frac{R_t}{(1+i)^t}] + \frac{R_{n}}{(1+i)^{n}} \\
+n \ge t 
+\end{gather}
+\end{aligned}
+$$
+​	The third term represents the amount needed to pay the employees who work on the project by hand before my program is completed and also my pay for the same term. $x$ is the number of employees including myself, $p$ is their pay rate per hour, and $h$ is the number of hours per time unit $t$.
+$$
+\begin{aligned}
+\begin{gather}
+\pi= \sum^n_{t=1}[\frac{R_t}{(1+i)^t}] + \frac{R_{n}}{(1+i)^{n}} - (xphN) \\
+n \ge t 
+\end{gather}
 \end{aligned}
 $$
 
-​	
+In order to maximize this
+
+$$
+\begin{aligned}
+\begin{gather}
+\pi= \sum^n_{t=1}[-\frac{ln(i+1)r}{(1+i)^t}] - \frac{ln(i+1)r}{(1+i)^t} \\
+n \ge t 
+\end{gather}
+\end{aligned}
+$$
+
+
+
+> profit of a given project = sum of NPV up until I finish the program - sum of time someone else spent on the project - pay
+> x = number of people + me
+>
+> p = pay rate
+>
+> h = hours per unit t
+>
+> t = time
 
 > **Quick pause here. I know the draft is super late but I haven’t fully worked out how I’m doing this so I’m going to put some math and thoughts down here instead of trying to get words in which might be wrong. I know this will also change the math farther down the page.**
 
@@ -86,68 +126,9 @@ $$
     - The time scale of these projects isn’t really long enough for interest or discount rates to have an effect. But the project does become more useful and therefore have more value the more complete it is. I’m not sure how I can apply that here.
   - $t$ time periods
     - The scale is in weeks
-- Let’s say time to completion is 10 weeks. Then I have $NPV = \sum^{10}_{t=1}\frac{R_t}{(1+i)^t}$. Couldn’t I calculate the discount rate if I assume that the value of \$1 today is the same as \$1 10 weeks from now? Then I could pinpoint the discount rate for any given project. 
+- Let’s say time to completion is 10 weeks. Then I have $NPV = \sum^{10}_{t=0}\frac{R_t}{(1+i)^t}$. Couldn’t I calculate the discount rate if I assume that the value of \$1 today is the same as \$1 10 weeks from now? Then I could pinpoint the discount rate for any given project. 
   - If I know the average discount rate, could I then change cash flow from week to week to simulate how much value is added by completing a certain percentage of the project that week so long as the total cash flow sums to the same value in the end?
   - Would it be better to calculate future value and current value separately then subtract to get present value? I think this might be the easier way to do it. Would present value just be a flat number while future value uses the NPV equation?
-
-
-
-
-
-Because the weight adds to one, the equation can be quickly rewritten as
-$$
-\begin{aligned}
-\pi=W_LV_LD_L + (1-W_L)V_SD_S - 13(M_L+O_L+M_S+O_S)
-\end{aligned}
-$$
-
-​	The portion completed of each project, $D$, can be re-written as a function of the total time taken to complete the project for each person and the total time it will take to complete the project. We can call this total time for each project $T_L$ and $T_S$. I have already optimized the log card project so $D_L$ becomes $\frac{M_L+O_L}{T_L}$. For any special projects, we can say that it will take me one-tenth the time it will take someone else. $D_S$ can become $\frac{M_S}{.1T_S}+\frac{O_S}{T_S}$ which is simplified to $\frac{O_S+10M_S}{T_S}$.  The initial equation is then rewritten as
-
-$$
-\begin{aligned}
-\pi=W_LV_L\frac{M_L+O_L}{T_L} + (1-W_L)V_S\frac{O_S+10M_S}{T_S} - 13(M_L+O_L+M_S+O_S)
-\end{aligned}
-$$
-
-​	Finally, in order to make this giant mess usable, $T_L$ and $T_S$ must be able to be said in terms of each other. Each special project takes about twenty-five hours to complete. Based on current progress, we can estimate that the log card project would take about ten twenty-five hour weeks to complete. Because I could complete ten special projects in the ten weeks it will take to complete the log card project, $T_L = 10T_S$. This only holds for the present moment in time because as time passes, the amount of special projects that can be completed by the time log cards are completed will decrease until the time remaining on the log card project will be equal to the amount of time it will take to complete a given special project. In order to make sure we are comparing the same amout of time, we must multiply any special project values by ten as well. This means that my and anyone else's time is limited to 250 hours as well. $O_S$ and $10M_S$ become $250-O_L$ and $10(250-M_L)$, respectively. The profit equation becomes
-
-$$
-\begin{aligned}
-\pi=W_LV_L\frac{M_L+O_L}{250} + 10(1-W_L)V_S\frac{(250-O_L)+10(250-M_L)}{250} - 13(M_L+O_L+10(10(250-M_L))+10(250-O_L))
-\end{aligned}
-$$
-
-​	This cannot be simplified much more unless some of the variables are assigned numeric values. While I do not know the true values of $W_L$, $V_L$, or $V_S$, I can most certainly make something up. Let us say that the log cards are four times as important as any given special project and so $W_L = .8$. However, special projects are considerably more profitable and so $V_S = 5V_L$ and $V_S = \$10,000,000$.
-
-$$
-\begin{aligned}
-\pi=(.8*2,000,000)\frac{M_L+O_L}{250} + 10(1-.8)10,000,000\frac{(250-O_L)+10(250-M_L)}{250} - 
-13(M_L+O_L+10(10(250-M_L))+10(250-O_L))
-\end{aligned}
-$$
-
-​	Simplifying,
-$$
-\begin{aligned}
-\pi=1,600,000\frac{M_L+O_L}{250} + 20,000,000\frac{(250-O_L)+10(250-M_L)}{250} - 13(M_L+O_L+10(10(250-M_L))+10(250-O_L))
-\end{aligned}
-$$
-
-$$
-\begin{aligned}
-\pi=6400M_L+6400O_L + 220000000-80000O_L-800000M_L - 357500-1287M_L-117O_L
-\end{aligned}
-$$
-
-$$
-\begin{aligned}
-\pi=219642500-794887M_L-73717O_L
-\end{aligned}
-$$
-
-​	The important part here is not the final profit equation because, as expected, the profit would be higher if MiGrocery did not have to pay employees, but rather that one hour of my time has a value of $794887$ while the value of someone else's time is only $73717$. My time is $10.87$ times more valuable than someone else's for the same task if the constants given above retain their value.
-
-​	Proper profit maximization requires taking the first derivative of the profit function. With all of the guesses about the values of constants I made and the ratios that allowed me to put one variable in terms of another, this quickly fell by the wayside. With proper numbers, the equation could be put into solver to give the amount of hours per project that myself and someone else should work on to maximize profit.
 
 # Conclusion
 
