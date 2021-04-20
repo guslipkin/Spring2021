@@ -3,7 +3,7 @@ set more off
 
 cd "/Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Final Project"
 *log using "Final Project.smcl", replace
-import delimited "TS2020_Final_Project_txt2/TS2020_Final_Project_Monthly.txt"
+import delimited "TS2020_Final_Project_Monthly.txt"
 rename smu12455400500000001 Count
 rename smu12455400500000002 WeekHours
 rename smu12455400500000003 HourlyEarnings
@@ -24,8 +24,10 @@ gen month=month(datec)
 format Date %tm
 tsset Date
 
-drop if tin(2021m3,)
-tsappend, add(1)
+gen withMarchCount = Count
+gen withMarchEarnings = WeeklyEarnings
+replace Count=. if tin(2021m3,)
+replace WeeklyEarnings=. if tin(2021m3,)
 
 gen lnCount = ln(Count)
 gen lnWeekHours = ln(WeekHours)
@@ -144,7 +146,6 @@ gen l36dlnServiceCount=l36d.lnServiceCount
 gen l48dlnServiceCount=l48d.lnServiceCount
 
 /*
-/*
 The project is to forecast the March non-seasonally adjusted estimates of average weekly earnings and total employment for private employers (total private) for a Florida MSA of your choice and write up a professional report on your forecast.
 */
 /* Count and WeeklyEarnings */
@@ -164,9 +165,6 @@ graph combine lnWeeklyEarnings_ac.gph lnWeeklyEarnings_pac.gph, saving(lnWeeklyE
 graph export "lnWeeklyEarnings_ac_pac.png", replace
 ** Probably need to difference
 
-*/
-/*
-HERE
 *starter models for count
 *I used a pair plot to examine the rise and fall of variables with respect to each other
 reg d.lnCount l(12,24,36,48)d.lnCount // .01637
@@ -229,14 +227,12 @@ RWminobs84 =         23
 RWrmse84 =  .01950911
 */
 
-/*
-gsreg dlnCount l1dlnCount l2dlnCount l3dlnCount l4dlnCount l5dlnCount l6dlnCount ///
+quietly gsreg dlnCount l1dlnCount l2dlnCount l3dlnCount l4dlnCount l5dlnCount l6dlnCount ///
 	l7dlnCount l8dlnCount l9dlnCount l10dlnCount l11dlnCount l12dlnCount ///
 	l24dlnCount l36dlnCount l48dlnCount ///
 	if tin(1990m1,2021m1), ///
 	ncomb(1,12) aic outsample(24) fix(m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11 m12) ///
 	samesample nindex( -1 aic -1 bic -1 rmse_out) results(gsreg_dlnCount) replace
-*/
 	
 *gsreg suggestions
 reg d.lnCount l12d.lnCount m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11
@@ -298,28 +294,6 @@ RWmaxobs144 =        144
 RWminobs144 =         12
 RWrmse144 =  .01777071
 */
-
-/*
-gsreg dlnCount l1dlnCount l2dlnCount l3dlnCount l4dlnCount l5dlnCount l6dlnCount ///
-	l7dlnCount l8dlnCount l9dlnCount l10dlnCount l11dlnCount l12dlnCount ///
-	l24dlnCount l36dlnCount ///
-	l1dlnWeekHours l2dlnWeekHours l3dlnWeekHours l4dlnWeekHours l5dlnWeekHours l6dlnWeekHours ///
-	l7dlnWeekHours l8dlnWeekHours l9dlnWeekHours l10dlnWeekHours l11dlnWeekHours l12dlnWeekHours ///
-	l24dlnWeekHours l36dlnWeekHours ///
-	l1dlnHourlyEarnings l2dlnHourlyEarnings l3dlnHourlyEarnings l4dlnHourlyEarnings ///
-	l5dlnHourlyEarnings l6dlnHourlyEarnings ///
-	l7dlnHourlyEarnings l8dlnHourlyEarnings l9dlnHourlyEarnings l10dlnHourlyEarnings ///
-	l11dlnHourlyEarnings l12dlnHourlyEarnings ///
-	l24dlnHourlyEarnings l36dlnHourlyEarnings ///
-	l1dlnWeeklyEarnings l2dlnWeeklyEarnings l3dlnWeeklyEarnings l4dlnWeeklyEarnings ///
-	l5dlnWeeklyEarnings l6dlnWeeklyEarnings ///
-	l7dlnWeeklyEarnings l8dlnWeeklyEarnings l9dlnWeeklyEarnings l10dlnWeeklyEarnings ///
-	l11dlnWeeklyEarnings l12dlnWeeklyEarnings ///
-	l24dlnWeeklyEarnings l36dlnWeeklyEarnings ///
-	if tin(2011m1,2021m1), ///
-	ncomb(1,4) aic outsample(24) fix(m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11) ///
-	samesample nindex( -1 aic -1 bic -1 rmse_out) results(gsreg_dlnCount_Full) replace
-*/
 	
 reg d.lnCount l4d.lnWeekHours l9d.lnWeekHours l8d.lnHourlyEarnings m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11
 scalar drop _all
@@ -350,7 +324,7 @@ RWmaxobs12 =         12
 RWminobs12 =          2
 RWrmse12 =   .0176238
 */
-*/
+
 scalar rwrmse = .0172128
 reg d.lnCount l(12,24,36,48)d.lnCount if tin(,2021m2)
 predict pd
@@ -385,9 +359,12 @@ twoway (tsrline ub3 ub2 if tin(2020m3,2021m3), ///
 	recast(rarea) fcolor(khaki) fintensity(20) lwidth(none) ) ///
 	(tsline Count pflcount if tin(2020m3,2021m3) , ///
 	lcolor(gs12 teal) lwidth(medthick medthick) ///
-	lpattern(solid longdash)) , scheme(s1mono) legend(off)
+	lpattern(solid longdash)) ///
+	(scatter withMarchCount Date if tin(2021m3,)), scheme(s1mono) legend(off)
+graph export "CountFan.png", replace
+	
 /*----------------------------------------------------------------------------*/
-/*	
+	
 *starter models for weekly earnings
 reg d.lnWeeklyEarnings l1d.lnWeekHours ld.lnHourlyEarnings
 scalar drop _all
@@ -419,8 +396,7 @@ RWminobs60 =          2
 RWrmse60 =  .06145693
 */
 
-/*
-gsreg dlnWeeklyEarnings l1dlnWeeklyEarnings l2dlnWeeklyEarnings l3dlnWeeklyEarnings ///
+quietly gsreg dlnWeeklyEarnings l1dlnWeeklyEarnings l2dlnWeeklyEarnings l3dlnWeeklyEarnings ///
 	l4dlnWeeklyEarnings l5dlnWeeklyEarnings l6dlnWeeklyEarnings ///
 	l7dlnWeeklyEarnings l8dlnWeeklyEarnings l9dlnWeeklyEarnings l10dlnWeeklyEarnings ///
 	l11dlnWeeklyEarnings l12dlnWeeklyEarnings ///
@@ -428,7 +404,6 @@ gsreg dlnWeeklyEarnings l1dlnWeeklyEarnings l2dlnWeeklyEarnings l3dlnWeeklyEarni
 	if tin(2011m1,2021m1), ///
 	ncomb(1,12) aic outsample(24) ///
 	samesample nindex( -1 aic -1 bic -1 rmse_out) results(gsreg_dlnWeeklyEarnings) replace
-*/
 	
 reg d.lnWeeklyEarnings l3d.lnWeeklyEarnings l5d.lnWeeklyEarnings m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11
 scalar drop _all
@@ -490,24 +465,45 @@ RWminobs84 =          2
 RWrmse84 =  .05250414
 */
 
-/*
-gsreg dlnCount l1dlnCount l2dlnCount l3dlnCount l4dlnCount l5dlnCount l6dlnCount ///
-	l7dlnCount l8dlnCount l9dlnCount l10dlnCount l11dlnCount l12dlnCount l24dlnCount ///
-	l1dlnWeekHours l2dlnWeekHours l3dlnWeekHours l4dlnWeekHours l5dlnWeekHours l6dlnWeekHours ///
-	l7dlnWeekHours l8dlnWeekHours l9dlnWeekHours l10dlnWeekHours l11dlnWeekHours l12dlnWeekHours l24dlnWeekHours ///
-	l1dlnHourlyEarnings l2dlnHourlyEarnings l3dlnHourlyEarnings l4dlnHourlyEarnings ///
-	l5dlnHourlyEarnings l6dlnHourlyEarnings ///
-	l7dlnHourlyEarnings l8dlnHourlyEarnings l9dlnHourlyEarnings l10dlnHourlyEarnings ///
-	l11dlnHourlyEarnings l12dlnHourlyEarnings l24dlnHourlyEarnings ///
-	l1dlnWeeklyEarnings l2dlnWeeklyEarnings l3dlnWeeklyEarnings l4dlnWeeklyEarnings ///
-	l5dlnWeeklyEarnings l6dlnWeeklyEarnings ///
-	l7dlnWeeklyEarnings l8dlnWeeklyEarnings l9dlnWeeklyEarnings l10dlnWeeklyEarnings ///
-	l11dlnWeeklyEarnings l12dlnWeeklyEarnings l24dlnWeeklyEarnings if tin(2011m1,2021m1), ///
-	ncomb(1,4) aic outsample(24) fix(m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11) ///
-	samesample nindex( -1 aic -1 bic -1 rmse_out) results(gsreg_dlnWeeklyEarnings_Full) replace
-*/
+drop pflcount ub1 ub2 ub3 lb1 lb2 lb3
 
-HERE
-*/
-log close
-translate "Final Project.smcl" "Final Project.txt", replace
+scalar rwrmse = .05250414
+reg d.lnWeeklyEarnings l(3,5,7)d.lnWeeklyEarnings if tin(,2021m2)
+predict pd
+gen pflcount=exp((rwrmse^2)/2)*exp(l.lnWeeklyEarnings+pd) if Date==tm(2021m3)
+gen ub1=exp((rwrmse^2)/2)*exp(l.lnWeeklyEarnings+pd+1*rwrmse) if Date==tm(2021m3)
+gen lb1=exp((rwrmse^2)/2)*exp(l.lnWeeklyEarnings+pd-1*rwrmse) if Date==tm(2021m3)
+gen ub2=exp((rwrmse^2)/2)*exp(l.lnWeeklyEarnings+pd+2*rwrmse) if Date==tm(2021m3)
+gen lb2=exp((rwrmse^2)/2)*exp(l.lnWeeklyEarnings+pd-2*rwrmse) if Date==tm(2021m3)
+gen ub3=exp((rwrmse^2)/2)*exp(l.lnWeeklyEarnings+pd+3*rwrmse) if Date==tm(2021m3)
+gen lb3=exp((rwrmse^2)/2)*exp(l.lnWeeklyEarnings+pd-3*rwrmse) if Date==tm(2021m3)
+drop pd
+
+replace pflcount=WeeklyEarnings if Date==tm(2021m2)
+replace ub1=WeeklyEarnings if Date==tm(2021m2)
+replace ub2=WeeklyEarnings if Date==tm(2021m2)
+replace ub3=WeeklyEarnings if Date==tm(2021m2)
+replace lb1=WeeklyEarnings if Date==tm(2021m2)
+replace lb2=WeeklyEarnings if Date==tm(2021m2)
+replace lb3=WeeklyEarnings if Date==tm(2021m2)
+
+twoway (tsrline ub3 ub2 if tin(2020m3,2021m3), ///
+	recast(rarea) fcolor(khaki) fintensity(20) lwidth(none) ) ///
+	(tsrline ub2 ub1 if tin(2020m3,2021m3), ///
+	recast(rarea) fcolor(khaki) fintensity(40) lwidth(none) ) ///
+	(tsrline ub1 pflcount if tin(2020m3,2021m3), ///
+	recast(rarea) fcolor(khaki) fintensity(65) lwidth(none) ) ///
+	(tsrline pflcount lb1 if tin(2020m3,2021m3), ///
+	recast(rarea) fcolor(khaki) fintensity(65) lwidth(none) ) ///
+	(tsrline lb1 lb2 if tin(2020m3,2021m3), ///
+	recast(rarea) fcolor(khaki) fintensity(40) lwidth(none) ) ///
+	(tsrline lb2 lb3 if tin(2020m3,2021m3), ///
+	recast(rarea) fcolor(khaki) fintensity(20) lwidth(none) ) ///
+	(tsline WeeklyEarnings pflcount if tin(2020m3,2021m3) , ///
+	lcolor(gs12 teal) lwidth(medthick medthick) ///
+	lpattern(solid longdash)) ///
+	(scatter withMarchEarnings Date if tin(2021m3,)), scheme(s1mono) legend(off)
+graph export "WeeklyFan.png", replace
+
+*log close
+*translate "Final Project.smcl" "Final Project.txt", replace

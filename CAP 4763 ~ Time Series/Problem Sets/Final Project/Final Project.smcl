@@ -3,10 +3,10 @@
       name:  {res}<unnamed>
        {txt}log:  {res}/Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Final Project/Final Project.smcl
   {txt}log type:  {res}smcl
- {txt}opened on:  {res} 8 Apr 2021, 17:47:08
+ {txt}opened on:  {res}19 Apr 2021, 20:43:14
 {txt}
-{com}. import delimited "TS2020_Final_Project_txt2/TS2020_Final_Project_Monthly.txt"
-{res}{text}(6 vars, 374 obs)
+{com}. import delimited "TS2020_Final_Project_Monthly.txt"
+{res}{text}(6 vars, 375 obs)
 
 {com}. rename smu12455400500000001 Count
 {res}{txt}
@@ -41,12 +41,25 @@
 {com}. format Date %tm
 {txt}
 {com}. tsset Date
-{res}{txt}{col 9}time variable:  {res}{col 25}Date, 1990m1 to 2021m2
+{res}{txt}{col 9}time variable:  {res}{col 25}Date, 1990m1 to 2021m3
 {txt}{col 17}delta:  {res}1 month
 {txt}
 {com}. 
-. gen lnCount = ln(Count)
+. gen withMarchCount = Count
 {txt}
+{com}. gen withMarchEarnings = WeeklyEarnings
+{txt}(252 missing values generated)
+
+{com}. replace Count=. if tin(2021m3,)
+{txt}(1 real change made, 1 to missing)
+
+{com}. replace WeeklyEarnings=. if tin(2021m3,)
+{txt}(1 real change made, 1 to missing)
+
+{com}. 
+. gen lnCount = ln(Count)
+{txt}(1 missing value generated)
+
 {com}. gen lnWeekHours = ln(WeekHours)
 {txt}(252 missing values generated)
 
@@ -54,7 +67,7 @@
 {txt}(252 missing values generated)
 
 {com}. gen lnWeeklyEarnings = ln(WeeklyEarnings)
-{txt}(252 missing values generated)
+{txt}(253 missing values generated)
 
 {com}. gen lnServiceCount = ln(ServiceCount)
 {txt}
@@ -72,7 +85,7 @@
 {com}. gen m3=0
 {txt}
 {com}. replace m3=1 if month==3
-{txt}(31 real changes made)
+{txt}(32 real changes made)
 
 {com}. gen m4=0
 {txt}
@@ -121,7 +134,7 @@
 
 {com}. 
 . gen dlnCount=d.lnCount
-{txt}(1 missing value generated)
+{txt}(2 missing values generated)
 
 {com}. gen l1dlnCount=l1d.lnCount
 {txt}(2 missing values generated)
@@ -268,7 +281,7 @@
 
 {com}. 
 . gen dlnWeeklyEarnings=d.lnWeeklyEarnings
-{txt}(253 missing values generated)
+{txt}(254 missing values generated)
 
 {com}. gen l1dlnWeeklyEarnings=l1d.lnWeeklyEarnings
 {txt}(254 missing values generated)
@@ -375,20 +388,20 @@
 {txt}    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
 {hline 13}{c +}{hline 57}
 {space 7}Count {c |}{res}        374    14.18556    6.880684        5.3         28
-{txt}{space 3}WeekHours {c |}{res}        122    36.86967    3.804193       28.3       45.8
-{txt}HourlyEarn~s {c |}{res}        122    19.70344    2.910126      15.01       24.6
-{txt}WeeklyEarn~s {c |}{res}        122    719.7972    84.82529     503.79      916.1
-{txt}ServiceCount {c |}{res}        374    10.40455    5.940013        3.9       22.8
+{txt}{space 3}WeekHours {c |}{res}        123    36.88455    3.791817       28.3       45.8
+{txt}HourlyEarn~s {c |}{res}        123       19.72    2.903968      15.01       24.6
+{txt}WeeklyEarn~s {c |}{res}        122    719.6542    84.57241     503.79      916.1
+{txt}ServiceCount {c |}{res}        375    10.43387    5.959179        3.9       22.8
 {txt}
 {com}. summ lnCount lnWeekHours lnHourlyEarnings lnWeeklyEarnings lnServiceCount
 
 {txt}    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
 {hline 13}{c +}{hline 57}
 {space 5}lnCount {c |}{res}        374      2.5174    .5398403   1.667707   3.332205
-{txt}{space 1}lnWeekHours {c |}{res}        122    3.602049    .1041722   3.342862   3.824284
-{txt}lnHourlyEa~s {c |}{res}        122    2.969891     .148565   2.708717   3.202746
-{txt}lnWeeklyEa~s {c |}{res}        122     6.57194    .1198394   6.222159   6.820126
-{txt}lnServiceC~t {c |}{res}        374     2.16967    .5975865   1.360977    3.12676
+{txt}{space 1}lnWeekHours {c |}{res}        123    3.602488      .10385   3.342862   3.824284
+{txt}lnHourlyEa~s {c |}{res}        123    2.970779    .1482819   2.708717   3.202746
+{txt}lnWeeklyEa~s {c |}{res}        122    6.571775    .1195694   6.222159   6.820126
+{txt}lnServiceC~t {c |}{res}        375    2.172053    .5985689   1.360977    3.12676
 {txt}
 {com}. 
 . ac lnCount, saving(lnCount_ac, replace)
@@ -417,7 +430,7 @@
 {com}. graph export "lnWeeklyEarnings_ac_pac.png", replace
 {txt}(file /Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Final Project/lnWeeklyEarnings_ac_pac.png written in PNG format)
 
-{com}. ** Probably need to differencen b
+{com}. ** Probably need to difference
 . 
 . *starter models for count
 . *I used a pair plot to examine the rise and fall of variables with respect to each other
@@ -549,15 +562,14 @@
 > RWrmse84 =  .01950911
 > */
 . 
-. /*
-> gsreg dlnCount l1dlnCount l2dlnCount l3dlnCount l4dlnCount l5dlnCount l6dlnCount ///
+. quietly gsreg dlnCount l1dlnCount l2dlnCount l3dlnCount l4dlnCount l5dlnCount l6dlnCount ///
 >         l7dlnCount l8dlnCount l9dlnCount l10dlnCount l11dlnCount l12dlnCount ///
 >         l24dlnCount l36dlnCount l48dlnCount ///
 >         if tin(1990m1,2021m1), ///
 >         ncomb(1,12) aic outsample(24) fix(m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11 m12) ///
 >         samesample nindex( -1 aic -1 bic -1 rmse_out) results(gsreg_dlnCount) replace
-> */
-.         
+{txt}
+{com}.         
 . *gsreg suggestions
 . reg d.lnCount l12d.lnCount m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11
 
@@ -713,28 +725,6 @@
 > RWminobs144 =         12
 > RWrmse144 =  .01777071
 > */
-. 
-. /*
-> gsreg dlnCount l1dlnCount l2dlnCount l3dlnCount l4dlnCount l5dlnCount l6dlnCount ///
->         l7dlnCount l8dlnCount l9dlnCount l10dlnCount l11dlnCount l12dlnCount ///
->         l24dlnCount l36dlnCount ///
->         l1dlnWeekHours l2dlnWeekHours l3dlnWeekHours l4dlnWeekHours l5dlnWeekHours l6dlnWeekHours ///
->         l7dlnWeekHours l8dlnWeekHours l9dlnWeekHours l10dlnWeekHours l11dlnWeekHours l12dlnWeekHours ///
->         l24dlnWeekHours l36dlnWeekHours ///
->         l1dlnHourlyEarnings l2dlnHourlyEarnings l3dlnHourlyEarnings l4dlnHourlyEarnings ///
->         l5dlnHourlyEarnings l6dlnHourlyEarnings ///
->         l7dlnHourlyEarnings l8dlnHourlyEarnings l9dlnHourlyEarnings l10dlnHourlyEarnings ///
->         l11dlnHourlyEarnings l12dlnHourlyEarnings ///
->         l24dlnHourlyEarnings l36dlnHourlyEarnings ///
->         l1dlnWeeklyEarnings l2dlnWeeklyEarnings l3dlnWeeklyEarnings l4dlnWeeklyEarnings ///
->         l5dlnWeeklyEarnings l6dlnWeeklyEarnings ///
->         l7dlnWeeklyEarnings l8dlnWeeklyEarnings l9dlnWeeklyEarnings l10dlnWeeklyEarnings ///
->         l11dlnWeeklyEarnings l12dlnWeeklyEarnings ///
->         l24dlnWeeklyEarnings l36dlnWeeklyEarnings ///
->         if tin(2011m1,2021m1), ///
->         ncomb(1,4) aic outsample(24) fix(m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11) ///
->         samesample nindex( -1 aic -1 bic -1 rmse_out) results(gsreg_dlnCount_Full) replace
-> */
 .         
 . reg d.lnCount l4d.lnWeekHours l9d.lnWeekHours l8d.lnHourlyEarnings m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11
 
@@ -745,29 +735,29 @@
 {txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.2200
 {txt}       Total {c |} {res} .043715825       111  .000393836   {txt}Root MSE        =   {res} .01753
 
-{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 1}   D.lnCount{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
-{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{space 1}lnWeekHours {c |}
-{space 8}L4D. {c |}{col 14}{res}{space 2}-.0013847{col 26}{space 2} .0384012{col 37}{space 1}   -0.04{col 46}{space 3}0.971{col 54}{space 4}-.0776005{col 67}{space 3}  .074831
-{txt}{space 8}L9D. {c |}{col 14}{res}{space 2} .0397686{col 26}{space 2} .0385964{col 37}{space 1}    1.03{col 46}{space 3}0.305{col 54}{space 4}-.0368346{col 67}{space 3} .1163718
-{txt}{space 12} {c |}
-lnHourlyEa~s {c |}
-{space 8}L8D. {c |}{col 14}{res}{space 2} -.039029{col 26}{space 2} .0414024{col 37}{space 1}   -0.94{col 46}{space 3}0.348{col 54}{space 4}-.1212014{col 67}{space 3} .0431433
-{txt}{space 12} {c |}
-{space 10}m1 {c |}{col 14}{res}{space 2}-.0097045{col 26}{space 2} .0078517{col 37}{space 1}   -1.24{col 46}{space 3}0.219{col 54}{space 4}-.0252879{col 67}{space 3} .0058789
-{txt}{space 10}m2 {c |}{col 14}{res}{space 2} .0000949{col 26}{space 2} .0079445{col 37}{space 1}    0.01{col 46}{space 3}0.990{col 54}{space 4}-.0156727{col 67}{space 3} .0158626
-{txt}{space 10}m3 {c |}{col 14}{res}{space 2} -.004712{col 26}{space 2} .0083585{col 37}{space 1}   -0.56{col 46}{space 3}0.574{col 54}{space 4}-.0213013{col 67}{space 3} .0118773
-{txt}{space 10}m4 {c |}{col 14}{res}{space 2}-.0273667{col 26}{space 2} .0081729{col 37}{space 1}   -3.35{col 46}{space 3}0.001{col 54}{space 4}-.0435876{col 67}{space 3}-.0111459
-{txt}{space 10}m5 {c |}{col 14}{res}{space 2}-.0076836{col 26}{space 2} .0081259{col 37}{space 1}   -0.95{col 46}{space 3}0.347{col 54}{space 4}-.0238112{col 67}{space 3}  .008444
-{txt}{space 10}m6 {c |}{col 14}{res}{space 2} -.020254{col 26}{space 2} .0081465{col 37}{space 1}   -2.49{col 46}{space 3}0.015{col 54}{space 4}-.0364227{col 67}{space 3}-.0040854
-{txt}{space 10}m7 {c |}{col 14}{res}{space 2}-.0130812{col 26}{space 2} .0081852{col 37}{space 1}   -1.60{col 46}{space 3}0.113{col 54}{space 4}-.0293265{col 67}{space 3} .0031642
-{txt}{space 10}m8 {c |}{col 14}{res}{space 2} .0041701{col 26}{space 2} .0081051{col 37}{space 1}    0.51{col 46}{space 3}0.608{col 54}{space 4}-.0119164{col 67}{space 3} .0202565
-{txt}{space 10}m9 {c |}{col 14}{res}{space 2}-.0089171{col 26}{space 2} .0082764{col 37}{space 1}   -1.08{col 46}{space 3}0.284{col 54}{space 4}-.0253435{col 67}{space 3} .0075093
-{txt}{space 9}m10 {c |}{col 14}{res}{space 2} .0153608{col 26}{space 2} .0081153{col 37}{space 1}    1.89{col 46}{space 3}0.061{col 54}{space 4}-.0007459{col 67}{space 3} .0314674
-{txt}{space 9}m11 {c |}{col 14}{res}{space 2} .0040463{col 26}{space 2} .0079619{col 37}{space 1}    0.51{col 46}{space 3}0.612{col 54}{space 4}-.0117559{col 67}{space 3} .0198485
-{txt}{space 7}_cons {c |}{col 14}{res}{space 2} .0094122{col 26}{space 2} .0056462{col 37}{space 1}    1.67{col 46}{space 3}0.099{col 54}{space 4}-.0017939{col 67}{space 3} .0206183
-{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{txt}{hline 17}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}       D.lnCount{col 18}{c |}      Coef.{col 30}   Std. Err.{col 42}      t{col 50}   P>|t|{col 58}     [95% Con{col 71}f. Interval]
+{hline 17}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 5}lnWeekHours {c |}
+{space 12}L4D. {c |}{col 18}{res}{space 2}-.0013847{col 30}{space 2} .0384012{col 41}{space 1}   -0.04{col 50}{space 3}0.971{col 58}{space 4}-.0776005{col 71}{space 3}  .074831
+{txt}{space 12}L9D. {c |}{col 18}{res}{space 2} .0397686{col 30}{space 2} .0385964{col 41}{space 1}    1.03{col 50}{space 3}0.305{col 58}{space 4}-.0368346{col 71}{space 3} .1163718
+{txt}{space 16} {c |}
+lnHourlyEarnings {c |}
+{space 12}L8D. {c |}{col 18}{res}{space 2} -.039029{col 30}{space 2} .0414024{col 41}{space 1}   -0.94{col 50}{space 3}0.348{col 58}{space 4}-.1212014{col 71}{space 3} .0431433
+{txt}{space 16} {c |}
+{space 14}m1 {c |}{col 18}{res}{space 2}-.0097045{col 30}{space 2} .0078517{col 41}{space 1}   -1.24{col 50}{space 3}0.219{col 58}{space 4}-.0252879{col 71}{space 3} .0058789
+{txt}{space 14}m2 {c |}{col 18}{res}{space 2} .0000949{col 30}{space 2} .0079445{col 41}{space 1}    0.01{col 50}{space 3}0.990{col 58}{space 4}-.0156727{col 71}{space 3} .0158626
+{txt}{space 14}m3 {c |}{col 18}{res}{space 2} -.004712{col 30}{space 2} .0083585{col 41}{space 1}   -0.56{col 50}{space 3}0.574{col 58}{space 4}-.0213013{col 71}{space 3} .0118773
+{txt}{space 14}m4 {c |}{col 18}{res}{space 2}-.0273667{col 30}{space 2} .0081729{col 41}{space 1}   -3.35{col 50}{space 3}0.001{col 58}{space 4}-.0435876{col 71}{space 3}-.0111459
+{txt}{space 14}m5 {c |}{col 18}{res}{space 2}-.0076836{col 30}{space 2} .0081259{col 41}{space 1}   -0.95{col 50}{space 3}0.347{col 58}{space 4}-.0238112{col 71}{space 3}  .008444
+{txt}{space 14}m6 {c |}{col 18}{res}{space 2} -.020254{col 30}{space 2} .0081465{col 41}{space 1}   -2.49{col 50}{space 3}0.015{col 58}{space 4}-.0364227{col 71}{space 3}-.0040854
+{txt}{space 14}m7 {c |}{col 18}{res}{space 2}-.0130812{col 30}{space 2} .0081852{col 41}{space 1}   -1.60{col 50}{space 3}0.113{col 58}{space 4}-.0293265{col 71}{space 3} .0031642
+{txt}{space 14}m8 {c |}{col 18}{res}{space 2} .0041701{col 30}{space 2} .0081051{col 41}{space 1}    0.51{col 50}{space 3}0.608{col 58}{space 4}-.0119164{col 71}{space 3} .0202565
+{txt}{space 14}m9 {c |}{col 18}{res}{space 2}-.0089171{col 30}{space 2} .0082764{col 41}{space 1}   -1.08{col 50}{space 3}0.284{col 58}{space 4}-.0253435{col 71}{space 3} .0075093
+{txt}{space 13}m10 {c |}{col 18}{res}{space 2} .0153608{col 30}{space 2} .0081153{col 41}{space 1}    1.89{col 50}{space 3}0.061{col 58}{space 4}-.0007459{col 71}{space 3} .0314674
+{txt}{space 13}m11 {c |}{col 18}{res}{space 2} .0040463{col 30}{space 2} .0079619{col 41}{space 1}    0.51{col 50}{space 3}0.612{col 58}{space 4}-.0117559{col 71}{space 3} .0198485
+{txt}{space 11}_cons {c |}{col 18}{res}{space 2} .0094122{col 30}{space 2} .0056462{col 41}{space 1}    1.67{col 50}{space 3}0.099{col 58}{space 4}-.0017939{col 71}{space 3} .0206183
+{txt}{hline 17}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {res}{txt}
 {com}. scalar drop _all
 {txt}
@@ -802,6 +792,100 @@ lnHourlyEa~s {c |}
 > RWrmse12 =   .0176238
 > */
 . 
+. scalar rwrmse = .0172128
+{txt}
+{com}. reg d.lnCount l(12,24,36,48)d.lnCount if tin(,2021m2)
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       325
+{txt}{hline 13}{c +}{hline 34}   F(4, 320)       = {res}    16.54
+{txt}       Model {c |} {res} .017539188         4  .004384797   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} .084856979       320  .000265178   {txt}R-squared       ={res}    0.1713
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.1609
+{txt}       Total {c |} {res} .102396167       324  .000316038   {txt}Root MSE        =   {res} .01628
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}   D.lnCount{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 5}lnCount {c |}
+{space 7}L12D. {c |}{col 14}{res}{space 2} .3609966{col 26}{space 2} .0621085{col 37}{space 1}    5.81{col 46}{space 3}0.000{col 54}{space 4}  .238804{col 67}{space 3} .4831893
+{txt}{space 7}L24D. {c |}{col 14}{res}{space 2}  .137848{col 26}{space 2} .0617615{col 37}{space 1}    2.23{col 46}{space 3}0.026{col 54}{space 4}  .016338{col 67}{space 3}  .259358
+{txt}{space 7}L36D. {c |}{col 14}{res}{space 2}-.0160136{col 26}{space 2} .0614584{col 37}{space 1}   -0.26{col 46}{space 3}0.795{col 54}{space 4}-.1369272{col 67}{space 3}    .1049
+{txt}{space 7}L48D. {c |}{col 14}{res}{space 2} .1265117{col 26}{space 2} .0585322{col 37}{space 1}    2.16{col 46}{space 3}0.031{col 54}{space 4} .0113551{col 67}{space 3} .2416683
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} .0017116{col 26}{space 2} .0009853{col 37}{space 1}    1.74{col 46}{space 3}0.083{col 54}{space 4}-.0002269{col 67}{space 3} .0036502
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. predict pd
+{txt}(option {bf:xb} assumed; fitted values)
+(49 missing values generated)
+
+{com}. gen pflcount=exp((rwrmse^2)/2)*exp(l.lnCount+pd) if Date==tm(2021m3)
+{txt}(374 missing values generated)
+
+{com}. gen ub1=exp((rwrmse^2)/2)*exp(l.lnCount+pd+1*rwrmse) if Date==tm(2021m3)
+{txt}(374 missing values generated)
+
+{com}. gen lb1=exp((rwrmse^2)/2)*exp(l.lnCount+pd-1*rwrmse) if Date==tm(2021m3)
+{txt}(374 missing values generated)
+
+{com}. gen ub2=exp((rwrmse^2)/2)*exp(l.lnCount+pd+2*rwrmse) if Date==tm(2021m3)
+{txt}(374 missing values generated)
+
+{com}. gen lb2=exp((rwrmse^2)/2)*exp(l.lnCount+pd-2*rwrmse) if Date==tm(2021m3)
+{txt}(374 missing values generated)
+
+{com}. gen ub3=exp((rwrmse^2)/2)*exp(l.lnCount+pd+3*rwrmse) if Date==tm(2021m3)
+{txt}(374 missing values generated)
+
+{com}. gen lb3=exp((rwrmse^2)/2)*exp(l.lnCount+pd-3*rwrmse) if Date==tm(2021m3)
+{txt}(374 missing values generated)
+
+{com}. drop pd
+{txt}
+{com}. 
+. replace pflcount=Count if Date==tm(2021m2)
+{txt}(1 real change made)
+
+{com}. replace ub1=Count if Date==tm(2021m2)
+{txt}(1 real change made)
+
+{com}. replace ub2=Count if Date==tm(2021m2)
+{txt}(1 real change made)
+
+{com}. replace ub3=Count if Date==tm(2021m2)
+{txt}(1 real change made)
+
+{com}. replace lb1=Count if Date==tm(2021m2)
+{txt}(1 real change made)
+
+{com}. replace lb2=Count if Date==tm(2021m2)
+{txt}(1 real change made)
+
+{com}. replace lb3=Count if Date==tm(2021m2)
+{txt}(1 real change made)
+
+{com}. 
+. twoway (tsrline ub3 ub2 if tin(2020m3,2021m3), ///
+>         recast(rarea) fcolor(khaki) fintensity(20) lwidth(none) ) ///
+>         (tsrline ub2 ub1 if tin(2020m3,2021m3), ///
+>         recast(rarea) fcolor(khaki) fintensity(40) lwidth(none) ) ///
+>         (tsrline ub1 pflcount if tin(2020m3,2021m3), ///
+>         recast(rarea) fcolor(khaki) fintensity(65) lwidth(none) ) ///
+>         (tsrline pflcount lb1 if tin(2020m3,2021m3), ///
+>         recast(rarea) fcolor(khaki) fintensity(65) lwidth(none) ) ///
+>         (tsrline lb1 lb2 if tin(2020m3,2021m3), ///
+>         recast(rarea) fcolor(khaki) fintensity(40) lwidth(none) ) ///
+>         (tsrline lb2 lb3 if tin(2020m3,2021m3), ///
+>         recast(rarea) fcolor(khaki) fintensity(20) lwidth(none) ) ///
+>         (tsline Count pflcount if tin(2020m3,2021m3) , ///
+>         lcolor(gs12 teal) lwidth(medthick medthick) ///
+>         lpattern(solid longdash)) ///
+>         (scatter withMarchCount Date if tin(2021m3,)), scheme(s1mono) legend(off)
+{res}{txt}
+{com}. graph export "CountFan.png", replace
+{txt}(file /Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Final Project/CountFan.png written in PNG format)
+
+{com}.         
 . /*----------------------------------------------------------------------------*/
 .         
 . *starter models for weekly earnings
@@ -809,23 +893,23 @@ lnHourlyEa~s {c |}
 
 {txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       120
 {txt}{hline 13}{c +}{hline 34}   F(2, 117)       = {res}     1.48
-{txt}       Model {c |} {res}  .00720643         2  .003603215   {txt}Prob > F        ={res}    0.2317
-{txt}    Residual {c |} {res} .284697808       117  .002433315   {txt}R-squared       ={res}    0.0247
+{txt}       Model {c |} {res}   .0071986         2    .0035993   {txt}Prob > F        ={res}    0.2316
+{txt}    Residual {c |} {res} .284290844       117  .002429836   {txt}R-squared       ={res}    0.0247
 {txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0080
-{txt}       Total {c |} {res} .291904237       119  .002452977   {txt}Root MSE        =   {res} .04933
+{txt}       Total {c |} {res} .291489443       119  .002449491   {txt}Root MSE        =   {res} .04929
 
-{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 1}D.          {col 14}{c |}
-{col 1}lnWeeklyEa~s{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
-{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{space 1}lnWeekHours {c |}
-{space 9}LD. {c |}{col 14}{res}{space 2}-.1344969{col 26}{space 2}  .105932{col 37}{space 1}   -1.27{col 46}{space 3}0.207{col 54}{space 4}-.3442897{col 67}{space 3} .0752959
-{txt}{space 12} {c |}
-lnHourlyEa~s {c |}
-{space 9}LD. {c |}{col 14}{res}{space 2} .0732899{col 26}{space 2} .1167768{col 37}{space 1}    0.63{col 46}{space 3}0.531{col 54}{space 4}-.1579805{col 67}{space 3} .3045603
-{txt}{space 12} {c |}
-{space 7}_cons {c |}{col 14}{res}{space 2} .0016809{col 26}{space 2} .0045103{col 37}{space 1}    0.37{col 46}{space 3}0.710{col 54}{space 4}-.0072515{col 67}{space 3} .0106133
-{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{txt}{hline 17}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}D.              {col 18}{c |}
+{col 1}lnWeeklyEarnings{col 18}{c |}      Coef.{col 30}   Std. Err.{col 42}      t{col 50}   P>|t|{col 58}     [95% Con{col 71}f. Interval]
+{hline 17}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 5}lnWeekHours {c |}
+{space 13}LD. {c |}{col 18}{res}{space 2}-.1334776{col 30}{space 2} .1058563{col 41}{space 1}   -1.26{col 50}{space 3}0.210{col 58}{space 4}-.3431204{col 71}{space 3} .0761651
+{txt}{space 16} {c |}
+lnHourlyEarnings {c |}
+{space 13}LD. {c |}{col 18}{res}{space 2} .0746807{col 30}{space 2} .1166933{col 41}{space 1}    0.64{col 50}{space 3}0.523{col 58}{space 4}-.1564244{col 71}{space 3} .3057857
+{txt}{space 16} {c |}
+{space 11}_cons {c |}{col 18}{res}{space 2} .0015108{col 30}{space 2} .0045071{col 41}{space 1}    0.34{col 50}{space 3}0.738{col 58}{space 4}-.0074152{col 71}{space 3} .0104368
+{txt}{hline 17}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {res}{txt}
 {com}. scalar drop _all
 {txt}
@@ -834,25 +918,25 @@ lnHourlyEa~s {c |}
 {com}. scalar list
 {txt}RWmaxobs84 = {res}        84
 {txt}RWminobs84 = {res}         2
-{txt}  RWrmse84 = {res} .06184586
+{txt}  RWrmse84 = {res} .06183191
 {txt}RWmaxobs72 = {res}        72
 {txt}RWminobs72 = {res}         2
-{txt}  RWrmse72 = {res} .06163593
+{txt}  RWrmse72 = {res} .06162109
 {txt}RWmaxobs60 = {res}        60
 {txt}RWminobs60 = {res}         2
-{txt}  RWrmse60 = {res} .06145693
+{txt}  RWrmse60 = {res} .06144232
 {txt}RWmaxobs48 = {res}        48
 {txt}RWminobs48 = {res}         2
-{txt}  RWrmse48 = {res} .06185207
+{txt}  RWrmse48 = {res}  .0618403
 {txt}RWmaxobs36 = {res}        36
 {txt}RWminobs36 = {res}         2
-{txt}  RWrmse36 = {res} .06201342
+{txt}  RWrmse36 = {res} .06201409
 {txt}RWmaxobs24 = {res}        24
 {txt}RWminobs24 = {res}         2
-{txt}  RWrmse24 = {res} .06223845
+{txt}  RWrmse24 = {res} .06224974
 {txt}RWmaxobs12 = {res}        12
 {txt}RWminobs12 = {res}         2
-{txt}  RWrmse12 = {res} .06581989
+{txt}  RWrmse12 = {res} .06583082
 {txt}
 {com}. /*
 > RWmaxobs60 =         60
@@ -860,8 +944,7 @@ lnHourlyEa~s {c |}
 > RWrmse60 =  .06145693
 > */
 . 
-. /*
-> gsreg dlnWeeklyEarnings l1dlnWeeklyEarnings l2dlnWeeklyEarnings l3dlnWeeklyEarnings ///
+. quietly gsreg dlnWeeklyEarnings l1dlnWeeklyEarnings l2dlnWeeklyEarnings l3dlnWeeklyEarnings ///
 >         l4dlnWeeklyEarnings l5dlnWeeklyEarnings l6dlnWeeklyEarnings ///
 >         l7dlnWeeklyEarnings l8dlnWeeklyEarnings l9dlnWeeklyEarnings l10dlnWeeklyEarnings ///
 >         l11dlnWeeklyEarnings l12dlnWeeklyEarnings ///
@@ -869,38 +952,38 @@ lnHourlyEa~s {c |}
 >         if tin(2011m1,2021m1), ///
 >         ncomb(1,12) aic outsample(24) ///
 >         samesample nindex( -1 aic -1 bic -1 rmse_out) results(gsreg_dlnWeeklyEarnings) replace
-> */
-.         
+{txt}
+{com}.         
 . reg d.lnWeeklyEarnings l3d.lnWeeklyEarnings l5d.lnWeeklyEarnings m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11
 
 {txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       116
-{txt}{hline 13}{c +}{hline 34}   F(13, 102)      = {res}     2.22
-{txt}       Model {c |} {res} .062824046        13  .004832619   {txt}Prob > F        ={res}    0.0134
-{txt}    Residual {c |} {res} .221893915       102  .002175431   {txt}R-squared       ={res}    0.2207
-{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.1213
-{txt}       Total {c |} {res} .284717961       115  .002475808   {txt}Root MSE        =   {res} .04664
+{txt}{hline 13}{c +}{hline 34}   F(13, 102)      = {res}     2.16
+{txt}       Model {c |} {res} .061304493        13   .00471573   {txt}Prob > F        ={res}    0.0166
+{txt}    Residual {c |} {res} .222983103       102  .002186109   {txt}R-squared       ={res}    0.2156
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.1157
+{txt}       Total {c |} {res} .284287596       115  .002472066   {txt}Root MSE        =   {res} .04676
 
-{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 1}D.          {col 14}{c |}
-{col 1}lnWeeklyEa~s{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
-{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-lnWeeklyEa~s {c |}
-{space 8}L3D. {c |}{col 14}{res}{space 2} -.230666{col 26}{space 2} .0948354{col 37}{space 1}   -2.43{col 46}{space 3}0.017{col 54}{space 4}-.4187716{col 67}{space 3}-.0425604
-{txt}{space 8}L5D. {c |}{col 14}{res}{space 2}-.1701094{col 26}{space 2} .0948714{col 37}{space 1}   -1.79{col 46}{space 3}0.076{col 54}{space 4}-.3582864{col 67}{space 3} .0180676
-{txt}{space 12} {c |}
-{space 10}m1 {c |}{col 14}{res}{space 2}-.0129295{col 26}{space 2} .0212711{col 37}{space 1}   -0.61{col 46}{space 3}0.545{col 54}{space 4}-.0551207{col 67}{space 3} .0292616
-{txt}{space 10}m2 {c |}{col 14}{res}{space 2} .0230655{col 26}{space 2} .0211959{col 37}{space 1}    1.09{col 46}{space 3}0.279{col 54}{space 4}-.0189765{col 67}{space 3} .0651074
-{txt}{space 10}m3 {c |}{col 14}{res}{space 2}-.0120234{col 26}{space 2} .0220335{col 37}{space 1}   -0.55{col 46}{space 3}0.586{col 54}{space 4}-.0557268{col 67}{space 3}   .03168
-{txt}{space 10}m4 {c |}{col 14}{res}{space 2} .0106776{col 26}{space 2} .0218502{col 37}{space 1}    0.49{col 46}{space 3}0.626{col 54}{space 4}-.0326621{col 67}{space 3} .0540173
-{txt}{space 10}m5 {c |}{col 14}{res}{space 2} .0379684{col 26}{space 2} .0215915{col 37}{space 1}    1.76{col 46}{space 3}0.082{col 54}{space 4}-.0048583{col 67}{space 3} .0807952
-{txt}{space 10}m6 {c |}{col 14}{res}{space 2} .0272323{col 26}{space 2} .0215653{col 37}{space 1}    1.26{col 46}{space 3}0.210{col 54}{space 4}-.0155424{col 67}{space 3} .0700069
-{txt}{space 10}m7 {c |}{col 14}{res}{space 2}-.0216364{col 26}{space 2} .0213979{col 37}{space 1}   -1.01{col 46}{space 3}0.314{col 54}{space 4} -.064079{col 67}{space 3} .0208063
-{txt}{space 10}m8 {c |}{col 14}{res}{space 2} .0154331{col 26}{space 2} .0210082{col 37}{space 1}    0.73{col 46}{space 3}0.464{col 54}{space 4}-.0262366{col 67}{space 3} .0571028
-{txt}{space 10}m9 {c |}{col 14}{res}{space 2} .0206819{col 26}{space 2}  .021546{col 37}{space 1}    0.96{col 46}{space 3}0.339{col 54}{space 4}-.0220544{col 67}{space 3} .0634182
-{txt}{space 9}m10 {c |}{col 14}{res}{space 2} .0210709{col 26}{space 2} .0217906{col 37}{space 1}    0.97{col 46}{space 3}0.336{col 54}{space 4}-.0221507{col 67}{space 3} .0642924
-{txt}{space 9}m11 {c |}{col 14}{res}{space 2} .0089656{col 26}{space 2} .0216561{col 37}{space 1}    0.41{col 46}{space 3}0.680{col 54}{space 4}-.0339891{col 67}{space 3} .0519203
-{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-.0075658{col 26}{space 2} .0151177{col 37}{space 1}   -0.50{col 46}{space 3}0.618{col 54}{space 4}-.0375517{col 67}{space 3} .0224201
-{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{txt}{hline 17}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}D.              {col 18}{c |}
+{col 1}lnWeeklyEarnings{col 18}{c |}      Coef.{col 30}   Std. Err.{col 42}      t{col 50}   P>|t|{col 58}     [95% Con{col 71}f. Interval]
+{hline 17}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+lnWeeklyEarnings {c |}
+{space 12}L3D. {c |}{col 18}{res}{space 2}-.2267216{col 30}{space 2} .0950679{col 41}{space 1}   -2.38{col 50}{space 3}0.019{col 58}{space 4}-.4152883{col 71}{space 3}-.0381549
+{txt}{space 12}L5D. {c |}{col 18}{res}{space 2}-.1621197{col 30}{space 2}  .095104{col 41}{space 1}   -1.70{col 50}{space 3}0.091{col 58}{space 4} -.350758{col 71}{space 3} .0265186
+{txt}{space 16} {c |}
+{space 14}m1 {c |}{col 18}{res}{space 2} -.013308{col 30}{space 2} .0213233{col 41}{space 1}   -0.62{col 50}{space 3}0.534{col 58}{space 4}-.0556027{col 71}{space 3} .0289866
+{txt}{space 14}m2 {c |}{col 18}{res}{space 2}  .020775{col 30}{space 2} .0212478{col 41}{space 1}    0.98{col 50}{space 3}0.331{col 58}{space 4}  -.02137{col 71}{space 3}   .06292
+{txt}{space 14}m3 {c |}{col 18}{res}{space 2}-.0123903{col 30}{space 2} .0220875{col 41}{space 1}   -0.56{col 50}{space 3}0.576{col 58}{space 4}-.0562008{col 71}{space 3} .0314201
+{txt}{space 14}m4 {c |}{col 18}{res}{space 2} .0105198{col 30}{space 2} .0219037{col 41}{space 1}    0.48{col 50}{space 3}0.632{col 58}{space 4}-.0329261{col 71}{space 3} .0539657
+{txt}{space 14}m5 {c |}{col 18}{res}{space 2} .0377285{col 30}{space 2} .0216445{col 41}{space 1}    1.74{col 50}{space 3}0.084{col 58}{space 4}-.0052032{col 71}{space 3} .0806602
+{txt}{space 14}m6 {c |}{col 18}{res}{space 2} .0272631{col 30}{space 2} .0216181{col 41}{space 1}    1.26{col 50}{space 3}0.210{col 58}{space 4}-.0156164{col 71}{space 3} .0701426
+{txt}{space 14}m7 {c |}{col 18}{res}{space 2}-.0220653{col 30}{space 2} .0214504{col 41}{space 1}   -1.03{col 50}{space 3}0.306{col 58}{space 4} -.064612{col 71}{space 3} .0204813
+{txt}{space 14}m8 {c |}{col 18}{res}{space 2} .0152172{col 30}{space 2} .0210597{col 41}{space 1}    0.72{col 50}{space 3}0.472{col 58}{space 4}-.0265547{col 71}{space 3} .0569891
+{txt}{space 14}m9 {c |}{col 18}{res}{space 2} .0201901{col 30}{space 2} .0215988{col 41}{space 1}    0.93{col 50}{space 3}0.352{col 58}{space 4}-.0226509{col 71}{space 3} .0630312
+{txt}{space 13}m10 {c |}{col 18}{res}{space 2} .0207722{col 30}{space 2}  .021844{col 41}{space 1}    0.95{col 50}{space 3}0.344{col 58}{space 4}-.0225553{col 71}{space 3} .0640997
+{txt}{space 13}m11 {c |}{col 18}{res}{space 2} .0084712{col 30}{space 2} .0217091{col 41}{space 1}    0.39{col 50}{space 3}0.697{col 58}{space 4}-.0345888{col 71}{space 3} .0515312
+{txt}{space 11}_cons {c |}{col 18}{res}{space 2}-.0073031{col 30}{space 2} .0151547{col 41}{space 1}   -0.48{col 50}{space 3}0.631{col 58}{space 4}-.0373625{col 71}{space 3} .0227563
+{txt}{hline 17}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {res}{txt}
 {com}. scalar drop _all
 {txt}
@@ -909,25 +992,25 @@ lnWeeklyEa~s {c |}
 {com}. scalar list
 {txt}RWmaxobs84 = {res}        84
 {txt}RWminobs84 = {res}         2
-{txt}  RWrmse84 = {res} .06004448
+{txt}  RWrmse84 = {res} .06011868
 {txt}RWmaxobs72 = {res}        72
 {txt}RWminobs72 = {res}         2
-{txt}  RWrmse72 = {res}  .0605325
+{txt}  RWrmse72 = {res} .06057642
 {txt}RWmaxobs60 = {res}        60
 {txt}RWminobs60 = {res}         2
-{txt}  RWrmse60 = {res} .06068574
+{txt}  RWrmse60 = {res} .06071208
 {txt}RWmaxobs48 = {res}        48
 {txt}RWminobs48 = {res}         2
-{txt}  RWrmse48 = {res} .06037733
+{txt}  RWrmse48 = {res} .06042055
 {txt}RWmaxobs36 = {res}        36
 {txt}RWminobs36 = {res}         2
-{txt}  RWrmse36 = {res} .06130591
+{txt}  RWrmse36 = {res} .06125152
 {txt}RWmaxobs24 = {res}        24
 {txt}RWminobs24 = {res}         2
-{txt}  RWrmse24 = {res} .06544875
+{txt}  RWrmse24 = {res} .06537943
 {txt}RWmaxobs12 = {res}        12
 {txt}RWminobs12 = {res}         2
-{txt}  RWrmse12 = {res} .07012904
+{txt}  RWrmse12 = {res}  .0702019
 {txt}
 {com}. /*
 > RWmaxobs84 =         84
@@ -938,23 +1021,23 @@ lnWeeklyEa~s {c |}
 . reg d.lnWeeklyEarnings l3d.lnWeeklyEarnings l5d.lnWeeklyEarnings l7d.lnWeeklyEarnings
 
 {txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       114
-{txt}{hline 13}{c +}{hline 34}   F(3, 110)       = {res}     4.04
-{txt}       Model {c |} {res} .027592174         3  .009197391   {txt}Prob > F        ={res}    0.0091
-{txt}    Residual {c |} {res} .250484433       110  .002277131   {txt}R-squared       ={res}    0.0992
-{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0747
-{txt}       Total {c |} {res} .278076607       113  .002460855   {txt}Root MSE        =   {res} .04772
+{txt}{hline 13}{c +}{hline 34}   F(3, 110)       = {res}     3.85
+{txt}       Model {c |} {res} .026396014         3  .008798671   {txt}Prob > F        ={res}    0.0115
+{txt}    Residual {c |} {res} .251283445       110  .002284395   {txt}R-squared       ={res}    0.0951
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0704
+{txt}       Total {c |} {res} .277679459       113   .00245734   {txt}Root MSE        =   {res}  .0478
 
-{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 1}D.          {col 14}{c |}
-{col 1}lnWeeklyEa~s{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
-{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-lnWeeklyEa~s {c |}
-{space 8}L3D. {c |}{col 14}{res}{space 2}-.2446256{col 26}{space 2} .0905231{col 37}{space 1}   -2.70{col 46}{space 3}0.008{col 54}{space 4}-.4240211{col 67}{space 3}-.0652301
-{txt}{space 8}L5D. {c |}{col 14}{res}{space 2}-.1957955{col 26}{space 2} .0901769{col 37}{space 1}   -2.17{col 46}{space 3}0.032{col 54}{space 4}-.3745049{col 67}{space 3}-.0170861
-{txt}{space 8}L7D. {c |}{col 14}{res}{space 2} .0649411{col 26}{space 2} .0912448{col 37}{space 1}    0.71{col 46}{space 3}0.478{col 54}{space 4}-.1158846{col 67}{space 3} .2457668
-{txt}{space 12} {c |}
-{space 7}_cons {c |}{col 14}{res}{space 2} .0027599{col 26}{space 2} .0044776{col 37}{space 1}    0.62{col 46}{space 3}0.539{col 54}{space 4}-.0061138{col 67}{space 3} .0116335
-{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{txt}{hline 17}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}D.              {col 18}{c |}
+{col 1}lnWeeklyEarnings{col 18}{c |}      Coef.{col 30}   Std. Err.{col 42}      t{col 50}   P>|t|{col 58}     [95% Con{col 71}f. Interval]
+{hline 17}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+lnWeeklyEarnings {c |}
+{space 12}L3D. {c |}{col 18}{res}{space 2}-.2408947{col 30}{space 2} .0906673{col 41}{space 1}   -2.66{col 50}{space 3}0.009{col 58}{space 4}-.4205761{col 71}{space 3}-.0612133
+{txt}{space 12}L5D. {c |}{col 18}{res}{space 2}-.1892527{col 30}{space 2} .0903206{col 41}{space 1}   -2.10{col 50}{space 3}0.038{col 58}{space 4}-.3682468{col 71}{space 3}-.0102585
+{txt}{space 12}L7D. {c |}{col 18}{res}{space 2} .0639647{col 30}{space 2} .0913902{col 41}{space 1}    0.70{col 50}{space 3}0.485{col 58}{space 4}-.1171492{col 71}{space 3} .2450786
+{txt}{space 16} {c |}
+{space 11}_cons {c |}{col 18}{res}{space 2} .0025724{col 30}{space 2} .0044848{col 41}{space 1}    0.57{col 50}{space 3}0.567{col 58}{space 4}-.0063154{col 71}{space 3} .0114602
+{txt}{hline 17}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {res}{txt}
 {com}. scalar drop _all
 {txt}
@@ -963,25 +1046,25 @@ lnWeeklyEa~s {c |}
 {com}. scalar list
 {txt}RWmaxobs84 = {res}        84
 {txt}RWminobs84 = {res}         2
-{txt}  RWrmse84 = {res} .05250414
+{txt}  RWrmse84 = {res} .05259823
 {txt}RWmaxobs72 = {res}        72
 {txt}RWminobs72 = {res}         2
-{txt}  RWrmse72 = {res} .05277312
+{txt}  RWrmse72 = {res} .05283772
 {txt}RWmaxobs60 = {res}        60
 {txt}RWminobs60 = {res}         2
-{txt}  RWrmse60 = {res} .05308846
+{txt}  RWrmse60 = {res} .05314168
 {txt}RWmaxobs48 = {res}        48
 {txt}RWminobs48 = {res}         2
-{txt}  RWrmse48 = {res} .05299891
+{txt}  RWrmse48 = {res}  .0530381
 {txt}RWmaxobs36 = {res}        36
 {txt}RWminobs36 = {res}         2
-{txt}  RWrmse36 = {res} .05349229
+{txt}  RWrmse36 = {res} .05353125
 {txt}RWmaxobs24 = {res}        24
 {txt}RWminobs24 = {res}         2
-{txt}  RWrmse24 = {res} .05283688
+{txt}  RWrmse24 = {res} .05282122
 {txt}RWmaxobs12 = {res}        12
 {txt}RWminobs12 = {res}         2
-{txt}  RWrmse12 = {res} .06056213
+{txt}  RWrmse12 = {res} .06036464
 {txt}
 {com}. /*
 > RWmaxobs84 =         84
@@ -989,28 +1072,108 @@ lnWeeklyEa~s {c |}
 > RWrmse84 =  .05250414
 > */
 . 
-. /*
-> gsreg dlnCount l1dlnCount l2dlnCount l3dlnCount l4dlnCount l5dlnCount l6dlnCount ///
->         l7dlnCount l8dlnCount l9dlnCount l10dlnCount l11dlnCount l12dlnCount l24dlnCount ///
->         l1dlnWeekHours l2dlnWeekHours l3dlnWeekHours l4dlnWeekHours l5dlnWeekHours l6dlnWeekHours ///
->         l7dlnWeekHours l8dlnWeekHours l9dlnWeekHours l10dlnWeekHours l11dlnWeekHours l12dlnWeekHours l24dlnWeekHours ///
->         l1dlnHourlyEarnings l2dlnHourlyEarnings l3dlnHourlyEarnings l4dlnHourlyEarnings ///
->         l5dlnHourlyEarnings l6dlnHourlyEarnings ///
->         l7dlnHourlyEarnings l8dlnHourlyEarnings l9dlnHourlyEarnings l10dlnHourlyEarnings ///
->         l11dlnHourlyEarnings l12dlnHourlyEarnings l24dlnHourlyEarnings ///
->         l1dlnWeeklyEarnings l2dlnWeeklyEarnings l3dlnWeeklyEarnings l4dlnWeeklyEarnings ///
->         l5dlnWeeklyEarnings l6dlnWeeklyEarnings ///
->         l7dlnWeeklyEarnings l8dlnWeeklyEarnings l9dlnWeeklyEarnings l10dlnWeeklyEarnings ///
->         l11dlnWeeklyEarnings l12dlnWeeklyEarnings l24dlnWeeklyEarnings if tin(2011m1,2021m1), ///
->         ncomb(1,4) aic outsample(24) fix(m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11) ///
->         samesample nindex( -1 aic -1 bic -1 rmse_out) results(gsreg_dlnWeeklyEarnings_Full) replace
-> */
-. 
+. drop pflcount ub1 ub2 ub3 lb1 lb2 lb3
+{txt}
+{com}. 
+. scalar rwrmse = .05250414
+{txt}
+{com}. reg d.lnWeeklyEarnings l(3,5,7)d.lnWeeklyEarnings if tin(,2021m2)
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       114
+{txt}{hline 13}{c +}{hline 34}   F(3, 110)       = {res}     3.85
+{txt}       Model {c |} {res} .026396014         3  .008798671   {txt}Prob > F        ={res}    0.0115
+{txt}    Residual {c |} {res} .251283445       110  .002284395   {txt}R-squared       ={res}    0.0951
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0704
+{txt}       Total {c |} {res} .277679459       113   .00245734   {txt}Root MSE        =   {res}  .0478
+
+{txt}{hline 17}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}D.              {col 18}{c |}
+{col 1}lnWeeklyEarnings{col 18}{c |}      Coef.{col 30}   Std. Err.{col 42}      t{col 50}   P>|t|{col 58}     [95% Con{col 71}f. Interval]
+{hline 17}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+lnWeeklyEarnings {c |}
+{space 12}L3D. {c |}{col 18}{res}{space 2}-.2408947{col 30}{space 2} .0906673{col 41}{space 1}   -2.66{col 50}{space 3}0.009{col 58}{space 4}-.4205761{col 71}{space 3}-.0612133
+{txt}{space 12}L5D. {c |}{col 18}{res}{space 2}-.1892527{col 30}{space 2} .0903206{col 41}{space 1}   -2.10{col 50}{space 3}0.038{col 58}{space 4}-.3682468{col 71}{space 3}-.0102585
+{txt}{space 12}L7D. {c |}{col 18}{res}{space 2} .0639647{col 30}{space 2} .0913902{col 41}{space 1}    0.70{col 50}{space 3}0.485{col 58}{space 4}-.1171492{col 71}{space 3} .2450786
+{txt}{space 16} {c |}
+{space 11}_cons {c |}{col 18}{res}{space 2} .0025724{col 30}{space 2} .0044848{col 41}{space 1}    0.57{col 50}{space 3}0.567{col 58}{space 4}-.0063154{col 71}{space 3} .0114602
+{txt}{hline 17}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. predict pd
+{txt}(option {bf:xb} assumed; fitted values)
+(260 missing values generated)
+
+{com}. gen pflcount=exp((rwrmse^2)/2)*exp(l.lnWeeklyEarnings+pd) if Date==tm(2021m3)
+{txt}(374 missing values generated)
+
+{com}. gen ub1=exp((rwrmse^2)/2)*exp(l.lnWeeklyEarnings+pd+1*rwrmse) if Date==tm(2021m3)
+{txt}(374 missing values generated)
+
+{com}. gen lb1=exp((rwrmse^2)/2)*exp(l.lnWeeklyEarnings+pd-1*rwrmse) if Date==tm(2021m3)
+{txt}(374 missing values generated)
+
+{com}. gen ub2=exp((rwrmse^2)/2)*exp(l.lnWeeklyEarnings+pd+2*rwrmse) if Date==tm(2021m3)
+{txt}(374 missing values generated)
+
+{com}. gen lb2=exp((rwrmse^2)/2)*exp(l.lnWeeklyEarnings+pd-2*rwrmse) if Date==tm(2021m3)
+{txt}(374 missing values generated)
+
+{com}. gen ub3=exp((rwrmse^2)/2)*exp(l.lnWeeklyEarnings+pd+3*rwrmse) if Date==tm(2021m3)
+{txt}(374 missing values generated)
+
+{com}. gen lb3=exp((rwrmse^2)/2)*exp(l.lnWeeklyEarnings+pd-3*rwrmse) if Date==tm(2021m3)
+{txt}(374 missing values generated)
+
+{com}. drop pd
+{txt}
+{com}. 
+. replace pflcount=WeeklyEarnings if Date==tm(2021m2)
+{txt}(1 real change made)
+
+{com}. replace ub1=WeeklyEarnings if Date==tm(2021m2)
+{txt}(1 real change made)
+
+{com}. replace ub2=WeeklyEarnings if Date==tm(2021m2)
+{txt}(1 real change made)
+
+{com}. replace ub3=WeeklyEarnings if Date==tm(2021m2)
+{txt}(1 real change made)
+
+{com}. replace lb1=WeeklyEarnings if Date==tm(2021m2)
+{txt}(1 real change made)
+
+{com}. replace lb2=WeeklyEarnings if Date==tm(2021m2)
+{txt}(1 real change made)
+
+{com}. replace lb3=WeeklyEarnings if Date==tm(2021m2)
+{txt}(1 real change made)
+
+{com}. 
+. twoway (tsrline ub3 ub2 if tin(2020m3,2021m3), ///
+>         recast(rarea) fcolor(khaki) fintensity(20) lwidth(none) ) ///
+>         (tsrline ub2 ub1 if tin(2020m3,2021m3), ///
+>         recast(rarea) fcolor(khaki) fintensity(40) lwidth(none) ) ///
+>         (tsrline ub1 pflcount if tin(2020m3,2021m3), ///
+>         recast(rarea) fcolor(khaki) fintensity(65) lwidth(none) ) ///
+>         (tsrline pflcount lb1 if tin(2020m3,2021m3), ///
+>         recast(rarea) fcolor(khaki) fintensity(65) lwidth(none) ) ///
+>         (tsrline lb1 lb2 if tin(2020m3,2021m3), ///
+>         recast(rarea) fcolor(khaki) fintensity(40) lwidth(none) ) ///
+>         (tsrline lb2 lb3 if tin(2020m3,2021m3), ///
+>         recast(rarea) fcolor(khaki) fintensity(20) lwidth(none) ) ///
+>         (tsline WeeklyEarnings pflcount if tin(2020m3,2021m3) , ///
+>         lcolor(gs12 teal) lwidth(medthick medthick) ///
+>         lpattern(solid longdash)) ///
+>         (scatter withMarchEarnings Date if tin(2021m3,)), scheme(s1mono) legend(off)
+{res}{txt}
+{com}. graph export "WeeklyFan.png", replace
+{txt}(file /Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Final Project/WeeklyFan.png written in PNG format)
+
+{com}. 
 . log close
       {txt}name:  {res}<unnamed>
        {txt}log:  {res}/Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Final Project/Final Project.smcl
   {txt}log type:  {res}smcl
- {txt}closed on:  {res} 8 Apr 2021, 17:48:56
+ {txt}closed on:  {res}19 Apr 2021, 21:08:41
 {txt}{.-}
 {smcl}
 {txt}{sf}{ul off}

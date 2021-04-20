@@ -8,10 +8,10 @@
              log:  /Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Probl
       > em Sets/Final Project/Final Project.smcl
         log type:  smcl
-       opened on:   8 Apr 2021, 17:47:08
+       opened on:  19 Apr 2021, 20:43:14
       
-     1 . import delimited "TS2020_Final_Project_txt2/TS2020_Final_Project_Monthly.txt"
-      (6 vars, 374 obs)
+     1 . import delimited "TS2020_Final_Project_Monthly.txt"
+      (6 vars, 375 obs)
       
      2 . rename smu12455400500000001 Count
       
@@ -46,394 +46,407 @@
     19 . format Date %tm
       
     20 . tsset Date
-              time variable:  Date, 1990m1 to 2021m2
+              time variable:  Date, 1990m1 to 2021m3
                       delta:  1 month
       
     21 . 
-    22 . gen lnCount = ln(Count)
+    22 . gen withMarchCount = Count
       
-    23 . gen lnWeekHours = ln(WeekHours)
+    23 . gen withMarchEarnings = WeeklyEarnings
       (252 missing values generated)
       
-    24 . gen lnHourlyEarnings = ln(HourlyEarnings)
-      (252 missing values generated)
+    24 . replace Count=. if tin(2021m3,)
+      (1 real change made, 1 to missing)
       
-    25 . gen lnWeeklyEarnings = ln(WeeklyEarnings)
-      (252 missing values generated)
+    25 . replace WeeklyEarnings=. if tin(2021m3,)
+      (1 real change made, 1 to missing)
       
-    26 . gen lnServiceCount = ln(ServiceCount)
-      
-    27 . 
-    28 . gen m1=0
-      
-    29 . replace m1=1 if month==1
-      (32 real changes made)
-      
-    30 . gen m2=0
-      
-    31 . replace m2=1 if month==2
-      (32 real changes made)
-      
-    32 . gen m3=0
-      
-    33 . replace m3=1 if month==3
-      (31 real changes made)
-      
-    34 . gen m4=0
-      
-    35 . replace m4=1 if month==4
-      (31 real changes made)
-      
-    36 . gen m5=0
-      
-    37 . replace m5=1 if month==5
-      (31 real changes made)
-      
-    38 . gen m6=0
-      
-    39 . replace m6=1 if month==6
-      (31 real changes made)
-      
-    40 . gen m7=0
-      
-    41 . replace m7=1 if month==7
-      (31 real changes made)
-      
-    42 . gen m8=0
-      
-    43 . replace m8=1 if month==8
-      (31 real changes made)
-      
-    44 . gen m9=0
-      
-    45 . replace m9=1 if month==9
-      (31 real changes made)
-      
-    46 . gen m10=0
-      
-    47 . replace m10=1 if month==10
-      (31 real changes made)
-      
-    48 . gen m11=0
-      
-    49 . replace m11=1 if month==11
-      (31 real changes made)
-      
-    50 . gen m12=0
-      
-    51 . replace m12=1 if month==12
-      (31 real changes made)
-      
-    52 . 
-    53 . gen dlnCount=d.lnCount
+    26 . 
+    27 . gen lnCount = ln(Count)
       (1 missing value generated)
       
-    54 . gen l1dlnCount=l1d.lnCount
+    28 . gen lnWeekHours = ln(WeekHours)
+      (252 missing values generated)
+      
+    29 . gen lnHourlyEarnings = ln(HourlyEarnings)
+      (252 missing values generated)
+      
+    30 . gen lnWeeklyEarnings = ln(WeeklyEarnings)
+      (253 missing values generated)
+      
+    31 . gen lnServiceCount = ln(ServiceCount)
+      
+    32 . 
+    33 . gen m1=0
+      
+    34 . replace m1=1 if month==1
+      (32 real changes made)
+      
+    35 . gen m2=0
+      
+    36 . replace m2=1 if month==2
+      (32 real changes made)
+      
+    37 . gen m3=0
+      
+    38 . replace m3=1 if month==3
+      (32 real changes made)
+      
+    39 . gen m4=0
+      
+    40 . replace m4=1 if month==4
+      (31 real changes made)
+      
+    41 . gen m5=0
+      
+    42 . replace m5=1 if month==5
+      (31 real changes made)
+      
+    43 . gen m6=0
+      
+    44 . replace m6=1 if month==6
+      (31 real changes made)
+      
+    45 . gen m7=0
+      
+    46 . replace m7=1 if month==7
+      (31 real changes made)
+      
+    47 . gen m8=0
+      
+    48 . replace m8=1 if month==8
+      (31 real changes made)
+      
+    49 . gen m9=0
+      
+    50 . replace m9=1 if month==9
+      (31 real changes made)
+      
+    51 . gen m10=0
+      
+    52 . replace m10=1 if month==10
+      (31 real changes made)
+      
+    53 . gen m11=0
+      
+    54 . replace m11=1 if month==11
+      (31 real changes made)
+      
+    55 . gen m12=0
+      
+    56 . replace m12=1 if month==12
+      (31 real changes made)
+      
+    57 . 
+    58 . gen dlnCount=d.lnCount
       (2 missing values generated)
       
-    55 . gen l2dlnCount=l2d.lnCount
+    59 . gen l1dlnCount=l1d.lnCount
+      (2 missing values generated)
+      
+    60 . gen l2dlnCount=l2d.lnCount
       (3 missing values generated)
       
-    56 . gen l3dlnCount=l3d.lnCount
+    61 . gen l3dlnCount=l3d.lnCount
       (4 missing values generated)
       
-    57 . gen l4dlnCount=l4d.lnCount
+    62 . gen l4dlnCount=l4d.lnCount
       (5 missing values generated)
       
-    58 . gen l5dlnCount=l5d.lnCount
+    63 . gen l5dlnCount=l5d.lnCount
       (6 missing values generated)
       
-    59 . gen l6dlnCount=l6d.lnCount
+    64 . gen l6dlnCount=l6d.lnCount
       (7 missing values generated)
       
-    60 . gen l7dlnCount=l7d.lnCount
+    65 . gen l7dlnCount=l7d.lnCount
       (8 missing values generated)
       
-    61 . gen l8dlnCount=l8d.lnCount
+    66 . gen l8dlnCount=l8d.lnCount
       (9 missing values generated)
       
-    62 . gen l9dlnCount=l9d.lnCount
+    67 . gen l9dlnCount=l9d.lnCount
       (10 missing values generated)
       
-    63 . gen l10dlnCount=l10d.lnCount
+    68 . gen l10dlnCount=l10d.lnCount
       (11 missing values generated)
       
-    64 . gen l11dlnCount=l11d.lnCount
+    69 . gen l11dlnCount=l11d.lnCount
       (12 missing values generated)
       
-    65 . gen l12dlnCount=l12d.lnCount
+    70 . gen l12dlnCount=l12d.lnCount
       (13 missing values generated)
       
-    66 . gen l24dlnCount=l24d.lnCount
+    71 . gen l24dlnCount=l24d.lnCount
       (25 missing values generated)
       
-    67 . gen l36dlnCount=l36d.lnCount
+    72 . gen l36dlnCount=l36d.lnCount
       (37 missing values generated)
       
-    68 . gen l48dlnCount=l48d.lnCount
+    73 . gen l48dlnCount=l48d.lnCount
       (49 missing values generated)
       
-    69 . 
-    70 . gen dlnWeekHours=d.lnWeekHours
+    74 . 
+    75 . gen dlnWeekHours=d.lnWeekHours
       (253 missing values generated)
       
-    71 . gen l1dlnWeekHours=l1d.lnWeekHours
+    76 . gen l1dlnWeekHours=l1d.lnWeekHours
       (254 missing values generated)
       
-    72 . gen l2dlnWeekHours=l2d.lnWeekHours
+    77 . gen l2dlnWeekHours=l2d.lnWeekHours
       (255 missing values generated)
       
-    73 . gen l3dlnWeekHours=l3d.lnWeekHours
+    78 . gen l3dlnWeekHours=l3d.lnWeekHours
       (256 missing values generated)
       
-    74 . gen l4dlnWeekHours=l4d.lnWeekHours
+    79 . gen l4dlnWeekHours=l4d.lnWeekHours
       (257 missing values generated)
       
-    75 . gen l5dlnWeekHours=l5d.lnWeekHours
+    80 . gen l5dlnWeekHours=l5d.lnWeekHours
       (258 missing values generated)
       
-    76 . gen l6dlnWeekHours=l6d.lnWeekHours
+    81 . gen l6dlnWeekHours=l6d.lnWeekHours
       (259 missing values generated)
       
-    77 . gen l7dlnWeekHours=l7d.lnWeekHours
+    82 . gen l7dlnWeekHours=l7d.lnWeekHours
       (260 missing values generated)
       
-    78 . gen l8dlnWeekHours=l8d.lnWeekHours
+    83 . gen l8dlnWeekHours=l8d.lnWeekHours
       (261 missing values generated)
       
-    79 . gen l9dlnWeekHours=l9d.lnWeekHours
+    84 . gen l9dlnWeekHours=l9d.lnWeekHours
       (262 missing values generated)
       
-    80 . gen l10dlnWeekHours=l10d.lnWeekHours
+    85 . gen l10dlnWeekHours=l10d.lnWeekHours
       (263 missing values generated)
       
-    81 . gen l11dlnWeekHours=l11d.lnWeekHours
+    86 . gen l11dlnWeekHours=l11d.lnWeekHours
       (264 missing values generated)
       
-    82 . gen l12dlnWeekHours=l12d.lnWeekHours
+    87 . gen l12dlnWeekHours=l12d.lnWeekHours
       (265 missing values generated)
       
-    83 . gen l24dlnWeekHours=l24d.lnWeekHours
+    88 . gen l24dlnWeekHours=l24d.lnWeekHours
       (277 missing values generated)
       
-    84 . gen l36dlnWeekHours=l36d.lnWeekHours
+    89 . gen l36dlnWeekHours=l36d.lnWeekHours
       (289 missing values generated)
       
-    85 . gen l48dlnWeekHours=l48d.lnWeekHours
+    90 . gen l48dlnWeekHours=l48d.lnWeekHours
       (301 missing values generated)
       
-    86 . 
-    87 . gen dlnHourlyEarnings=d.lnHourlyEarnings
+    91 . 
+    92 . gen dlnHourlyEarnings=d.lnHourlyEarnings
       (253 missing values generated)
       
-    88 . gen l1dlnHourlyEarnings=l1d.lnHourlyEarnings
+    93 . gen l1dlnHourlyEarnings=l1d.lnHourlyEarnings
       (254 missing values generated)
       
-    89 . gen l2dlnHourlyEarnings=l2d.lnHourlyEarnings
+    94 . gen l2dlnHourlyEarnings=l2d.lnHourlyEarnings
       (255 missing values generated)
       
-    90 . gen l3dlnHourlyEarnings=l3d.lnHourlyEarnings
+    95 . gen l3dlnHourlyEarnings=l3d.lnHourlyEarnings
       (256 missing values generated)
       
-    91 . gen l4dlnHourlyEarnings=l4d.lnHourlyEarnings
+    96 . gen l4dlnHourlyEarnings=l4d.lnHourlyEarnings
       (257 missing values generated)
       
-    92 . gen l5dlnHourlyEarnings=l5d.lnHourlyEarnings
+    97 . gen l5dlnHourlyEarnings=l5d.lnHourlyEarnings
       (258 missing values generated)
       
-    93 . gen l6dlnHourlyEarnings=l6d.lnHourlyEarnings
+    98 . gen l6dlnHourlyEarnings=l6d.lnHourlyEarnings
       (259 missing values generated)
       
-    94 . gen l7dlnHourlyEarnings=l7d.lnHourlyEarnings
+    99 . gen l7dlnHourlyEarnings=l7d.lnHourlyEarnings
       (260 missing values generated)
       
-    95 . gen l8dlnHourlyEarnings=l8d.lnHourlyEarnings
+   100 . gen l8dlnHourlyEarnings=l8d.lnHourlyEarnings
       (261 missing values generated)
       
-    96 . gen l9dlnHourlyEarnings=l9d.lnHourlyEarnings
+   101 . gen l9dlnHourlyEarnings=l9d.lnHourlyEarnings
       (262 missing values generated)
       
-    97 . gen l10dlnHourlyEarnings=l10d.lnHourlyEarnings
+   102 . gen l10dlnHourlyEarnings=l10d.lnHourlyEarnings
       (263 missing values generated)
       
-    98 . gen l11dlnHourlyEarnings=l11d.lnHourlyEarnings
+   103 . gen l11dlnHourlyEarnings=l11d.lnHourlyEarnings
       (264 missing values generated)
       
-    99 . gen l12dlnHourlyEarnings=l12d.lnHourlyEarnings
+   104 . gen l12dlnHourlyEarnings=l12d.lnHourlyEarnings
       (265 missing values generated)
       
-   100 . gen l24dlnHourlyEarnings=l24d.lnHourlyEarnings
+   105 . gen l24dlnHourlyEarnings=l24d.lnHourlyEarnings
       (277 missing values generated)
       
-   101 . gen l36dlnHourlyEarnings=l36d.lnHourlyEarnings
+   106 . gen l36dlnHourlyEarnings=l36d.lnHourlyEarnings
       (289 missing values generated)
       
-   102 . gen l48dlnHourlyEarnings=l48d.lnHourlyEarnings
+   107 . gen l48dlnHourlyEarnings=l48d.lnHourlyEarnings
       (301 missing values generated)
       
-   103 . 
-   104 . gen dlnWeeklyEarnings=d.lnWeeklyEarnings
-      (253 missing values generated)
-      
-   105 . gen l1dlnWeeklyEarnings=l1d.lnWeeklyEarnings
+   108 . 
+   109 . gen dlnWeeklyEarnings=d.lnWeeklyEarnings
       (254 missing values generated)
       
-   106 . gen l2dlnWeeklyEarnings=l2d.lnWeeklyEarnings
+   110 . gen l1dlnWeeklyEarnings=l1d.lnWeeklyEarnings
+      (254 missing values generated)
+      
+   111 . gen l2dlnWeeklyEarnings=l2d.lnWeeklyEarnings
       (255 missing values generated)
       
-   107 . gen l3dlnWeeklyEarnings=l3d.lnWeeklyEarnings
+   112 . gen l3dlnWeeklyEarnings=l3d.lnWeeklyEarnings
       (256 missing values generated)
       
-   108 . gen l4dlnWeeklyEarnings=l4d.lnWeeklyEarnings
+   113 . gen l4dlnWeeklyEarnings=l4d.lnWeeklyEarnings
       (257 missing values generated)
       
-   109 . gen l5dlnWeeklyEarnings=l5d.lnWeeklyEarnings
+   114 . gen l5dlnWeeklyEarnings=l5d.lnWeeklyEarnings
       (258 missing values generated)
       
-   110 . gen l6dlnWeeklyEarnings=l6d.lnWeeklyEarnings
+   115 . gen l6dlnWeeklyEarnings=l6d.lnWeeklyEarnings
       (259 missing values generated)
       
-   111 . gen l7dlnWeeklyEarnings=l7d.lnWeeklyEarnings
+   116 . gen l7dlnWeeklyEarnings=l7d.lnWeeklyEarnings
       (260 missing values generated)
       
-   112 . gen l8dlnWeeklyEarnings=l8d.lnWeeklyEarnings
+   117 . gen l8dlnWeeklyEarnings=l8d.lnWeeklyEarnings
       (261 missing values generated)
       
-   113 . gen l9dlnWeeklyEarnings=l9d.lnWeeklyEarnings
+   118 . gen l9dlnWeeklyEarnings=l9d.lnWeeklyEarnings
       (262 missing values generated)
       
-   114 . gen l10dlnWeeklyEarnings=l10d.lnWeeklyEarnings
+   119 . gen l10dlnWeeklyEarnings=l10d.lnWeeklyEarnings
       (263 missing values generated)
       
-   115 . gen l11dlnWeeklyEarnings=l11d.lnWeeklyEarnings
+   120 . gen l11dlnWeeklyEarnings=l11d.lnWeeklyEarnings
       (264 missing values generated)
       
-   116 . gen l12dlnWeeklyEarnings=l12d.lnWeeklyEarnings
+   121 . gen l12dlnWeeklyEarnings=l12d.lnWeeklyEarnings
       (265 missing values generated)
       
-   117 . gen l24dlnWeeklyEarnings=l24d.lnWeeklyEarnings
+   122 . gen l24dlnWeeklyEarnings=l24d.lnWeeklyEarnings
       (277 missing values generated)
       
-   118 . gen l36dlnWeeklyEarnings=l36d.lnWeeklyEarnings
+   123 . gen l36dlnWeeklyEarnings=l36d.lnWeeklyEarnings
       (289 missing values generated)
       
-   119 . gen l48dlnWeeklyEarnings=l48d.lnWeeklyEarnings
+   124 . gen l48dlnWeeklyEarnings=l48d.lnWeeklyEarnings
       (301 missing values generated)
       
-   120 . 
-   121 . gen dlnServiceCount=d.lnServiceCount
+   125 . 
+   126 . gen dlnServiceCount=d.lnServiceCount
       (1 missing value generated)
       
-   122 . gen l1dlnServiceCount=l1d.lnServiceCount
+   127 . gen l1dlnServiceCount=l1d.lnServiceCount
       (2 missing values generated)
       
-   123 . gen l2dlnServiceCount=l2d.lnServiceCount
+   128 . gen l2dlnServiceCount=l2d.lnServiceCount
       (3 missing values generated)
       
-   124 . gen l3dlnServiceCount=l3d.lnServiceCount
+   129 . gen l3dlnServiceCount=l3d.lnServiceCount
       (4 missing values generated)
       
-   125 . gen l4dlnServiceCount=l4d.lnServiceCount
+   130 . gen l4dlnServiceCount=l4d.lnServiceCount
       (5 missing values generated)
       
-   126 . gen l5dlnServiceCount=l5d.lnServiceCount
+   131 . gen l5dlnServiceCount=l5d.lnServiceCount
       (6 missing values generated)
       
-   127 . gen l6dlnServiceCount=l6d.lnServiceCount
+   132 . gen l6dlnServiceCount=l6d.lnServiceCount
       (7 missing values generated)
       
-   128 . gen l7dlnServiceCount=l7d.lnServiceCount
+   133 . gen l7dlnServiceCount=l7d.lnServiceCount
       (8 missing values generated)
       
-   129 . gen l8dlnServiceCount=l8d.lnServiceCount
+   134 . gen l8dlnServiceCount=l8d.lnServiceCount
       (9 missing values generated)
       
-   130 . gen l9dlnServiceCount=l9d.lnServiceCount
+   135 . gen l9dlnServiceCount=l9d.lnServiceCount
       (10 missing values generated)
       
-   131 . gen l10dlnServiceCount=l10d.lnServiceCount
+   136 . gen l10dlnServiceCount=l10d.lnServiceCount
       (11 missing values generated)
       
-   132 . gen l11dlnServiceCount=l11d.lnServiceCount
+   137 . gen l11dlnServiceCount=l11d.lnServiceCount
       (12 missing values generated)
       
-   133 . gen l12dlnServiceCount=l12d.lnServiceCount
+   138 . gen l12dlnServiceCount=l12d.lnServiceCount
       (13 missing values generated)
       
-   134 . gen l24dlnServiceCount=l24d.lnServiceCount
+   139 . gen l24dlnServiceCount=l24d.lnServiceCount
       (25 missing values generated)
       
-   135 . gen l36dlnServiceCount=l36d.lnServiceCount
+   140 . gen l36dlnServiceCount=l36d.lnServiceCount
       (37 missing values generated)
       
-   136 . gen l48dlnServiceCount=l48d.lnServiceCount
+   141 . gen l48dlnServiceCount=l48d.lnServiceCount
       (49 missing values generated)
       
-   137 . 
-   138 . /*
+   142 . 
+   143 . /*
       > The project is to forecast the March non-seasonally adjusted estimates of ave
       > rage weekly earnings and total employment for private employers (total privat
       > e) for a Florida MSA of your choice and write up a professional report on you
       > r forecast.
       > */
-   139 . /* Count and WeeklyEarnings */
-   140 . 
-   141 . summ Count WeekHours HourlyEarnings WeeklyEarnings ServiceCount
+   144 . /* Count and WeeklyEarnings */
+   145 . 
+   146 . summ Count WeekHours HourlyEarnings WeeklyEarnings ServiceCount
       
           Variable |        Obs        Mean    Std. Dev.       Min        Max
       -------------+---------------------------------------------------------
              Count |        374    14.18556    6.880684        5.3         28
-         WeekHours |        122    36.86967    3.804193       28.3       45.8
-      HourlyEarn~s |        122    19.70344    2.910126      15.01       24.6
-      WeeklyEarn~s |        122    719.7972    84.82529     503.79      916.1
-      ServiceCount |        374    10.40455    5.940013        3.9       22.8
+         WeekHours |        123    36.88455    3.791817       28.3       45.8
+      HourlyEarn~s |        123       19.72    2.903968      15.01       24.6
+      WeeklyEarn~s |        122    719.6542    84.57241     503.79      916.1
+      ServiceCount |        375    10.43387    5.959179        3.9       22.8
       
-   142 . summ lnCount lnWeekHours lnHourlyEarnings lnWeeklyEarnings lnServiceCount
+   147 . summ lnCount lnWeekHours lnHourlyEarnings lnWeeklyEarnings lnServiceCount
       
           Variable |        Obs        Mean    Std. Dev.       Min        Max
       -------------+---------------------------------------------------------
            lnCount |        374      2.5174    .5398403   1.667707   3.332205
-       lnWeekHours |        122    3.602049    .1041722   3.342862   3.824284
-      lnHourlyEa~s |        122    2.969891     .148565   2.708717   3.202746
-      lnWeeklyEa~s |        122     6.57194    .1198394   6.222159   6.820126
-      lnServiceC~t |        374     2.16967    .5975865   1.360977    3.12676
+       lnWeekHours |        123    3.602488      .10385   3.342862   3.824284
+      lnHourlyEa~s |        123    2.970779    .1482819   2.708717   3.202746
+      lnWeeklyEa~s |        122    6.571775    .1195694   6.222159   6.820126
+      lnServiceC~t |        375    2.172053    .5985689   1.360977    3.12676
       
-   143 . 
-   144 . ac lnCount, saving(lnCount_ac, replace)
+   148 . 
+   149 . ac lnCount, saving(lnCount_ac, replace)
       (file lnCount_ac.gph saved)
       
-   145 . pac lnCount, saving(lnCount_pac, replace)
+   150 . pac lnCount, saving(lnCount_pac, replace)
       (file lnCount_pac.gph saved)
       
-   146 . graph combine lnCount_ac.gph lnCount_pac.gph, saving(lnCount_ac_pac, replace)
+   151 . graph combine lnCount_ac.gph lnCount_pac.gph, saving(lnCount_ac_pac, replace)
       (file lnCount_ac_pac.gph saved)
       
-   147 . graph export "lnCount_ac_pac.png", replace
+   152 . graph export "lnCount_ac_pac.png", replace
       (file /Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets
       > /Final Project/lnCount_ac_pac.png written in PNG format)
       
-   148 . ** Probably need to difference
-   149 . 
-   150 . ac lnWeeklyEarnings, saving(lnWeeklyEarnings_ac, replace)
+   153 . ** Probably need to difference
+   154 . 
+   155 . ac lnWeeklyEarnings, saving(lnWeeklyEarnings_ac, replace)
       (file lnWeeklyEarnings_ac.gph saved)
       
-   151 . pac lnWeeklyEarnings, saving(lnWeeklyEarnings_pac, replace)
+   156 . pac lnWeeklyEarnings, saving(lnWeeklyEarnings_pac, replace)
       (file lnWeeklyEarnings_pac.gph saved)
       
-   152 . graph combine lnWeeklyEarnings_ac.gph lnWeeklyEarnings_pac.gph, saving(lnWeek
+   157 . graph combine lnWeeklyEarnings_ac.gph lnWeeklyEarnings_pac.gph, saving(lnWeek
       > lyEarnings_ac_pac, replace)
       (file lnWeeklyEarnings_ac_pac.gph saved)
       
-   153 . graph export "lnWeeklyEarnings_ac_pac.png", replace
+   158 . graph export "lnWeeklyEarnings_ac_pac.png", replace
       (file /Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets
       > /Final Project/lnWeeklyEarnings_ac_pac.png written in PNG format)
       
-   154 . ** Probably need to differencen b
-   155 . 
-   156 . *starter models for count
-   157 . *I used a pair plot to examine the rise and fall of variables with respect to
+   159 . ** Probably need to difference
+   160 . 
+   161 . *starter models for count
+   162 . *I used a pair plot to examine the rise and fall of variables with respect to
       >  each other
-   158 . reg d.lnCount l(12,24,36,48)d.lnCount // .01637
+   163 . reg d.lnCount l(12,24,36,48)d.lnCount // .01637
       
             Source |       SS           df       MS      Number of obs   =       325
       -------------+----------------------------------   F(4, 320)       =     16.54
@@ -454,11 +467,11 @@
              _cons |   .0017116   .0009853     1.74   0.083    -.0002269    .0036502
       ------------------------------------------------------------------------------
       
-   159 . scalar drop _all
+   164 . scalar drop _all
       
-   160 . quietly forval w=12(12)144 {
+   165 . quietly forval w=12(12)144 {
       
-   161 . scalar list
+   166 . scalar list
       RWmaxobs144 =        144
       RWminobs144 =         12
        RWrmse144 =   .0172276
@@ -496,13 +509,13 @@
       RWminobs12 =         12
         RWrmse12 =  .02320505
       
-   162 . /*
+   167 . /*
       > RWmaxobs132 =        132
       > RWminobs132 =         12
       > RWrmse132 =   .0172128
       > */
-   163 . 
-   164 . reg d.lnCount l(5,12,24,36,48)d.lnCount l(5)d.lnWeekHours m5 // .01711
+   168 . 
+   169 . reg d.lnCount l(5,12,24,36,48)d.lnCount l(5)d.lnWeekHours m5 // .01711
       
             Source |       SS           df       MS      Number of obs   =       116
       -------------+----------------------------------   F(7, 108)       =      5.94
@@ -528,11 +541,11 @@
              _cons |   .0004279   .0018229     0.23   0.815    -.0031854    .0040412
       ------------------------------------------------------------------------------
       
-   165 . scalar drop _all
+   170 . scalar drop _all
       
-   166 . quietly forval w=12(12)84 {
+   171 . quietly forval w=12(12)84 {
       
-   167 . scalar list
+   172 . scalar list
       RWmaxobs84 =         84
       RWminobs84 =         23
         RWrmse84 =  .01950911
@@ -555,15 +568,14 @@
       RWminobs12 =         12
         RWrmse12 =  .05004898
       
-   168 . /*
+   173 . /*
       > RWmaxobs84 =         84
       > RWminobs84 =         23
       > RWrmse84 =  .01950911
       > */
-   169 . 
-   170 . /*
-      > gsreg dlnCount l1dlnCount l2dlnCount l3dlnCount l4dlnCount l5dlnCount l6dlnCo
-      > unt ///
+   174 . 
+   175 . quietly gsreg dlnCount l1dlnCount l2dlnCount l3dlnCount l4dlnCount l5dlnCount
+      >  l6dlnCount ///
       >         l7dlnCount l8dlnCount l9dlnCount l10dlnCount l11dlnCount l12dlnCount 
       > ///
       >         l24dlnCount l36dlnCount l48dlnCount ///
@@ -572,10 +584,10 @@
       > m12) ///
       >         samesample nindex( -1 aic -1 bic -1 rmse_out) results(gsreg_dlnCount)
       >  replace
-      > */
-   171 .         
-   172 . *gsreg suggestions
-   173 . reg d.lnCount l12d.lnCount m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11
+      
+   176 .         
+   177 . *gsreg suggestions
+   178 . reg d.lnCount l12d.lnCount m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11
       
             Source |       SS           df       MS      Number of obs   =       361
       -------------+----------------------------------   F(12, 348)      =      6.91
@@ -604,11 +616,11 @@
              _cons |   .0072199   .0030452     2.37   0.018     .0012306    .0132093
       ------------------------------------------------------------------------------
       
-   174 . scalar drop _all
+   179 . scalar drop _all
       
-   175 . quietly forval w=12(12)144 {
+   180 . quietly forval w=12(12)144 {
       
-   176 . scalar list
+   181 . scalar list
       RWmaxobs144 =        144
       RWminobs144 =         12
        RWrmse144 =  .01824906
@@ -646,13 +658,13 @@
       RWminobs12 =         12
         RWrmse12 =  .02009249
       
-   177 . /*
+   182 . /*
       > RWmaxobs144 =        144
       > RWminobs144 =         12
       > RWrmse144 =  .01824906
       > */
-   178 . 
-   179 . reg d.lnCount l(12,36)d.lnCount m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11
+   183 . 
+   184 . reg d.lnCount l(12,36)d.lnCount m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11
       
             Source |       SS           df       MS      Number of obs   =       337
       -------------+----------------------------------   F(13, 323)      =      5.68
@@ -682,11 +694,11 @@
              _cons |   .0067355   .0031722     2.12   0.034     .0004948    .0129762
       ------------------------------------------------------------------------------
       
-   180 . scalar drop _all
+   185 . scalar drop _all
       
-   181 . quietly forval w=12(12)144 {
+   186 . quietly forval w=12(12)144 {
       
-   182 . scalar list
+   187 . scalar list
       RWmaxobs144 =        144
       RWminobs144 =         12
        RWrmse144 =  .01777071
@@ -724,45 +736,13 @@
       RWminobs12 =         12
         RWrmse12 =  .01880291
       
-   183 . /*
+   188 . /*
       > RWmaxobs144 =        144
       > RWminobs144 =         12
       > RWrmse144 =  .01777071
       > */
-   184 . 
-   185 . /*
-      > gsreg dlnCount l1dlnCount l2dlnCount l3dlnCount l4dlnCount l5dlnCount l6dlnCo
-      > unt ///
-      >         l7dlnCount l8dlnCount l9dlnCount l10dlnCount l11dlnCount l12dlnCount 
-      > ///
-      >         l24dlnCount l36dlnCount ///
-      >         l1dlnWeekHours l2dlnWeekHours l3dlnWeekHours l4dlnWeekHours l5dlnWeek
-      > Hours l6dlnWeekHours ///
-      >         l7dlnWeekHours l8dlnWeekHours l9dlnWeekHours l10dlnWeekHours l11dlnWe
-      > ekHours l12dlnWeekHours ///
-      >         l24dlnWeekHours l36dlnWeekHours ///
-      >         l1dlnHourlyEarnings l2dlnHourlyEarnings l3dlnHourlyEarnings l4dlnHour
-      > lyEarnings ///
-      >         l5dlnHourlyEarnings l6dlnHourlyEarnings ///
-      >         l7dlnHourlyEarnings l8dlnHourlyEarnings l9dlnHourlyEarnings l10dlnHou
-      > rlyEarnings ///
-      >         l11dlnHourlyEarnings l12dlnHourlyEarnings ///
-      >         l24dlnHourlyEarnings l36dlnHourlyEarnings ///
-      >         l1dlnWeeklyEarnings l2dlnWeeklyEarnings l3dlnWeeklyEarnings l4dlnWeek
-      > lyEarnings ///
-      >         l5dlnWeeklyEarnings l6dlnWeeklyEarnings ///
-      >         l7dlnWeeklyEarnings l8dlnWeeklyEarnings l9dlnWeeklyEarnings l10dlnWee
-      > klyEarnings ///
-      >         l11dlnWeeklyEarnings l12dlnWeeklyEarnings ///
-      >         l24dlnWeeklyEarnings l36dlnWeeklyEarnings ///
-      >         if tin(2011m1,2021m1), ///
-      >         ncomb(1,4) aic outsample(24) fix(m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11) 
-      > ///
-      >         samesample nindex( -1 aic -1 bic -1 rmse_out) results(gsreg_dlnCount_
-      > Full) replace
-      > */
-   186 .         
-   187 . reg d.lnCount l4d.lnWeekHours l9d.lnWeekHours l8d.lnHourlyEarnings m1 m2 m3 m
+   189 .         
+   190 . reg d.lnCount l4d.lnWeekHours l9d.lnWeekHours l8d.lnHourlyEarnings m1 m2 m3 m
       > 4 m5 m6 m7 m8 m9 m10 m11
       
             Source |       SS           df       MS      Number of obs   =       112
@@ -772,35 +752,54 @@
       -------------+----------------------------------   Adj R-squared   =    0.2200
              Total |  .043715825       111  .000393836   Root MSE        =    .01753
       
-      ------------------------------------------------------------------------------
-         D.lnCount |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
-      -------------+----------------------------------------------------------------
-       lnWeekHours |
-              L4D. |  -.0013847   .0384012    -0.04   0.971    -.0776005     .074831
-              L9D. |   .0397686   .0385964     1.03   0.305    -.0368346    .1163718
-                   |
-      lnHourlyEa~s |
-              L8D. |   -.039029   .0414024    -0.94   0.348    -.1212014    .0431433
-                   |
-                m1 |  -.0097045   .0078517    -1.24   0.219    -.0252879    .0058789
-                m2 |   .0000949   .0079445     0.01   0.990    -.0156727    .0158626
-                m3 |   -.004712   .0083585    -0.56   0.574    -.0213013    .0118773
-                m4 |  -.0273667   .0081729    -3.35   0.001    -.0435876   -.0111459
-                m5 |  -.0076836   .0081259    -0.95   0.347    -.0238112     .008444
-                m6 |   -.020254   .0081465    -2.49   0.015    -.0364227   -.0040854
-                m7 |  -.0130812   .0081852    -1.60   0.113    -.0293265    .0031642
-                m8 |   .0041701   .0081051     0.51   0.608    -.0119164    .0202565
-                m9 |  -.0089171   .0082764    -1.08   0.284    -.0253435    .0075093
-               m10 |   .0153608   .0081153     1.89   0.061    -.0007459    .0314674
-               m11 |   .0040463   .0079619     0.51   0.612    -.0117559    .0198485
-             _cons |   .0094122   .0056462     1.67   0.099    -.0017939    .0206183
-      ------------------------------------------------------------------------------
+      -------------------------------------------------------------------------------
+      ---
+             D.lnCount |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interv
+      > al]
+      -----------------+-------------------------------------------------------------
+      ---
+           lnWeekHours |
+                  L4D. |  -.0013847   .0384012    -0.04   0.971    -.0776005     .074
+      > 831
+                  L9D. |   .0397686   .0385964     1.03   0.305    -.0368346    .1163
+      > 718
+                       |
+      lnHourlyEarnings |
+                  L8D. |   -.039029   .0414024    -0.94   0.348    -.1212014    .0431
+      > 433
+                       |
+                    m1 |  -.0097045   .0078517    -1.24   0.219    -.0252879    .0058
+      > 789
+                    m2 |   .0000949   .0079445     0.01   0.990    -.0156727    .0158
+      > 626
+                    m3 |   -.004712   .0083585    -0.56   0.574    -.0213013    .0118
+      > 773
+                    m4 |  -.0273667   .0081729    -3.35   0.001    -.0435876   -.0111
+      > 459
+                    m5 |  -.0076836   .0081259    -0.95   0.347    -.0238112     .008
+      > 444
+                    m6 |   -.020254   .0081465    -2.49   0.015    -.0364227   -.0040
+      > 854
+                    m7 |  -.0130812   .0081852    -1.60   0.113    -.0293265    .0031
+      > 642
+                    m8 |   .0041701   .0081051     0.51   0.608    -.0119164    .0202
+      > 565
+                    m9 |  -.0089171   .0082764    -1.08   0.284    -.0253435    .0075
+      > 093
+                   m10 |   .0153608   .0081153     1.89   0.061    -.0007459    .0314
+      > 674
+                   m11 |   .0040463   .0079619     0.51   0.612    -.0117559    .0198
+      > 485
+                 _cons |   .0094122   .0056462     1.67   0.099    -.0017939    .0206
+      > 183
+      -------------------------------------------------------------------------------
+      ---
       
-   188 . scalar drop _all
+   191 . scalar drop _all
       
-   189 . quietly forval w=12(12)84 {
+   192 . quietly forval w=12(12)84 {
       
-   190 . scalar list
+   193 . scalar list
       RWmaxobs84 =         84
       RWminobs84 =          2
         RWrmse84 =  .01847546
@@ -823,74 +822,176 @@
       RWminobs12 =          2
         RWrmse12 =   .0176238
       
-   191 . /*
+   194 . /*
       > RWmaxobs12 =         12
       > RWminobs12 =          2
       > RWrmse12 =   .0176238
       > */
-   192 . 
-   193 . /*---------------------------------------------------------------------------
+   195 . 
+   196 . scalar rwrmse = .0172128
+      
+   197 . reg d.lnCount l(12,24,36,48)d.lnCount if tin(,2021m2)
+      
+            Source |       SS           df       MS      Number of obs   =       325
+      -------------+----------------------------------   F(4, 320)       =     16.54
+             Model |  .017539188         4  .004384797   Prob > F        =    0.0000
+          Residual |  .084856979       320  .000265178   R-squared       =    0.1713
+      -------------+----------------------------------   Adj R-squared   =    0.1609
+             Total |  .102396167       324  .000316038   Root MSE        =    .01628
+      
+      ------------------------------------------------------------------------------
+         D.lnCount |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+      -------------+----------------------------------------------------------------
+           lnCount |
+             L12D. |   .3609966   .0621085     5.81   0.000      .238804    .4831893
+             L24D. |    .137848   .0617615     2.23   0.026      .016338     .259358
+             L36D. |  -.0160136   .0614584    -0.26   0.795    -.1369272       .1049
+             L48D. |   .1265117   .0585322     2.16   0.031     .0113551    .2416683
+                   |
+             _cons |   .0017116   .0009853     1.74   0.083    -.0002269    .0036502
+      ------------------------------------------------------------------------------
+      
+   198 . predict pd
+      (option xb assumed; fitted values)
+      (49 missing values generated)
+      
+   199 . gen pflcount=exp((rwrmse^2)/2)*exp(l.lnCount+pd) if Date==tm(2021m3)
+      (374 missing values generated)
+      
+   200 . gen ub1=exp((rwrmse^2)/2)*exp(l.lnCount+pd+1*rwrmse) if Date==tm(2021m3)
+      (374 missing values generated)
+      
+   201 . gen lb1=exp((rwrmse^2)/2)*exp(l.lnCount+pd-1*rwrmse) if Date==tm(2021m3)
+      (374 missing values generated)
+      
+   202 . gen ub2=exp((rwrmse^2)/2)*exp(l.lnCount+pd+2*rwrmse) if Date==tm(2021m3)
+      (374 missing values generated)
+      
+   203 . gen lb2=exp((rwrmse^2)/2)*exp(l.lnCount+pd-2*rwrmse) if Date==tm(2021m3)
+      (374 missing values generated)
+      
+   204 . gen ub3=exp((rwrmse^2)/2)*exp(l.lnCount+pd+3*rwrmse) if Date==tm(2021m3)
+      (374 missing values generated)
+      
+   205 . gen lb3=exp((rwrmse^2)/2)*exp(l.lnCount+pd-3*rwrmse) if Date==tm(2021m3)
+      (374 missing values generated)
+      
+   206 . drop pd
+      
+   207 . 
+   208 . replace pflcount=Count if Date==tm(2021m2)
+      (1 real change made)
+      
+   209 . replace ub1=Count if Date==tm(2021m2)
+      (1 real change made)
+      
+   210 . replace ub2=Count if Date==tm(2021m2)
+      (1 real change made)
+      
+   211 . replace ub3=Count if Date==tm(2021m2)
+      (1 real change made)
+      
+   212 . replace lb1=Count if Date==tm(2021m2)
+      (1 real change made)
+      
+   213 . replace lb2=Count if Date==tm(2021m2)
+      (1 real change made)
+      
+   214 . replace lb3=Count if Date==tm(2021m2)
+      (1 real change made)
+      
+   215 . 
+   216 . twoway (tsrline ub3 ub2 if tin(2020m3,2021m3), ///
+      >         recast(rarea) fcolor(khaki) fintensity(20) lwidth(none) ) ///
+      >         (tsrline ub2 ub1 if tin(2020m3,2021m3), ///
+      >         recast(rarea) fcolor(khaki) fintensity(40) lwidth(none) ) ///
+      >         (tsrline ub1 pflcount if tin(2020m3,2021m3), ///
+      >         recast(rarea) fcolor(khaki) fintensity(65) lwidth(none) ) ///
+      >         (tsrline pflcount lb1 if tin(2020m3,2021m3), ///
+      >         recast(rarea) fcolor(khaki) fintensity(65) lwidth(none) ) ///
+      >         (tsrline lb1 lb2 if tin(2020m3,2021m3), ///
+      >         recast(rarea) fcolor(khaki) fintensity(40) lwidth(none) ) ///
+      >         (tsrline lb2 lb3 if tin(2020m3,2021m3), ///
+      >         recast(rarea) fcolor(khaki) fintensity(20) lwidth(none) ) ///
+      >         (tsline Count pflcount if tin(2020m3,2021m3) , ///
+      >         lcolor(gs12 teal) lwidth(medthick medthick) ///
+      >         lpattern(solid longdash)) ///
+      >         (scatter withMarchCount Date if tin(2021m3,)), scheme(s1mono) legend(
+      > off)
+      
+   217 . graph export "CountFan.png", replace
+      (file /Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets
+      > /Final Project/CountFan.png written in PNG format)
+      
+   218 .         
+   219 . /*---------------------------------------------------------------------------
       > -*/
-   194 .         
-   195 . *starter models for weekly earnings
-   196 . reg d.lnWeeklyEarnings l1d.lnWeekHours ld.lnHourlyEarnings
+   220 .         
+   221 . *starter models for weekly earnings
+   222 . reg d.lnWeeklyEarnings l1d.lnWeekHours ld.lnHourlyEarnings
       
             Source |       SS           df       MS      Number of obs   =       120
       -------------+----------------------------------   F(2, 117)       =      1.48
-             Model |   .00720643         2  .003603215   Prob > F        =    0.2317
-          Residual |  .284697808       117  .002433315   R-squared       =    0.0247
+             Model |    .0071986         2    .0035993   Prob > F        =    0.2316
+          Residual |  .284290844       117  .002429836   R-squared       =    0.0247
       -------------+----------------------------------   Adj R-squared   =    0.0080
-             Total |  .291904237       119  .002452977   Root MSE        =    .04933
+             Total |  .291489443       119  .002449491   Root MSE        =    .04929
       
-      ------------------------------------------------------------------------------
-      D.           |
-      lnWeeklyEa~s |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
-      -------------+----------------------------------------------------------------
-       lnWeekHours |
-               LD. |  -.1344969    .105932    -1.27   0.207    -.3442897    .0752959
-                   |
-      lnHourlyEa~s |
-               LD. |   .0732899   .1167768     0.63   0.531    -.1579805    .3045603
-                   |
-             _cons |   .0016809   .0045103     0.37   0.710    -.0072515    .0106133
-      ------------------------------------------------------------------------------
+      -------------------------------------------------------------------------------
+      ---
+      D.               |
+      lnWeeklyEarnings |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interv
+      > al]
+      -----------------+-------------------------------------------------------------
+      ---
+           lnWeekHours |
+                   LD. |  -.1334776   .1058563    -1.26   0.210    -.3431204    .0761
+      > 651
+                       |
+      lnHourlyEarnings |
+                   LD. |   .0746807   .1166933     0.64   0.523    -.1564244    .3057
+      > 857
+                       |
+                 _cons |   .0015108   .0045071     0.34   0.738    -.0074152    .0104
+      > 368
+      -------------------------------------------------------------------------------
+      ---
       
-   197 . scalar drop _all
+   223 . scalar drop _all
       
-   198 . quietly forval w=12(12)84 {
+   224 . quietly forval w=12(12)84 {
       
-   199 . scalar list
+   225 . scalar list
       RWmaxobs84 =         84
       RWminobs84 =          2
-        RWrmse84 =  .06184586
+        RWrmse84 =  .06183191
       RWmaxobs72 =         72
       RWminobs72 =          2
-        RWrmse72 =  .06163593
+        RWrmse72 =  .06162109
       RWmaxobs60 =         60
       RWminobs60 =          2
-        RWrmse60 =  .06145693
+        RWrmse60 =  .06144232
       RWmaxobs48 =         48
       RWminobs48 =          2
-        RWrmse48 =  .06185207
+        RWrmse48 =   .0618403
       RWmaxobs36 =         36
       RWminobs36 =          2
-        RWrmse36 =  .06201342
+        RWrmse36 =  .06201409
       RWmaxobs24 =         24
       RWminobs24 =          2
-        RWrmse24 =  .06223845
+        RWrmse24 =  .06224974
       RWmaxobs12 =         12
       RWminobs12 =          2
-        RWrmse12 =  .06581989
+        RWrmse12 =  .06583082
       
-   200 . /*
+   226 . /*
       > RWmaxobs60 =         60
       > RWminobs60 =          2
       > RWrmse60 =  .06145693
       > */
-   201 . 
-   202 . /*
-      > gsreg dlnWeeklyEarnings l1dlnWeeklyEarnings l2dlnWeeklyEarnings l3dlnWeeklyEa
-      > rnings ///
+   227 . 
+   228 . quietly gsreg dlnWeeklyEarnings l1dlnWeeklyEarnings l2dlnWeeklyEarnings l3dln
+      > WeeklyEarnings ///
       >         l4dlnWeeklyEarnings l5dlnWeeklyEarnings l6dlnWeeklyEarnings ///
       >         l7dlnWeeklyEarnings l8dlnWeeklyEarnings l9dlnWeeklyEarnings l10dlnWee
       > klyEarnings ///
@@ -900,160 +1001,271 @@
       >         ncomb(1,12) aic outsample(24) ///
       >         samesample nindex( -1 aic -1 bic -1 rmse_out) results(gsreg_dlnWeekly
       > Earnings) replace
-      > */
-   203 .         
-   204 . reg d.lnWeeklyEarnings l3d.lnWeeklyEarnings l5d.lnWeeklyEarnings m1 m2 m3 m4 
+      
+   229 .         
+   230 . reg d.lnWeeklyEarnings l3d.lnWeeklyEarnings l5d.lnWeeklyEarnings m1 m2 m3 m4 
       > m5 m6 m7 m8 m9 m10 m11
       
             Source |       SS           df       MS      Number of obs   =       116
-      -------------+----------------------------------   F(13, 102)      =      2.22
-             Model |  .062824046        13  .004832619   Prob > F        =    0.0134
-          Residual |  .221893915       102  .002175431   R-squared       =    0.2207
-      -------------+----------------------------------   Adj R-squared   =    0.1213
-             Total |  .284717961       115  .002475808   Root MSE        =    .04664
+      -------------+----------------------------------   F(13, 102)      =      2.16
+             Model |  .061304493        13   .00471573   Prob > F        =    0.0166
+          Residual |  .222983103       102  .002186109   R-squared       =    0.2156
+      -------------+----------------------------------   Adj R-squared   =    0.1157
+             Total |  .284287596       115  .002472066   Root MSE        =    .04676
       
-      ------------------------------------------------------------------------------
-      D.           |
-      lnWeeklyEa~s |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
-      -------------+----------------------------------------------------------------
-      lnWeeklyEa~s |
-              L3D. |   -.230666   .0948354    -2.43   0.017    -.4187716   -.0425604
-              L5D. |  -.1701094   .0948714    -1.79   0.076    -.3582864    .0180676
-                   |
-                m1 |  -.0129295   .0212711    -0.61   0.545    -.0551207    .0292616
-                m2 |   .0230655   .0211959     1.09   0.279    -.0189765    .0651074
-                m3 |  -.0120234   .0220335    -0.55   0.586    -.0557268      .03168
-                m4 |   .0106776   .0218502     0.49   0.626    -.0326621    .0540173
-                m5 |   .0379684   .0215915     1.76   0.082    -.0048583    .0807952
-                m6 |   .0272323   .0215653     1.26   0.210    -.0155424    .0700069
-                m7 |  -.0216364   .0213979    -1.01   0.314     -.064079    .0208063
-                m8 |   .0154331   .0210082     0.73   0.464    -.0262366    .0571028
-                m9 |   .0206819    .021546     0.96   0.339    -.0220544    .0634182
-               m10 |   .0210709   .0217906     0.97   0.336    -.0221507    .0642924
-               m11 |   .0089656   .0216561     0.41   0.680    -.0339891    .0519203
-             _cons |  -.0075658   .0151177    -0.50   0.618    -.0375517    .0224201
-      ------------------------------------------------------------------------------
+      -------------------------------------------------------------------------------
+      ---
+      D.               |
+      lnWeeklyEarnings |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interv
+      > al]
+      -----------------+-------------------------------------------------------------
+      ---
+      lnWeeklyEarnings |
+                  L3D. |  -.2267216   .0950679    -2.38   0.019    -.4152883   -.0381
+      > 549
+                  L5D. |  -.1621197    .095104    -1.70   0.091     -.350758    .0265
+      > 186
+                       |
+                    m1 |   -.013308   .0213233    -0.62   0.534    -.0556027    .0289
+      > 866
+                    m2 |    .020775   .0212478     0.98   0.331      -.02137      .06
+      > 292
+                    m3 |  -.0123903   .0220875    -0.56   0.576    -.0562008    .0314
+      > 201
+                    m4 |   .0105198   .0219037     0.48   0.632    -.0329261    .0539
+      > 657
+                    m5 |   .0377285   .0216445     1.74   0.084    -.0052032    .0806
+      > 602
+                    m6 |   .0272631   .0216181     1.26   0.210    -.0156164    .0701
+      > 426
+                    m7 |  -.0220653   .0214504    -1.03   0.306     -.064612    .0204
+      > 813
+                    m8 |   .0152172   .0210597     0.72   0.472    -.0265547    .0569
+      > 891
+                    m9 |   .0201901   .0215988     0.93   0.352    -.0226509    .0630
+      > 312
+                   m10 |   .0207722    .021844     0.95   0.344    -.0225553    .0640
+      > 997
+                   m11 |   .0084712   .0217091     0.39   0.697    -.0345888    .0515
+      > 312
+                 _cons |  -.0073031   .0151547    -0.48   0.631    -.0373625    .0227
+      > 563
+      -------------------------------------------------------------------------------
+      ---
       
-   205 . scalar drop _all
+   231 . scalar drop _all
       
-   206 . quietly forval w=12(12)84 {
+   232 . quietly forval w=12(12)84 {
       
-   207 . scalar list
+   233 . scalar list
       RWmaxobs84 =         84
       RWminobs84 =          2
-        RWrmse84 =  .06004448
+        RWrmse84 =  .06011868
       RWmaxobs72 =         72
       RWminobs72 =          2
-        RWrmse72 =   .0605325
+        RWrmse72 =  .06057642
       RWmaxobs60 =         60
       RWminobs60 =          2
-        RWrmse60 =  .06068574
+        RWrmse60 =  .06071208
       RWmaxobs48 =         48
       RWminobs48 =          2
-        RWrmse48 =  .06037733
+        RWrmse48 =  .06042055
       RWmaxobs36 =         36
       RWminobs36 =          2
-        RWrmse36 =  .06130591
+        RWrmse36 =  .06125152
       RWmaxobs24 =         24
       RWminobs24 =          2
-        RWrmse24 =  .06544875
+        RWrmse24 =  .06537943
       RWmaxobs12 =         12
       RWminobs12 =          2
-        RWrmse12 =  .07012904
+        RWrmse12 =   .0702019
       
-   208 . /*
+   234 . /*
       > RWmaxobs84 =         84
       > RWminobs84 =          2
       > RWrmse84 =  .06004448
       > */
-   209 . 
-   210 . reg d.lnWeeklyEarnings l3d.lnWeeklyEarnings l5d.lnWeeklyEarnings l7d.lnWeekly
+   235 . 
+   236 . reg d.lnWeeklyEarnings l3d.lnWeeklyEarnings l5d.lnWeeklyEarnings l7d.lnWeekly
       > Earnings
       
             Source |       SS           df       MS      Number of obs   =       114
-      -------------+----------------------------------   F(3, 110)       =      4.04
-             Model |  .027592174         3  .009197391   Prob > F        =    0.0091
-          Residual |  .250484433       110  .002277131   R-squared       =    0.0992
-      -------------+----------------------------------   Adj R-squared   =    0.0747
-             Total |  .278076607       113  .002460855   Root MSE        =    .04772
+      -------------+----------------------------------   F(3, 110)       =      3.85
+             Model |  .026396014         3  .008798671   Prob > F        =    0.0115
+          Residual |  .251283445       110  .002284395   R-squared       =    0.0951
+      -------------+----------------------------------   Adj R-squared   =    0.0704
+             Total |  .277679459       113   .00245734   Root MSE        =     .0478
       
-      ------------------------------------------------------------------------------
-      D.           |
-      lnWeeklyEa~s |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
-      -------------+----------------------------------------------------------------
-      lnWeeklyEa~s |
-              L3D. |  -.2446256   .0905231    -2.70   0.008    -.4240211   -.0652301
-              L5D. |  -.1957955   .0901769    -2.17   0.032    -.3745049   -.0170861
-              L7D. |   .0649411   .0912448     0.71   0.478    -.1158846    .2457668
-                   |
-             _cons |   .0027599   .0044776     0.62   0.539    -.0061138    .0116335
-      ------------------------------------------------------------------------------
+      -------------------------------------------------------------------------------
+      ---
+      D.               |
+      lnWeeklyEarnings |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interv
+      > al]
+      -----------------+-------------------------------------------------------------
+      ---
+      lnWeeklyEarnings |
+                  L3D. |  -.2408947   .0906673    -2.66   0.009    -.4205761   -.0612
+      > 133
+                  L5D. |  -.1892527   .0903206    -2.10   0.038    -.3682468   -.0102
+      > 585
+                  L7D. |   .0639647   .0913902     0.70   0.485    -.1171492    .2450
+      > 786
+                       |
+                 _cons |   .0025724   .0044848     0.57   0.567    -.0063154    .0114
+      > 602
+      -------------------------------------------------------------------------------
+      ---
       
-   211 . scalar drop _all
+   237 . scalar drop _all
       
-   212 . quietly forval w=12(12)84 {
+   238 . quietly forval w=12(12)84 {
       
-   213 . scalar list
+   239 . scalar list
       RWmaxobs84 =         84
       RWminobs84 =          2
-        RWrmse84 =  .05250414
+        RWrmse84 =  .05259823
       RWmaxobs72 =         72
       RWminobs72 =          2
-        RWrmse72 =  .05277312
+        RWrmse72 =  .05283772
       RWmaxobs60 =         60
       RWminobs60 =          2
-        RWrmse60 =  .05308846
+        RWrmse60 =  .05314168
       RWmaxobs48 =         48
       RWminobs48 =          2
-        RWrmse48 =  .05299891
+        RWrmse48 =   .0530381
       RWmaxobs36 =         36
       RWminobs36 =          2
-        RWrmse36 =  .05349229
+        RWrmse36 =  .05353125
       RWmaxobs24 =         24
       RWminobs24 =          2
-        RWrmse24 =  .05283688
+        RWrmse24 =  .05282122
       RWmaxobs12 =         12
       RWminobs12 =          2
-        RWrmse12 =  .06056213
+        RWrmse12 =  .06036464
       
-   214 . /*
+   240 . /*
       > RWmaxobs84 =         84
       > RWminobs84 =          2
       > RWrmse84 =  .05250414
       > */
-   215 . 
-   216 . /*
-      > gsreg dlnCount l1dlnCount l2dlnCount l3dlnCount l4dlnCount l5dlnCount l6dlnCo
-      > unt ///
-      >         l7dlnCount l8dlnCount l9dlnCount l10dlnCount l11dlnCount l12dlnCount 
-      > l24dlnCount ///
-      >         l1dlnWeekHours l2dlnWeekHours l3dlnWeekHours l4dlnWeekHours l5dlnWeek
-      > Hours l6dlnWeekHours ///
-      >         l7dlnWeekHours l8dlnWeekHours l9dlnWeekHours l10dlnWeekHours l11dlnWe
-      > ekHours l12dlnWeekHours l24dlnWeekHours ///
-      >         l1dlnHourlyEarnings l2dlnHourlyEarnings l3dlnHourlyEarnings l4dlnHour
-      > lyEarnings ///
-      >         l5dlnHourlyEarnings l6dlnHourlyEarnings ///
-      >         l7dlnHourlyEarnings l8dlnHourlyEarnings l9dlnHourlyEarnings l10dlnHou
-      > rlyEarnings ///
-      >         l11dlnHourlyEarnings l12dlnHourlyEarnings l24dlnHourlyEarnings ///
-      >         l1dlnWeeklyEarnings l2dlnWeeklyEarnings l3dlnWeeklyEarnings l4dlnWeek
-      > lyEarnings ///
-      >         l5dlnWeeklyEarnings l6dlnWeeklyEarnings ///
-      >         l7dlnWeeklyEarnings l8dlnWeeklyEarnings l9dlnWeeklyEarnings l10dlnWee
-      > klyEarnings ///
-      >         l11dlnWeeklyEarnings l12dlnWeeklyEarnings l24dlnWeeklyEarnings if tin
-      > (2011m1,2021m1), ///
-      >         ncomb(1,4) aic outsample(24) fix(m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11) 
-      > ///
-      >         samesample nindex( -1 aic -1 bic -1 rmse_out) results(gsreg_dlnWeekly
-      > Earnings_Full) replace
-      > */
-   217 . 
-   218 . log close
+   241 . 
+   242 . drop pflcount ub1 ub2 ub3 lb1 lb2 lb3
+      
+   243 . 
+   244 . scalar rwrmse = .05250414
+      
+   245 . reg d.lnWeeklyEarnings l(3,5,7)d.lnWeeklyEarnings if tin(,2021m2)
+      
+            Source |       SS           df       MS      Number of obs   =       114
+      -------------+----------------------------------   F(3, 110)       =      3.85
+             Model |  .026396014         3  .008798671   Prob > F        =    0.0115
+          Residual |  .251283445       110  .002284395   R-squared       =    0.0951
+      -------------+----------------------------------   Adj R-squared   =    0.0704
+             Total |  .277679459       113   .00245734   Root MSE        =     .0478
+      
+      -------------------------------------------------------------------------------
+      ---
+      D.               |
+      lnWeeklyEarnings |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interv
+      > al]
+      -----------------+-------------------------------------------------------------
+      ---
+      lnWeeklyEarnings |
+                  L3D. |  -.2408947   .0906673    -2.66   0.009    -.4205761   -.0612
+      > 133
+                  L5D. |  -.1892527   .0903206    -2.10   0.038    -.3682468   -.0102
+      > 585
+                  L7D. |   .0639647   .0913902     0.70   0.485    -.1171492    .2450
+      > 786
+                       |
+                 _cons |   .0025724   .0044848     0.57   0.567    -.0063154    .0114
+      > 602
+      -------------------------------------------------------------------------------
+      ---
+      
+   246 . predict pd
+      (option xb assumed; fitted values)
+      (260 missing values generated)
+      
+   247 . gen pflcount=exp((rwrmse^2)/2)*exp(l.lnWeeklyEarnings+pd) if Date==tm(2021m3)
+      (374 missing values generated)
+      
+   248 . gen ub1=exp((rwrmse^2)/2)*exp(l.lnWeeklyEarnings+pd+1*rwrmse) if Date==tm(202
+      > 1m3)
+      (374 missing values generated)
+      
+   249 . gen lb1=exp((rwrmse^2)/2)*exp(l.lnWeeklyEarnings+pd-1*rwrmse) if Date==tm(202
+      > 1m3)
+      (374 missing values generated)
+      
+   250 . gen ub2=exp((rwrmse^2)/2)*exp(l.lnWeeklyEarnings+pd+2*rwrmse) if Date==tm(202
+      > 1m3)
+      (374 missing values generated)
+      
+   251 . gen lb2=exp((rwrmse^2)/2)*exp(l.lnWeeklyEarnings+pd-2*rwrmse) if Date==tm(202
+      > 1m3)
+      (374 missing values generated)
+      
+   252 . gen ub3=exp((rwrmse^2)/2)*exp(l.lnWeeklyEarnings+pd+3*rwrmse) if Date==tm(202
+      > 1m3)
+      (374 missing values generated)
+      
+   253 . gen lb3=exp((rwrmse^2)/2)*exp(l.lnWeeklyEarnings+pd-3*rwrmse) if Date==tm(202
+      > 1m3)
+      (374 missing values generated)
+      
+   254 . drop pd
+      
+   255 . 
+   256 . replace pflcount=WeeklyEarnings if Date==tm(2021m2)
+      (1 real change made)
+      
+   257 . replace ub1=WeeklyEarnings if Date==tm(2021m2)
+      (1 real change made)
+      
+   258 . replace ub2=WeeklyEarnings if Date==tm(2021m2)
+      (1 real change made)
+      
+   259 . replace ub3=WeeklyEarnings if Date==tm(2021m2)
+      (1 real change made)
+      
+   260 . replace lb1=WeeklyEarnings if Date==tm(2021m2)
+      (1 real change made)
+      
+   261 . replace lb2=WeeklyEarnings if Date==tm(2021m2)
+      (1 real change made)
+      
+   262 . replace lb3=WeeklyEarnings if Date==tm(2021m2)
+      (1 real change made)
+      
+   263 . 
+   264 . twoway (tsrline ub3 ub2 if tin(2020m3,2021m3), ///
+      >         recast(rarea) fcolor(khaki) fintensity(20) lwidth(none) ) ///
+      >         (tsrline ub2 ub1 if tin(2020m3,2021m3), ///
+      >         recast(rarea) fcolor(khaki) fintensity(40) lwidth(none) ) ///
+      >         (tsrline ub1 pflcount if tin(2020m3,2021m3), ///
+      >         recast(rarea) fcolor(khaki) fintensity(65) lwidth(none) ) ///
+      >         (tsrline pflcount lb1 if tin(2020m3,2021m3), ///
+      >         recast(rarea) fcolor(khaki) fintensity(65) lwidth(none) ) ///
+      >         (tsrline lb1 lb2 if tin(2020m3,2021m3), ///
+      >         recast(rarea) fcolor(khaki) fintensity(40) lwidth(none) ) ///
+      >         (tsrline lb2 lb3 if tin(2020m3,2021m3), ///
+      >         recast(rarea) fcolor(khaki) fintensity(20) lwidth(none) ) ///
+      >         (tsline WeeklyEarnings pflcount if tin(2020m3,2021m3) , ///
+      >         lcolor(gs12 teal) lwidth(medthick medthick) ///
+      >         lpattern(solid longdash)) ///
+      >         (scatter withMarchEarnings Date if tin(2021m3,)), scheme(s1mono) lege
+      > nd(off)
+      
+   265 . graph export "WeeklyFan.png", replace
+      (file /Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets
+      > /Final Project/WeeklyFan.png written in PNG format)
+      
+   266 . 
+   267 . log close
             name:  <unnamed>
              log:  /Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Probl
       > em Sets/Final Project/Final Project.smcl
         log type:  smcl
-       closed on:   8 Apr 2021, 17:48:56
+       closed on:  19 Apr 2021, 21:08:41
       -------------------------------------------------------------------------------
