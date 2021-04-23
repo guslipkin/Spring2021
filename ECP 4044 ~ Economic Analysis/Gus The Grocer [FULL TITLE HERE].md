@@ -94,69 +94,46 @@ n \ge t
 \end{aligned}
 $$
 
-In order to maximize this
+​	Something important to note here is that me writing the code in $t$ time will always be more profitable than waiting for the other people to do the same task in $t+1$ time. In order to maximize this, we find the first derivative and find the maximum point of the line. We will leave the maximization here and move to balancing multiple projects.
 
 $$
 \begin{aligned}
 \begin{gather}
-\pi= \sum^n_{t=1}[-\frac{ln(i+1)r}{(1+i)^t}] - \frac{ln(i+1)r}{(1+i)^t} \\
+\frac{d\pi}{dt}= \sum^n_{t=1}[-\frac{ln(i+1)r}{(1+i)^t}] - \frac{ln(i+1)r}{(1+i)^n} \\
 n \ge t 
 \end{gather}
 \end{aligned}
 $$
 
+​	From here, we can take this in two directions. The first would be to change the model to reflect that some projects are one-offs and some are repeated. The second would be to do a direct comparison with another modeled project to learn where my talents can best be applied. 
 
+## One-offs vs Repeated Projects
 
-> profit of a given project = sum of NPV up until I finish the program - sum of time someone else spent on the project - pay
-> x = number of people + me
->
-> p = pay rate
->
-> h = hours per unit t
->
-> t = time
+​	A one-off project is something that once completed, is used once and then never again. A repeated project is performed multiple times. This could be every week, month, or other time period, or on an as needed basis. I've already established that profit for a one-off project is modeled with
+$$
+\begin{aligned}
+\begin{gather}
+\pi= \sum^n_{t=1}[\frac{R_t}{(1+i)^t}] + \frac{R_{n}}{(1+i)^{n}} - (xphN) \\
+n \ge t 
+\end{gather}
+\end{aligned}
+$$
+​	The first iteration of a repeated project will always stay the same as the above model because the company still wants its results as quickly as possible. If it is going to take me more than one period to complete, we can multiply the entire equation by the number of periods it will take me to complete the program. Let's call that number $\rho$.
+$$
+\begin{aligned}
+\begin{gather}
+\pi= \rho\{\sum^n_{t=1}[\frac{R_t}{(1+i)^t}] + \frac{R_{n}}{(1+i)^{n}} - (xphN)\} \\
+n \ge t 
+\end{gather}
+\end{aligned}
+$$
 
-> **Quick pause here. I know the draft is super late but I haven’t fully worked out how I’m doing this so I’m going to put some math and thoughts down here instead of trying to get words in which might be wrong. I know this will also change the math farther down the page.**
+​	Once I've finished the program, there is no diminishing value in waiting for the code to run. Thus, the only change to the function is added cost of paying someone to hit run on the program which is negligible.
 
-- get in function of time to completion and NPV
-  - $NPV = \sum^n_{t=1}\frac{R_t}{(1+i)^t}$
-  - $R_t$ cash flow during time $t$
-    - See my point on the discount rate. But again, I’m not really sure how to apply that here
-  - $i$ discount rate
-    - The time scale of these projects isn’t really long enough for interest or discount rates to have an effect. But the project does become more useful and therefore have more value the more complete it is. I’m not sure how I can apply that here.
-  - $t$ time periods
-    - The scale is in weeks
-- Let’s say time to completion is 10 weeks. Then I have $NPV = \sum^{10}_{t=0}\frac{R_t}{(1+i)^t}$. Couldn’t I calculate the discount rate if I assume that the value of \$1 today is the same as \$1 10 weeks from now? Then I could pinpoint the discount rate for any given project. 
-  - If I know the average discount rate, could I then change cash flow from week to week to simulate how much value is added by completing a certain percentage of the project that week so long as the total cash flow sums to the same value in the end?
-  - Would it be better to calculate future value and current value separately then subtract to get present value? I think this might be the easier way to do it. Would present value just be a flat number while future value uses the NPV equation?
+## Direct Comparison of Projects
+
+​	This approach is relatively easy. To make this easier to understand, let's say there are two or more projects happening simultaneously and I can only work on one at a time. After estimating how long it will take me to write a solution based on prior knowledge of the tools needed or having written programs that can be adapted to the new tasks. We can put the profit maximization function to work and use the time it would take me to write the program as $t+1$. Then, we do the same for the other projects in consideration. Whichever one has the highest potential profit is the one that I should be applied to. This can be taken a step further by taking into consideration whether or not the projects in question is a one-off or a repeated project.
 
 # Conclusion
 
 ​	I may be tooting my own horn, so to speak, but I do not think that MiGrocery could have hired a better and more productive intern. I have shown time and time again that I am able to use skills in my toolset to expertly optimize current workloads and to automate tasks that could take weeks to complete by hand. Through profit maximization techniques with estimated numbers, I have shown that I can be more than ten times as productive as an employee doing the same task by hand. In discussing expected marginal utility, we learned that it makes sense for me to take on any special project that is expected to take more than a week to complete or that is an ongoing project. Because I am so much more productive on special projects, it makes sense for me to be switched to those full time rather than kept on log cards and loaned out to special projects on occasion.
-
-
-
-
-
-> Notes
-
-- OR get in function of time to completion and NPV
-  - $NPV = \sum^n_{t=1}\frac{R_t}{(1+i)^t}$
-  - $R_t$ cash flow during time $t$
-  - $i$ discount rate
-  - $t$ time periods
-- time rate of value matters
-  - w = function of time to completion (raised to a negative)
-- v is amount of time put into it
-- ==Gus has limited time per week but morons aren't limited==
-- Make w a function of time to completion and v is a function increasing in my time (2nd derivative is negative), then an internal solution should present 
-- Get in time to completion in a concrete way
-- ==Explain T==
-- NPV changes over time when doing things by hand
-  - Os and Ms are a sum
-- value moving forward is function of my time put into T
-  - Ms asymptotes off to 1
-- ==Talk theory before math==
-- Can solve by continuous with internal minimum
-- - 
-
