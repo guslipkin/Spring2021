@@ -153,6 +153,11 @@ The project is to forecast the March non-seasonally adjusted estimates of averag
 summ Count WeekHours HourlyEarnings WeeklyEarnings ServiceCount
 summ lnCount lnWeekHours lnHourlyEarnings lnWeeklyEarnings lnServiceCount
 
+tsline lnCount, saving(lnCount_tsline, replace)
+tsline lnWeeklyEarnings if tin(1990m1,), saving(lnWeeklyEarnings_tsline, replace)
+graph combine lnCount_tsline.gph lnWeeklyEarnings_tsline.gph, saving(ln_tsline, replace)
+graph export "ln_tsline.png", replace
+
 ac lnCount, saving(lnCount_ac, replace)
 pac lnCount, saving(lnCount_pac, replace)
 graph combine lnCount_ac.gph lnCount_pac.gph, saving(lnCount_ac_pac, replace)
@@ -366,7 +371,7 @@ graph export "CountFan.png", replace
 /*----------------------------------------------------------------------------*/
 	
 *starter models for weekly earnings
-reg d.lnWeeklyEarnings l1d.lnWeekHours ld.lnHourlyEarnings
+reg d.lnWeeklyEarnings ld.lnWeekHours ld.lnHourlyEarnings
 scalar drop _all
 quietly forval w=12(12)84 {
 gen pred=.
