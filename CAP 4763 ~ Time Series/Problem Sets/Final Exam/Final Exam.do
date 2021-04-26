@@ -112,21 +112,74 @@ gsreg dlnTotal dlnConstruct l1dlnConstruct l2dlnConstruct l3dlnConstruct ///
 */
 
 loocv reg d.lnTotal l(1/3)d.lnTotal m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11
-reg d.lnTotal l(1/3)d.lnTotal m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11
+quietly reg d.lnTotal l(1/3)d.lnTotal m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11
 estat ic
 
 loocv reg d.lnTotal l(1/3,12,24)d.lnTotal m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11
-reg d.lnTotal l(1/3,12,24)d.lnTotal m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11
+quietly reg d.lnTotal l(1/3,12,24)d.lnTotal m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11
 estat ic
 
 loocv reg d.lnTotal l(1/3)d.lnTotal l(1/3)d.lnConstruct l(1/3)d.lnLeisure ///
-	l(1/3)d.lnManufacture
-reg d.lnTotal l(1/3)d.lnTotal l(1/3)d.lnConstruct l(1/3)d.lnLeisure ///
-	l(1/3)d.lnManufacture
+	l(1/3)d.lnManufacture m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11
+quietly reg d.lnTotal l(1/3)d.lnTotal l(1/3)d.lnConstruct l(1/3)d.lnLeisure ///
+	l(1/3)d.lnManufacture m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11
 estat ic
 
 loocv reg d.lnTotal l(1/3,12,24)d.lnTotal l(1/3,12,24)d.lnConstruct ///
-	l(1/3,12,24)d.lnLeisure l(1/3)d.lnManufacture
-reg d.lnTotal l(1/3,12,24)d.lnTotal l(1/3,12,24)d.lnConstruct ///
-	l(1/3,12,24)d.lnLeisure l(1/3)d.lnManufacture
+	l(1/3,12,24)d.lnLeisure l(1/3)d.lnManufacture m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11
+quietly reg d.lnTotal l(1/3,12,24)d.lnTotal l(1/3,12,24)d.lnConstruct ///
+	l(1/3,12,24)d.lnLeisure l(1/3)d.lnManufacture m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11
 estat ic
+
+*lowest AIC and BIC
+reg d.lnTotal l(1/3)d.lnTotal l(1/3)d.lnConstruct l(1/3)d.lnLeisure ///
+	l(1/3)d.lnManufacture m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11
+scalar drop _all
+quietly forval w=12(12)180 {
+gen pred=.
+gen nobs=.
+	forval t=544/734 { 
+	gen wstart=`t'-`w'
+	gen wend=`t'-1
+	reg d.lnTotal l(1/3)d.lnTotal l(1/3)d.lnConstruct l(1/3)d.lnLeisure ///
+		l(1/3)d.lnManufacture m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11 ///
+		if Date>=wstart & Date<=wend
+	replace nobs=e(N) if Date==`t'
+	predict ptemp
+	replace pred=ptemp if Date==`t'
+	drop ptemp wstart wend
+	}
+gen errsq=(pred-d.lnTotal)^2
+summ errsq
+scalar RWrmse`w'=r(mean)^.5
+summ nobs
+scalar RWminobs`w'=r(min)
+scalar RWmaxobs`w'=r(max)
+drop errsq pred nobs
+}
+scalar list
+*Lowest rmse
+reg d.lnTotal l(1/3)d.lnTotal m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11
+scalar drop _all
+quietly forval w=12(12)180 {
+gen pred=.
+gen nobs=.
+	forval t=544/734 { 
+	gen wstart=`t'-`w'
+	gen wend=`t'-1
+	reg d.lnTotal l(1/3)d.lnTotal m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11 ///
+		if Date>=wstart & Date<=wend
+	replace nobs=e(N) if Date==`t'
+	predict ptemp
+	replace pred=ptemp if Date==`t'
+	drop ptemp wstart wend
+	}
+gen errsq=(pred-d.lnTotal)^2
+summ errsq
+scalar RWrmse`w'=r(mean)^.5
+summ nobs
+scalar RWminobs`w'=r(min)
+scalar RWmaxobs`w'=r(max)
+drop errsq pred nobs
+}
+scalar list
