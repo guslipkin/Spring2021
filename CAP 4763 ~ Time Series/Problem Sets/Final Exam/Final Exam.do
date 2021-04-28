@@ -109,7 +109,7 @@ gen l3dlnTotal=l3d.lnTotal
 gen l12dlnTotal=l12d.lnTotal
 gen l24dlnTotal=l24d.lnTotal
 
-
+twoway (tsline Total) (tsline d.lnTotal)
 *------------------------------------------------------------------------------*
 /*
 gsreg dlnTotal dlnConstruct l1dlnConstruct l2dlnConstruct l3dlnConstruct ///
@@ -142,7 +142,7 @@ loocv reg d.lnTotal l(1/3,12,24)d.lnTotal l(1/3,12,24)d.lnConstruct ///
 quietly reg d.lnTotal l(1/3,12,24)d.lnTotal l(1/3,12,24)d.lnConstruct ///
 	l(1/3,12,24)d.lnLeisure l(1/3)d.lnManufacture m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11
 estat ic
-
+*/
 *Lowest rmse (1)
 reg d.lnTotal l(1/3)d.lnTotal m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11
 scalar drop _all
@@ -168,17 +168,18 @@ scalar RWmaxobs`w'=r(max)
 drop errsq pred nobs
 }
 scalar list
+
 /*
 RWmaxobs12 =         12
 RWminobs12 =         12
 RWrmse12 =   .0132376
-*/
+
 
 *lowest AIC and BIC (3)
 reg d.lnTotal l(1/3)d.lnTotal l(1/3)d.lnConstruct l(1/3)d.lnLeisure ///
 	l(1/3)d.lnManufacture m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11
 scalar drop _all
-quietly forval w=12(12)180 {
+quietly forval w=3(3)180 {
 gen pred=.
 gen nobs=.
 	forval t=544/734 { 
@@ -230,19 +231,19 @@ replace lb2=Total if Date==tm(2021m3)
 replace lb3=Total if Date==tm(2021m3)
 
 twoway (tsrline ub3 ub2 if tin(2020m4,2021m4), ///
-	recast(rarea) fcolor(khaki) fintensity(20) lwidth(none) ) ///
+	recast(rarea) fcolor(orange) fintensity(20) lwidth(none) ) ///
 	(tsrline ub2 ub1 if tin(2020m4,2021m4), ///
-	recast(rarea) fcolor(khaki) fintensity(40) lwidth(none) ) ///
+	recast(rarea) fcolor(green) fintensity(40) lwidth(none) ) ///
 	(tsrline ub1 pflcount if tin(2020m4,2021m4), ///
-	recast(rarea) fcolor(khaki) fintensity(65) lwidth(none) ) ///
+	recast(rarea) fcolor(purple) fintensity(65) lwidth(none) ) ///
 	(tsrline pflcount lb1 if tin(2020m4,2021m4), ///
-	recast(rarea) fcolor(khaki) fintensity(65) lwidth(none) ) ///
+	recast(rarea) fcolor(purple) fintensity(65) lwidth(none) ) ///
 	(tsrline lb1 lb2 if tin(2020m4,2021m4), ///
-	recast(rarea) fcolor(khaki) fintensity(40) lwidth(none) ) ///
+	recast(rarea) fcolor(green) fintensity(40) lwidth(none) ) ///
 	(tsrline lb2 lb3 if tin(2020m4,2021m4), ///
-	recast(rarea) fcolor(khaki) fintensity(20) lwidth(none) ) ///
+	recast(rarea) fcolor(orange) fintensity(20) lwidth(none) ) ///
 	(tsline Total pflcount if tin(2020m4,2021m4) , ///
-	lcolor(gs12 teal) lwidth(medthick medthick) ///
+	lcolor(gs12 pink) lwidth(medthick medthick) ///
 	lpattern(solid longdash)), scheme(s1mono) legend(off)
 graph export "TotalFan1.png", replace
 
@@ -270,18 +271,18 @@ replace lb2a=Total if Date == tm(2021m3)
 replace lb3a=Total if Date == tm(2021m3)
 
 twoway (tsrline ub3a ub2a if tin(2019m1,2022m3), ///
-	recast(rarea) fcolor(khaki) fintensity(20) lwidth(none) ) ///
+	recast(rarea) fcolor(red) fintensity(20) lwidth(none) ) ///
 	(tsrline ub2a ub1a if tin(2019m1,2022m3), ///
-	recast(rarea) fcolor(khaki) fintensity(40) lwidth(none) ) ///
+	recast(rarea) fcolor(yellow) fintensity(40) lwidth(none) ) ///
 	(tsrline ub1a pnonfarma if tin(2019m1,2022m3), ///
-	recast(rarea) fcolor(khaki) fintensity(65) lwidth(none) ) ///
+	recast(rarea) fcolor(blue) fintensity(65) lwidth(none) ) ///
 	(tsrline pnonfarma lb1a if tin(2019m1,2022m3), ///
-	recast(rarea) fcolor(khaki) fintensity(65) lwidth(none) ) ///
+	recast(rarea) fcolor(blue) fintensity(65) lwidth(none) ) ///
 	(tsrline lb1a lb2a if tin(2019m1,2022m3), ///
-	recast(rarea) fcolor(khaki) fintensity(40) lwidth(none) ) ///
+	recast(rarea) fcolor(yellow) fintensity(40) lwidth(none) ) ///
 	(tsrline lb2a lb3a if tin(2019m1,2022m3), ///
-	recast(rarea) fcolor(khaki) fintensity(20) lwidth(none) ) ///
+	recast(rarea) fcolor(red) fintensity(20) lwidth(none) ) ///
 	(tsline Total pnonfarma if tin(2019m1,2022m3) , ///
-	lcolor(gs12 teal) lwidth(medthick medthick) ///
+	lcolor(gs12 pink) lwidth(medthick medthick) ///
 	lpattern(solid longdash)) , scheme(s1mono) legend(off)
 graph export "TotalFan12.png", replace
