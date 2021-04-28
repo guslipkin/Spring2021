@@ -1,5 +1,7 @@
 # Problem Set 3
 
+> All corrections are <u>underlined</u>
+
 ## 1
 
 ### A
@@ -30,7 +32,7 @@
 
 > 2. Compare model selection using the four criteria. Did they agree in both cases (n=30 and n=300)? For each criterion, are the differences between the “best” model and the next best more or less pronounced with more data?
 
-​	Note: I know I probably should have set a seed for the data, but because the objective of the exercise is to compare how results compare 	between datasets of different sizes.
+​	Note: I know I probably should have set a seed for the data, but because the objective of the exercise is to compare how results compare between datasets of different sizes, I didn't.
 
 In the smaller dataset, the best model differs greatly between the tests. In the larger dataset, the results are more consistent where the model with lags 1 and 2 and 1, 2, and 3 are split 50/50 between the four tests. In the smaller dataset, the results of each test are much closer for the AIC and BIC while for the crossfold and LOOCV the differences between results are similar for the small and large datasets. That said, while the spread is similar, the actual values are different.
 

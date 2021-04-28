@@ -4,7 +4,7 @@
 
 **CAP 4763 Time Series Modelling and Forecasting**
 
-
+> All corrections are <u>underlined</u>
 
 # Table of Contents
 

@@ -2,6 +2,8 @@
 
 # Gus Lipkin
 
+> All corrections are <u>underlined</u>
+
 ## Problems
 
 1. Drop any observations after December 2019.
@@ -76,6 +78,8 @@ replace month=month(dofm(date)) if month==.
 11. Generate a figure showing the last 12 months of non-farm employment and the January 2020 point and interval forecasts. (The figure shows actual for January 2019 through December 2019 and then the point and interval forecast for January 2020.)
 
 <img src="Problem Set 4.assets/predictFlnonfarm11-6548518.png" alt="predictFlnonfarm11" style="zoom:50%;" />
+
+<u>The point forecast is 9093.688, and the empirical interval is 8923.5 to 9215.6.</u>
 
 ## Appendix A
 
