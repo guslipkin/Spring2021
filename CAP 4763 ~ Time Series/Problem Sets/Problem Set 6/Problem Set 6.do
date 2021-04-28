@@ -101,6 +101,7 @@ gen dh2lnflnonfarm = lnflnonfarm - l2.lnflnonfarm
 gen dh4lnflnonfarm = lnflnonfarm - l4.lnflnonfarm
 gen dh6lnflnonfarm = lnflnonfarm - l6.lnflnonfarm
 
+/*
 *h=2
 
 gsreg dh2lnflnonfarm l3dlnflnonfarm l6dlnflnonfarm l9dlnflnonfarm ///
@@ -361,7 +362,7 @@ RWmaxobs108 =        108
 RWminobs108 =        108
 RWrmse108 =  .00355344
 */
-
+*/
 arima d.lnflnonfarm l(3,4,5,6,10,12,24)d.lnflnonfarm ///
 	m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11 if tin(1990m1,2019m12)
 predict pnonfarm, dynamic(tm(2020m1))

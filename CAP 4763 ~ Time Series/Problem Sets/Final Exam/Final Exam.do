@@ -16,6 +16,17 @@ gen lnLeisure = ln(leisure)
 gen lnManufacture = ln(manufacture)
 gen lnTotal = ln(total)
 
+rename total Total
+
+/*
+gen withMarchTotal = Total
+replace Total=. if tin(2021m3,)
+*/
+
+tsset Date
+tsappend, add(12)
+replace month=month(dofm(Date))
+
 gen m1=0
 replace m1=1 if month==1
 gen m2=0
@@ -111,6 +122,7 @@ gsreg dlnTotal dlnConstruct l1dlnConstruct l2dlnConstruct l3dlnConstruct ///
 	samesample nindex( -1 aic -1 bic -1 rmse_out) results(gsreg_dlnTtoal) replace
 */
 
+/*
 loocv reg d.lnTotal l(1/3)d.lnTotal m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11
 quietly reg d.lnTotal l(1/3)d.lnTotal m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11
 estat ic
@@ -131,7 +143,38 @@ quietly reg d.lnTotal l(1/3,12,24)d.lnTotal l(1/3,12,24)d.lnConstruct ///
 	l(1/3,12,24)d.lnLeisure l(1/3)d.lnManufacture m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11
 estat ic
 
-*lowest AIC and BIC
+*Lowest rmse (1)
+reg d.lnTotal l(1/3)d.lnTotal m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11
+scalar drop _all
+quietly forval w=12(12)180 {
+gen pred=.
+gen nobs=.
+	forval t=544/734 { 
+	gen wstart=`t'-`w'
+	gen wend=`t'-1
+	reg d.lnTotal l(1/3)d.lnTotal m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11 ///
+		if Date>=wstart & Date<=wend
+	replace nobs=e(N) if Date==`t'
+	predict ptemp
+	replace pred=ptemp if Date==`t'
+	drop ptemp wstart wend
+	}
+gen errsq=(pred-d.lnTotal)^2
+summ errsq
+scalar RWrmse`w'=r(mean)^.5
+summ nobs
+scalar RWminobs`w'=r(min)
+scalar RWmaxobs`w'=r(max)
+drop errsq pred nobs
+}
+scalar list
+/*
+RWmaxobs12 =         12
+RWminobs12 =         12
+RWrmse12 =   .0132376
+*/
+
+*lowest AIC and BIC (3)
 reg d.lnTotal l(1/3)d.lnTotal l(1/3)d.lnConstruct l(1/3)d.lnLeisure ///
 	l(1/3)d.lnManufacture m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11
 scalar drop _all
@@ -158,28 +201,87 @@ scalar RWmaxobs`w'=r(max)
 drop errsq pred nobs
 }
 scalar list
-*Lowest rmse
-reg d.lnTotal l(1/3)d.lnTotal m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11
-scalar drop _all
-quietly forval w=12(12)180 {
-gen pred=.
-gen nobs=.
-	forval t=544/734 { 
-	gen wstart=`t'-`w'
-	gen wend=`t'-1
-	reg d.lnTotal l(1/3)d.lnTotal m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11 ///
-		if Date>=wstart & Date<=wend
-	replace nobs=e(N) if Date==`t'
-	predict ptemp
-	replace pred=ptemp if Date==`t'
-	drop ptemp wstart wend
-	}
-gen errsq=(pred-d.lnTotal)^2
-summ errsq
-scalar RWrmse`w'=r(mean)^.5
-summ nobs
-scalar RWminobs`w'=r(min)
-scalar RWmaxobs`w'=r(max)
-drop errsq pred nobs
-}
-scalar list
+/*
+RWmaxobs12 =         12
+RWminobs12 =         12
+RWrmse12 =   .0132376
+*/
+*/
+
+* Going with model 1 because average RWrmse is lower across window sizes
+scalar rwrmse = .0132376
+reg d.lnTotal l(1/3)d.lnTotal m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11 if tin(,2021m3)
+predict pd
+gen pflcount=exp((rwrmse^2)/2)*exp(l.lnTotal+pd) if Date==tm(2021m4)
+gen ub1=exp((rwrmse^2)/2)*exp(l.lnTotal+pd+1*rwrmse) if Date==tm(2021m4)
+gen lb1=exp((rwrmse^2)/2)*exp(l.lnTotal+pd-1*rwrmse) if Date==tm(2021m4)
+gen ub2=exp((rwrmse^2)/2)*exp(l.lnTotal+pd+2*rwrmse) if Date==tm(2021m4)
+gen lb2=exp((rwrmse^2)/2)*exp(l.lnTotal+pd-2*rwrmse) if Date==tm(2021m4)
+gen ub3=exp((rwrmse^2)/2)*exp(l.lnTotal+pd+3*rwrmse) if Date==tm(2021m4)
+gen lb3=exp((rwrmse^2)/2)*exp(l.lnTotal+pd-3*rwrmse) if Date==tm(2021m4)
+drop pd
+
+replace pflcount=Total if Date==tm(2021m3)
+replace ub1=Total if Date==tm(2021m3)
+replace ub2=Total if Date==tm(2021m3)
+replace ub3=Total if Date==tm(2021m3)
+replace lb1=Total if Date==tm(2021m3)
+replace lb2=Total if Date==tm(2021m3)
+replace lb3=Total if Date==tm(2021m3)
+
+twoway (tsrline ub3 ub2 if tin(2020m4,2021m4), ///
+	recast(rarea) fcolor(khaki) fintensity(20) lwidth(none) ) ///
+	(tsrline ub2 ub1 if tin(2020m4,2021m4), ///
+	recast(rarea) fcolor(khaki) fintensity(40) lwidth(none) ) ///
+	(tsrline ub1 pflcount if tin(2020m4,2021m4), ///
+	recast(rarea) fcolor(khaki) fintensity(65) lwidth(none) ) ///
+	(tsrline pflcount lb1 if tin(2020m4,2021m4), ///
+	recast(rarea) fcolor(khaki) fintensity(65) lwidth(none) ) ///
+	(tsrline lb1 lb2 if tin(2020m4,2021m4), ///
+	recast(rarea) fcolor(khaki) fintensity(40) lwidth(none) ) ///
+	(tsrline lb2 lb3 if tin(2020m4,2021m4), ///
+	recast(rarea) fcolor(khaki) fintensity(20) lwidth(none) ) ///
+	(tsline Total pflcount if tin(2020m4,2021m4) , ///
+	lcolor(gs12 teal) lwidth(medthick medthick) ///
+	lpattern(solid longdash)), scheme(s1mono) legend(off)
+graph export "TotalFan1.png", replace
+
+* More than 1 step
+arima d.lnTotal l(1/3)d.lnTotal m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11 if tin(1990m1,2021m3)
+predict pnonfarm, dynamic(tm(2021m3))
+predict mse, mse dynamic(mofd(tm(2021m4)))
+gen totmse = mse if Date==tm(2021m4)
+replace totmse = l.totmse+mse if Date>tm(2021m4)
+gen pnonfarma = Total if Date==tm(2021m3)
+replace pnonfarma = l.pnonfarma*exp(pnonfarm+mse/2) if Date>tm(2021m3)
+
+gen ub1a = pnonfarma*exp(totmse^.5)
+gen ub2a = pnonfarma*exp(2*totmse^.5)
+gen ub3a = pnonfarma*exp(3*totmse^.5)
+gen lb1a = pnonfarma/exp(totmse^.5)
+gen lb2a = pnonfarma/exp(2*totmse^.5)
+gen lb3a = pnonfarma/exp(3*totmse^.5)
+
+replace ub1a=Total if Date == tm(2021m3)
+replace ub2a=Total if Date == tm(2021m3)
+replace ub3a=Total if Date == tm(2021m3)
+replace lb1a=Total if Date == tm(2021m3)
+replace lb2a=Total if Date == tm(2021m3)
+replace lb3a=Total if Date == tm(2021m3)
+
+twoway (tsrline ub3a ub2a if tin(2019m1,2022m3), ///
+	recast(rarea) fcolor(khaki) fintensity(20) lwidth(none) ) ///
+	(tsrline ub2a ub1a if tin(2019m1,2022m3), ///
+	recast(rarea) fcolor(khaki) fintensity(40) lwidth(none) ) ///
+	(tsrline ub1a pnonfarma if tin(2019m1,2022m3), ///
+	recast(rarea) fcolor(khaki) fintensity(65) lwidth(none) ) ///
+	(tsrline pnonfarma lb1a if tin(2019m1,2022m3), ///
+	recast(rarea) fcolor(khaki) fintensity(65) lwidth(none) ) ///
+	(tsrline lb1a lb2a if tin(2019m1,2022m3), ///
+	recast(rarea) fcolor(khaki) fintensity(40) lwidth(none) ) ///
+	(tsrline lb2a lb3a if tin(2019m1,2022m3), ///
+	recast(rarea) fcolor(khaki) fintensity(20) lwidth(none) ) ///
+	(tsline Total pnonfarma if tin(2019m1,2022m3) , ///
+	lcolor(gs12 teal) lwidth(medthick medthick) ///
+	lpattern(solid longdash)) , scheme(s1mono) legend(off)
+graph export "TotalFan12.png", replace

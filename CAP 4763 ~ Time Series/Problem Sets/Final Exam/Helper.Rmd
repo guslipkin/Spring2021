@@ -1,0 +1,22 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+fileConn <- file("output.txt")
+text <- ""
+for(i in 2:12) {
+  if(i )
+  text <- c(text, paste0("replace pflnonfarm=exp((rwrmseH", i, "^2/2)*exp(l", i, ".lnTotal+pd) if Date==tm(202XmX)"))
+  text <- c(text, paste0("replace ub1=exp((rwrmseH", i, "^2/2)*exp(l", i, ".lnTotal+pd+1*rwrmse) if Date==tm(202XmX)"))
+  text <- c(text, paste0("replace lb1=exp((rwrmseH", i, "^2/2)*exp(l", i, ".lnTotal+pd-1*rwrmse) if Date==tm(202XmX)"))
+  text <- c(text, paste0("replace ub2=exp((rwrmseH", i, "^2/2)*exp(l", i, ".lnTotal+pd+2*rwrmse) if Date==tm(202XmX)"))
+  text <- c(text, paste0("replace lb2=exp((rwrmseH", i, "^2/2)*exp(l", i, ".lnTotal+pd-2*rwrmse) if Date==tm(202XmX)"))
+  text <- c(text, paste0("replace ub3=exp((rwrmseH", i, "^2/2)*exp(l", i, ".lnTotal+pd+3*rwrmse) if Date==tm(202XmX)"))
+  text <- c(text, paste0("replace lb3=exp((rwrmseH", i, "^2/2)*exp(l", i, ".lnTotal+pd-3*rwrmse) if Date==tm(202XmX)\n"))
+}
+writeLines(text, fileConn)
+close(fileConn)
+```
+
