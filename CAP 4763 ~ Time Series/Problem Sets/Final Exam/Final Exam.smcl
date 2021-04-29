@@ -1,0 +1,1243 @@
+{smcl}
+{txt}{sf}{ul off}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}/Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Final Exam/Final Exam.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}29 Apr 2021, 12:07:09
+{txt}
+{com}. import delimited "SP21Final.csv"
+{res}{text}(5 vars, 375 obs)
+
+{com}. 
+. gen datec=date(date, "YMD")
+{txt}
+{com}. gen Date=mofd(datec)
+{txt}
+{com}. gen month=month(datec)
+{txt}
+{com}. format Date %tm
+{txt}
+{com}. tsset Date
+{res}{txt}{col 9}time variable:  {res}{col 25}Date, 1990m1 to 2021m3
+{txt}{col 17}delta:  {res}1 month
+{txt}
+{com}. 
+. gen lnConstruct = ln(construct)
+{txt}
+{com}. gen lnLeisure = ln(leisure)
+{txt}
+{com}. gen lnManufacture = ln(manufacture)
+{txt}
+{com}. gen lnTotal = ln(total)
+{txt}
+{com}. 
+. gen Total = total
+{txt}
+{com}. gen Construct = construct
+{txt}
+{com}. gen Leisure = leisure
+{txt}
+{com}. gen Manufacture = manufacture
+{txt}
+{com}. 
+. /*
+> gen withMarchTotal = Total
+> replace Total=. if tin(2021m3,)
+> */
+. 
+. tsset Date
+{res}{txt}{col 9}time variable:  {res}{col 25}Date, 1990m1 to 2021m3
+{txt}{col 17}delta:  {res}1 month
+{txt}
+{com}. tsappend, add(12)
+{txt}
+{com}. replace month=month(dofm(Date))
+{txt}(12 real changes made)
+
+{com}. 
+. gen m1=0
+{txt}
+{com}. replace m1=1 if month==1
+{txt}(33 real changes made)
+
+{com}. gen m2=0
+{txt}
+{com}. replace m2=1 if month==2
+{txt}(33 real changes made)
+
+{com}. gen m3=0
+{txt}
+{com}. replace m3=1 if month==3
+{txt}(33 real changes made)
+
+{com}. gen m4=0
+{txt}
+{com}. replace m4=1 if month==4
+{txt}(32 real changes made)
+
+{com}. gen m5=0
+{txt}
+{com}. replace m5=1 if month==5
+{txt}(32 real changes made)
+
+{com}. gen m6=0
+{txt}
+{com}. replace m6=1 if month==6
+{txt}(32 real changes made)
+
+{com}. gen m7=0
+{txt}
+{com}. replace m7=1 if month==7
+{txt}(32 real changes made)
+
+{com}. gen m8=0
+{txt}
+{com}. replace m8=1 if month==8
+{txt}(32 real changes made)
+
+{com}. gen m9=0
+{txt}
+{com}. replace m9=1 if month==9
+{txt}(32 real changes made)
+
+{com}. gen m10=0
+{txt}
+{com}. replace m10=1 if month==10
+{txt}(32 real changes made)
+
+{com}. gen m11=0
+{txt}
+{com}. replace m11=1 if month==11
+{txt}(32 real changes made)
+
+{com}. 
+. 
+. summ construct leisure manufacture total
+
+{txt}    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 3}construct {c |}{res}        375    461.0043     95.8947      323.9      696.1
+{txt}{space 5}leisure {c |}{res}        375    930.2083    159.6216      660.6     1287.5
+{txt}{space 1}manufacture {c |}{res}        375    410.0496    63.14375      307.9      518.2
+{txt}{space 7}total {c |}{res}        375    6161.164    958.2068     4366.1     8010.4
+{txt}
+{com}. summ lnConstruct lnLeisure lnManufacture lnTotal
+
+{txt}    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 1}lnConstruct {c |}{res}        375    6.112377    .2043883   5.780435   6.545493
+{txt}{space 3}lnLeisure {c |}{res}        375    6.820994    .1695282   6.493148   7.160458
+{txt}lnManufact~e {c |}{res}        375    6.004071    .1577555   5.729775   6.250361
+{txt}{space 5}lnTotal {c |}{res}        375     8.71332    .1619029   8.381625   8.988496
+{txt}
+{com}. 
+. tsline lnConstruct lnLeisure, saving(lnConstructLeisure_tsline.gph, replace)
+{res}{txt}(file lnConstructLeisure_tsline.gph saved)
+
+{com}. tsline lnManufacture, saving(lnManufacture_tsline.gph, replace)
+{res}{txt}(file lnManufacture_tsline.gph saved)
+
+{com}. graph combine lnConstructLeisure_tsline.gph lnManufacture_tsline.gph, ///
+>         saving(lnConstructLeisure, replace)
+{res}{txt}(file lnConstructLeisure.gph saved)
+
+{com}. graph export "lnConstructLeisure-Manufacture_tsline.png", replace
+{txt}(file /Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Final Exam/lnConstructLeisure-Manufacture_tsline.png written in PNG format)
+
+{com}. 
+. tsline lnTotal, saving(lnTotal_tsline.gph, replace)
+{res}{txt}(file lnTotal_tsline.gph saved)
+
+{com}. tsline d.lnTotal, saving(dlnTotal_tsline.gph, replace)
+{res}{txt}(file dlnTotal_tsline.gph saved)
+
+{com}. graph combine Total_tsline.gph dlnTotal_tsline.gph, saving(lnTotal-Total, replace)
+{res}{txt}(file lnTotal-Total.gph saved)
+
+{com}. graph export "lnTotal-dlnTotal_tsline.png", replace
+{txt}(file /Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Final Exam/lnTotal-dlnTotal_tsline.png written in PNG format)
+
+{com}. 
+. ac lnTotal, saving(lnTotal_ac, replace)
+{res}{txt}(file lnTotal_ac.gph saved)
+
+{com}. pac lnTotal, saving(lnTotal_pac, replace)
+{res}{txt}(file lnTotal_pac.gph saved)
+
+{com}. graph combine lnTotal_ac.gph lnTotal_pac.gph, saving(lnTotal_ac_pac, replace)
+{res}{txt}(file lnTotal_ac_pac.gph saved)
+
+{com}. graph export "lnTotal_ac_pac.png", replace
+{txt}(file /Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Final Exam/lnTotal_ac_pac.png written in PNG format)
+
+{com}. dfuller lnTotal, trend regress
+
+{txt}Dickey-Fuller test for unit root                   Number of obs   = {res}      374
+
+{txt}{col 32}{hline 10} Interpolated Dickey-Fuller {hline 9}
+                  Test         1% Critical       5% Critical      10% Critical
+               Statistic           Value             Value             Value
+{hline 78}
+ Z(t)         {res}    -1.895            -3.985            -3.425            -3.130
+{txt}{hline 78}
+MacKinnon approximate p-value for Z(t) = {res}0.6570
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}   D.lnTotal{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 5}lnTotal {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.0191916{col 26}{space 2} .0101251{col 37}{space 1}   -1.90{col 46}{space 3}0.059{col 54}{space 4}-.0391013{col 67}{space 3} .0007181
+{txt}{space 12} {c |}
+{space 6}_trend {c |}{col 14}{res}{space 2} .0000223{col 26}{space 2} .0000151{col 37}{space 1}    1.47{col 46}{space 3}0.142{col 54}{space 4}-7.48e-06{col 67}{space 3} .0000521
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} .1644033{col 26}{space 2}  .085612{col 37}{space 1}    1.92{col 46}{space 3}0.056{col 54}{space 4}-.0039423{col 67}{space 3} .3327489
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. 
+. ac lnConstruct, saving(lnConstruct_ac, replace)
+{res}{txt}(file lnConstruct_ac.gph saved)
+
+{com}. pac lnConstruct, saving(lnConstruct_pac, replace)
+{res}{txt}(file lnConstruct_pac.gph saved)
+
+{com}. graph combine lnConstruct_ac.gph lnConstruct_pac.gph, saving(lnConstruct_ac_pac, replace)
+{res}{txt}(file lnConstruct_ac_pac.gph saved)
+
+{com}. graph export "lnConstruct_ac_pac.png", replace
+{txt}(file /Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Final Exam/lnConstruct_ac_pac.png written in PNG format)
+
+{com}. dfuller lnConstruct, trend regress
+
+{txt}Dickey-Fuller test for unit root                   Number of obs   = {res}      374
+
+{txt}{col 32}{hline 10} Interpolated Dickey-Fuller {hline 9}
+                  Test         1% Critical       5% Critical      10% Critical
+               Statistic           Value             Value             Value
+{hline 78}
+ Z(t)         {res}    -0.586            -3.985            -3.425            -3.130
+{txt}{hline 78}
+MacKinnon approximate p-value for Z(t) = {res}0.9796
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}D.          {col 14}{c |}
+{col 1} lnConstruct{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 1}lnConstruct {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.0021673{col 26}{space 2} .0036962{col 37}{space 1}   -0.59{col 46}{space 3}0.558{col 54}{space 4}-.0094355{col 67}{space 3} .0051009
+{txt}{space 12} {c |}
+{space 6}_trend {c |}{col 14}{res}{space 2} 5.05e-06{col 26}{space 2} 6.99e-06{col 37}{space 1}    0.72{col 46}{space 3}0.470{col 54}{space 4}-8.68e-06{col 67}{space 3} .0000188
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} .0132628{col 26}{space 2} .0221901{col 37}{space 1}    0.60{col 46}{space 3}0.550{col 54}{space 4}-.0303713{col 67}{space 3} .0568969
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. 
+. ac lnLeisure, saving(lnLeisure_ac, replace)
+{res}{txt}(file lnLeisure_ac.gph saved)
+
+{com}. pac lnLeisure, saving(lnLeisure_pac, replace)
+{res}{txt}(file lnLeisure_pac.gph saved)
+
+{com}. graph combine lnLeisure_ac.gph lnLeisure_pac.gph, saving(lnLeisure_ac_pac, replace)
+{res}{txt}(file lnLeisure_ac_pac.gph saved)
+
+{com}. graph export "lnLeisure_ac_pac.png", replace
+{txt}(file /Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Final Exam/lnLeisure_ac_pac.png written in PNG format)
+
+{com}. dfuller lnLeisure, trend regress
+
+{txt}Dickey-Fuller test for unit root                   Number of obs   = {res}      374
+
+{txt}{col 32}{hline 10} Interpolated Dickey-Fuller {hline 9}
+                  Test         1% Critical       5% Critical      10% Critical
+               Statistic           Value             Value             Value
+{hline 78}
+ Z(t)         {res}    -4.787            -3.985            -3.425            -3.130
+{txt}{hline 78}
+MacKinnon approximate p-value for Z(t) = {res}0.0005
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1} D.lnLeisure{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 3}lnLeisure {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.1242368{col 26}{space 2} .0259543{col 37}{space 1}   -4.79{col 46}{space 3}0.000{col 54}{space 4}-.1752728{col 67}{space 3}-.0732007
+{txt}{space 12} {c |}
+{space 6}_trend {c |}{col 14}{res}{space 2} .0001744{col 26}{space 2} .0000407{col 37}{space 1}    4.28{col 46}{space 3}0.000{col 54}{space 4} .0000943{col 67}{space 3} .0002545
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} .8156996{col 26}{space 2} .1699707{col 37}{space 1}    4.80{col 46}{space 3}0.000{col 54}{space 4} .4814728{col 67}{space 3} 1.149926
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. 
+. ac lnManufacture, saving(lnManufacture_ac, replace)
+{res}{txt}(file lnManufacture_ac.gph saved)
+
+{com}. pac lnManufacture, saving(lnManufacture_pac, replace)
+{res}{txt}(file lnManufacture_pac.gph saved)
+
+{com}. graph combine lnManufacture_ac.gph lnManufacture_pac.gph, saving(lnManufacture_ac_pac, replace)
+{res}{txt}(file lnManufacture_ac_pac.gph saved)
+
+{com}. graph export "lnManufacture_ac_pac.png", replace
+{txt}(file /Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Final Exam/lnManufacture_ac_pac.png written in PNG format)
+
+{com}. dfuller lnManufacture, trend regress
+
+{txt}Dickey-Fuller test for unit root                   Number of obs   = {res}      374
+
+{txt}{col 32}{hline 10} Interpolated Dickey-Fuller {hline 9}
+                  Test         1% Critical       5% Critical      10% Critical
+               Statistic           Value             Value             Value
+{hline 78}
+ Z(t)         {res}     0.313            -3.985            -3.425            -3.130
+{txt}{hline 78}
+MacKinnon approximate p-value for Z(t) = {res}0.9963
+
+{txt}{hline 14}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}D.           {col 15}{c |}
+{col 1}lnManufacture{col 15}{c |}      Coef.{col 27}   Std. Err.{col 39}      t{col 47}   P>|t|{col 55}     [95% Con{col 68}f. Interval]
+{hline 14}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+lnManufacture {c |}
+{space 10}L1. {c |}{col 15}{res}{space 2} .0013361{col 27}{space 2} .0042655{col 38}{space 1}    0.31{col 47}{space 3}0.754{col 55}{space 4}-.0070515{col 68}{space 3} .0097238
+{txt}{space 13} {c |}
+{space 7}_trend {c |}{col 15}{res}{space 2} 9.58e-06{col 27}{space 2} 6.23e-06{col 38}{space 1}    1.54{col 47}{space 3}0.125{col 55}{space 4}-2.67e-06{col 68}{space 3} .0000218
+{txt}{space 8}_cons {c |}{col 15}{res}{space 2}-.0106361{col 27}{space 2} .0265921{col 38}{space 1}   -0.40{col 47}{space 3}0.689{col 55}{space 4}-.0629262{col 68}{space 3} .0416539
+{txt}{hline 14}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. 
+. quietly reg l(12,24)d.Construct l(12,24)d.Leisure l(12,24)d.Manufacture
+{txt}
+{com}. testparm l(12,24)d.Construct l(12,24)d.Leisure l(12,24)d.Manufacture
+
+{p 0 7}{space 1}{text:( 1)}{space 1} {res}L24D.Construct = 0{p_end}
+{p 0 7}{space 1}{text:( 2)}{space 1} L12D.Leisure = 0{p_end}
+{p 0 7}{space 1}{text:( 3)}{space 1} L24D.Leisure = 0{p_end}
+{p 0 7}{space 1}{text:( 4)}{space 1} L12D.Manufacture = 0{p_end}
+{p 0 7}{space 1}{text:( 5)}{space 1} L24D.Manufacture = 0{p_end}
+
+{txt}       F(  5,   356) ={res}  146.28
+{txt}{col 13}Prob > F ={res}    0.0000
+{txt}
+{com}. 
+. newey d.lnTotal l(0/3,12,24)d.Construct l(0/3,12,24)d.Manufacture l(0/3,12,24)d.Leisure, lag(24)
+
+{txt}Regression with Newey-West standard errors{col 49}Number of obs{col 67}= {res}       350
+{txt}maximum lag: {res}24{col 49}{txt}F( 18,       331){col 67}= {res}   4461.04
+{col 49}{txt}Prob > F{col 67}= {res}    0.0000
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}  Newey-West
+{col 1}   D.lnTotal{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 3}Construct {c |}
+{space 9}D1. {c |}{col 14}{res}{space 2} .0004252{col 26}{space 2} .0000809{col 37}{space 1}    5.26{col 46}{space 3}0.000{col 54}{space 4} .0002661{col 67}{space 3} .0005842
+{txt}{space 9}LD. {c |}{col 14}{res}{space 2} .0000247{col 26}{space 2}  .000044{col 37}{space 1}    0.56{col 46}{space 3}0.574{col 54}{space 4}-.0000617{col 67}{space 3} .0001112
+{txt}{space 8}L2D. {c |}{col 14}{res}{space 2} .0000613{col 26}{space 2} .0000403{col 37}{space 1}    1.52{col 46}{space 3}0.129{col 54}{space 4}-.0000179{col 67}{space 3} .0001405
+{txt}{space 8}L3D. {c |}{col 14}{res}{space 2}-.0000674{col 26}{space 2} .0000577{col 37}{space 1}   -1.17{col 46}{space 3}0.244{col 54}{space 4} -.000181{col 67}{space 3} .0000462
+{txt}{space 7}L12D. {c |}{col 14}{res}{space 2} -.000035{col 26}{space 2} .0000641{col 37}{space 1}   -0.55{col 46}{space 3}0.585{col 54}{space 4} -.000161{col 67}{space 3}  .000091
+{txt}{space 7}L24D. {c |}{col 14}{res}{space 2} .0000494{col 26}{space 2} .0000684{col 37}{space 1}    0.72{col 46}{space 3}0.470{col 54}{space 4}-.0000851{col 67}{space 3} .0001839
+{txt}{space 12} {c |}
+{space 1}Manufacture {c |}
+{space 9}D1. {c |}{col 14}{res}{space 2} .0011938{col 26}{space 2} .0001924{col 37}{space 1}    6.21{col 46}{space 3}0.000{col 54}{space 4} .0008154{col 67}{space 3} .0015723
+{txt}{space 9}LD. {c |}{col 14}{res}{space 2}-.0002374{col 26}{space 2} .0001386{col 37}{space 1}   -1.71{col 46}{space 3}0.088{col 54}{space 4}  -.00051{col 67}{space 3} .0000353
+{txt}{space 8}L2D. {c |}{col 14}{res}{space 2} -.000336{col 26}{space 2} .0000718{col 37}{space 1}   -4.68{col 46}{space 3}0.000{col 54}{space 4}-.0004773{col 67}{space 3}-.0001948
+{txt}{space 8}L3D. {c |}{col 14}{res}{space 2}-.0002689{col 26}{space 2} .0001059{col 37}{space 1}   -2.54{col 46}{space 3}0.012{col 54}{space 4}-.0004772{col 67}{space 3}-.0000606
+{txt}{space 7}L12D. {c |}{col 14}{res}{space 2} .0003308{col 26}{space 2} .0001381{col 37}{space 1}    2.39{col 46}{space 3}0.017{col 54}{space 4}  .000059{col 67}{space 3} .0006025
+{txt}{space 7}L24D. {c |}{col 14}{res}{space 2} .0002403{col 26}{space 2} .0001413{col 37}{space 1}    1.70{col 46}{space 3}0.090{col 54}{space 4}-.0000376{col 67}{space 3} .0005182
+{txt}{space 12} {c |}
+{space 5}Leisure {c |}
+{space 9}D1. {c |}{col 14}{res}{space 2} .0002134{col 26}{space 2} 8.38e-06{col 37}{space 1}   25.47{col 46}{space 3}0.000{col 54}{space 4} .0001969{col 67}{space 3} .0002299
+{txt}{space 9}LD. {c |}{col 14}{res}{space 2} 5.34e-06{col 26}{space 2} 9.19e-06{col 37}{space 1}    0.58{col 46}{space 3}0.561{col 54}{space 4}-.0000127{col 67}{space 3} .0000234
+{txt}{space 8}L2D. {c |}{col 14}{res}{space 2}-2.42e-06{col 26}{space 2} .0000172{col 37}{space 1}   -0.14{col 46}{space 3}0.888{col 54}{space 4}-.0000364{col 67}{space 3} .0000315
+{txt}{space 8}L3D. {c |}{col 14}{res}{space 2}-8.76e-06{col 26}{space 2} .0000174{col 37}{space 1}   -0.50{col 46}{space 3}0.614{col 54}{space 4}-.0000429{col 67}{space 3} .0000254
+{txt}{space 7}L12D. {c |}{col 14}{res}{space 2} .0000629{col 26}{space 2} .0000361{col 37}{space 1}    1.74{col 46}{space 3}0.082{col 54}{space 4}-8.04e-06{col 67}{space 3} .0001339
+{txt}{space 7}L24D. {c |}{col 14}{res}{space 2} -.000016{col 26}{space 2} .0000428{col 37}{space 1}   -0.37{col 46}{space 3}0.708{col 54}{space 4}-.0001002{col 67}{space 3} .0000681
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} .0011957{col 26}{space 2} .0003664{col 37}{space 1}    3.26{col 46}{space 3}0.001{col 54}{space 4}  .000475{col 67}{space 3} .0019165
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. test ld.Construct + ld.Construct + l2d.Construct + l3d.Construct + l12d.Construct + l24d.Construct ///
+>         == d.Manufacture + ld.Manufacture + l2d.Manufacture + l3d.Manufacture + ///
+>                 l12d.Manufacture + l24d.Manufacture
+
+{p 0 7}{space 1}{text:( 1)}{space 1} {res}2{res}*{res}LD.Construct + L2D.Construct + L3D.Construct + L12D.Construct + L24D.Construct - D.Manufacture - LD.Manufacture - L2D.Manufacture - L3D.Manufacture - L12D.Manufacture - L24D.Manufacture = 0{p_end}
+
+{txt}       F(  1,   331) ={res}    5.85
+{txt}{col 13}Prob > F ={res}    0.0161
+{txt}
+{com}. test d.Construct + ld.Construct + l2d.Construct + l3d.Construct + l12d.Construct + l24d.Construct ///
+>         == d.Leisure + ld.Leisure + l2d.Leisure + l3d.Leisure + l12d.Leisure + l24d.Leisure
+
+{p 0 7}{space 1}{text:( 1)}{space 1} {res}D.Construct + LD.Construct + L2D.Construct + L3D.Construct + L12D.Construct + L24D.Construct - D.Leisure - LD.Leisure - L2D.Leisure - L3D.Leisure - L12D.Leisure - L24D.Leisure = 0{p_end}
+
+{txt}       F(  1,   331) ={res}   11.36
+{txt}{col 13}Prob > F ={res}    0.0008
+{txt}
+{com}. test d.Leisure + ld.Leisure + l2d.Leisure + l3d.Leisure + l12d.Leisure + l24d.Leisure ///
+>         == d.Manufacture + ld.Manufacture + l2d.Manufacture + l3d.Manufacture + ///
+>                 l12d.Manufacture + l24d.Manufacture
+
+{p 0 7}{space 1}{text:( 1)}{space 1}{space 1}{res}- D.Manufacture - LD.Manufacture - L2D.Manufacture - L3D.Manufacture - L12D.Manufacture - L24D.Manufacture + D.Leisure + LD.Leisure + L2D.Leisure + L3D.Leisure + L12D.Leisure + L24D.Leisure = 0{p_end}
+
+{txt}       F(  1,   331) ={res}    4.74
+{txt}{col 13}Prob > F ={res}    0.0301
+{txt}
+{com}. 
+. *------------------------------------------------------------------------------*
+. gen dlnConstruct=d.lnConstruct
+{txt}(13 missing values generated)
+
+{com}. gen l1dlnConstruct=l1d.lnConstruct
+{txt}(13 missing values generated)
+
+{com}. gen l2dlnConstruct=l2d.lnConstruct
+{txt}(13 missing values generated)
+
+{com}. gen l3dlnConstruct=l3d.lnConstruct
+{txt}(13 missing values generated)
+
+{com}. gen l12dlnConstruct=l12d.lnConstruct
+{txt}(13 missing values generated)
+
+{com}. gen l24dlnConstruct=l24d.lnConstruct
+{txt}(25 missing values generated)
+
+{com}. 
+. gen dlnLeisure=d.lnLeisure
+{txt}(13 missing values generated)
+
+{com}. gen l1dlnLeisure=l1d.lnLeisure
+{txt}(13 missing values generated)
+
+{com}. gen l2dlnLeisure=l2d.lnLeisure
+{txt}(13 missing values generated)
+
+{com}. gen l3dlnLeisure=l3d.lnLeisure
+{txt}(13 missing values generated)
+
+{com}. gen l12dlnLeisure=l12d.lnLeisure
+{txt}(13 missing values generated)
+
+{com}. gen l24dlnLeisure=l24d.lnLeisure
+{txt}(25 missing values generated)
+
+{com}. 
+. gen dlnManufacture=d.lnManufacture
+{txt}(13 missing values generated)
+
+{com}. gen l1dlnManufacture=l1d.lnManufacture
+{txt}(13 missing values generated)
+
+{com}. gen l2dlnManufacture=l2d.lnManufacture
+{txt}(13 missing values generated)
+
+{com}. gen l3dlnManufacture=l3d.lnManufacture
+{txt}(13 missing values generated)
+
+{com}. gen l12dlnManufacture=l12d.lnManufacture
+{txt}(13 missing values generated)
+
+{com}. gen l24dlnManufacture=l24d.lnManufacture
+{txt}(25 missing values generated)
+
+{com}. 
+. gen dlnTotal=d.lnTotal
+{txt}(13 missing values generated)
+
+{com}. gen l1dlnTotal=l1d.lnTotal
+{txt}(13 missing values generated)
+
+{com}. gen l2dlnTotal=l2d.lnTotal
+{txt}(13 missing values generated)
+
+{com}. gen l3dlnTotal=l3d.lnTotal
+{txt}(13 missing values generated)
+
+{com}. gen l12dlnTotal=l12d.lnTotal
+{txt}(13 missing values generated)
+
+{com}. gen l24dlnTotal=l24d.lnTotal
+{txt}(25 missing values generated)
+
+{com}. 
+. /*
+> gsreg dlnTotal dlnConstruct l1dlnConstruct l2dlnConstruct l3dlnConstruct ///
+>         l12dlnConstruct l24dlnConstruct ///
+>         dlnLeisure l1dlnLeisure l2dlnLeisure l3dlnLeisure l12dlnLeisure l24dlnLeisure ///
+>         dlnManufacture l1dlnManufacture l2dlnManufacture l3dlnManufacture ///
+>         l12dlnManufacture l24dlnManufacture ///
+>         if tin(1990m1,2021m3), ///
+>         ncomb(1,6) aic outsample(24) fix(m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11) ///
+>         samesample nindex( -1 aic -1 bic -1 rmse_out) results(gsreg_dlnTtoal) replace
+> */
+. 
+. 
+. loocv reg d.lnTotal l(1/3)d.lnTotal m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11
+
+
+{txt} Leave-One-Out Cross-Validation Results 
+{hline 25}{c TT}{hline 15}
+         Method          {c |}{col 30} Value
+{hline 25}{c +}{hline 15}
+Root Mean Squared Errors {c |}{col 30}{res}.0129605
+{txt}Mean Absolute Errors     {c |}{col 30}{res}.00443719
+{txt}Pseudo-R2                {c |} {col 30}{res}.14054754
+{txt}{hline 25}{c BT}{hline 15}
+
+{com}. quietly reg d.lnTotal l(1/3)d.lnTotal m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11
+{txt}
+{com}. estat ic
+
+{txt}Akaike's information criterion and Bayesian information criterion
+
+{hline 13}{c TT}{hline 63}
+       Model {c |}          N   ll(null)  ll(model)      df        AIC        BIC
+{hline 13}{c +}{hline 63}
+{ralign 12:.}{col 14}{c |}{res}{col 16}       371{col 28} 1102.298{col 39} 1206.362{col 50}    15{col 58}-2382.725{col 69}-2323.982
+{txt}{hline 13}{c BT}{hline 63}
+{p 0 6 0 77}Note: BIC uses N = number of observations. See {helpb bic_note:{bind:[R] BIC note}}.{p_end}
+
+{com}. 
+. loocv reg d.lnTotal l(1/3,12,24)d.lnTotal m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11
+
+
+{txt} Leave-One-Out Cross-Validation Results 
+{hline 25}{c TT}{hline 15}
+         Method          {c |}{col 30} Value
+{hline 25}{c +}{hline 15}
+Root Mean Squared Errors {c |}{col 30}{res}.01300797
+{txt}Mean Absolute Errors     {c |}{col 30}{res}.00427199
+{txt}Pseudo-R2                {c |} {col 30}{res}.14852182
+{txt}{hline 25}{c BT}{hline 15}
+
+{com}. quietly reg d.lnTotal l(1/3,12,24)d.lnTotal m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11
+{txt}
+{com}. estat ic
+
+{txt}Akaike's information criterion and Bayesian information criterion
+
+{hline 13}{c TT}{hline 63}
+       Model {c |}          N   ll(null)  ll(model)      df        AIC        BIC
+{hline 13}{c +}{hline 63}
+{ralign 12:.}{col 14}{c |}{res}{col 16}       350{col 28}  1035.49{col 39} 1135.109{col 50}    17{col 58}-2236.218{col 69}-2170.633
+{txt}{hline 13}{c BT}{hline 63}
+{p 0 6 0 77}Note: BIC uses N = number of observations. See {helpb bic_note:{bind:[R] BIC note}}.{p_end}
+
+{com}. 
+. loocv reg d.lnTotal l(1/3)d.lnTotal l(1/3)d.lnConstruct l(1/3)d.lnLeisure ///
+>         l(1/3)d.lnManufacture m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11
+
+
+{txt} Leave-One-Out Cross-Validation Results 
+{hline 25}{c TT}{hline 15}
+         Method          {c |}{col 30} Value
+{hline 25}{c +}{hline 15}
+Root Mean Squared Errors {c |}{col 30}{res}.01611154
+{txt}Mean Absolute Errors     {c |}{col 30}{res}.00423375
+{txt}Pseudo-R2                {c |} {col 30}{res}.06722376
+{txt}{hline 25}{c BT}{hline 15}
+
+{com}. quietly reg d.lnTotal l(1/3)d.lnTotal l(1/3)d.lnConstruct l(1/3)d.lnLeisure ///
+>         l(1/3)d.lnManufacture m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11
+{txt}
+{com}. estat ic
+
+{txt}Akaike's information criterion and Bayesian information criterion
+
+{hline 13}{c TT}{hline 63}
+       Model {c |}          N   ll(null)  ll(model)      df        AIC        BIC
+{hline 13}{c +}{hline 63}
+{ralign 12:.}{col 14}{c |}{res}{col 16}       371{col 28} 1102.298{col 39} 1220.504{col 50}    24{col 58}-2393.008{col 69}-2299.019
+{txt}{hline 13}{c BT}{hline 63}
+{p 0 6 0 77}Note: BIC uses N = number of observations. See {helpb bic_note:{bind:[R] BIC note}}.{p_end}
+
+{com}. 
+. loocv reg d.lnTotal l(1/3,12,24)d.lnTotal l(1/3,12,24)d.lnConstruct ///
+>         l(1/3,12,24)d.lnLeisure l(1/3)d.lnManufacture m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11
+
+
+{txt} Leave-One-Out Cross-Validation Results 
+{hline 25}{c TT}{hline 15}
+         Method          {c |}{col 30} Value
+{hline 25}{c +}{hline 15}
+Root Mean Squared Errors {c |}{col 30}{res}.01713897
+{txt}Mean Absolute Errors     {c |}{col 30}{res}.004436
+{txt}Pseudo-R2                {c |} {col 30}{res}.05184396
+{txt}{hline 25}{c BT}{hline 15}
+
+{com}. quietly reg d.lnTotal l(1/3,12,24)d.lnTotal l(1/3,12,24)d.lnConstruct ///
+>         l(1/3,12,24)d.lnLeisure l(1/3)d.lnManufacture m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11
+{txt}
+{com}. estat ic
+
+{txt}Akaike's information criterion and Bayesian information criterion
+
+{hline 13}{c TT}{hline 63}
+       Model {c |}          N   ll(null)  ll(model)      df        AIC        BIC
+{hline 13}{c +}{hline 63}
+{ralign 12:.}{col 14}{c |}{res}{col 16}       350{col 28}  1035.49{col 39} 1145.391{col 50}    30{col 58}-2230.781{col 69}-2115.043
+{txt}{hline 13}{c BT}{hline 63}
+{p 0 6 0 77}Note: BIC uses N = number of observations. See {helpb bic_note:{bind:[R] BIC note}}.{p_end}
+
+{com}. 
+. *Lowest rmse (1)
+. reg d.lnTotal l(1/3)d.lnTotal m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       371
+{txt}{hline 13}{c +}{hline 34}   F(14, 356)      = {res}    19.13
+{txt}       Model {c |} {res} .024491123        14  .001749366   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} .032550038       356  .000091433   {txt}R-squared       ={res}    0.4294
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.4069
+{txt}       Total {c |} {res} .057041161       370  .000154165   {txt}Root MSE        =   {res} .00956
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}   D.lnTotal{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 5}lnTotal {c |}
+{space 9}LD. {c |}{col 14}{res}{space 2}-.0016173{col 26}{space 2} .0529806{col 37}{space 1}   -0.03{col 46}{space 3}0.976{col 54}{space 4}-.1058116{col 67}{space 3} .1025769
+{txt}{space 8}L2D. {c |}{col 14}{res}{space 2}-.1325018{col 26}{space 2} .0525096{col 37}{space 1}   -2.52{col 46}{space 3}0.012{col 54}{space 4}-.2357698{col 67}{space 3}-.0292338
+{txt}{space 8}L3D. {c |}{col 14}{res}{space 2}  .026173{col 26}{space 2} .0529824{col 37}{space 1}    0.49{col 46}{space 3}0.622{col 54}{space 4}-.0780247{col 67}{space 3} .1303708
+{txt}{space 12} {c |}
+{space 10}m1 {c |}{col 14}{res}{space 2}-.0254857{col 26}{space 2} .0024679{col 37}{space 1}  -10.33{col 46}{space 3}0.000{col 54}{space 4}-.0303391{col 67}{space 3}-.0206322
+{txt}{space 10}m2 {c |}{col 14}{res}{space 2} .0004869{col 26}{space 2} .0029045{col 37}{space 1}    0.17{col 46}{space 3}0.867{col 54}{space 4}-.0052252{col 67}{space 3}  .006199
+{txt}{space 10}m3 {c |}{col 14}{res}{space 2} -.003913{col 26}{space 2} .0027686{col 37}{space 1}   -1.41{col 46}{space 3}0.158{col 54}{space 4}-.0093579{col 67}{space 3} .0015318
+{txt}{space 10}m4 {c |}{col 14}{res}{space 2} -.013317{col 26}{space 2} .0026543{col 37}{space 1}   -5.02{col 46}{space 3}0.000{col 54}{space 4}-.0185371{col 67}{space 3}-.0080969
+{txt}{space 10}m5 {c |}{col 14}{res}{space 2}-.0064632{col 26}{space 2} .0026182{col 37}{space 1}   -2.47{col 46}{space 3}0.014{col 54}{space 4}-.0116124{col 67}{space 3}-.0013141
+{txt}{space 10}m6 {c |}{col 14}{res}{space 2}-.0088465{col 26}{space 2} .0025835{col 37}{space 1}   -3.42{col 46}{space 3}0.001{col 54}{space 4}-.0139273{col 67}{space 3}-.0037657
+{txt}{space 10}m7 {c |}{col 14}{res}{space 2}-.0159741{col 26}{space 2} .0025331{col 37}{space 1}   -6.31{col 46}{space 3}0.000{col 54}{space 4}-.0209559{col 67}{space 3}-.0109924
+{txt}{space 10}m8 {c |}{col 14}{res}{space 2}-.0051433{col 26}{space 2} .0026374{col 37}{space 1}   -1.95{col 46}{space 3}0.052{col 54}{space 4}-.0103302{col 67}{space 3} .0000435
+{txt}{space 10}m9 {c |}{col 14}{res}{space 2}-.0096793{col 26}{space 2} .0025635{col 37}{space 1}   -3.78{col 46}{space 3}0.000{col 54}{space 4}-.0147208{col 67}{space 3}-.0046378
+{txt}{space 9}m10 {c |}{col 14}{res}{space 2}-.0021472{col 26}{space 2} .0025489{col 37}{space 1}   -0.84{col 46}{space 3}0.400{col 54}{space 4}  -.00716{col 67}{space 3} .0028657
+{txt}{space 9}m11 {c |}{col 14}{res}{space 2} .0024587{col 26}{space 2} .0024684{col 37}{space 1}    1.00{col 46}{space 3}0.320{col 54}{space 4}-.0023958{col 67}{space 3} .0073131
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} .0088125{col 26}{space 2} .0018473{col 37}{space 1}    4.77{col 46}{space 3}0.000{col 54}{space 4} .0051795{col 67}{space 3} .0124454
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. scalar drop _all
+{txt}
+{com}. quietly forval w=12(12)180 {c -(}
+{txt}
+{com}. scalar list
+{txt}RWmaxobs180 = {res}       180
+{txt}RWminobs180 = {res}       180
+{txt} RWrmse180 = {res} .01789015
+{txt}RWmaxobs168 = {res}       168
+{txt}RWminobs168 = {res}       168
+{txt} RWrmse168 = {res} .01812779
+{txt}RWmaxobs156 = {res}       156
+{txt}RWminobs156 = {res}       156
+{txt} RWrmse156 = {res}  .0186461
+{txt}RWmaxobs144 = {res}       144
+{txt}RWminobs144 = {res}       144
+{txt} RWrmse144 = {res} .01935361
+{txt}RWmaxobs132 = {res}       132
+{txt}RWminobs132 = {res}       132
+{txt} RWrmse132 = {res} .02010893
+{txt}RWmaxobs120 = {res}       120
+{txt}RWminobs120 = {res}       120
+{txt} RWrmse120 = {res} .02273114
+{txt}RWmaxobs108 = {res}       108
+{txt}RWminobs108 = {res}       108
+{txt} RWrmse108 = {res}  .0233275
+{txt}RWmaxobs96 = {res}        96
+{txt}RWminobs96 = {res}        96
+{txt}  RWrmse96 = {res}  .0244855
+{txt}RWmaxobs84 = {res}        84
+{txt}RWminobs84 = {res}        84
+{txt}  RWrmse84 = {res} .02493232
+{txt}RWmaxobs72 = {res}        72
+{txt}RWminobs72 = {res}        72
+{txt}  RWrmse72 = {res} .02471091
+{txt}RWmaxobs60 = {res}        60
+{txt}RWminobs60 = {res}        60
+{txt}  RWrmse60 = {res} .02489376
+{txt}RWmaxobs48 = {res}        48
+{txt}RWminobs48 = {res}        48
+{txt}  RWrmse48 = {res} .02475145
+{txt}RWmaxobs36 = {res}        36
+{txt}RWminobs36 = {res}        36
+{txt}  RWrmse36 = {res} .02791922
+{txt}RWmaxobs24 = {res}        24
+{txt}RWminobs24 = {res}        24
+{txt}  RWrmse24 = {res} .16402211
+{txt}RWmaxobs12 = {res}        12
+{txt}RWminobs12 = {res}        12
+{txt}  RWrmse12 = {res}  .0132376
+{txt}
+{com}. 
+. /*
+> RWmaxobs12 =         12
+> RWminobs12 =         12
+> RWrmse12 =   .0132376
+> */
+. 
+. *lowest AIC and BIC (3)
+. reg d.lnTotal l(1/3)d.lnTotal l(1/3)d.lnConstruct l(1/3)d.lnLeisure ///
+>         l(1/3)d.lnManufacture m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       371
+{txt}{hline 13}{c +}{hline 34}   F(23, 347)      = {res}    13.45
+{txt}       Model {c |} {res} .026880308        23  .001168709   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} .030160853       347  .000086919   {txt}R-squared       ={res}    0.4712
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.4362
+{txt}       Total {c |} {res} .057041161       370  .000154165   {txt}Root MSE        =   {res} .00932
+
+{txt}{hline 14}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}    D.lnTotal{col 15}{c |}      Coef.{col 27}   Std. Err.{col 39}      t{col 47}   P>|t|{col 55}     [95% Con{col 68}f. Interval]
+{hline 14}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}lnTotal {c |}
+{space 10}LD. {c |}{col 15}{res}{space 2} .2862672{col 27}{space 2} .2667427{col 38}{space 1}    1.07{col 47}{space 3}0.284{col 55}{space 4}-.2383687{col 68}{space 3} .8109032
+{txt}{space 9}L2D. {c |}{col 15}{res}{space 2} .2454317{col 27}{space 2} .2661885{col 38}{space 1}    0.92{col 47}{space 3}0.357{col 55}{space 4}-.2781141{col 68}{space 3} .7689776
+{txt}{space 9}L3D. {c |}{col 15}{res}{space 2} .4266043{col 27}{space 2} .2702181{col 38}{space 1}    1.58{col 47}{space 3}0.115{col 55}{space 4}-.1048673{col 68}{space 3} .9580758
+{txt}{space 13} {c |}
+{space 2}lnConstruct {c |}
+{space 10}LD. {c |}{col 15}{res}{space 2} 6.41e-06{col 27}{space 2}  .081453{col 38}{space 1}    0.00{col 47}{space 3}1.000{col 55}{space 4}-.1601974{col 68}{space 3} .1602102
+{txt}{space 9}L2D. {c |}{col 15}{res}{space 2} .0327201{col 27}{space 2} .0818081{col 38}{space 1}    0.40{col 47}{space 3}0.689{col 55}{space 4} -.128182{col 68}{space 3} .1936223
+{txt}{space 9}L3D. {c |}{col 15}{res}{space 2}-.0371503{col 27}{space 2} .0817044{col 38}{space 1}   -0.45{col 47}{space 3}0.650{col 55}{space 4}-.1978486{col 68}{space 3}  .123548
+{txt}{space 13} {c |}
+{space 4}lnLeisure {c |}
+{space 10}LD. {c |}{col 15}{res}{space 2}-.1208348{col 27}{space 2} .0688988{col 38}{space 1}   -1.75{col 47}{space 3}0.080{col 55}{space 4}-.2563467{col 68}{space 3} .0146771
+{txt}{space 9}L2D. {c |}{col 15}{res}{space 2}-.1169829{col 27}{space 2} .0684363{col 38}{space 1}   -1.71{col 47}{space 3}0.088{col 55}{space 4} -.251585{col 68}{space 3} .0176192
+{txt}{space 9}L3D. {c |}{col 15}{res}{space 2}-.1609605{col 27}{space 2}  .069157{col 38}{space 1}   -2.33{col 47}{space 3}0.021{col 55}{space 4}-.2969801{col 68}{space 3} -.024941
+{txt}{space 13} {c |}
+lnManufacture {c |}
+{space 10}LD. {c |}{col 15}{res}{space 2} .0485695{col 27}{space 2} .1821043{col 38}{space 1}    0.27{col 47}{space 3}0.790{col 55}{space 4}-.3095975{col 68}{space 3} .4067365
+{txt}{space 9}L2D. {c |}{col 15}{res}{space 2}-.1583242{col 27}{space 2} .1862613{col 38}{space 1}   -0.85{col 47}{space 3}0.396{col 55}{space 4}-.5246673{col 68}{space 3}  .208019
+{txt}{space 9}L3D. {c |}{col 15}{res}{space 2} .1372412{col 27}{space 2} .1883006{col 38}{space 1}    0.73{col 47}{space 3}0.467{col 55}{space 4}-.2331129{col 68}{space 3} .5075952
+{txt}{space 13} {c |}
+{space 11}m1 {c |}{col 15}{res}{space 2}-.0259546{col 27}{space 2} .0026844{col 38}{space 1}   -9.67{col 47}{space 3}0.000{col 55}{space 4}-.0312344{col 68}{space 3}-.0206748
+{txt}{space 11}m2 {c |}{col 15}{res}{space 2} .0061874{col 27}{space 2} .0054433{col 38}{space 1}    1.14{col 47}{space 3}0.256{col 55}{space 4}-.0045187{col 68}{space 3} .0168935
+{txt}{space 11}m3 {c |}{col 15}{res}{space 2} .0041315{col 27}{space 2} .0052298{col 38}{space 1}    0.79{col 47}{space 3}0.430{col 55}{space 4}-.0061545{col 68}{space 3} .0144176
+{txt}{space 11}m4 {c |}{col 15}{res}{space 2}-.0019669{col 27}{space 2} .0049557{col 38}{space 1}   -0.40{col 47}{space 3}0.692{col 55}{space 4} -.011714{col 68}{space 3} .0077802
+{txt}{space 11}m5 {c |}{col 15}{res}{space 2}-.0024728{col 27}{space 2} .0032223{col 38}{space 1}   -0.77{col 47}{space 3}0.443{col 55}{space 4}-.0088106{col 68}{space 3} .0038649
+{txt}{space 11}m6 {c |}{col 15}{res}{space 2}-.0057242{col 27}{space 2} .0032307{col 38}{space 1}   -1.77{col 47}{space 3}0.077{col 55}{space 4}-.0120785{col 68}{space 3}   .00063
+{txt}{space 11}m7 {c |}{col 15}{res}{space 2}-.0128758{col 27}{space 2} .0035363{col 38}{space 1}   -3.64{col 47}{space 3}0.000{col 55}{space 4}-.0198311{col 68}{space 3}-.0059206
+{txt}{space 11}m8 {c |}{col 15}{res}{space 2}-.0017029{col 27}{space 2}  .003742{col 38}{space 1}   -0.46{col 47}{space 3}0.649{col 55}{space 4}-.0090627{col 68}{space 3}  .005657
+{txt}{space 11}m9 {c |}{col 15}{res}{space 2} -.006856{col 27}{space 2} .0032793{col 38}{space 1}   -2.09{col 47}{space 3}0.037{col 55}{space 4}-.0133058{col 68}{space 3}-.0004062
+{txt}{space 10}m10 {c |}{col 15}{res}{space 2} .0015872{col 27}{space 2} .0030906{col 38}{space 1}    0.51{col 47}{space 3}0.608{col 55}{space 4}-.0044915{col 68}{space 3}  .007666
+{txt}{space 10}m11 {c |}{col 15}{res}{space 2} .0030825{col 27}{space 2} .0026162{col 38}{space 1}    1.18{col 47}{space 3}0.240{col 55}{space 4}-.0020632{col 68}{space 3} .0082282
+{txt}{space 8}_cons {c |}{col 15}{res}{space 2} .0039798{col 27}{space 2} .0029489{col 38}{space 1}    1.35{col 47}{space 3}0.178{col 55}{space 4}-.0018201{col 68}{space 3} .0097797
+{txt}{hline 14}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. scalar drop _all
+{txt}
+{com}. quietly forval w=3(3)180 {c -(}
+{txt}
+{com}. scalar list
+{txt}RWmaxobs180 = {res}       180
+{txt}RWminobs180 = {res}       180
+{txt} RWrmse180 = {res} .06231312
+{txt}RWmaxobs177 = {res}       177
+{txt}RWminobs177 = {res}       177
+{txt} RWrmse177 = {res} .06310936
+{txt}RWmaxobs174 = {res}       174
+{txt}RWminobs174 = {res}       174
+{txt} RWrmse174 = {res} .06557282
+{txt}RWmaxobs171 = {res}       171
+{txt}RWminobs171 = {res}       171
+{txt} RWrmse171 = {res} .06644967
+{txt}RWmaxobs168 = {res}       168
+{txt}RWminobs168 = {res}       168
+{txt} RWrmse168 = {res}  .0679586
+{txt}RWmaxobs165 = {res}       165
+{txt}RWminobs165 = {res}       165
+{txt} RWrmse165 = {res}  .0691683
+{txt}RWmaxobs162 = {res}       162
+{txt}RWminobs162 = {res}       162
+{txt} RWrmse162 = {res} .06977207
+{txt}RWmaxobs159 = {res}       159
+{txt}RWminobs159 = {res}       159
+{txt} RWrmse159 = {res} .07051975
+{txt}RWmaxobs156 = {res}       156
+{txt}RWminobs156 = {res}       156
+{txt} RWrmse156 = {res}  .0708996
+{txt}RWmaxobs153 = {res}       153
+{txt}RWminobs153 = {res}       153
+{txt} RWrmse153 = {res} .07104253
+{txt}RWmaxobs150 = {res}       150
+{txt}RWminobs150 = {res}       150
+{txt} RWrmse150 = {res} .07151194
+{txt}RWmaxobs147 = {res}       147
+{txt}RWminobs147 = {res}       147
+{txt} RWrmse147 = {res}  .0724523
+{txt}RWmaxobs144 = {res}       144
+{txt}RWminobs144 = {res}       144
+{txt} RWrmse144 = {res} .07292486
+{txt}RWmaxobs141 = {res}       141
+{txt}RWminobs141 = {res}       141
+{txt} RWrmse141 = {res} .07359791
+{txt}RWmaxobs138 = {res}       138
+{txt}RWminobs138 = {res}       138
+{txt} RWrmse138 = {res} .07415885
+{txt}RWmaxobs135 = {res}       135
+{txt}RWminobs135 = {res}       135
+{txt} RWrmse135 = {res} .07551713
+{txt}RWmaxobs132 = {res}       132
+{txt}RWminobs132 = {res}       132
+{txt} RWrmse132 = {res} .07895271
+{txt}RWmaxobs129 = {res}       129
+{txt}RWminobs129 = {res}       129
+{txt} RWrmse129 = {res} .08680818
+{txt}RWmaxobs126 = {res}       126
+{txt}RWminobs126 = {res}       126
+{txt} RWrmse126 = {res} .08791729
+{txt}RWmaxobs123 = {res}       123
+{txt}RWminobs123 = {res}       123
+{txt} RWrmse123 = {res}  .0885621
+{txt}RWmaxobs120 = {res}       120
+{txt}RWminobs120 = {res}       120
+{txt} RWrmse120 = {res}  .0893681
+{txt}RWmaxobs117 = {res}       117
+{txt}RWminobs117 = {res}       117
+{txt} RWrmse117 = {res} .09222918
+{txt}RWmaxobs114 = {res}       114
+{txt}RWminobs114 = {res}       114
+{txt} RWrmse114 = {res} .09918976
+{txt}RWmaxobs111 = {res}       111
+{txt}RWminobs111 = {res}       111
+{txt} RWrmse111 = {res} .10159669
+{txt}RWmaxobs108 = {res}       108
+{txt}RWminobs108 = {res}       108
+{txt} RWrmse108 = {res}  .1074872
+{txt}RWmaxobs105 = {res}       105
+{txt}RWminobs105 = {res}       105
+{txt} RWrmse105 = {res} .11024241
+{txt}RWmaxobs102 = {res}       102
+{txt}RWminobs102 = {res}       102
+{txt} RWrmse102 = {res} .11448013
+{txt}RWmaxobs99 = {res}        99
+{txt}RWminobs99 = {res}        99
+{txt}  RWrmse99 = {res} .11681123
+{txt}RWmaxobs96 = {res}        96
+{txt}RWminobs96 = {res}        96
+{txt}  RWrmse96 = {res} .12412703
+{txt}RWmaxobs93 = {res}        93
+{txt}RWminobs93 = {res}        93
+{txt}  RWrmse93 = {res} .13010923
+{txt}RWmaxobs90 = {res}        90
+{txt}RWminobs90 = {res}        90
+{txt}  RWrmse90 = {res} .12958828
+{txt}RWmaxobs87 = {res}        87
+{txt}RWminobs87 = {res}        87
+{txt}  RWrmse87 = {res} .13728567
+{txt}RWmaxobs84 = {res}        84
+{txt}RWminobs84 = {res}        84
+{txt}  RWrmse84 = {res} .14028654
+{txt}RWmaxobs81 = {res}        81
+{txt}RWminobs81 = {res}        81
+{txt}  RWrmse81 = {res} .14073066
+{txt}RWmaxobs78 = {res}        78
+{txt}RWminobs78 = {res}        78
+{txt}  RWrmse78 = {res} .14462066
+{txt}RWmaxobs75 = {res}        75
+{txt}RWminobs75 = {res}        75
+{txt}  RWrmse75 = {res} .14520888
+{txt}RWmaxobs72 = {res}        72
+{txt}RWminobs72 = {res}        72
+{txt}  RWrmse72 = {res} .14882576
+{txt}RWmaxobs69 = {res}        69
+{txt}RWminobs69 = {res}        69
+{txt}  RWrmse69 = {res} .16426363
+{txt}RWmaxobs66 = {res}        66
+{txt}RWminobs66 = {res}        66
+{txt}  RWrmse66 = {res} .16732114
+{txt}RWmaxobs63 = {res}        63
+{txt}RWminobs63 = {res}        63
+{txt}  RWrmse63 = {res}  .1679914
+{txt}RWmaxobs60 = {res}        60
+{txt}RWminobs60 = {res}        60
+{txt}  RWrmse60 = {res} .18224837
+{txt}RWmaxobs57 = {res}        57
+{txt}RWminobs57 = {res}        57
+{txt}  RWrmse57 = {res} .19923544
+{txt}RWmaxobs54 = {res}        54
+{txt}RWminobs54 = {res}        54
+{txt}  RWrmse54 = {res}  .2008839
+{txt}RWmaxobs51 = {res}        51
+{txt}RWminobs51 = {res}        51
+{txt}  RWrmse51 = {res}  .2096647
+{txt}RWmaxobs48 = {res}        48
+{txt}RWminobs48 = {res}        48
+{txt}  RWrmse48 = {res} .20847129
+{txt}RWmaxobs45 = {res}        45
+{txt}RWminobs45 = {res}        45
+{txt}  RWrmse45 = {res}  .2244767
+{txt}RWmaxobs42 = {res}        42
+{txt}RWminobs42 = {res}        42
+{txt}  RWrmse42 = {res} .25720484
+{txt}RWmaxobs39 = {res}        39
+{txt}RWminobs39 = {res}        39
+{txt}  RWrmse39 = {res} .24835914
+{txt}RWmaxobs36 = {res}        36
+{txt}RWminobs36 = {res}        36
+{txt}  RWrmse36 = {res} .24045465
+{txt}RWmaxobs33 = {res}        33
+{txt}RWminobs33 = {res}        33
+{txt}  RWrmse33 = {res} .26919986
+{txt}RWmaxobs30 = {res}        30
+{txt}RWminobs30 = {res}        30
+{txt}  RWrmse30 = {res} .49888354
+{txt}RWmaxobs27 = {res}        27
+{txt}RWminobs27 = {res}        27
+{txt}  RWrmse27 = {res} .32666868
+{txt}RWmaxobs24 = {res}        24
+{txt}RWminobs24 = {res}        24
+{txt}  RWrmse24 = {res} .66642366
+{txt}RWmaxobs21 = {res}        21
+{txt}RWminobs21 = {res}        21
+{txt}  RWrmse21 = {res} .34614878
+{txt}RWmaxobs18 = {res}        18
+{txt}RWminobs18 = {res}        18
+{txt}  RWrmse18 = {res}   .757383
+{txt}RWmaxobs15 = {res}        15
+{txt}RWminobs15 = {res}        15
+{txt}  RWrmse15 = {res} .21744051
+{txt}RWmaxobs12 = {res}        12
+{txt}RWminobs12 = {res}        12
+{txt}  RWrmse12 = {res}  .0132376
+{txt} RWmaxobs9 = {res}         9
+{txt} RWminobs9 = {res}         9
+{txt}   RWrmse9 = {res} .01629782
+{txt} RWmaxobs6 = {res}         6
+{txt} RWminobs6 = {res}         6
+{txt}   RWrmse6 = {res}  .0162575
+{txt} RWmaxobs3 = {res}         3
+{txt} RWminobs3 = {res}         3
+{txt}   RWrmse3 = {res}  .0206163
+{txt}
+{com}. /*
+> RWmaxobs12 =         12
+> RWminobs12 =         12
+> RWrmse12 =   .0132376
+> */
+. 
+. 
+. * Going with model 1 because average RWrmse is lower across window sizes
+. scalar rwrmse = .0132376
+{txt}
+{com}. reg d.lnTotal l(1/3)d.lnTotal m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11 if tin(,2021m3)
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       371
+{txt}{hline 13}{c +}{hline 34}   F(14, 356)      = {res}    19.13
+{txt}       Model {c |} {res} .024491123        14  .001749366   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} .032550038       356  .000091433   {txt}R-squared       ={res}    0.4294
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.4069
+{txt}       Total {c |} {res} .057041161       370  .000154165   {txt}Root MSE        =   {res} .00956
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}   D.lnTotal{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 5}lnTotal {c |}
+{space 9}LD. {c |}{col 14}{res}{space 2}-.0016173{col 26}{space 2} .0529806{col 37}{space 1}   -0.03{col 46}{space 3}0.976{col 54}{space 4}-.1058116{col 67}{space 3} .1025769
+{txt}{space 8}L2D. {c |}{col 14}{res}{space 2}-.1325018{col 26}{space 2} .0525096{col 37}{space 1}   -2.52{col 46}{space 3}0.012{col 54}{space 4}-.2357698{col 67}{space 3}-.0292338
+{txt}{space 8}L3D. {c |}{col 14}{res}{space 2}  .026173{col 26}{space 2} .0529824{col 37}{space 1}    0.49{col 46}{space 3}0.622{col 54}{space 4}-.0780247{col 67}{space 3} .1303708
+{txt}{space 12} {c |}
+{space 10}m1 {c |}{col 14}{res}{space 2}-.0254857{col 26}{space 2} .0024679{col 37}{space 1}  -10.33{col 46}{space 3}0.000{col 54}{space 4}-.0303391{col 67}{space 3}-.0206322
+{txt}{space 10}m2 {c |}{col 14}{res}{space 2} .0004869{col 26}{space 2} .0029045{col 37}{space 1}    0.17{col 46}{space 3}0.867{col 54}{space 4}-.0052252{col 67}{space 3}  .006199
+{txt}{space 10}m3 {c |}{col 14}{res}{space 2} -.003913{col 26}{space 2} .0027686{col 37}{space 1}   -1.41{col 46}{space 3}0.158{col 54}{space 4}-.0093579{col 67}{space 3} .0015318
+{txt}{space 10}m4 {c |}{col 14}{res}{space 2} -.013317{col 26}{space 2} .0026543{col 37}{space 1}   -5.02{col 46}{space 3}0.000{col 54}{space 4}-.0185371{col 67}{space 3}-.0080969
+{txt}{space 10}m5 {c |}{col 14}{res}{space 2}-.0064632{col 26}{space 2} .0026182{col 37}{space 1}   -2.47{col 46}{space 3}0.014{col 54}{space 4}-.0116124{col 67}{space 3}-.0013141
+{txt}{space 10}m6 {c |}{col 14}{res}{space 2}-.0088465{col 26}{space 2} .0025835{col 37}{space 1}   -3.42{col 46}{space 3}0.001{col 54}{space 4}-.0139273{col 67}{space 3}-.0037657
+{txt}{space 10}m7 {c |}{col 14}{res}{space 2}-.0159741{col 26}{space 2} .0025331{col 37}{space 1}   -6.31{col 46}{space 3}0.000{col 54}{space 4}-.0209559{col 67}{space 3}-.0109924
+{txt}{space 10}m8 {c |}{col 14}{res}{space 2}-.0051433{col 26}{space 2} .0026374{col 37}{space 1}   -1.95{col 46}{space 3}0.052{col 54}{space 4}-.0103302{col 67}{space 3} .0000435
+{txt}{space 10}m9 {c |}{col 14}{res}{space 2}-.0096793{col 26}{space 2} .0025635{col 37}{space 1}   -3.78{col 46}{space 3}0.000{col 54}{space 4}-.0147208{col 67}{space 3}-.0046378
+{txt}{space 9}m10 {c |}{col 14}{res}{space 2}-.0021472{col 26}{space 2} .0025489{col 37}{space 1}   -0.84{col 46}{space 3}0.400{col 54}{space 4}  -.00716{col 67}{space 3} .0028657
+{txt}{space 9}m11 {c |}{col 14}{res}{space 2} .0024587{col 26}{space 2} .0024684{col 37}{space 1}    1.00{col 46}{space 3}0.320{col 54}{space 4}-.0023958{col 67}{space 3} .0073131
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} .0088125{col 26}{space 2} .0018473{col 37}{space 1}    4.77{col 46}{space 3}0.000{col 54}{space 4} .0051795{col 67}{space 3} .0124454
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. predict pd
+{txt}(option {bf:xb} assumed; fitted values)
+(15 missing values generated)
+
+{com}. gen pflcount=exp((rwrmse^2)/2)*exp(l.lnTotal+pd) if Date==tm(2021m4)
+{txt}(386 missing values generated)
+
+{com}. gen ub1=exp((rwrmse^2)/2)*exp(l.lnTotal+pd+1*rwrmse) if Date==tm(2021m4)
+{txt}(386 missing values generated)
+
+{com}. gen lb1=exp((rwrmse^2)/2)*exp(l.lnTotal+pd-1*rwrmse) if Date==tm(2021m4)
+{txt}(386 missing values generated)
+
+{com}. gen ub2=exp((rwrmse^2)/2)*exp(l.lnTotal+pd+2*rwrmse) if Date==tm(2021m4)
+{txt}(386 missing values generated)
+
+{com}. gen lb2=exp((rwrmse^2)/2)*exp(l.lnTotal+pd-2*rwrmse) if Date==tm(2021m4)
+{txt}(386 missing values generated)
+
+{com}. gen ub3=exp((rwrmse^2)/2)*exp(l.lnTotal+pd+3*rwrmse) if Date==tm(2021m4)
+{txt}(386 missing values generated)
+
+{com}. gen lb3=exp((rwrmse^2)/2)*exp(l.lnTotal+pd-3*rwrmse) if Date==tm(2021m4)
+{txt}(386 missing values generated)
+
+{com}. drop pd
+{txt}
+{com}. 
+. replace pflcount=Total if Date==tm(2021m3)
+{txt}(1 real change made)
+
+{com}. replace ub1=Total if Date==tm(2021m3)
+{txt}(1 real change made)
+
+{com}. replace ub2=Total if Date==tm(2021m3)
+{txt}(1 real change made)
+
+{com}. replace ub3=Total if Date==tm(2021m3)
+{txt}(1 real change made)
+
+{com}. replace lb1=Total if Date==tm(2021m3)
+{txt}(1 real change made)
+
+{com}. replace lb2=Total if Date==tm(2021m3)
+{txt}(1 real change made)
+
+{com}. replace lb3=Total if Date==tm(2021m3)
+{txt}(1 real change made)
+
+{com}. 
+. twoway (tsrline ub3 ub2 if tin(2020m4,2021m4), ///
+>         recast(rarea) fcolor(orange) fintensity(20) lwidth(none) ) ///
+>         (tsrline ub2 ub1 if tin(2020m4,2021m4), ///
+>         recast(rarea) fcolor(green) fintensity(40) lwidth(none) ) ///
+>         (tsrline ub1 pflcount if tin(2020m4,2021m4), ///
+>         recast(rarea) fcolor(purple) fintensity(65) lwidth(none) ) ///
+>         (tsrline pflcount lb1 if tin(2020m4,2021m4), ///
+>         recast(rarea) fcolor(purple) fintensity(65) lwidth(none) ) ///
+>         (tsrline lb1 lb2 if tin(2020m4,2021m4), ///
+>         recast(rarea) fcolor(green) fintensity(40) lwidth(none) ) ///
+>         (tsrline lb2 lb3 if tin(2020m4,2021m4), ///
+>         recast(rarea) fcolor(orange) fintensity(20) lwidth(none) ) ///
+>         (tsline Total pflcount if tin(2020m4,2021m4) , ///
+>         lcolor(gs12 pink) lwidth(medthick medthick) ///
+>         lpattern(solid longdash)), scheme(s1mono) legend(off)
+{res}{txt}
+{com}. graph export "TotalFan1.png", replace
+{txt}(file /Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Final Exam/TotalFan1.png written in PNG format)
+
+{com}. 
+. * More than 1 step
+. arima d.lnTotal l(1/3)d.lnTotal m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11 if tin(1990m1,2021m3)
+
+{txt}(setting optimization to BHHH)
+{res}{txt}Iteration 0:{col 16}log likelihood = {res} 1206.3625{txt}  
+{res}{txt}Iteration 1:{col 16}log likelihood = {res} 1206.3625{txt}  
+{res}
+{txt}ARIMA regression
+
+Sample:  {res}1990m5 - 2021m3                        {txt}Number of obs     = {res}       371
+                                                {txt}Wald chi2({res}14{txt})     =  {res}    83.94
+{txt}Log likelihood = {res} 1206.362                      {txt}Prob > chi2       =     {res}0.0000
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}      OPG
+{col 1}   D.lnTotal{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}lnTotal      {txt}{c |}
+{space 5}lnTotal {c |}
+{space 9}LD. {c |}{col 14}{res}{space 2}-.0016173{col 26}{space 2} .0448009{col 37}{space 1}   -0.04{col 46}{space 3}0.971{col 54}{space 4}-.0894254{col 67}{space 3} .0861907
+{txt}{space 8}L2D. {c |}{col 14}{res}{space 2}-.1325018{col 26}{space 2} .0486537{col 37}{space 1}   -2.72{col 46}{space 3}0.006{col 54}{space 4}-.2278614{col 67}{space 3}-.0371422
+{txt}{space 8}L3D. {c |}{col 14}{res}{space 2}  .026173{col 26}{space 2} .0400229{col 37}{space 1}    0.65{col 46}{space 3}0.513{col 54}{space 4}-.0522705{col 67}{space 3} .1046166
+{txt}{space 12} {c |}
+{space 10}m1 {c |}{col 14}{res}{space 2}-.0254857{col 26}{space 2} .0054401{col 37}{space 1}   -4.68{col 46}{space 3}0.000{col 54}{space 4}-.0361481{col 67}{space 3}-.0148232
+{txt}{space 10}m2 {c |}{col 14}{res}{space 2} .0004869{col 26}{space 2} .0068588{col 37}{space 1}    0.07{col 46}{space 3}0.943{col 54}{space 4}-.0129561{col 67}{space 3} .0139299
+{txt}{space 10}m3 {c |}{col 14}{res}{space 2} -.003913{col 26}{space 2} .0058695{col 37}{space 1}   -0.67{col 46}{space 3}0.505{col 54}{space 4}-.0154171{col 67}{space 3}  .007591
+{txt}{space 10}m4 {c |}{col 14}{res}{space 2} -.013317{col 26}{space 2} .0047531{col 37}{space 1}   -2.80{col 46}{space 3}0.005{col 54}{space 4}-.0226329{col 67}{space 3}-.0040012
+{txt}{space 10}m5 {c |}{col 14}{res}{space 2}-.0064632{col 26}{space 2} .0082351{col 37}{space 1}   -0.78{col 46}{space 3}0.433{col 54}{space 4}-.0226038{col 67}{space 3} .0096773
+{txt}{space 10}m6 {c |}{col 14}{res}{space 2}-.0088465{col 26}{space 2} .0069016{col 37}{space 1}   -1.28{col 46}{space 3}0.200{col 54}{space 4}-.0223735{col 67}{space 3} .0046804
+{txt}{space 10}m7 {c |}{col 14}{res}{space 2}-.0159741{col 26}{space 2} .0056734{col 37}{space 1}   -2.82{col 46}{space 3}0.005{col 54}{space 4}-.0270938{col 67}{space 3}-.0048545
+{txt}{space 10}m8 {c |}{col 14}{res}{space 2}-.0051433{col 26}{space 2} .0074271{col 37}{space 1}   -0.69{col 46}{space 3}0.489{col 54}{space 4}-.0197002{col 67}{space 3} .0094135
+{txt}{space 10}m9 {c |}{col 14}{res}{space 2}-.0096793{col 26}{space 2} .0051505{col 37}{space 1}   -1.88{col 46}{space 3}0.060{col 54}{space 4}-.0197741{col 67}{space 3} .0004155
+{txt}{space 9}m10 {c |}{col 14}{res}{space 2}-.0021472{col 26}{space 2} .0048943{col 37}{space 1}   -0.44{col 46}{space 3}0.661{col 54}{space 4}-.0117399{col 67}{space 3} .0074456
+{txt}{space 9}m11 {c |}{col 14}{res}{space 2} .0024587{col 26}{space 2} .0066745{col 37}{space 1}    0.37{col 46}{space 3}0.713{col 54}{space 4}-.0106231{col 67}{space 3} .0155405
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} .0088125{col 26}{space 2} .0042033{col 37}{space 1}    2.10{col 46}{space 3}0.036{col 54}{space 4} .0005741{col 67}{space 3} .0170508
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+      /sigma {c |}{col 14}{res}{space 2} .0093667{col 26}{space 2} .0001378{col 37}{space 1}   67.96{col 46}{space 3}0.000{col 54}{space 4} .0090966{col 67}{space 3} .0096369
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 0 79}Note: The test of the variance against zero is one sided, and the two-sided confidence interval is truncated at zero.{p_end}
+
+{com}. predict pnonfarm, dynamic(tm(2021m3))
+{txt}(option {bf:xb} assumed; predicted values)
+(4 missing values generated)
+
+{com}. predict mse, mse dynamic(mofd(tm(2021m4)))
+{txt}
+{com}. gen totmse = mse if Date==tm(2021m4)
+{txt}(386 missing values generated)
+
+{com}. replace totmse = l.totmse+mse if Date>tm(2021m4)
+{txt}(11 real changes made)
+
+{com}. gen pnonfarma = Total if Date==tm(2021m3)
+{txt}(386 missing values generated)
+
+{com}. replace pnonfarma = l.pnonfarma*exp(pnonfarm+mse/2) if Date>tm(2021m3)
+{txt}(12 real changes made)
+
+{com}. 
+. gen ub1a = pnonfarma*exp(totmse^.5)
+{txt}(375 missing values generated)
+
+{com}. gen ub2a = pnonfarma*exp(2*totmse^.5)
+{txt}(375 missing values generated)
+
+{com}. gen ub3a = pnonfarma*exp(3*totmse^.5)
+{txt}(375 missing values generated)
+
+{com}. gen lb1a = pnonfarma/exp(totmse^.5)
+{txt}(375 missing values generated)
+
+{com}. gen lb2a = pnonfarma/exp(2*totmse^.5)
+{txt}(375 missing values generated)
+
+{com}. gen lb3a = pnonfarma/exp(3*totmse^.5)
+{txt}(375 missing values generated)
+
+{com}. 
+. replace ub1a=Total if Date == tm(2021m3)
+{txt}(1 real change made)
+
+{com}. replace ub2a=Total if Date == tm(2021m3)
+{txt}(1 real change made)
+
+{com}. replace ub3a=Total if Date == tm(2021m3)
+{txt}(1 real change made)
+
+{com}. replace lb1a=Total if Date == tm(2021m3)
+{txt}(1 real change made)
+
+{com}. replace lb2a=Total if Date == tm(2021m3)
+{txt}(1 real change made)
+
+{com}. replace lb3a=Total if Date == tm(2021m3)
+{txt}(1 real change made)
+
+{com}. 
+. twoway (tsrline ub3a ub2a if tin(2019m1,2022m3), ///
+>         recast(rarea) fcolor(red) fintensity(20) lwidth(none) ) ///
+>         (tsrline ub2a ub1a if tin(2019m1,2022m3), ///
+>         recast(rarea) fcolor(yellow) fintensity(40) lwidth(none) ) ///
+>         (tsrline ub1a pnonfarma if tin(2019m1,2022m3), ///
+>         recast(rarea) fcolor(blue) fintensity(65) lwidth(none) ) ///
+>         (tsrline pnonfarma lb1a if tin(2019m1,2022m3), ///
+>         recast(rarea) fcolor(blue) fintensity(65) lwidth(none) ) ///
+>         (tsrline lb1a lb2a if tin(2019m1,2022m3), ///
+>         recast(rarea) fcolor(yellow) fintensity(40) lwidth(none) ) ///
+>         (tsrline lb2a lb3a if tin(2019m1,2022m3), ///
+>         recast(rarea) fcolor(red) fintensity(20) lwidth(none) ) ///
+>         (tsline Total pnonfarma if tin(2019m1,2022m3) , ///
+>         lcolor(gs12 pink) lwidth(medthick medthick) ///
+>         lpattern(solid longdash)) , scheme(s1mono) legend(off)
+{res}{txt}
+{com}. graph export "TotalFan12.png", replace
+{txt}(file /Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Final Exam/TotalFan12.png written in PNG format)
+
+{com}. 
+. scalar rmse_mod1 = .0132376
+{txt}
+{com}. reg d.lnTotal l(1/3)d.lnTotal m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11 if tin(1990m1,2021m3)
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       371
+{txt}{hline 13}{c +}{hline 34}   F(14, 356)      = {res}    19.13
+{txt}       Model {c |} {res} .024491123        14  .001749366   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} .032550038       356  .000091433   {txt}R-squared       ={res}    0.4294
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.4069
+{txt}       Total {c |} {res} .057041161       370  .000154165   {txt}Root MSE        =   {res} .00956
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}   D.lnTotal{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 5}lnTotal {c |}
+{space 9}LD. {c |}{col 14}{res}{space 2}-.0016173{col 26}{space 2} .0529806{col 37}{space 1}   -0.03{col 46}{space 3}0.976{col 54}{space 4}-.1058116{col 67}{space 3} .1025769
+{txt}{space 8}L2D. {c |}{col 14}{res}{space 2}-.1325018{col 26}{space 2} .0525096{col 37}{space 1}   -2.52{col 46}{space 3}0.012{col 54}{space 4}-.2357698{col 67}{space 3}-.0292338
+{txt}{space 8}L3D. {c |}{col 14}{res}{space 2}  .026173{col 26}{space 2} .0529824{col 37}{space 1}    0.49{col 46}{space 3}0.622{col 54}{space 4}-.0780247{col 67}{space 3} .1303708
+{txt}{space 12} {c |}
+{space 10}m1 {c |}{col 14}{res}{space 2}-.0254857{col 26}{space 2} .0024679{col 37}{space 1}  -10.33{col 46}{space 3}0.000{col 54}{space 4}-.0303391{col 67}{space 3}-.0206322
+{txt}{space 10}m2 {c |}{col 14}{res}{space 2} .0004869{col 26}{space 2} .0029045{col 37}{space 1}    0.17{col 46}{space 3}0.867{col 54}{space 4}-.0052252{col 67}{space 3}  .006199
+{txt}{space 10}m3 {c |}{col 14}{res}{space 2} -.003913{col 26}{space 2} .0027686{col 37}{space 1}   -1.41{col 46}{space 3}0.158{col 54}{space 4}-.0093579{col 67}{space 3} .0015318
+{txt}{space 10}m4 {c |}{col 14}{res}{space 2} -.013317{col 26}{space 2} .0026543{col 37}{space 1}   -5.02{col 46}{space 3}0.000{col 54}{space 4}-.0185371{col 67}{space 3}-.0080969
+{txt}{space 10}m5 {c |}{col 14}{res}{space 2}-.0064632{col 26}{space 2} .0026182{col 37}{space 1}   -2.47{col 46}{space 3}0.014{col 54}{space 4}-.0116124{col 67}{space 3}-.0013141
+{txt}{space 10}m6 {c |}{col 14}{res}{space 2}-.0088465{col 26}{space 2} .0025835{col 37}{space 1}   -3.42{col 46}{space 3}0.001{col 54}{space 4}-.0139273{col 67}{space 3}-.0037657
+{txt}{space 10}m7 {c |}{col 14}{res}{space 2}-.0159741{col 26}{space 2} .0025331{col 37}{space 1}   -6.31{col 46}{space 3}0.000{col 54}{space 4}-.0209559{col 67}{space 3}-.0109924
+{txt}{space 10}m8 {c |}{col 14}{res}{space 2}-.0051433{col 26}{space 2} .0026374{col 37}{space 1}   -1.95{col 46}{space 3}0.052{col 54}{space 4}-.0103302{col 67}{space 3} .0000435
+{txt}{space 10}m9 {c |}{col 14}{res}{space 2}-.0096793{col 26}{space 2} .0025635{col 37}{space 1}   -3.78{col 46}{space 3}0.000{col 54}{space 4}-.0147208{col 67}{space 3}-.0046378
+{txt}{space 9}m10 {c |}{col 14}{res}{space 2}-.0021472{col 26}{space 2} .0025489{col 37}{space 1}   -0.84{col 46}{space 3}0.400{col 54}{space 4}  -.00716{col 67}{space 3} .0028657
+{txt}{space 9}m11 {c |}{col 14}{res}{space 2} .0024587{col 26}{space 2} .0024684{col 37}{space 1}    1.00{col 46}{space 3}0.320{col 54}{space 4}-.0023958{col 67}{space 3} .0073131
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} .0088125{col 26}{space 2} .0018473{col 37}{space 1}    4.77{col 46}{space 3}0.000{col 54}{space 4} .0051795{col 67}{space 3} .0124454
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. predict plTotal
+{txt}(option {bf:xb} assumed; fitted values)
+(15 missing values generated)
+
+{com}. predict temp if tin(2021m3,2021m3)
+{txt}(option {bf:xb} assumed; fitted values)
+(386 missing values generated)
+
+{com}. replace plTotal=temp if tin(2021m3,2021m3)
+{txt}(0 real changes made)
+
+{com}. drop temp
+{txt}
+{com}. gen pTotal=exp(l.lnTotal+plTotal+(rmse_mod1^2)/2)
+{txt}(15 missing values generated)
+
+{com}. gen lbTotal=exp(l.lnTotal+plTotal-1.96*rmse_mod1+(rmse_mod1^2)/2)
+{txt}(15 missing values generated)
+
+{com}. gen ubTotal=exp(l.lnTotal+plTotal+1.96*rmse_mod1+(rmse_mod1^2)/2)
+{txt}(15 missing values generated)
+
+{com}. 
+. gen res=(d.lnTotal-plTotal)
+{txt}(16 missing values generated)
+
+{com}. gen expres=exp(res)
+{txt}(16 missing values generated)
+
+{com}. summ expres
+
+{txt}    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 6}expres {c |}{res}        371    1.000042    .0088821   .8565838   1.028623
+{txt}
+{com}. scalar meanexpres=r(mean)
+{txt}
+{com}. gen epTotal=exp(l.lnTotal+plTotal)*meanexpres
+{txt}(15 missing values generated)
+
+{com}. _pctile res, percentile(2.5,97.5)
+{txt}
+{com}. return list
+
+{txt}scalars:
+                 r(r1) =  {res}-.0089262239634991
+                 {txt}r(r2) =  {res}.0108835604041815
+{txt}
+{com}. gen elbTotal=exp(l.lnTotal+plTotal+r(r1))*meanexpres
+{txt}(15 missing values generated)
+
+{com}. gen eubTotal=exp(l.lnTotal+plTotal+r(r2))*meanexpres
+{txt}(15 missing values generated)
+
+{com}.         
+. tsline Total pTotal elbTotal eubTotal lbTotal ubTotal if tin(2019m1,2021m4), ///
+>         scheme(s1mono) tline(2021m3, lcolor(gs4)) ///
+>         lpattern(solid solid longdash longdash shortdash shortdash) ///
+>         lcolor(dkorange gs5 gs10 gs10 dkorange%60 dkorange%60) ///
+>         lwidth(medthick medthick medium medium)
+{res}{txt}
+{com}. graph export "interval_tsline.png", replace
+{txt}(file /Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Final Exam/interval_tsline.png written in PNG format)
+
+{com}.         
+. histogram expres, normal kdensity saving(residuals.gph, replace)
+{txt}(bin={res}19{txt}, start={res}.85658383{txt}, width={res}.00905468{txt})
+{res}{txt}(file residuals.gph saved)
+
+{com}. graph export "residuals.png", replace
+{txt}(file /Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Final Exam/residuals.png written in PNG format)
+
+{com}. 
+. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}/Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Final Exam/Final Exam.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}29 Apr 2021, 12:09:27
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}

@@ -2,7 +2,7 @@ clear
 set more off
 
 cd "/Users/guslipkin/Documents/Spring2020/CAP 4763 ~ Time Series/Problem Sets/Final Exam"
-*log using "Final Exam.smcl", replace
+log using "Final Exam.smcl", replace
 import delimited "SP21Final.csv"
 
 gen datec=date(date, "YMD")
@@ -53,7 +53,7 @@ replace m10=1 if month==10
 gen m11=0
 replace m11=1 if month==11
 
-/*
+
 summ construct leisure manufacture total
 summ lnConstruct lnLeisure lnManufacture lnTotal
 
@@ -67,7 +67,7 @@ tsline lnTotal, saving(lnTotal_tsline.gph, replace)
 tsline d.lnTotal, saving(dlnTotal_tsline.gph, replace)
 graph combine Total_tsline.gph dlnTotal_tsline.gph, saving(lnTotal-Total, replace)
 graph export "lnTotal-dlnTotal_tsline.png", replace
-*/
+
 ac lnTotal, saving(lnTotal_ac, replace)
 pac lnTotal, saving(lnTotal_pac, replace)
 graph combine lnTotal_ac.gph lnTotal_pac.gph, saving(lnTotal_ac_pac, replace)
@@ -145,7 +145,7 @@ gsreg dlnTotal dlnConstruct l1dlnConstruct l2dlnConstruct l3dlnConstruct ///
 	samesample nindex( -1 aic -1 bic -1 rmse_out) results(gsreg_dlnTtoal) replace
 */
 
-/*
+
 loocv reg d.lnTotal l(1/3)d.lnTotal m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11
 quietly reg d.lnTotal l(1/3)d.lnTotal m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11
 estat ic
@@ -165,7 +165,7 @@ loocv reg d.lnTotal l(1/3,12,24)d.lnTotal l(1/3,12,24)d.lnConstruct ///
 quietly reg d.lnTotal l(1/3,12,24)d.lnTotal l(1/3,12,24)d.lnConstruct ///
 	l(1/3,12,24)d.lnLeisure l(1/3)d.lnManufacture m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11
 estat ic
-*/
+
 *Lowest rmse (1)
 reg d.lnTotal l(1/3)d.lnTotal m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11
 scalar drop _all
@@ -196,7 +196,7 @@ scalar list
 RWmaxobs12 =         12
 RWminobs12 =         12
 RWrmse12 =   .0132376
-
+*/
 
 *lowest AIC and BIC (3)
 reg d.lnTotal l(1/3)d.lnTotal l(1/3)d.lnConstruct l(1/3)d.lnLeisure ///
@@ -230,7 +230,7 @@ RWmaxobs12 =         12
 RWminobs12 =         12
 RWrmse12 =   .0132376
 */
-*/
+
 
 * Going with model 1 because average RWrmse is lower across window sizes
 scalar rwrmse = .0132376
@@ -309,3 +309,36 @@ twoway (tsrline ub3a ub2a if tin(2019m1,2022m3), ///
 	lcolor(gs12 pink) lwidth(medthick medthick) ///
 	lpattern(solid longdash)) , scheme(s1mono) legend(off)
 graph export "TotalFan12.png", replace
+
+scalar rmse_mod1 = .0132376
+reg d.lnTotal l(1/3)d.lnTotal m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11 if tin(1990m1,2021m3)
+predict plTotal
+predict temp if tin(2021m3,2021m3)
+replace plTotal=temp if tin(2021m3,2021m3)
+drop temp
+gen pTotal=exp(l.lnTotal+plTotal+(rmse_mod1^2)/2)
+gen lbTotal=exp(l.lnTotal+plTotal-1.96*rmse_mod1+(rmse_mod1^2)/2)
+gen ubTotal=exp(l.lnTotal+plTotal+1.96*rmse_mod1+(rmse_mod1^2)/2)
+
+gen res=(d.lnTotal-plTotal)
+gen expres=exp(res)
+summ expres
+scalar meanexpres=r(mean)
+gen epTotal=exp(l.lnTotal+plTotal)*meanexpres
+_pctile res, percentile(2.5,97.5)
+return list
+gen elbTotal=exp(l.lnTotal+plTotal+r(r1))*meanexpres
+gen eubTotal=exp(l.lnTotal+plTotal+r(r2))*meanexpres
+	
+tsline Total pTotal elbTotal eubTotal lbTotal ubTotal if tin(2019m1,2021m4), ///
+	scheme(s1mono) tline(2021m3, lcolor(gs4)) ///
+	lpattern(solid solid longdash longdash shortdash shortdash) ///
+	lcolor(dkorange gs5 gs10 gs10 dkorange%60 dkorange%60) ///
+	lwidth(medthick medthick medium medium)
+graph export "interval_tsline.png", replace
+	
+histogram expres, normal kdensity saving(residuals.gph, replace)
+graph export "residuals.png", replace
+
+log close
+translate "Final Exam.smcl" "Final Project.txt", replace
