@@ -16,7 +16,10 @@ gen lnLeisure = ln(leisure)
 gen lnManufacture = ln(manufacture)
 gen lnTotal = ln(total)
 
-rename total Total
+gen Total = total
+gen Construct = construct
+gen Leisure = leisure
+gen Manufacture = manufacture
 
 /*
 gen withMarchTotal = Total
@@ -60,27 +63,49 @@ graph combine lnConstructLeisure_tsline.gph lnManufacture_tsline.gph, ///
 	saving(lnConstructLeisure, replace)
 graph export "lnConstructLeisure-Manufacture_tsline.png", replace
 
+tsline lnTotal, saving(lnTotal_tsline.gph, replace)
+tsline d.lnTotal, saving(dlnTotal_tsline.gph, replace)
+graph combine Total_tsline.gph dlnTotal_tsline.gph, saving(lnTotal-Total, replace)
+graph export "lnTotal-dlnTotal_tsline.png", replace
+*/
 ac lnTotal, saving(lnTotal_ac, replace)
 pac lnTotal, saving(lnTotal_pac, replace)
 graph combine lnTotal_ac.gph lnTotal_pac.gph, saving(lnTotal_ac_pac, replace)
 graph export "lnTotal_ac_pac.png", replace
+dfuller lnTotal, trend regress
 
 ac lnConstruct, saving(lnConstruct_ac, replace)
 pac lnConstruct, saving(lnConstruct_pac, replace)
 graph combine lnConstruct_ac.gph lnConstruct_pac.gph, saving(lnConstruct_ac_pac, replace)
 graph export "lnConstruct_ac_pac.png", replace
+dfuller lnConstruct, trend regress
 
 ac lnLeisure, saving(lnLeisure_ac, replace)
 pac lnLeisure, saving(lnLeisure_pac, replace)
 graph combine lnLeisure_ac.gph lnLeisure_pac.gph, saving(lnLeisure_ac_pac, replace)
 graph export "lnLeisure_ac_pac.png", replace
+dfuller lnLeisure, trend regress
 
-ac lnTotal, saving(lnTotal_ac, replace)
-pac lnTotal, saving(lnTotal_pac, replace)
-graph combine lnTotal_ac.gph lnTotal_pac.gph, saving(lnManufacture_ac_pac, replace)
+ac lnManufacture, saving(lnManufacture_ac, replace)
+pac lnManufacture, saving(lnManufacture_pac, replace)
+graph combine lnManufacture_ac.gph lnManufacture_pac.gph, saving(lnManufacture_ac_pac, replace)
 graph export "lnManufacture_ac_pac.png", replace
-*/
+dfuller lnManufacture, trend regress
 
+quietly reg l(12,24)d.Construct l(12,24)d.Leisure l(12,24)d.Manufacture
+testparm l(12,24)d.Construct l(12,24)d.Leisure l(12,24)d.Manufacture
+
+newey d.lnTotal l(0/3,12,24)d.Construct l(0/3,12,24)d.Manufacture l(0/3,12,24)d.Leisure, lag(24)
+test ld.Construct + ld.Construct + l2d.Construct + l3d.Construct + l12d.Construct + l24d.Construct ///
+	== d.Manufacture + ld.Manufacture + l2d.Manufacture + l3d.Manufacture + ///
+		l12d.Manufacture + l24d.Manufacture
+test d.Construct + ld.Construct + l2d.Construct + l3d.Construct + l12d.Construct + l24d.Construct ///
+	== d.Leisure + ld.Leisure + l2d.Leisure + l3d.Leisure + l12d.Leisure + l24d.Leisure
+test d.Leisure + ld.Leisure + l2d.Leisure + l3d.Leisure + l12d.Leisure + l24d.Leisure ///
+	== d.Manufacture + ld.Manufacture + l2d.Manufacture + l3d.Manufacture + ///
+		l12d.Manufacture + l24d.Manufacture
+
+*------------------------------------------------------------------------------*
 gen dlnConstruct=d.lnConstruct
 gen l1dlnConstruct=l1d.lnConstruct
 gen l2dlnConstruct=l2d.lnConstruct
@@ -109,8 +134,6 @@ gen l3dlnTotal=l3d.lnTotal
 gen l12dlnTotal=l12d.lnTotal
 gen l24dlnTotal=l24d.lnTotal
 
-twoway (tsline Total) (tsline d.lnTotal)
-*------------------------------------------------------------------------------*
 /*
 gsreg dlnTotal dlnConstruct l1dlnConstruct l2dlnConstruct l3dlnConstruct ///
 	l12dlnConstruct l24dlnConstruct ///

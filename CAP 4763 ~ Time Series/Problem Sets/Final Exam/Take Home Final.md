@@ -2,19 +2,112 @@
 
 ## Time Series Plots
 
+<img src="lnTotal-dlnTotal_tsline.png" alt="lnTotal-dlnTotal_tsline" style="zoom:33%;" />
+
 ## No Logs
+
+​	You do not want to take logs because that adjusts the distance between values and normalizes the data. Without the distances between data being preserved, there is no good way to measure proportions unless the log transformed data has identical transforms performed (the data going in would have to be the same).
 
 ## Persistent Data
 
-From AC and PAC
+### Construct
+<img src="lnConstruct_ac_pac.png" alt="lnConstruct_ac_pac" style="zoom:33%;" />
+
+​	Both first lags are high which means we should difference.
+
+| Test                                   | Result |
+| -------------------------------------- | ------ |
+| MacKinnon approximate p-value for Z(t) | 0.9796 |
+
+### Manufacture
+<img src="lnManufacture_ac_pac.png" alt="lnManufacture_ac_pac" style="zoom:33%;" />
+
+​	Both first lags are high which means we should difference.
+
+| Test                                   | Result |
+| -------------------------------------- | ------ |
+| MacKinnon approximate p-value for Z(t) | 0.9963 |
+
+### Total
+
+<img src="lnTotal_ac_pac.png" alt="lnTotal_ac_pac" style="zoom:33%;" />
+
+​	Both first lags are high which means we should difference.
+
+| Test                                   | Result |
+| -------------------------------------- | ------ |
+| MacKinnon approximate p-value for Z(t) | 0.6570 |
+
+​	Even though the dickey fuller test says we do not need to difference for construct, manufacture, and total, I'm still going to because ~~I already wrote everything with it differenced~~ the lags outside the confidence intervals in the PAC quite far apart and I can't imagine that there is really that much of an impact on current employment by employment from 30+ months ago. The only ones I can maybe understand are the 12 and 24 moth lags because employers will use historical data when hiring seasonal employees.
+
+### Leisure
+
+<img src="lnLeisure_ac_pac.png" alt="lnLeisure_ac_pac" style="zoom:33%;" />
+
+​	Both first lags are high which means we should difference.
+
+| Test                                   | Result |
+| -------------------------------------- | ------ |
+| MacKinnon approximate p-value for Z(t) | 0.0005 |
+
+​	The p value for leisure is below .05 so I don't need an excuse to difference this time. However, it must be noted that lags 31 and 32 are extremely high.
 
 ## Serial Correlation
 
-Dickey fuller
+​	Because not all lags are within the 95% confidence interval, we should worry at least a little bit about serial correlation. However, as I suggested earlier, the only lags that could have a true impact are the 12th and 24th lags and so I am not worried about serial correlation.
 
 ## Dropping Lags
 
-newey or test/testparm
+|             |            |           |       |       |            |           |
+| ----------- | ---------- | --------- | ----- | ----- | ---------- | --------- |
+|             | Newey-West |           |       |       |            |           |
+| D.lnTotal   | Coef.      | Std. Err. | t     | P>t   | [95% Conf. | Interval] |
+|             |            |           |       |       |            |           |
+| Construct   |            |           |       |       |            |           |
+| D1.         | .0004252   | .0000809  | 5.26  | 0.000 | .0002661   | .0005842  |
+| LD.         | .0000247   | .000044   | 0.56  | 0.574 | -.0000617  | .0001112  |
+| L2D.        | .0000613   | .0000403  | 1.52  | 0.129 | -.0000179  | .0001405  |
+| L3D.        | -.0000674  | .0000577  | -1.17 | 0.244 | -.000181   | .0000462  |
+| L12D.       | -.000035   | .0000641  | -0.55 | 0.585 | -.000161   | .000091   |
+| L24D.       | .0000494   | .0000684  | 0.72  | 0.470 | -.0000851  | .0001839  |
+| Manufacture |            |           |       |       |            |           |
+| D1.         | .0011938   | .0001924  | 6.21  | 0.000 | .0008154   | .0015723  |
+| LD.         | -.0002374  | .0001386  | -1.71 | 0.088 | -.00051    | .0000353  |
+| L2D.        | -.000336   | .0000718  | -4.68 | 0.000 | -.0004773  | -.0001948 |
+| L3D.        | -.0002689  | .0001059  | -2.54 | 0.012 | -.0004772  | -.0000606 |
+| L12D.       | .0003308   | .0001381  | 2.39  | 0.017 | .000059    | .0006025  |
+| L24D.       | .0002403   | .0001413  | 1.70  | 0.090 | -.0000376  | .0005182  |
+| Leisure     |            |           |       |       |            |           |
+| D1.         | .0002134   | 8.38e-06  | 25.47 | 0.000 | .0001969   | .0002299  |
+| LD.         | 5.34e-06   | 9.19e-06  | 0.58  | 0.561 | -.0000127  | .0000234  |
+| L2D.        | -2.42e-06  | .0000172  | -0.14 | 0.888 | -.0000364  | .0000315  |
+| L3D.        | -8.76e-06  | .0000174  | -0.50 | 0.614 | -.0000429  | .0000254  |
+| L12D.       | .0000629   | .0000361  | 1.74  | 0.082 | -8.04e-06  | .0001339  |
+| L24D.       | -.000016   | .0000428  | -0.37 | 0.708 | -.0001002  | .0000681  |
+|             |            |           |       |       |            |           |
+| _cons       | .0011957   | .0003664  | 3.26  | 0.001 | .000475    | .0019165  |
+
+​	The Newey-West test suggests we should drop lags 12 and 24.
+
+| Test Number | Variable | | Test Value |
+| ----- | ---------------- | ---- | ---- |
+| (1)   | L24D.Construct  | =    | 0     |
+| (2)   | L12D.Leisure  | =     | 0     |
+| (3)   | L24D.Leisure | =     | 0     |
+| (4)   | L12D.Manufacture | =    | 0    |
+| (5)   | L24D.Manufacture | =    | 0    |
+
+​	`testparm` suggests that there is no interaction between the 12th and 24th lags of each construct, leisure, and manufacture.
+
+## Equal Effects
+
+| Interaction             | Prob > F |
+| ----------------------- | -------- |
+| Construct ~ Manufacture | 0.0161   |
+| Construct ~ Leisure     | 0.0008   |
+| Manufacture ~ Leisure   | 0.0301   |
+
+​	The p-value for all three is less than 0.05 which means we can reject the null hypothesis and accept the alternative that the impacts of each variable are not equal.
 
 # Part 2
 
@@ -22,26 +115,7 @@ newey or test/testparm
 
 ### Differencing
 
-> Construct
-> <img src="lnConstruct_ac_pac.png" alt="lnConstruct_ac_pac" style="zoom:33%;" />
->
-> Both first lags are high which means we should difference.
-
-
-> Leisure
-> <img src="lnLeisure_ac_pac.png" alt="lnLeisure_ac_pac" style="zoom:33%;" />
->
-> Both first lags are high which means we should difference.
-
-> Manufacture
-> <img src="lnManufacture_ac_pac.png" alt="lnManufacture_ac_pac" style="zoom:33%;" />
->
-> Both first lags are high which means we should difference.
-
-> Total
-> <img src="lnTotal_ac_pac.png" alt="lnTotal_ac_pac" style="zoom:33%;" />
->
-> Both first lags are high which means we should difference.
+​	See above AC and PAC charts in [Part 1](#Persistent-Data).
 
 ### Log Transforms
 
